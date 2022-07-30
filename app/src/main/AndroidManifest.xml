@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cotton.importexport">
+    package="com.ecotton.impex">
 
     <application
         android:allowBackup="true"
@@ -11,17 +11,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".MyApp"
+        android:name="com.ecotton.impex.MyApp"
         android:theme="@style/Theme.CottonImportExport"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity">
+            android:name="com.ecotton.impex.MainActivity">
 
         </activity>
-        <activity android:name=".activities.LoginActivity"
+        <activity android:name="com.ecotton.impex.activities.LoginActivity"
             android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.SplashActivity"
+        <activity android:name="com.ecotton.impex.activities.SplashActivity"
             android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"
             android:exported="true">
@@ -32,19 +32,19 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.ResetPasswordActivity"
+        <activity android:name="com.ecotton.impex.activities.ResetPasswordActivity"
             android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.ForgotPasswordActivity"
+        <activity android:name="com.ecotton.impex.activities.ForgotPasswordActivity"
             android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.IsInvitedCreateAccountActivity"
+        <activity android:name="com.ecotton.impex.activities.IsInvitedCreateAccountActivity"
             android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.VerifyOTPActivity"
+        <activity android:name="com.ecotton.impex.activities.VerifyOTPActivity"
             android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.CreateAccountActivity"
+        <activity android:name="com.ecotton.impex.activities.CreateAccountActivity"
             android:theme="@style/Theme.White"
             android:screenOrientation="portrait"/>
     </application>

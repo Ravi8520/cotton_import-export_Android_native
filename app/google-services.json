@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "36600724872",
-    "project_id": "e-cotton",
-    "storage_bucket": "e-cotton.appspot.com"
+    "project_number": "4860528014",
+    "project_id": "cotton-import-export",
+    "storage_bucket": "cotton-import-export.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:36600724872:android:8689fd9b071e404a210e3d",
+        "mobilesdk_app_id": "1:4860528014:android:76af719695d304f036d0df",
         "android_client_info": {
-          "package_name": "com.cotton.importexport"
+          "package_name": "com.ecotton.impex"
         }
       },
       "oauth_client": [
         {
-          "client_id": "36600724872-9phkbp0efeo43sqr5clh0d7n56povf2i.apps.googleusercontent.com",
+          "client_id": "4860528014-7s59t4gp5n3c8h4r4927ce7372o2mc72.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBT74PGVniBqT2AQ7e-OWIMASHeW0Z87bw"
+          "current_key": "AIzaSyD6Eixm_djD6eZO2lxK0bQk9nvWmbpOY34"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "36600724872-9phkbp0efeo43sqr5clh0d7n56povf2i.apps.googleusercontent.com",
+              "client_id": "4860528014-7s59t4gp5n3c8h4r4927ce7372o2mc72.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
