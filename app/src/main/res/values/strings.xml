@@ -1,0 +1,401 @@
+<resources>
+
+    <string name="lbl_mobile_number">Mobile Number</string>
+    <string name="lbl_password">Password</string>
+    <string name="lbl_forgot_password">Forgot Password?</string>
+    <string name="lbl_login">Login</string>
+    <string name="lbl_send">Send</string>
+    <string name="lbl_send_notification">Send Notification</string>
+    <string name="lbl_post">Post</string>
+    <string name="lbl_add">Add</string>
+    <string name="lbl_next">Next</string>
+    <string name="lbl_set_password">Set Password</string>
+    <string name="lbl_verify">Verify</string>
+    <string name="lbl_view">View</string>
+    <string name="lbl_responed">Respond</string>
+    <string name="lbl_waitingforResponse">Waiting for response</string>
+    <string name="lbl_resend"><u>Resend</u></string>
+    <string name="lbl_create_account"><u>Create new account</u></string>
+    <string name="lbl_create_account_with_link"><u>Create new account through invited link</u></string>
+    <string name="lbl_title_forgot_password">Forgot Password</string>
+    <string name="lbl_title_verify_mobile">Mobile Number</string>
+    <string name="lbl_select_company">Select Company</string>
+    <string name="lbl_create_an_account">Create an account</string>
+    <string name="lbl_personal_details">Personal Details</string>
+    <string name="lbl_company_details">Company Details</string>
+    <string name="lbl_select_seller">Select Seller</string>
+    <string name="lbl_seller_directory">Seller directory</string>
+    <string name="lbl_select_buyer">Select Buyer</string>
+    <string name="lbl_add_broker">Add Broker</string>
+    <string name="lbl_deals">Deals</string>
+    <string name="lbl_seller_name">Seller Name</string>
+    <string name="lbl_rupees_symbol">\u20B9 40000</string>
+    <string name="lbl_rupees_symbol_only">\u20B9</string>
+
+
+    <string name="lbl_title_verify_otp">Verify OTP</string>
+    <string name="lbl_send_otp">Send OTP</string>
+    <string name="lbl_contract_verify">Are you sure you want to verify this contracts</string>
+    <string name="lbl_login_as">Login as</string>
+    <string name="lbl_new_password">New Password</string>
+    <string name="lbl_confrim_password">Confirm Password</string>
+    <string name="lbl_post_to_sell">Post To Sell</string>
+    <string name="lbl_post_to_buy">Post To Buy</string>
+    <string name="lbl_search">Search</string>
+    <string name="lbl_private_sell">Private Sell</string>
+    <string name="lbl_private_buy">Private Buy</string>
+    <string name="lbl_update">Update</string>
+    <string name="lbl_edit_personal_detail">Edit personal details</string>
+    <string name="edit_company_detail">Edit Company Detail</string>
+    <string name="type">Type</string>
+    <string name="mill_reg_number">Mill reg number</string>
+    <string name="mill_reg_date">Mill/Registration Date</string>
+    <string name="registration_as">Registration as</string>
+    <string name="station_name">Station Name</string>
+    <string name="update">Update</string>
+    <string name="turnover_in_crore">Tornover in crore(rs.)</string>
+
+
+    <string name="lbl_contact_person">Contact Person Name</string>
+    <string name="lbl_email_address">Email Address</string>
+    <string name="lbl_company_name">Name Of Company</string>
+    <string name="lbl_company">Company</string>
+    <string name="lbl_gst_number">GST Number</string>
+    <string name="lbl_buyer_seller">Buyer / Seller</string>
+    <string name="lbl_buyer">Buyer</string>
+    <string name="lbl_broker">Broker</string>
+    <string name="lbl_referral_code">Referral Code</string>
+    <string name="lbl_primary_broker">Primary Broker</string>
+    <string name="lbl_create">Create</string>
+    <string name="lbl_add_company">Add Company</string>
+    <string name="lbl_uhml">UHML(mm)</string>
+    <string name="lbl_mic">MIC</string>
+    <string name="lbl_rd">RD</string>
+    <string name="lbl_cg">CG</string>
+    <string name="lbl_trash">Trash</string>
+    <string name="lbl_moisture">Moisture</string>
+    <string name="lbl_price">Price</string>
+    <string name="lbl_buy_bales">Buy Bales</string>
+    <string name="lbl_de">D/E</string>
+    <string name="lbl_state">State</string>
+    <string name="lbl_district">District</string>
+    <string name="lbl_station">Station</string>
+    <string name="lbl_search_seller">Search Seller</string>
+    <string name="lbl_search_buyer">Search Buyer</string>
+    <string name="lbl_seller_type">Seller Type</string>
+    <string name="lbl_pending">Pending...</string>
+
+
+    <string name="err_min_text">Minimum</string>
+    <string name="err_max_text">Maximum</string>
+    <string name="err_character_required">characters required.</string>
+    <string name="err_enter_mobile_number">Please enter mobile number</string>
+    <string name="err_enter_valid_mobile_number">Please enter valid mobile number</string>
+    <string name="err_enter_password">Please enter password</string>
+    <string name="err_password_contain_character">Password should contain atleast %d characters</string>
+    <string name="err_name_character">Name should contain atleast %d characters</string>
+    <string name="err_company">Company Name should contain atleast %d characters</string>
+    <string name="err_enter_new_password">Please enter new password</string>
+    <string name="err_enter_confirm_password">Please enter confirm password</string>
+    <string name="err_password_not_match">Password and confirm password does not matched</string>
+    <string name="err_primary_broker">Please Enter Primary Broker</string>
+    <string name="err_email">Please Enter Email</string>
+    <string name="err_referral">Please Enter Referral Code</string>
+    <string name="err_gst">Please Enter GST Number</string>
+    <string name="err_email1">Email should contain atleast %d charactersl</string>
+    <string name="err_referral_code">Referral Code should contain atleast %d charactersl</string>
+    <string name="err_gst_number">GST should contain atleast %d charactersl</string>
+    <string name="err_password">Password should contain atleast %d charactersl</string>
+    <string name="err_company_name">Please Enter Company Name</string>
+
+    <string name="utilities_title">Utilities</string>
+    <string name="lbl_details">Details</string>
+    <string name="lbl_edit_company_details">Edit Company Details</string>
+    <string name="buyer_directory">Buyer directory</string>
+    <string name="mcx">MCX</string>
+    <string name="calculator">Calculator</string>
+    <string name="news">News</string>
+    <string name="lbl_filter">Filter</string>
+    <string name="lbl_select_product">Select Product</string>
+    <string name="lbl_select_state">Select State</string>
+    <string name="lbl_select_value">Select Value</string>
+    <string name="lbl_please_fill_detail">Please fill all company <u><font color='#69BA53'>details \n to proceed</font></u></string>
+
+
+    // seller directory strings //
+
+    <string name="buyerdirectory">Buyer Directory</string>
+    <string name="companyname">Trident Ltd</string>
+    <string name="address">Address :</string>
+    <string name="lbl_address">Address</string>
+    <string name="port">Port</string>
+    <string name="country">Country</string>
+    <string name="contact">(111)234 323 2323</string>
+
+    // MCX strings //
+
+    <string name="mcxtitle">MCX</string>
+    <string name="cotton">Cotton</string>
+    <string name="price">Price</string>
+    <string name="date">22 oct 2090</string>
+    <string name="fut">FUT</string>
+    <string name="up_down">Up/Down</string>
+    <string name="Open">Open</string>
+    <string name="high">High</string>
+    <string name="low">Low</string>
+    <string name="prev_close">Prev.close</string>
+
+    // calculator strings //
+
+    // ginning tab strings //
+    <string name="calculatortitle">Calculator</string>
+    <string name="tab_ginning">Ginning</string>
+    <string name="tab_spinning">Spinning</string>
+    <string name="tab_exports">Exports</string>
+    <string name="kapas">Kapas</string>
+    <string name="expenses">Expenses</string>
+    <string name="cotton_seed">Cotton Seed</string>
+    <string name="our_turn">Our Turn</string>
+    <string name="shortage">Shortage</string>
+    <string name="cost_of_cotton">Cost Of cotton</string>
+    <string name="rs_per_kg">Rs/20 kg</string>
+    <string name="rs_kg">Rs/kg</string>
+    <string name="rs_per_candy">Rs/Candy</string>
+
+    // spinning tab strings //
+
+    <string name="yarn_count">Yarn Count</string>
+    <string name="cotton_rate">Cotton Rate</string>
+    <string name="yield">Yield</string>
+    <string name="waste_recovery">Waste Recovery</string>
+    <string name="conversion_cost">Conversion Cost</string>
+    <string name="yarn_cost">Yarn Cost</string>
+    <string name="rs_k_count">Rs/K\n/Count</string>
+
+    // export tab strings //
+
+    <string name="exchange_rate">Exchange Rate</string>
+    <string name="usd_inr">USD/INR</string>
+    <string name="export_rate">Export Rate</string>
+    <string name="cents_per_bales">Cents/Bales</string>
+
+    // news tab strings //
+
+    <string name="news_feed">News Feed</string>
+    <string name="news_time">2h ago</string>
+    <string name="newslines">Global warming is a hike in the average global temperature on earth.
+        Burning of excess fossil fuel and the release of toxic fumes into the atmosphere
+        is the major cause behind global warming. Global warming can
+        have disastrous effects on living organisms. The impacts of global warming are
+        widespread and unspecific</string>
+
+
+    <string name="notification_channel_id">E Cotton</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="my_work">My work</string>
+
+    <string name="report">Report</string>
+    <string name="status">Status</string>
+    <string name="date_range">Date Range</string>
+    <string name="seller_wise">Seller Wise</string>
+    <string name="broker_wise">Broker Wise</string>
+    <string name="product_wise">Product Wise</string>
+    <string name="company_name">Company Name</string>
+
+
+    <string name="filter">Filter</string>
+    <string name="time_duration">By time duration</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="custome">Custome</string>
+    <string name="by_product">By Product</string>
+
+    // My work strings //
+
+    <string name="my_post">My post</string>
+    <string name="my_contract">My Contract</string>
+    <string name="reports">Reports</string>
+    <string name="my_wallet">My wallet</string>
+    <string name="lbl_waiting">Waiting For Approval</string>
+    <string name="my_broker">My broker</string>
+    <string name="my_request">My Request</string>
+    <string name="my_member">My members</string>
+    <string name="my_favourites">My Favourites</string>
+    <string name="my_profile">My profile</string>
+    <string name="change_pass">Change password</string>
+    <string name="log_out">Logout</string>
+    <string name="posts">Post</string>
+    <string name="contract">Contract</string>
+    <string name="lbl_requests">Requests</string>
+
+
+    // My Waleet Activity strings //
+    <string name="wallet">Wallet</string>
+    <string name="available_balance">Available Balance</string>
+    <string name="add_balance">Add Balance</string>
+    <string name="transactions">Transactions</string>
+    <string name="add_wallet">Add To Wallet</string>
+    <string name="Plans">Plans</string>
+    <string name="validity">Validity</string>
+    <string name="amount">Amount</string>
+    <string name="buy">Buy</string>
+    <string name="added_to_wallet">Added to wallet</string>
+
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="google_pay">Google Pay</string>
+    <string name="your_wallet">Your wallet</string>
+
+
+    // my post strings //
+
+    <string name="my_post_title">My post</string>
+    <string name="tab_active">Active</string>
+    <string name="tab_completed">Completed</string>
+    <string name="bales_300">300 Bales</string>
+    <string name="shankar6">Shankar 6</string>
+    <string name="uhml">UHML(mm)</string>
+    <string name="mic">MIC(mm)</string>
+    <string name="rd">RD(mm)</string>
+    <string name="cg">CG(mm)</string>
+    <string name="sfi">SFI(mm)</string>
+    <string name="trash">Trash</string>
+    <string name="moisture">Moisture(mm)</string>
+
+    <string name="Post_time">Post Time</string>
+    <string name="cancel_time">Cancel Time</string>
+    <string name="bales_price">Bales/ Price</string>
+    <string name="post_bales">Post Bales</string>
+    <string name="sell_bales">Sell Bales</string>
+    <string name="post_price">Post Price</string>
+    <string name="sell_price">Sell Price</string>
+    <string name="post">Post</string>
+    <string name="post_at">Post at</string>
+    <string name="Cancel_at">Cancel at</string>
+    <string name="notification_to_seller">Notification to Seller</string>
+    <string name="lbl_seller">Seller Name</string>
+    <string name="lbl_broker_name">Broker Name</string>
+    <string name="lbl_transmit_condition">Transmit Condition</string>
+
+
+    // my contact strings //
+
+    <string name="my_contacttitle">My Contact</string>
+    <string name="changepass_title">Change Password</string>
+
+    // change password strings //
+    <string name="current_pass">Current password</string>
+    <string name="new_pass">New password</string>
+    <string name="confirm_pass">Confirm password</string>
+    <string name="set_pass">Set Password</string>
+
+    // my profile strings //
+    // personal detail tab strings //
+
+    <string name="profiletitle">Profile</string>
+    <string name="tab_personal_detail">Personal Details</string>
+    <string name="tab_company_detail">Company Details</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="contact_person_name">Contact Person Name</string>
+    <string name="contact_person_mobile">Contact Person Mobile Number</string>
+    <string name="email_address">Email Address</string>
+
+    // company detail tab strings //
+
+    <string name="header">Header</string>
+    <string name="partnership">Partnership</string>
+    <string name="sellertype">Seller type</string>
+    <string name="ginner">Ginner</string>
+    <string name="reg_number">Mill reg number</string>
+    <string name="reg_date">Mill reg date</string>
+    <string name="reg_as">Reg as</string>
+    <string name="msme">MSME</string>
+    <string name="year">Year</string>
+    <string name="cr2">2 Cr</string>
+    <string name="cr3">3 Cr</string>
+    <string name="cr4">4 Cr</string>
+    <string name="locationdetail">Location Details</string>
+    <string name="station">Station</string>
+    <string name="district">District</string>
+    <string name="state">State</string>
+    <string name="bank_details">Bank Details</string>
+    <string name="gst_number">GST Number</string>
+    <string name="pan_number">PAN Number</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="account_holder_name">Account Holder Name</string>
+    <string name="branch_addresh">Branch Address</string>
+    <string name="ifsc_code">IFSC Code</string>
+    <string name="referral_code">Referral code</string>
+    <string name="stamp">Stamp</string>
+    <string name="shapur">Shapur</string>
+    <string name="lbl_deal_details">Deal Details</string>
+    <string name="lbl_deal_done">Deal Done</string>
+    <string name="lbl_payment_condition">Payment Condition</string>
+    <string name="lbl_lab">Lab</string>
+
+    <string name="lbl_pan_of_company">Pan of company</string>
+    <string name="lbl_company_business_type">Company business type</string>
+    <string name="lbl_country_name">Country Name</string>
+
+    <string name="lbl_company_role">Company role</string>
+    <string name="lbl_company_stamp_image">Company stamp image</string>
+    <string name="lbl_done">Done</string>
+    <string name="err_upload_company_stamp">Please upload company stamp</string>
+
+
+    // My Member strings //
+    <string name="my_membertitle">My Member</string>
+    <string name="trident_ltd">Trident LTD</string>
+    <string name="admin">Admin</string>
+    <string name="name">Name :</string>
+    <string name="members">Members</string>
+    <string name="mobile">Mobile :</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="designation">Designation</string>
+    <string name="btn_addmember">Add members</string>
+    <string name="btn_send">Send</string>
+    <string name="lbl_name">Name</string>
+
+    // My broker strings //
+    <string name="brokers">Brokers</string>
+    <string name="primary">Primary</string>
+
+
+    <string name="my_contarcttitle">My Contract</string>
+    <string name="company">Company</string>
+    <string name="download">Download</string>
+    <string name="seller">Seller</string>
+
+    // My Favourites strings //
+
+    <string name="myfavourite_title">My Favourites</string>
+    <string name="lbl_bales_price_detail">Bales/ Price Details</string>
+    <string name="lbl_seller_otp_verify">Seller OTP Verify</string>
+    <string name="lbl_buyer_otp_verify">Buyer OTP Verify</string>
+    <string name="lbl_broker_otp_verify">Broker OTP Verify</string>
+    <string name="lbl_sampling_ifnot">Sampling if not direct dispatch</string>
+    <string name="lbl_upload_lab_report">Upload lab report</string>
+    <string name="lbl_upload_upload_transmit_deal">Upload transmit deal</string>
+    <string name="lbl_pay_without_gst">Pay without GST(Paid Receipt)</string>
+    <string name="lbl_upload_debit_note">Upload Debit Note</string>
+    <string name="lbl_pay_gst">Pay GST Receipt</string>
+    <string name="lbl_upload">Upload</string>
+    <string name="lbl_add_more">Add more</string>
+    <string name="lbl_pass">Pass</string>
+    <string name="lbl_fail">Fail</string>
+    <string name="lbl_fail_with">Fail N</string>
+    <string name="lbl_confirmation_needed">Confirmation Needed</string>
+    <string name="lbl_accept">Accept</string>
+    <string name="lbl_reject">Reject</string>
+
+
+    <string name="dashboard">Dashboard</string>
+
+    <string-array name="rangeSliderValues">
+        <item>20</item>
+        <item>70</item>
+    </string-array>
+</resources>
