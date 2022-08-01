@@ -61,6 +61,7 @@
     <string name="lbl_company_name">Name Of Company</string>
     <string name="lbl_company">Company</string>
     <string name="lbl_gst_number">GST Number</string>
+    <string name="lbl_iec_number">IEC number</string>
     <string name="lbl_buyer_seller">Buyer / Seller</string>
     <string name="lbl_buyer">Buyer</string>
     <string name="lbl_broker">Broker</string>

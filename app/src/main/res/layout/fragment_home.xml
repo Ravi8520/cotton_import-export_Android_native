@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    tools:context=".fragments.HomeFragment">
+
+    <RelativeLayout
+        android:id="@+id/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@color/light_blue">
+
+
+        <RelativeLayout
+            android:id="@+id/user_logo"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:background="@drawable/logo_bg"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/firs_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/second_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/firs_letter"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_toLeftOf="@id/img_filter"
+            android:layout_toRightOf="@id/user_logo"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Company Name"
+            android:textColor="@color/tab_text_color"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/txt_user_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_company_name"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toLeftOf="@id/img_filter"
+            android:layout_toRightOf="@id/user_logo"
+            android:alpha="0.8"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Jone(buyer)"
+            android:textColor="@color/tab_text_color"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/img_filter"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_7sdp"
+            android:layout_toLeftOf="@id/img_notification"
+            android:padding="@dimen/_3sdp"
+            android:src="@drawable/ic_filter"
+            app:tint="@color/colorAccent" />
+
+        <ImageView
+
+            android:id="@+id/img_notification"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:padding="@dimen/_3sdp"
+            android:src="@drawable/ic_baseline_notifications_none_24" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_toolbar"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/custome_bg_white">
+
+        <LinearLayout
+            android:id="@+id/linStateData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/textview_border"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent"
+                    android:elevation="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:rotation="-90"
+                    android:src="@drawable/ic_back_arrow" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStateList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/layout_state_item" />
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

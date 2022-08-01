@@ -77,7 +77,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         is_invited = bundle.getInt(ISINVITED, 0);
         mobileno = bundle.getString(MOBILE_NO, "");
         number = "<b>" + mobileno + "</b> ";
-        binding.txMobileNumber.setText(Html.fromHtml("We have sent verification \ncode on your number  " + number));
+        binding.txMobileNumber.setText(Html.fromHtml("Please enter the 6 digit code sent \nto your mail " + number));
         binding.btnVerify.setOnClickListener(view -> {
             btn_verifyOnClick();
         });

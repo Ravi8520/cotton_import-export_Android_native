@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
                     android:fontFamily="@font/poppins_regular"
-                    android:hint="@string/lbl_mobile_number"
+                    android:hint="@string/email_address"
                     android:imeOptions="actionNext"
                     android:inputType="number"
                     android:maxLength="10"

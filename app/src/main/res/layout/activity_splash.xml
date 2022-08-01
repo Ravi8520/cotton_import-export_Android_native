@@ -12,6 +12,6 @@
         android:layout_width="@dimen/_120sdp"
         android:layout_height="@dimen/_120sdp"
         android:layout_centerInParent="true"
-        android:src="@drawable/buyer" />
+        android:src="@drawable/ic_logo" />
 
 </RelativeLayout>

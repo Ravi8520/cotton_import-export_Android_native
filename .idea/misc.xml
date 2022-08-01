@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_create_account.xml" value="0.17604166666666668" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_edit_company_details.xml" value="0.18" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_forgot_password.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_my_contract_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_news.xml" value="0.1" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_news_full_screen.xml" value="0.1" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/company_details_dialog.xml" value="0.22" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/fragment_deal_notification.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="true" project-jdk-name="13" project-jdk-type="JavaSDK" />
+</project>

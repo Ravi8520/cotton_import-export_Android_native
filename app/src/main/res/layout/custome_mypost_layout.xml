@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/card1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_type"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/custome_imageview"
+                android:padding="@dimen/_8sdp"
+                android:src="@drawable/ic_baseline_notifications_none_24" />
+
+            <TextView
+                android:id="@+id/txt_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_toEndOf="@id/img_type"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/shankar6"
+                android:textColor="@color/tab_text_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_beale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/bales_300"
+                android:textColor="@color/tab_text_color"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/complete_tab_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_1"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/tv_post_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/Post_time"
+                android:textColor="@color/tab_text_color_op"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/txt_postTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_post_time"
+                android:fontFamily="@font/poppins_regular"
+                android:text="10-10-2020, 09:00 am"
+                android:textColor="@color/tab_text_color"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/txt_deal_status"
+                android:layout_width="110dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/custome_box_dotted"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="Canceled"
+                android:textColor="@color/dark_red"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/txt_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/complete_tab_rl"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="Rs. 40000"
+            android:textColor="@color/tab_text_color"
+            android:textSize="14sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/cancel_time_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/complete_tab_rl"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toLeftOf="@+id/txt_amount"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/lable_cancel_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/cancel_time"
+                android:textColor="@color/tab_text_color_op"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/txt_cancel_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lable_cancel_time"
+                android:fontFamily="@font/poppins_regular"
+                android:text="10-10-2020, 012:30 am"
+                android:textColor="@color/tab_text_color"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/complete_tab_rl"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toLeftOf="@+id/txt_amount"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="start"
+                    android:text="@string/lbl_company_name"
+                    android:textColor="@color/tab_text_color_op"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txt_company_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="start"
+                    android:text=""
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="start"
+                    android:text="@string/lbl_seller_name"
+                    android:textColor="@color/tab_text_color_op"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txt_seller_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="start"
+                    android:text=""
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

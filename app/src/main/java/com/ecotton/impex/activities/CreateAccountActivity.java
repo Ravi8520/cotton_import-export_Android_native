@@ -36,8 +36,6 @@ import retrofit2.Response;
 public class CreateAccountActivity extends AppCompatActivity {
 
 
-
-
     public static String MobileNo = "mobile_no";
     private String mobileno;
 
@@ -67,15 +65,15 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         binding.edtGstNumber.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
-        binding.btnCreate.setOnClickListener(view->{
+        binding.btnCreate.setOnClickListener(view -> {
             btn_createOnClick();
         });
 
-        binding.btnCreate.setOnClickListener(view->{
+        binding.backarrow.setOnClickListener(view -> {
             img_backOnClick();
         });
 
-        
+
     }
 
     public static boolean isValidGSTNo(String str) {
@@ -112,11 +110,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 Pattern.compile("^[0-9]{2}[A-Z]{5}[0-9]{4}"
                         + "[A-Z]{1}[1-9A-Z]{1}"
                         + "Z[0-9A-Z]{1}$");
-        if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            binding.edtGstNumber.setError("Please Enter Proper GST Number");
-            binding.edtGstNumber.requestFocus();
-            return false;
-        }
+
+
         if (!Patterns.EMAIL_ADDRESS.matcher(binding.edtEmailAddress.getText().toString()).matches()) {
             binding.edtEmailAddress.setError("Please Enter Proper Email Format");
             binding.edtEmailAddress.requestFocus();
@@ -138,7 +133,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             binding.edtConfrimPassword.requestFocus();
             return false;
         }
-        return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtContactPerson,binding.mTilcontactPerson, mContext.getString(R.string.lbl_contact_person), 3, mContext.getString(R.string.err_name_character, 3), 20, "")
+        return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtContactPerson, binding.mTilcontactPerson, mContext.getString(R.string.lbl_contact_person), 3, mContext.getString(R.string.err_name_character, 3), 20, "")
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtPassword, binding.mTilpassword, mContext.getString(R.string.err_enter_password), 6, mContext.getString(R.string.err_password, 6), 15, "")
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtConfrimPassword, binding.mTilconfrimPassword, mContext.getString(R.string.err_enter_password), 6, mContext.getString(R.string.err_password, 6), 15, "")
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtCompanyName, binding.mTilcpmpanyName, mContext.getString(R.string.err_company_name), 4, mContext.getString(R.string.err_company, 4), 60, "");
@@ -146,13 +141,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     protected void btn_createOnClick() {
         if (isValidForm()) {
-            Log.e("usertype", "usertype==" + usertype);
-            if (usertype == null) {
-                Toast.makeText(mContext, "Please Select User Type", Toast.LENGTH_SHORT).show();
-            } else {
-                //are equal
-                CreateAccount();
-            }
+            CreateAccount();
         }
     }
 
@@ -166,6 +155,9 @@ public class CreateAccountActivity extends AppCompatActivity {
             object.put("password", binding.edtPassword.getText().toString().trim());
             object.put("company_name", binding.edtCompanyName.getText().toString().trim());
             object.put("gst_no", binding.edtGstNumber.getText().toString().trim());
+            object.put("user_type", "sellerBuyer");
+            object.put("referral_code", "");
+
             String data = object.toString();
             Log.e("data", "data==" + data);
             Log.e("getApiToken", "getApiToken" + mSessionUtil.getApiToken());
@@ -186,7 +178,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     Log.e("response", "response==" + dataa);
                     if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                         AppUtil.showToast1(mContext, model.getMessage());
-                       // startActivity(new Intent(mContext, WitingApprovelActivity.class));
+                        startActivity(new Intent(mContext, WitingApprovelActivity.class));
                         finish();
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());

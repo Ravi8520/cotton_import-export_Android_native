@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/userdetail_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/txt_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Shankar 6"
+            android:textColor="@color/tab_text_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/company_title_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_product_name"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/company"
+            android:textColor="@color/tab_text_color_op"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/company_title_txt"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Trident Ltd"
+            android:textColor="@color/tab_text_color"
+            android:textSize="12sp" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_download"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/custome_button"
+            android:clickable="true"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical|center"
+            android:text="@string/download"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/seller_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userdetail_rl"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/seller_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sellertitle_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/seller"
+                android:textColor="@color/tab_text_color_op"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_seller_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sellertitle_txt"
+                android:fontFamily="@font/poppins_regular"
+                android:text="John Doe"
+                android:textColor="@color/tab_text_color"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sellprice_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pricetitle_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/price"
+                android:textColor="@color/tab_text_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pricetitle_txt"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Rs. 45000(200)"
+                android:textColor="@color/tab_text_color"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_below="@+id/seller_ll"
+        android:layout_marginTop="2dp"
+        android:background="@color/dark_grey" />
+
+</RelativeLayout>

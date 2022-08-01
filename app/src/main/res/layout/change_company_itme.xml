@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_5sdp">
+
+
+    <RelativeLayout
+        android:id="@+id/layout_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:padding="@dimen/_3sdp">
+
+        <RelativeLayout
+            android:id="@+id/user_logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:background="@drawable/logo_bg"
+            android:backgroundTint="@color/white"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/firs_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/second_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/firs_letter"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_toRightOf="@id/user_logo"
+            android:fontFamily="@font/poppins_semibold"
+            android:letterSpacing="-0.038"
+            android:text="Company Name"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <!-- <TextView
+             android:id="@+id/txt_use_name"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/txt_company_name"
+             android:layout_marginLeft="@dimen/_10sdp"
+             android:layout_toRightOf="@id/profile_image"
+             android:fontFamily="@font/poppins_regular"
+             android:text="Jone(buyer)"
+             android:textColor="@color/white"
+             android:textSize="@dimen/_12sdp" />-->
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_login_as"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_main"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/txt_buyer"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/wight_border"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="Buyer"
+            android:textColor="@color/white"
+            android:textSize="9sp" />
+
+        <TextView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp" />
+
+        <TextView
+            android:id="@+id/txt_seller"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txt_buyer"
+            android:layout_weight="1"
+            android:background="@drawable/wight_border"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="Seller"
+            android:textColor="@color/white"
+            android:textSize="9sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -71,24 +71,26 @@ public class SplashActivity extends AppCompatActivity {
         // int version = Build.VERSION.SDK_INT;
         versionRelease = Build.VERSION.RELEASE;
         //PrintLog.d(TAG,"P= "+ AppUtil.getDecryptString(mContext,"4e1258aae34886df7ffd309eb376737153a1110e2c19d0e936d2587c31112f415e28a0bfa346449fe47a7d20452b11d2a36aa93e1757ace50e3c36f9b4bd2e252ec7e2e210d459d419b5d17e2b1057a8fa5745b74711b245a025b3d1b22668227e2f11d1253f950d8b44b09a01adf14c2fe8dcb41759b4f0c1bef22b001c2ff1a6739287467a22250f776a38a4bd25e0"));
-        if (isOnline()) {
-            if (mSessionUtil.isLogin()) {
-                if (mSessionUtil.getMobileNo().isEmpty() || mSessionUtil.getPass().isEmpty() || mSessionUtil.getApiToken().isEmpty() || mSessionUtil.getUserid().isEmpty()) {
-                    startActivity(new Intent(mContext, LoginActivity.class));
-                    finish();
-                } else {
-                    autologin();
-                }
 
-            } else {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+        if (isOnline()) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (mSessionUtil.isLogin()) {
+                        if (mSessionUtil.getMobileNo().isEmpty() || mSessionUtil.getPass().isEmpty() || mSessionUtil.getApiToken().isEmpty() || mSessionUtil.getUserid().isEmpty()) {
+                            startActivity(new Intent(mContext, LoginActivity.class));
+                            finish();
+                        } else {
+                            autologin();
+                        }
+                    } else {
                         startActivity(new Intent(mContext, LoginActivity.class));
                         finish();
+
                     }
-                }, 3000);
-            }
+                }
+            }, 3000);
+
         } else {
             Toast.makeText(mContext, "No Internet", Toast.LENGTH_LONG).show();
         }
@@ -148,11 +150,11 @@ public class SplashActivity extends AppCompatActivity {
                         map.put(SessionUtil.COMPANY_ID, mSessionUtil.getCompanyId());
                         mSessionUtil.setData(map);
                         if (model.getData().getIs_user_plan() == 1) {
-                           // startActivity(new Intent(mContext, HomeActivity.class));
-                          //  finish();
+                            // startActivity(new Intent(mContext, HomeActivity.class));
+                            //  finish();
                         } else {
-                          //  Intent intent = new Intent(mContext, MywalletPlansActivity.class);
-                          //  startActivity(intent);
+                            //  Intent intent = new Intent(mContext, MywalletPlansActivity.class);
+                            //  startActivity(intent);
                         }
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());

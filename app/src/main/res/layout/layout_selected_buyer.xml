@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/serchview_bg"
+    android:padding="@dimen/_5sdp"
+    android:layout_margin="@dimen/_3sdp"
+    android:orientation="horizontal">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtCityName"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textColor="#343434"
+        android:textSize="15sp"
+        tools:text="Gondal"/>
+
+    <ImageView
+        android:id="@+id/imgClose"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_gravity="center_vertical"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_close_black" />
+</androidx.appcompat.widget.LinearLayoutCompat>

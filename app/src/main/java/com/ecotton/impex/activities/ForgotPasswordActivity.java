@@ -50,6 +50,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             mobileno = intent.getStringExtra(VerifyOTPActivity.NEWMOBILE_NO);
             binding.edtEmail.setText(mobileno);
         }
+        if (LoginActivity.create_account.equals("create")) {
+           binding.txtTitle.setText(mContext.getResources().getString(R.string.email_address));
+        } else {
+            Log.e("Forgot_password", "Forgot_password==");
+            binding.txtTitle.setText(mContext.getResources().getString(R.string.lbl_forgot_password));
+
+        }
         binding.btnSubmit.setOnClickListener(view -> {
             if (isValidForm()) {
                 if (LoginActivity.create_account.equals("create")) {

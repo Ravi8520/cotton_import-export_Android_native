@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/layout_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp">
+
+        <RelativeLayout
+            android:id="@+id/user_logo"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:background="@drawable/logo_bg"
+            android:backgroundTint="@color/white"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/firs_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="#7E7E7E"
+                android:textSize="21sp" />
+
+            <TextView
+                android:id="@+id/second_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/firs_letter"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="#7E7E7E"
+                android:textSize="21sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/user_logo"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Company Name"
+            android:textColor="#7E7E7E"
+            android:textSize="16sp" />
+
+        <!-- <TextView
+             android:id="@+id/txt_use_name"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/txt_company_name"
+             android:layout_marginLeft="@dimen/_10sdp"
+             android:layout_toRightOf="@id/profile_image"
+             android:fontFamily="@font/poppins_regular"
+             android:text="Jone(buyer)"
+             android:textColor="@color/black"
+             android:textSize="@dimen/_12sdp" />-->
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_3sdp"
+        android:layout_below="@id/layout_main"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:background="@drawable/dotted" />
+
+
+</RelativeLayout>

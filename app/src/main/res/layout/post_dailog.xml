@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@android:color/transparent"
+            android:weightSum="2">
+
+
+            <TextView
+                android:id="@+id/lbl_post_to_buy"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_right_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="@string/lbl_post_to_sell"
+                android:textColor="@color/button_color"
+                android:textSize="@dimen/_12sdp" />
+
+            <View
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@color/button_color" />
+
+            <TextView
+                android:id="@+id/lbl_personal_buy"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_left_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="@string/lbl_private_sell"
+                android:textColor="@color/button_color"
+                android:textSize="@dimen/_12sdp" />
+
+        </LinearLayout>
+
+</RelativeLayout>

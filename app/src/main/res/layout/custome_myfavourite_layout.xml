@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_favouritedata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/txt_district_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center_vertical"
+            android:text="@string/district"
+            android:textColor="@color/tab_text_color"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:id="@+id/user_logo"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_below="@+id/txt_district_name"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:background="@drawable/custome_imagev"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/firs_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="@color/light_black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/second_letter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/firs_letter"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="@color/light_black"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_district_name"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toEndOf="@id/user_logo"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center_vertical"
+            android:text="@string/companyname"
+            android:textColor="@color/light_black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_state_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_company_name"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_toEndOf="@id/user_logo"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:text="@string/lbl_state"
+            android:textColor="@color/new_light_grey"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_userdetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_state_name"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_vertical"
+                android:text="@string/address"
+                android:textColor="@color/new_light_grey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txt_address"
+                android:layout_width="@dimen/_170sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_toEndOf="@id/tv_address"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_vertical"
+                android:text="dsfsdfsdfdsfdsfdsdfsdfdsfsdfdsdfdsdfds"
+                android:textColor="@color/new_light_grey"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
