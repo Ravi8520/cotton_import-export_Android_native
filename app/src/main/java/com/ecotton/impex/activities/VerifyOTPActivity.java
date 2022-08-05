@@ -187,7 +187,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     Log.e("response", "response==" + dataa);
                     if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                         HashMap<String, String> map = new HashMap<>();
-                        map.put(SessionUtil.MOBILE_NO, model.getData().getMobileNumber());
+                        map.put(SessionUtil.EMAIL, model.getData().getEmail());
                         map.put(SessionUtil.API_TOKEN, model.getData().getApiToken());
                         mSessionUtil.setData(map);
                         /*if (is_invited == 1) {
@@ -244,7 +244,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                         HashMap<String, String> map = new HashMap<>();
                         map.put(SessionUtil.API_TOKEN, model.getData().getApiToken());
-                        map.put(SessionUtil.MOBILE_NO, model.getData().getMobileNumber());
+                        map.put(SessionUtil.EMAIL, model.getData().getEmail());
                         mSessionUtil.setData(map);
                         Intent intent = new Intent(mContext, ResetPasswordActivity.class);
                         intent.putExtra(ResetPasswordActivity.MobileNo, email);

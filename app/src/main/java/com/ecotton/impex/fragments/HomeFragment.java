@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.activities.AddCompanyActivity;
 import com.ecotton.impex.activities.BuyerStateListActivity;
@@ -49,6 +48,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -100,6 +100,7 @@ public class HomeFragment extends Fragment {
 
             binding.txtCompanyName.setText(mSessionUtil.getCompanyName());
             binding.txtUserType.setText(mSessionUtil.getUsertype());
+            Log.e("getUsertype", "getUsertype=" + mSessionUtil.getUsertype());
             CompanyList();
         }
 
@@ -230,7 +231,7 @@ public class HomeFragment extends Fragment {
                         if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                             HashMap<String, String> map = new HashMap<>();
                             map.put(SessionUtil.API_TOKEN, mSessionUtil.getApiToken());
-                            map.put(SessionUtil.MOBILE_NO, mSessionUtil.getMobileNo());
+                            map.put(SessionUtil.EMAIL, mSessionUtil.getEmail());
                             map.put(SessionUtil.PASS, mSessionUtil.getPass());
                             map.put(SessionUtil.COMPANY_NAME, model.getData().getCompany_name());
                             map.put(SessionUtil.USER_TYPE, model.getData().getUser_type());

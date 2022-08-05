@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.controller.FCMController;
@@ -25,6 +24,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.Constants;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,6 +77,11 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (mSessionUtil.isLogin()) {
+                        Log.e("getEmail", "getEmail==" + mSessionUtil.getEmail());
+                        Log.e("getPass", "getPass==" + mSessionUtil.getPass());
+                        Log.e("getApiToken", "getApiToken==" + mSessionUtil.getApiToken());
+                        Log.e("getUserid", "getUserid==" + mSessionUtil.getUserid());
+
                         if (mSessionUtil.getEmail().isEmpty() || mSessionUtil.getPass().isEmpty() || mSessionUtil.getApiToken().isEmpty() || mSessionUtil.getUserid().isEmpty()) {
                             startActivity(new Intent(mContext, LoginActivity.class));
                             finish();
@@ -142,7 +147,7 @@ public class SplashActivity extends AppCompatActivity {
                     if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                         HashMap<String, String> map = new HashMap<>();
                         map.put(SessionUtil.API_TOKEN, model.getData().getApiToken());
-                        map.put(SessionUtil.MOBILE_NO, model.getData().getMobileNumber());
+                        map.put(SessionUtil.EMAIL, model.getData().getEmail());
                         map.put(SessionUtil.COMPANY_NAME, mSessionUtil.getCompanyName());
                         map.put(SessionUtil.USER_TYPE, mSessionUtil.getUsertype());
                         map.put(SessionUtil.PASS, mSessionUtil.getPass());

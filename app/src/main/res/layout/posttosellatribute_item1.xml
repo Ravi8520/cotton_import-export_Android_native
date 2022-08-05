@@ -20,7 +20,7 @@
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_weight="1.2"
             android:textColor="@color/tab_text_color"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/poppins_semibold"
             android:text="UHML(mmm)"
             android:textSize="14sp" />
 

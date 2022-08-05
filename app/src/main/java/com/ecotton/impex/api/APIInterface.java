@@ -7,6 +7,7 @@ import com.ecotton.impex.models.CancelPostModel;
 import com.ecotton.impex.models.CompanyDetailModel;
 import com.ecotton.impex.models.CompleteTabModel;
 import com.ecotton.impex.models.ContractDetailModel;
+import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.DistrictModel;
 import com.ecotton.impex.models.DocumentUploadModel;
 import com.ecotton.impex.models.EditProfileModel;
@@ -171,6 +172,13 @@ public interface APIInterface {
     Call<ResponseModel<List<StateModel>>> state_list(
             @Header("Authorization") String Authorization,
             @Field("data") String data
+    );
+
+   
+    @POST("country_list")
+    Call<ResponseModel<List<CountryModel>>> country_list(
+            @Header("Authorization") String Authorization
+
     );
 
     @FormUrlEncoded

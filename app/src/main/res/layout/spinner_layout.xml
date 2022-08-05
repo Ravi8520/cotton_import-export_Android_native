@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         android:gravity="center_vertical"
-        android:fontFamily="@font/poppins_regular"
+        android:fontFamily="@font/poppins_semibold"
         android:textSize="14sp"
         android:textColor="@color/tab_text_color"
         android:text="@string/type"

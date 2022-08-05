@@ -16,13 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.PostToSellAttributeAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivityPostToSellBinding;
 import com.ecotton.impex.models.AttributeRequestModel;
+import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.PostToSellModel;
 import com.ecotton.impex.models.ProductAttributeModel;
 import com.ecotton.impex.models.ProductModel;
@@ -30,6 +30,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -52,9 +53,13 @@ public class PostToSellActivity extends AppCompatActivity {
     PostToSellAttributeAdapter postToSellAttributeAdapter;
     List<AttributeRequestModel> attributeRequestModels = new ArrayList<>();
 
+    private List<CountryModel> stateModelList = new ArrayList<>();
+    private List<CountryModel> stateModelList11 = new ArrayList<>();
+
     private int productid;
     String[] import_export = {"Export", "Domestic"};
     private String impoert_exprott;
+    private int selectedStation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +141,107 @@ public class PostToSellActivity extends AppCompatActivity {
             }
         });
 
+        CountryList();
+
+    }
+
+    private void CountryList() {
+        Log.e("StateModel", "StateModel==");
+        customDialog.displayProgress(mContext);
+        Call<ResponseModel<List<CountryModel>>> call = APIClient.getInstance().country_list(mSessionUtil.getApiToken());
+        Log.e("StateModel", "StateModel==" + call);
+        Log.e("getApiToken", "getApiToken==" + mSessionUtil.getApiToken());
+        call.enqueue(new Callback<ResponseModel<List<CountryModel>>>() {
+            @Override
+            public void onResponse(Call<ResponseModel<List<CountryModel>>> call, Response<ResponseModel<List<CountryModel>>> response) {
+                Log.e("StateModel", "StateModel==" + new Gson().toJson(response.body().data));
+                customDialog.dismissProgress(mContext);
+                if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
+                    setUpSpinerStation(response.body().data);
+                } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+                } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
+                    AppUtil.showToast(mContext, response.body().message);
+                    AppUtil.autoLogout(mContext);
+                } else {
+                    AppUtil.showToast(mContext, response.body().message);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel<List<CountryModel>>> call, Throwable t) {
+                customDialog.dismissProgress(mContext);
+            }
+        });
+
+    }
+
+    public void setUpSpinerStation(List<CountryModel> list) {
+        stateModelList.clear();
+        CountryModel countryModel = new CountryModel();
+        countryModel.setName("Country of origin");
+        countryModel.setId(-1);
+        stateModelList.add(countryModel);
+        stateModelList.addAll(list);
+        CountryAdapter adapter = new CountryAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, stateModelList);
+        binding.spinnerCountry.setAdapter(adapter);
+        binding.spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedStation = stateModelList.get(position).getId();
+            } // to close the onItemSelected
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public class CountryAdapter extends ArrayAdapter<CountryModel> {
+
+        LayoutInflater flater;
+
+        public CountryAdapter(Context context, int resouceId, int textviewId, List<CountryModel> list) {
+
+            super(context, resouceId, textviewId, list);
+//        flater = context.getLayoutInflater();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            return rowview(convertView, position);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return rowview(convertView, position);
+        }
+
+        private View rowview(View convertView, int position) {
+
+            CountryModel rowItem = getItem(position);
+
+            CountryAdapter.viewHolder holder;
+            View rowview = convertView;
+            if (rowview == null) {
+
+                holder = new CountryAdapter.viewHolder();
+                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowview = flater.inflate(R.layout.spinner_layout, null, false);
+
+                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
+
+                rowview.setTag(holder);
+            } else {
+                holder = (CountryAdapter.viewHolder) rowview.getTag();
+            }
+            holder.txtTitle.setText(rowItem.getName());
+
+            return rowview;
+        }
+
+        private class viewHolder {
+            AppCompatTextView txtTitle;
+        }
     }
 
     public void setAttributeArray(String attribute, String value) {

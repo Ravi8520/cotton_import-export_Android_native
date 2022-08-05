@@ -86,7 +86,7 @@
             android:layout_toLeftOf="@id/img_notification"
             android:padding="@dimen/_3sdp"
             android:src="@drawable/ic_filter"
-            app:tint="@color/colorAccent" />
+            app:tint="@color/white" />
 
         <ImageView
 

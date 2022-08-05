@@ -8,7 +8,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.databinding.ActivityLoginBinding;
@@ -19,6 +18,7 @@ import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
 import com.ecotton.impex.utils.ValidationUtil;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -139,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                         map.put(SessionUtil.EMAIL, model.getData().getEmail());
                         map.put(SessionUtil.PASS, binding.edtPassword.getText().toString().trim());
                         mSessionUtil.setData(map);
+                        Log.e("getEmail", "getEmail==" + model.getData().getEmail());
                         startActivity(new Intent(mContext, CompanyListActivity.class));
                         finish();
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {

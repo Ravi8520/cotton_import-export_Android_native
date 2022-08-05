@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
@@ -21,6 +20,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -92,17 +92,14 @@ public class CompanyDetailFragment extends Fragment {
 
     public void SetData() {
         binding.txtUserType.setText(arraylist.getSellerBuyer_type());
-        binding.tvStationName.setText(arraylist.getCity_name());
         binding.txtPanOfCompany.setText(arraylist.getCompany_pan_no());
-        binding.tvDistrictName.setText(arraylist.getDistrict_name());
-        binding.tvStateName.setText(arraylist.getState_name());
+        binding.txtIecNumber.setText(arraylist.getIec());
+        binding.txtCountryName.setText(arraylist.getCountry_name());
         binding.txtGstNumber.setText(arraylist.getGst_no());
         binding.tvBankName.setText(arraylist.getBank_name());
-        binding.tvAccountHolderName.setText(arraylist.getAccount_holder_name());
+        binding.tvAccountNumber.setText(arraylist.getAccount_number());
         binding.tvBranchAddress.setText(arraylist.getBranch_address());
         binding.tvIfscNumber.setText(arraylist.getIfsc_code());
-        binding.txtAddress.setText(arraylist.getAddress());
-        binding.txtPanNumber.setText(arraylist.getPan_no());
         Glide.with(mContext).load(arraylist.getStamp_img()).placeholder(R.drawable.placeholder).into(binding.imgStamp);
     }
 

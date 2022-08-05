@@ -66,7 +66,8 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/type"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -105,8 +106,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/tab_text_color"
                     android:text="@string/lbl_pan_of_company"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/edt_company_pan_number"
@@ -117,62 +119,46 @@
                     android:ems="10"
                     android:fontFamily="@font/poppins_regular"
                     android:imeOptions="actionNext"
-                    android:inputType="textPersonName"
+                    android:inputType="text"
                     android:maxLength="10"
                     android:padding="@dimen/_8sdp"
                     android:singleLine="true"
                     android:textAllCaps="true"
                     android:textSize="14sp" />
 
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/state"
-                    android:textSize="@dimen/_12ssp" />
+                    android:text="@string/lbl_iec_number"
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
-                <RelativeLayout
+                <EditText
+                    android:id="@+id/edt_iec_number"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <Spinner
-                        android:id="@+id/spinner_state"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:spinnerMode="dropdown" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:rotation="-90"
-                        android:src="@drawable/ic_back_arrow" />
-
-                </RelativeLayout>
-
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_regular"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="10"
+                    android:padding="@dimen/_8sdp"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/district"
-                    android:textSize="@dimen/_12ssp" />
+                    android:text="@string/lbl_all_country"
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -184,49 +170,9 @@
                     android:orientation="horizontal">
 
                     <Spinner
-                        android:id="@+id/spinner_district"
+                        android:id="@+id/spinner_country"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:spinnerMode="dropdown" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:rotation="-90"
-                        android:src="@drawable/ic_back_arrow" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/station_name"
-                    android:textSize="@dimen/_12ssp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <Spinner
-                        android:id="@+id/spinner_station"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="@dimen/_40sdp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
@@ -254,7 +200,8 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/lbl_address"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/edt_address"
@@ -339,7 +286,8 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/gst_number"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/edt_gst_number"
@@ -355,29 +303,6 @@
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/pan_number_txt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/pan_number"
-                    android:textSize="@dimen/_12ssp" />
-
-                <EditText
-                    android:id="@+id/edt_pan_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/textview_border"
-                    android:ems="10"
-                    android:fontFamily="@font/poppins_regular"
-                    android:imeOptions="actionNext"
-                    android:maxLength="10"
-                    android:padding="@dimen/_8sdp"
-                    android:singleLine="true"
-                    android:textAllCaps="true"
-                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/bankname_txt"
@@ -386,7 +311,8 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/bank_name"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/edt_bankname"
@@ -406,11 +332,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/account_holder_name"
-                    android:textSize="@dimen/_12ssp" />
+                    android:text="@string/account_number"
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/edt_ac_holdername"
+                    android:id="@+id/edt_account_number"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -418,6 +345,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:imeOptions="actionNext"
                     android:padding="@dimen/_8sdp"
+                    android:maxLength="19"
                     android:singleLine="true"
                     android:textSize="14sp" />
 
@@ -428,7 +356,8 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/branch_addresh"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/edt_branch_address"
@@ -452,7 +381,8 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/ifsc_code"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/edt_ifsc_code"
@@ -473,7 +403,8 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/lbl_company_stamp_image"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
 
                 <RelativeLayout
                     android:id="@+id/layout_upload_stamp"
@@ -501,20 +432,20 @@
                 </RelativeLayout>
 
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_update"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_45sdp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/lbl_done"
                     android:textAllCaps="false"
+                    android:background="@drawable/custome_button"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12ssp"
-                    android:theme="@style/AppTheme" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
