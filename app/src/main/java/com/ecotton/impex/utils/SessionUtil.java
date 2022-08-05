@@ -76,6 +76,7 @@ public class SessionUtil {
         return preferences.getString(MOBILE_NO, "");
     }
 
+
     public String getCompanyName() {
         return preferences.getString(COMPANY_NAME, "");
     }

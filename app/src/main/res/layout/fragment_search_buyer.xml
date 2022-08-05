@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue">
+    android:background="@color/purple_700">
 
     <RelativeLayout
         android:id="@+id/layout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/light_blue">
+        android:background="@color/purple_700">
 
 
         <TextView
@@ -21,7 +21,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:text="@string/lbl_search_buyer"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 
 

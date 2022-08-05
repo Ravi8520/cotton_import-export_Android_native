@@ -73,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 create_account = "create";
                 startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
-                finish();
             }
         });
 
@@ -82,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (isValidForm()) {
                     loginwithotp();
-
                 }
             }
         });
@@ -91,14 +89,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
-                finish();
+
             }
         });
     }
 
 
     private boolean isValidForm() {
-        return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtMobileNumber, binding.mTilMobile, mContext.getString(R.string.err_enter_mobile_number), 10, mContext.getString(R.string.err_enter_valid_mobile_number))
+        return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtMobileNumber, binding.mTilMobile, mContext.getString(R.string.err_enter_email_number))
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtPassword, binding.mTilPassword, mContext.getString(R.string.err_enter_password), 6, mContext.getString(R.string.err_password_contain_character, 6), 15, "");
     }
 
@@ -112,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
     private void loginwithotp() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", binding.edtMobileNumber.getText().toString());
+            object.put("email", binding.edtMobileNumber.getText().toString());
             object.put("password", binding.edtPassword.getText().toString());
             object.put("fcm_token", mSessionUtil.getFcmtoken());
             object.put("device_os", "android");
@@ -138,11 +136,11 @@ public class LoginActivity extends AppCompatActivity {
                     if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                         HashMap<String, String> map = new HashMap<>();
                         map.put(SessionUtil.API_TOKEN, model.getData().getApiToken());
-                        map.put(SessionUtil.MOBILE_NO, model.getData().getMobileNumber());
+                        map.put(SessionUtil.EMAIL, model.getData().getEmail());
                         map.put(SessionUtil.PASS, binding.edtPassword.getText().toString().trim());
                         mSessionUtil.setData(map);
-                        //startActivity(new Intent(mContext, CompanyListActivity.class));
-                        //finish();
+                        startActivity(new Intent(mContext, CompanyListActivity.class));
+                        finish();
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());
                     } else if (model.getStatus() == Utils.StandardStatusCodes.UNAUTHORISE) {

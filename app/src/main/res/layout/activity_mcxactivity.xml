@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey">
+    android:background="@color/purple_700">
 
     <RelativeLayout
         android:id="@+id/rl_mcxlayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/light_grey">
+        android:background="@color/purple_700">
 
         <ImageView
             android:id="@+id/backarrow"
@@ -20,7 +20,7 @@
             android:background="?selectableItemBackgroundBorderless"
             android:focusable="true"
             android:padding="@dimen/_3sdp"
-            android:src="@drawable/ic_back_arrow" />
+            android:src="@drawable/ic_back_arrow_white" />
 
         <TextView
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center_horizontal"
             android:text="@string/mcxtitle"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp" />
     </RelativeLayout>
 

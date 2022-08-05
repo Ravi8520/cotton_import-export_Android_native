@@ -61,9 +61,8 @@
             android:id="@+id/slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="slider"
-            app:tickVisible="true"
-            android:layout_below="@+id/txt_label" />
+            android:layout_below="@+id/txt_label"
+            app:tickVisible="true" />
 
 
         <TextView

@@ -9,7 +9,7 @@
         android:id="@+id/rl_calculatortitle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/light_grey">
+        android:background="@color/purple_700">
 
         <ImageView
             android:id="@+id/backarrow"
@@ -20,7 +20,7 @@
             android:background="?selectableItemBackgroundBorderless"
             android:focusable="true"
             android:padding="@dimen/_3sdp"
-            android:src="@drawable/ic_back_arrow" />
+            android:src="@drawable/ic_back_arrow_white" />
 
         <TextView
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:fontFamily="@font/poppins_regular"
             android:gravity="center_horizontal"
             android:text="@string/calculatortitle"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
@@ -40,10 +40,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_calculatortitle"
-        android:background="@color/light_grey">
+        android:background="@color/purple_700">
 
         <com.google.android.material.tabs.TabLayout
-
             android:id="@+id/tablaout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"

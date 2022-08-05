@@ -89,7 +89,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_30sdp">
 
                     <TextView
@@ -101,8 +101,7 @@
                         android:layout_toLeftOf="@+id/img_edit"
                         android:fontFamily="@font/poppins_regular"
                         android:gravity="center"
-                        android:text="1234567890"
-                        android:textSize="@dimen/_14sdp" />
+                         android:textSize="@dimen/_14sdp" />
 
                     <ImageView
                         android:id="@+id/img_edit"

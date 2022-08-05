@@ -113,8 +113,8 @@ public interface APIInterface {
 
 
     @FormUrlEncoded
-    @POST("verify_mobile_number")
-    Call<ResponseBody> VerifyMobileNo(
+    @POST("verify_email")
+    Call<ResponseBody> VerifyEmail(
             @Header("Authorization") String Authorization,
             @Field("data") String data
     );

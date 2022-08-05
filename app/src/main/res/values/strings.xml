@@ -9,6 +9,7 @@
     <string name="lbl_post">Post</string>
     <string name="lbl_add">Add</string>
     <string name="lbl_next">Next</string>
+    <string name="lbl_buy">Buy</string>
     <string name="lbl_set_password">Set Password</string>
     <string name="lbl_verify">Verify</string>
     <string name="lbl_view">View</string>
@@ -91,7 +92,9 @@
     <string name="err_max_text">Maximum</string>
     <string name="err_character_required">characters required.</string>
     <string name="err_enter_mobile_number">Please enter mobile number</string>
+    <string name="err_enter_email_number">Please enter email number</string>
     <string name="err_enter_valid_mobile_number">Please enter valid mobile number</string>
+    <string name="err_enter_valid_iec_number">Please enter valid iec number</string>
     <string name="err_enter_password">Please enter password</string>
     <string name="err_password_contain_character">Password should contain atleast %d characters</string>
     <string name="err_name_character">Name should contain atleast %d characters</string>
@@ -108,6 +111,7 @@
     <string name="err_gst_number">GST should contain atleast %d charactersl</string>
     <string name="err_password">Password should contain atleast %d charactersl</string>
     <string name="err_company_name">Please Enter Company Name</string>
+    <string name="err_iec_number">Please Enter IEC Number</string>
 
     <string name="utilities_title">Utilities</string>
     <string name="lbl_details">Details</string>
@@ -398,5 +402,10 @@
     <string-array name="rangeSliderValues">
         <item>20</item>
         <item>70</item>
+    </string-array>
+
+    <string-array name="status">
+        <item>Active</item>
+        <item>Completed</item>
     </string-array>
 </resources>

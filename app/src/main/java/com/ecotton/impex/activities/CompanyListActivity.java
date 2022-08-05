@@ -71,12 +71,17 @@ public class CompanyListActivity extends AppCompatActivity {
         add_company.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(mContext, com.ecotton.impex.activities.AddCompanyActivity.class));
-                finish();
+                startActivity(new Intent(mContext, AddCompanyActivity.class));
+
 
             }
         });
         setSellerinfo();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         CompanyList();
     }
 

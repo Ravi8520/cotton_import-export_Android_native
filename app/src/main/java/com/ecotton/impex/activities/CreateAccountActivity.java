@@ -3,6 +3,7 @@ package com.ecotton.impex.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.widget.Toast;
@@ -36,8 +37,8 @@ import retrofit2.Response;
 public class CreateAccountActivity extends AppCompatActivity {
 
 
-    public static String MobileNo = "mobile_no";
-    private String mobileno;
+    public static String EMAIL_ADDRESS = "email";
+    private String emailID;
 
     private CreateAccountActivity mContext;
 
@@ -57,13 +58,13 @@ public class CreateAccountActivity extends AppCompatActivity {
         customDialog = new CustomDialog();
         Intent intent = getIntent();
         if (intent != null) {
-            mobileno = intent.getStringExtra(MobileNo);
-            binding.edtMobileNumber.setText(mobileno);
+            emailID = intent.getStringExtra(EMAIL_ADDRESS);
+            binding.edtEmailAddress.setText(emailID);
         }
 
-        binding.edtMobileNumber.setEnabled(false);
+        binding.edtEmailAddress.setEnabled(false);
 
-        binding.edtGstNumber.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+         binding.edtGstNumber.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         binding.btnCreate.setOnClickListener(view -> {
             btn_createOnClick();
@@ -110,6 +111,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                 Pattern.compile("^[0-9]{2}[A-Z]{5}[0-9]{4}"
                         + "[A-Z]{1}[1-9A-Z]{1}"
                         + "Z[0-9A-Z]{1}$");
+        if (!TextUtils.isEmpty(passwordInput) && !PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            binding.edtGstNumber.setError("Please Enter Proper GST Number");
+            binding.edtGstNumber.requestFocus();
+            return false;
+        }
 
 
         if (!Patterns.EMAIL_ADDRESS.matcher(binding.edtEmailAddress.getText().toString()).matches()) {
@@ -134,9 +140,11 @@ public class CreateAccountActivity extends AppCompatActivity {
             return false;
         }
         return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtContactPerson, binding.mTilcontactPerson, mContext.getString(R.string.lbl_contact_person), 3, mContext.getString(R.string.err_name_character, 3), 20, "")
+                && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtMobileNumber, binding.mTilmobileNumber, mContext.getString(R.string.err_enter_mobile_number), 10, mContext.getString(R.string.err_enter_valid_mobile_number))
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtPassword, binding.mTilpassword, mContext.getString(R.string.err_enter_password), 6, mContext.getString(R.string.err_password, 6), 15, "")
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtConfrimPassword, binding.mTilconfrimPassword, mContext.getString(R.string.err_enter_password), 6, mContext.getString(R.string.err_password, 6), 15, "")
-                && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtCompanyName, binding.mTilcpmpanyName, mContext.getString(R.string.err_company_name), 4, mContext.getString(R.string.err_company, 4), 60, "");
+                && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtCompanyName, binding.mTilcpmpanyName, mContext.getString(R.string.err_company_name), 4, mContext.getString(R.string.err_company, 4), 60, "")
+                && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtIecNumber, binding.mTiliecNumber, mContext.getString(R.string.err_iec_number), 10, mContext.getString(R.string.err_enter_valid_iec_number));
     }
 
     protected void btn_createOnClick() {
@@ -155,8 +163,8 @@ public class CreateAccountActivity extends AppCompatActivity {
             object.put("password", binding.edtPassword.getText().toString().trim());
             object.put("company_name", binding.edtCompanyName.getText().toString().trim());
             object.put("gst_no", binding.edtGstNumber.getText().toString().trim());
-            object.put("user_type", "sellerBuyer");
-            object.put("referral_code", "");
+            object.put("iec", binding.edtIecNumber.getText().toString().trim());
+
 
             String data = object.toString();
             Log.e("data", "data==" + data);

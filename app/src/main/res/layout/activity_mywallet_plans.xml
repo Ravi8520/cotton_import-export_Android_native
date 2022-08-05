@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey">
+    android:background="@color/purple_700">
 
     <RelativeLayout
         android:id="@+id/rl_plansHeader"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/light_grey">
+        android:background="@color/purple_700">
 
         <ImageView
             android:id="@+id/backarrow"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_centerVertical="true"
-            android:clickable="true"
             android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:focusable="true"
             android:padding="@dimen/_3sdp"
-            android:src="@drawable/ic_back_arrow" />
+            android:src="@drawable/ic_back_arrow_white" />
 
         <TextView
             android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/Plans"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
     </RelativeLayout>
@@ -39,14 +40,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_plansHeader"
-        android:background="@drawable/custome_bg_white">
+        android:layout_above="@+id/rlBuy"
+        android:background="@drawable/custome_bg_white"
+        android:paddingTop="@dimen/_10sdp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/plans_recycler"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/mywallet_plans" />
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlBuy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/_20sdp">
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/login_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/poppins_medium"
+        android:letterSpacing="0.05"
+        android:text="@string/lbl_buy"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp" />
     </RelativeLayout>
 
 </RelativeLayout>

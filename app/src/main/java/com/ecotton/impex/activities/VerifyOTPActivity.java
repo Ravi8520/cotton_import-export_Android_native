@@ -39,10 +39,10 @@ import retrofit2.Response;
 
 public class VerifyOTPActivity extends AppCompatActivity {
 
-    public static String MOBILE_NO = "mobile_no";
+    public static String EMAIL_ADDRESS = "email";
     public static String NEWMOBILE_NO = "newmobile_no";
     public static String ISINVITED = "is_invited";
-    private String mobileno = "";
+    private String email = "";
     private int is_invited;
 
     private VerifyOTPActivity mContext;
@@ -75,9 +75,9 @@ public class VerifyOTPActivity extends AppCompatActivity {
             return;
         }
         is_invited = bundle.getInt(ISINVITED, 0);
-        mobileno = bundle.getString(MOBILE_NO, "");
-        number = "<b>" + mobileno + "</b> ";
-        binding.txMobileNumber.setText(Html.fromHtml("Please enter the 6 digit code sent \nto your mail " + number));
+        email = bundle.getString(EMAIL_ADDRESS, "");
+        binding.txMobileNumber.setText(Html.fromHtml("Please enter the 6 digit code sent to your mail <b>" + email + "</b> "));
+        Log.e("TAG", "EMAIL" + email);
         binding.btnVerify.setOnClickListener(view -> {
             btn_verifyOnClick();
         });
@@ -85,10 +85,10 @@ public class VerifyOTPActivity extends AppCompatActivity {
             txt_resend_otpClick();
         });
         binding.backarrow.setOnClickListener(view -> {
-            txt_resend_otpClick();
+            onBackPressed();
         });
         binding.imgEdit.setOnClickListener(view -> {
-            img_editOnClick();
+            onBackPressed();
         });
     }
 
@@ -96,7 +96,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         try {
             customDialog.displayProgress(mContext);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("mobile_number", mobileno);
+            jsonObject.put("mobile_number", email);
             String data = jsonObject.toString();
             Call<ResponseModel<List<InvitedDataModel>>> call = APIClient.getInstance().get_invited_by_company_details(Constants.AUTH, data);
             call.enqueue(new Callback<ResponseModel<List<InvitedDataModel>>>() {
@@ -167,7 +167,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     private void VerifyOTP() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", mobileno);
+            object.put("email", email);
             object.put("otp", pin);
             String data = object.toString();
             Log.e("data", "data==" + data);
@@ -190,15 +190,15 @@ public class VerifyOTPActivity extends AppCompatActivity {
                         map.put(SessionUtil.MOBILE_NO, model.getData().getMobileNumber());
                         map.put(SessionUtil.API_TOKEN, model.getData().getApiToken());
                         mSessionUtil.setData(map);
-                        if (is_invited == 1) {
+                        /*if (is_invited == 1) {
                             Toast.makeText(mContext, ISINVITED, Toast.LENGTH_LONG).show();
                             InvitedData();
                         } else {
-                            Intent intent = new Intent(mContext, CreateAccountActivity.class);
-                            intent.putExtra(CreateAccountActivity.MobileNo, mobileno);
-                            startActivity(intent);
-                            finish();
-                        }
+                        }*/
+                        Intent intent = new Intent(mContext, CreateAccountActivity.class);
+                        intent.putExtra(CreateAccountActivity.EMAIL_ADDRESS, email);
+                        startActivity(intent);
+                        finish();
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());
                     } else if (model.getStatus() == Utils.StandardStatusCodes.UNAUTHORISE) {
@@ -223,7 +223,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     private void VerifyOTP1() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", mobileno);
+            object.put("mobile_number", email);
             object.put("otp", pin);
             String data = object.toString();
             Log.e("data", "data==" + data);
@@ -247,7 +247,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                         map.put(SessionUtil.MOBILE_NO, model.getData().getMobileNumber());
                         mSessionUtil.setData(map);
                         Intent intent = new Intent(mContext, ResetPasswordActivity.class);
-                        intent.putExtra(ResetPasswordActivity.MobileNo, mobileno);
+                        intent.putExtra(ResetPasswordActivity.MobileNo, email);
                         startActivity(intent);
                         finish();
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
@@ -274,7 +274,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     private void ResendOTP() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", mobileno);
+            object.put("email", email);
             String data = object.toString();
             Log.e("data", "data==" + data);
             Call<ResponseBody> call = APIClient.getInstance().Resend_otp(Constants.AUTH, data);
@@ -315,15 +315,12 @@ public class VerifyOTPActivity extends AppCompatActivity {
     }
 
 
-     protected void img_backOnClick() {
-        onBackPressed();
-    }
 
 
     protected void img_editOnClick() {
         Intent intent = new Intent(mContext, ForgotPasswordActivity.class);
-        Log.e("number0", "number==" + mobileno);
-        intent.putExtra(NEWMOBILE_NO, mobileno);
+        Log.e("number0", "number==" + email);
+        intent.putExtra(NEWMOBILE_NO, email);
         startActivity(intent);
         finish();
     }
@@ -342,8 +339,6 @@ public class VerifyOTPActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(mContext, ForgotPasswordActivity.class);
-        startActivity(intent);
-        finish();
+
     }
 }

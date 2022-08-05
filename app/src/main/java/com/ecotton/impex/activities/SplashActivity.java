@@ -77,7 +77,7 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (mSessionUtil.isLogin()) {
-                        if (mSessionUtil.getMobileNo().isEmpty() || mSessionUtil.getPass().isEmpty() || mSessionUtil.getApiToken().isEmpty() || mSessionUtil.getUserid().isEmpty()) {
+                        if (mSessionUtil.getEmail().isEmpty() || mSessionUtil.getPass().isEmpty() || mSessionUtil.getApiToken().isEmpty() || mSessionUtil.getUserid().isEmpty()) {
                             startActivity(new Intent(mContext, LoginActivity.class));
                             finish();
                         } else {
@@ -118,7 +118,7 @@ public class SplashActivity extends AppCompatActivity {
     private void autologin() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", mSessionUtil.getMobileNo());
+            object.put("email", mSessionUtil.getEmail());
             object.put("password", mSessionUtil.getPass());
             object.put("fcm_token", mSessionUtil.getFcmtoken());
             object.put("device_os", "android");
@@ -150,11 +150,11 @@ public class SplashActivity extends AppCompatActivity {
                         map.put(SessionUtil.COMPANY_ID, mSessionUtil.getCompanyId());
                         mSessionUtil.setData(map);
                         if (model.getData().getIs_user_plan() == 1) {
-                            // startActivity(new Intent(mContext, HomeActivity.class));
-                            //  finish();
+                            startActivity(new Intent(mContext, HomeActivity.class));
+                            finish();
                         } else {
-                            //  Intent intent = new Intent(mContext, MywalletPlansActivity.class);
-                            //  startActivity(intent);
+                            Intent intent = new Intent(mContext, MywalletPlansActivity.class);
+                            startActivity(intent);
                         }
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());

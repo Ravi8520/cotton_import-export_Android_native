@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/purple_700">
 
     <RelativeLayout
         android:id="@+id/title_rl"
@@ -20,7 +21,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/my_work"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
     </RelativeLayout>
@@ -181,6 +182,7 @@
                 android:layout_below="@id/rl_wallet"
                 android:layout_alignStart="@id/rl_mypost"
                 android:layout_alignEnd="@id/rl_mypost"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_5sdp">
 
                 <ImageView
@@ -216,6 +218,7 @@
                 android:layout_below="@id/rl_mybroker"
                 android:layout_alignStart="@id/rl_mypost"
                 android:layout_alignEnd="@id/rl_mypost"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_5sdp">
 
                 <ImageView

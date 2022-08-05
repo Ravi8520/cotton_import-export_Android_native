@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ecotton.impex.databinding.ActivityBuyerBinding;
 import com.ecotton.impex.databinding.ActivityLoginasBinding;
+import com.ecotton.impex.utils.Constants;
 import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
@@ -37,11 +38,10 @@ import retrofit2.Response;
 
 public class LoginAsActivity extends AppCompatActivity {
 
-    String[] user = {"Select", "buyer", "seller"};
+    String[] user = {"Select", "Importer", "Exporter"};
 
     private Context mContext;
 
-    Spinner spinner_user;
     String Usertype;
     public static String COMPANY_ID = "Company_id";
     private int company_id;
@@ -65,15 +65,23 @@ public class LoginAsActivity extends AppCompatActivity {
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, user);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
-        spinner_user.setAdapter(aa);
+        binding.spinnerUser.setAdapter(aa);
 
-        spinner_user.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spinnerUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // On selecting a spinner item
                 pos = position;
                 if (position > 0) {
-                    Usertype = spinner_user.getSelectedItem().toString();
+                    Usertype = binding.spinnerUser.getSelectedItem().toString();
+                    Log.e("Usertype", "Usertype==" + Usertype);
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
+                if (position > 0) {
+                    if (binding.spinnerUser.getSelectedItem().toString().equals("Importer"))
+                        Usertype = Constants.IMPORTER;
+                    if (binding.spinnerUser.getSelectedItem().toString().equals("Exporter"))
+                        Usertype = Constants.EXPORTER;
                     Log.e("Usertype", "Usertype==" + Usertype);
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
                 }
@@ -139,19 +147,21 @@ public class LoginAsActivity extends AppCompatActivity {
                             map.put(SessionUtil.COMPANY_ID, model.getData().getCompany_id());
                             mSessionUtil.setData(map);
                             if (model.getData().getIs_user_plan() == 1) {
-                                Intent intent = new Intent(mContext, com.ecotton.impex.activities.HomeActivity.class);
-                                intent.putExtra(com.ecotton.impex.activities.HomeActivity.COMPANY_Name, model.getData().getCompany_name());
-                                intent.putExtra(com.ecotton.impex.activities.HomeActivity.USER_Type, model.getData().getUser_type());
+                                Intent intent = new Intent(mContext, HomeActivity.class);
+                                intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
+                                intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
                                 startActivity(intent);
                                 finish();
                             } else {
-                                Intent intent = new Intent(mContext, com.ecotton.impex.activities.MywalletPlansActivity.class);
+                                Intent intent = new Intent(mContext, MywalletPlansActivity.class);
+                                intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
+                                intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
                                 startActivity(intent);
                             }
 
                         } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                             AppUtil.showToast(mContext, model.getMessage());
-                            startActivity(new Intent(mContext, com.ecotton.impex.activities.WitingApprovelActivity.class));
+                            startActivity(new Intent(mContext, WitingApprovelActivity.class));
                             finish();
                         } else if (model.getStatus() == Utils.StandardStatusCodes.UNAUTHORISE) {
                             AppUtil.showToast(mContext, model.getMessage());

@@ -69,6 +69,8 @@ public class Constants {
     public static final String USER_DELIVERY_BOY = "delivery_boy";
     public static  String  USERTYPE = "";
 
+    public static  String  EXPORTER = "seller";
+    public static  String  IMPORTER = "buyer";
     //server status string
     public interface ServerOrderStatus{
         String UPCOMING = "new";

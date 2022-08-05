@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,6 @@ import com.ecotton.impex.models.login.LoginModel;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.Constants;
 import com.ecotton.impex.utils.Utils;
-import com.ecotton.impex.utils.ValidationUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,7 +51,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             binding.edtEmail.setText(mobileno);
         }
         if (LoginActivity.create_account.equals("create")) {
-           binding.txtTitle.setText(mContext.getResources().getString(R.string.email_address));
+            binding.txtTitle.setText(mContext.getResources().getString(R.string.email_address));
         } else {
             Log.e("Forgot_password", "Forgot_password==");
             binding.txtTitle.setText(mContext.getResources().getString(R.string.lbl_forgot_password));
@@ -96,9 +96,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                         AppUtil.showToast(mContext, model.getMessage());
                         Intent intent = new Intent(mContext, VerifyOTPActivity.class);
-                        intent.putExtra(VerifyOTPActivity.MOBILE_NO, binding.edtEmail.getText().toString().trim());
+                        intent.putExtra(VerifyOTPActivity.EMAIL_ADDRESS, binding.edtEmail.getText().toString().trim());
                         startActivity(intent);
-                        finish();
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());
                     } else if (model.getStatus() == Utils.StandardStatusCodes.UNAUTHORISE) {
@@ -123,10 +122,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private void VerifyMono() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", binding.edtEmail.getText().toString());
+            object.put("email", binding.edtEmail.getText().toString());
             String data = object.toString();
             Log.e("data", "data==" + data);
-            Call<ResponseBody> call = APIClient.getInstance().VerifyMobileNo(Constants.AUTH, data);
+            Call<ResponseBody> call = APIClient.getInstance().VerifyEmail(Constants.AUTH, data);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -142,10 +141,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     LoginModel model = gson.fromJson(dataa, LoginModel.class);
                     if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                         Intent intent = new Intent(mContext, VerifyOTPActivity.class);
-                        intent.putExtra(VerifyOTPActivity.MOBILE_NO, binding.edtEmail.getText().toString().trim());
+                        intent.putExtra(VerifyOTPActivity.EMAIL_ADDRESS, binding.edtEmail.getText().toString().trim());
                         intent.putExtra(VerifyOTPActivity.ISINVITED, model.getData().getIs_invited());
                         startActivity(intent);
-                        finish();
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());
                     } else if (model.getStatus() == Utils.StandardStatusCodes.UNAUTHORISE) {
@@ -168,9 +166,19 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
 
-
     private boolean isValidForm() {
-        return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtEmail, binding.mTilEmail, mContext.getString(R.string.err_enter_mobile_number), 10, mContext.getString(R.string.err_enter_valid_mobile_number));
+
+        if (binding.edtEmail.getText().toString().isEmpty()) {
+            binding.edtEmail.setError("Please Enter Email");
+            binding.edtEmail.requestFocus();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(binding.edtEmail.getText().toString()).matches()) {
+            binding.edtEmail.setError("Please Enter Proper Email Format");
+            binding.edtEmail.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -179,9 +187,5 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(mContext, LoginActivity.class));
-        finish();
-    }
+
 }

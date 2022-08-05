@@ -23,6 +23,18 @@ public class CompanyListModel implements Serializable {
     @Expose
     private int is_setupped;
 
+    @SerializedName("is_approve")
+    @Expose
+    private int is_approve;
+
+    public int getIs_approve() {
+        return is_approve;
+    }
+
+    public void setIs_approve(int is_approve) {
+        this.is_approve = is_approve;
+    }
+
     public int getCompany_id() {
         return company_id;
     }

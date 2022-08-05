@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:theme="@style/BoxTheme">
 
             <Space
@@ -121,7 +122,6 @@
             android:background="@drawable/textview_border">
 
             <Spinner
-                android:id="@+id/spinner_user"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_centerVertical="true"
@@ -152,30 +152,119 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/date_range"
+            android:visibility="gone"
             android:textSize="@dimen/_14ssp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <RelativeLayout
+            android:id="@+id/titles_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp">
+
+
+            <LinearLayout
+                android:id="@+id/titles_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/status"
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/date_range"
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/date_spin_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titles_rl"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/_5sdp"
-            android:layout_weight="1"
-            android:background="@drawable/spinner_border">
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/pick_date_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:drawableRight="@drawable/datepicker_icon"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Select Date"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:theme="@style/AppTheme" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/textview_border">
+
+                    <Spinner
+                        android:id="@+id/spinner_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:entries="@array/status" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:rotation="-90"
+                        android:src="@drawable/ic_back_arrow" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/textview_border">
+
+                    <Button
+                        android:id="@+id/pick_date_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:drawableRight="@drawable/datepicker_icon"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Select Date"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:theme="@style/AppTheme" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"

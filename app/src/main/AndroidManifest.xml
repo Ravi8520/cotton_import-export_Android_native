@@ -76,15 +76,18 @@
 
         <activity
             android:name=".activities.LoginAsActivity"
+            android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"
              />
 
         <activity
             android:name=".activities.AddCompanyActivity"
+            android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"
              />
         <activity
             android:name=".activities.CompanyListActivity"
+            android:theme="@style/Theme.Splash"
             android:screenOrientation="portrait"
              />
         <activity

@@ -86,7 +86,7 @@ public class AddCompanyActivity extends AppCompatActivity {
         try {
             JSONObject object = new JSONObject();
             object.put("company_name", binding.edtCompanyName.getText().toString().trim());
-            object.put("gst_no", binding.edtGstNumber.getText().toString().trim());
+            object.put("iec", binding.edtGstNumber.getText().toString().trim());
 
             String data = object.toString();
 
@@ -132,13 +132,13 @@ public class AddCompanyActivity extends AppCompatActivity {
                 Pattern.compile("^[0-9]{2}[A-Z]{5}[0-9]{4}"
                         + "[A-Z]{1}[1-9A-Z]{1}"
                         + "Z[0-9A-Z]{1}$");
-        if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+      /*  if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
             binding.edtGstNumber.setError("Please Enter Proper GST Number");
             binding.edtGstNumber.requestFocus();
             return false;
-        }
-        return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtCompanyName, binding.mTilcpmpanyName, mContext.getString(R.string.err_company_name), 4, mContext.getString(R.string.err_company, 4), 60, "");
-        //&& ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtReferralCode, binding.mTilreferralCode, mContext.getString(R.string.err_referral), 3, mContext.getString(R.string.err_referral_code, 4), 60, "")
+        }*/
+        return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtCompanyName, binding.mTilcpmpanyName, mContext.getString(R.string.err_company_name), 4, mContext.getString(R.string.err_company, 4), 60, "")
+          && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtGstNumber, binding.mTilgstNumber, mContext.getString(R.string.err_iec_number), 10, mContext.getString(R.string.err_enter_valid_iec_number));
         // && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtGstNumber, binding.mTilgstNumber, mContext.getString(R.string.err_gst), 15, mContext.getString(R.string.err_gst_number, 15), 20, "");
         // && ValidationUtil.isBlankETAndTextInputError(mContext, edt_primary_broker, mTilprimary_broker, mContext.getString(R.string.err_primary_broker), 6, mContext.getString(R.string.err_name_character, 6), 60, "");
     }
@@ -170,16 +170,5 @@ public class AddCompanyActivity extends AppCompatActivity {
         return m.matches();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (homeaddcompany.equals("homeaddcompany")) {
-            Log.e("homeaddcompany", "homeaddcompany==" + homeaddcompany);
-            startActivity(new Intent(mContext, HomeActivity.class));
-            finish();
-        } else {
-            startActivity(new Intent(mContext, CompanyListActivity.class));
-            finish();
-        }
 
-    }
 }
