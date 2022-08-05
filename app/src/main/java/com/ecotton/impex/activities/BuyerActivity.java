@@ -90,6 +90,7 @@ public class BuyerActivity extends AppCompatActivity implements BuyerAdapter.OnI
         });
         if (mSessionUtil.getUsertype().equals("buyer")) {
             binding.txtTitle.setText(getResources().getString(R.string.lbl_seller_directory));
+            Log.e("getUsertype","getUsertype==");
         }
     }
 
