@@ -76,7 +76,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private void Forgot_password() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", binding.edtEmail.getText().toString());
+            object.put("email", binding.edtEmail.getText().toString());
             String data = object.toString();
             Log.e("data", "data==" + data);
             Call<ResponseBody> call = APIClient.getInstance().Forgot_password(Constants.AUTH, data);

@@ -131,7 +131,7 @@ public class UpdateCompanyDetailsActivity extends AppCompatActivity {
             binding.edtAccountNumber.setText(arraylist.getAccount_number());
             binding.edtBranchAddress.setText(arraylist.getBranch_address());
             binding.edtIfscCode.setText(arraylist.getIfsc_code());
-            binding.edtIecNumber.setText(arraylist.getIfsc_code());
+            binding.edtIecNumber.setText(arraylist.getIec());
             Glide.with(mContext).load(arraylist.getStamp_img()).placeholder(R.drawable.placeholder).into(binding.imgUploadStamp);
         }
 
@@ -433,7 +433,7 @@ public class UpdateCompanyDetailsActivity extends AppCompatActivity {
         Pattern ACCOUNT_NUMBER_PATTERN =
                 Pattern.compile("[0-9]{9,18}");
         if (!ACCOUNT_NUMBER_PATTERN.matcher(account_number).matches()) {
-            binding.edtAccountNumber.setError("Please Enter Proper PAN Number");
+            binding.edtAccountNumber.setError("Please Enter Proper Account Number");
             binding.edtAccountNumber.requestFocus();
             return false;
         }

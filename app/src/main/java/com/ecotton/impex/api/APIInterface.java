@@ -31,6 +31,7 @@ import com.ecotton.impex.models.PrivatSellNotificationModel;
 import com.ecotton.impex.models.ProductAttributeModel;
 import com.ecotton.impex.models.ProductModel;
 import com.ecotton.impex.models.ProductValueModel;
+import com.ecotton.impex.models.ProtModel;
 import com.ecotton.impex.models.RequestModel;
 import com.ecotton.impex.models.SearchBrokerModel;
 import com.ecotton.impex.models.SearchCompanyModel;
@@ -178,6 +179,13 @@ public interface APIInterface {
     @POST("country_list")
     Call<ResponseModel<List<CountryModel>>> country_list(
             @Header("Authorization") String Authorization
+
+    );
+    @FormUrlEncoded
+  @POST("port_list")
+    Call<ResponseModel<List<ProtModel>>> port_list(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
 
     );
 

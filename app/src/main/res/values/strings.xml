@@ -86,6 +86,11 @@
     <string name="lbl_search_buyer">Search Buyer</string>
     <string name="lbl_seller_type">Seller Type</string>
     <string name="lbl_pending">Pending...</string>
+    <string name="lbl_dollar">$1200</string>
+    <string name="lbl_country_of_dispatch">Country of dispatch</string>
+    <string name="lbl_port_of_dispatch">Port of dispatch</string>
+    <string name="lbl_destination_country">Destination country</string>
+    <string name="lbl_destination_port">Destination port</string>
 
 
     <string name="err_min_text">Minimum</string>

@@ -76,7 +76,7 @@
                     android:layout_below="@id/txt_user_type"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/lbl_pan_of_company"
+                    android:text="@string/lbl_iec_number"
                     android:textSize="14sp" />
 
                 <TextView
