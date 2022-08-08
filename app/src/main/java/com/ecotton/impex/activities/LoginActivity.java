@@ -72,7 +72,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 create_account = "create";
-                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class)
+                        .putExtra("isFrom","create"));
             }
         });
 
@@ -88,7 +89,8 @@ public class LoginActivity extends AppCompatActivity {
         binding.txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class)
+                        .putExtra("isFrom","forgot"));
 
             }
         });

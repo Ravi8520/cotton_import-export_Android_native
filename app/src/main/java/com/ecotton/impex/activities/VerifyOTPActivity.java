@@ -56,7 +56,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     CustomDialog customDialog;
 
     private List<List<InvitedDataModel>> invitedDataModelList = new ArrayList<List<InvitedDataModel>>();
-    String number;
+    String isFrom="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +74,10 @@ public class VerifyOTPActivity extends AppCompatActivity {
             finish();
             return;
         }
+        isFrom = getIntent().getStringExtra("isFrom");
         is_invited = bundle.getInt(ISINVITED, 0);
         email = bundle.getString(EMAIL_ADDRESS, "");
+        isFrom = bundle.getString("isFrom", "");
         binding.txMobileNumber.setText(Html.fromHtml("Please enter the 6 digit code sent to your mail <b>" + email + "</b> "));
         Log.e("TAG", "EMAIL" + email);
         binding.btnVerify.setOnClickListener(view -> {
@@ -144,7 +146,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         if (pin.length() != 6) {
             Toast.makeText(mContext, "Please Enter 6 digit Pin", Toast.LENGTH_LONG).show();
         } else {
-            if (LoginActivity.create_account.equals("create")) {
+            if (isFrom.equals("create")) {
                 VerifyOTP();
             } else {
                 VerifyOTP1();
@@ -223,7 +225,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     private void VerifyOTP1() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", email);
+            object.put("email", email);
             object.put("otp", pin);
             String data = object.toString();
             Log.e("data", "data==" + data);
@@ -244,7 +246,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                         HashMap<String, String> map = new HashMap<>();
                         map.put(SessionUtil.API_TOKEN, model.getData().getApiToken());
-                        map.put(SessionUtil.MOBILE_NO, model.getData().getMobileNumber());
+                        map.put(SessionUtil.EMAIL, model.getData().getEmail());
                         mSessionUtil.setData(map);
                         Intent intent = new Intent(mContext, ResetPasswordActivity.class);
                         intent.putExtra(ResetPasswordActivity.MobileNo, email);

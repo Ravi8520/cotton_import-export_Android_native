@@ -97,7 +97,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private void Reset_password() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", mobileno);
+            object.put("email", mobileno);
             object.put("password", binding.edtPassword.getText().toString().trim());
             object.put("confirm_password", binding.edtConfrimPassword.getText().toString().trim());
             String data = object.toString();

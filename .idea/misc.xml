@@ -6,13 +6,16 @@
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/coustom_button_border.xml" value="0.11" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/ic_back_arrow.xml" value="0.154" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/ic_back_arrow_white.xml" value="0.154" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.111" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/ic_notifications_white.xml" value="0.111" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/spinner_border.xml" value="0.11" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/textview_border.xml" value="0.11" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_add_company.xml" value="0.33" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_buyer.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_calculator.xml" value="0.2289156626506024" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_changepassword.xml" value="0.16296296296296298" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_company_list.xml" value="0.16018518518518518" />
-        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_create_account.xml" value="0.17604166666666668" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_create_account.xml" value="0.33" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_edit_company_details.xml" value="0.18" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_filter.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_forgot_password.xml" value="0.20416666666666666" />

@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ecotton.impex.utils.Constants;
 import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.activities.AddCompanyActivity;
@@ -99,7 +100,12 @@ public class HomeFragment extends Fragment {
         if (bundle != null) {
 
             binding.txtCompanyName.setText(mSessionUtil.getCompanyName());
-            binding.txtUserType.setText(mSessionUtil.getUsertype());
+            if (mSessionUtil.getUsertype().equals("seller")) {
+                binding.txtUserType.setText(Constants.EXPORTER);
+            } else if (mSessionUtil.getUsertype().equals("buyer")) {
+                binding.txtUserType.setText(Constants.IMPORTER);
+            }
+
             CompanyList();
         }
 

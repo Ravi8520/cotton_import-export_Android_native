@@ -32,7 +32,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
 
     private Context mContext;
-    String mobileno;
+    String isFrom;
 
     ActivityForgotPasswordBinding binding;
 
@@ -47,10 +47,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            mobileno = intent.getStringExtra(VerifyOTPActivity.NEWMOBILE_NO);
-            binding.edtEmail.setText(mobileno);
+            isFrom = intent.getStringExtra("isFrom");
+           // binding.edtEmail.setText(mobileno);
         }
-        if (LoginActivity.create_account.equals("create")) {
+        if (isFrom.equals("create")) {
             binding.txtTitle.setText(mContext.getResources().getString(R.string.email_address));
         } else {
             Log.e("Forgot_password", "Forgot_password==");
@@ -59,7 +59,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }
         binding.btnSubmit.setOnClickListener(view -> {
             if (isValidForm()) {
-                if (LoginActivity.create_account.equals("create")) {
+                if (isFrom.equals("create")) {
                     VerifyMono();
                 } else {
                     Log.e("Forgot_password", "Forgot_password==");
@@ -76,7 +76,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private void Forgot_password() {
         try {
             JSONObject object = new JSONObject();
-            object.put("mobile_number", binding.edtEmail.getText().toString());
+            object.put("email", binding.edtEmail.getText().toString());
             String data = object.toString();
             Log.e("data", "data==" + data);
             Call<ResponseBody> call = APIClient.getInstance().Forgot_password(Constants.AUTH, data);
@@ -97,6 +97,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         AppUtil.showToast(mContext, model.getMessage());
                         Intent intent = new Intent(mContext, VerifyOTPActivity.class);
                         intent.putExtra(VerifyOTPActivity.EMAIL_ADDRESS, binding.edtEmail.getText().toString().trim());
+                        intent.putExtra("isFrom", isFrom);
                         startActivity(intent);
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());

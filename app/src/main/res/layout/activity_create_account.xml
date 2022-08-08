@@ -43,7 +43,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/poppins_bold"
                 android:text="@string/lbl_create_an_account"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp" />
@@ -117,29 +117,48 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/mTilmobile_number"
-                    style="@style/LoginTextInputLayoutStyle"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    app:errorEnabled="true">
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_mobile_number"
-                        android:layout_width="match_parent"
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/ccp1"
+                        android:layout_width="wrap_content"
                         android:layout_height="?actionBarSize"
-                        android:fontFamily="@font/poppins_regular"
-                        android:hint="@string/lbl_mobile_number"
-                        android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10ssp" />
+                        android:layout_gravity="top"
+                        android:background="@drawable/textview_border"
+                        android:gravity="center_vertical"
+                        app:ccp_contentColor="@color/black"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:ccp_defaultNameCode="in"
+                        app:ccp_textSize="@dimen/_10sdp" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/mTilmobile_number"
+                        style="@style/LoginTextInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        app:errorEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_mobile_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="?actionBarSize"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="@string/lbl_mobile_number"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10ssp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout

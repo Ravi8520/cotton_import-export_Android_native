@@ -86,7 +86,7 @@
             android:layout_toLeftOf="@id/img_notification"
             android:padding="@dimen/_3sdp"
             android:src="@drawable/ic_filter"
-            app:tint="@color/colorAccent" />
+            app:tint="@color/white" />
 
         <ImageView
 
@@ -97,7 +97,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/_5sdp"
             android:padding="@dimen/_3sdp"
-            android:src="@drawable/ic_baseline_notifications_none_24" />
+            android:src="@drawable/ic_notifications_white" />
 
     </RelativeLayout>
 

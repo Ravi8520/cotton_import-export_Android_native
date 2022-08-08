@@ -139,7 +139,7 @@ public class LoginAsActivity extends AppCompatActivity {
                         if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                             HashMap<String, String> map = new HashMap<>();
                             map.put(SessionUtil.API_TOKEN, mSessionUtil.getApiToken());
-                            map.put(SessionUtil.MOBILE_NO, mSessionUtil.getMobileNo());
+                            map.put(SessionUtil.EMAIL, mSessionUtil.getEmail());
                             map.put(SessionUtil.PASS, mSessionUtil.getPass());
                             map.put(SessionUtil.COMPANY_NAME, model.getData().getCompany_name());
                             map.put(SessionUtil.USER_TYPE, model.getData().getUser_type());
