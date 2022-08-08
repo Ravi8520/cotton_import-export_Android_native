@@ -1,5 +1,6 @@
 package com.ecotton.impex.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,26 +12,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.PostToSellAttributeAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivityPersonalSellBinding;
 import com.ecotton.impex.models.AttributeRequestModel;
+import com.ecotton.impex.models.CountryModel;
+import com.ecotton.impex.models.PostDetailSpinerData;
 import com.ecotton.impex.models.ProductAttributeModel;
 import com.ecotton.impex.models.ProductModel;
+import com.ecotton.impex.models.ProtModel;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
+import com.ecotton.impex.utils.PrintLog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -49,12 +56,23 @@ public class PrivateSellActivity extends AppCompatActivity {
     List<ProductModel> productModelList = new ArrayList<>();
     PostToSellAttributeAdapter postToSellAttributeAdapter;
     List<AttributeRequestModel> attributeRequestModels = new ArrayList<>();
-    private int productid;
 
-    private String impoert_exprot;
-    private String sellerType;
-    String[] import_export = {"Export", "Domestic"};
-    String[] Seller_Type = {"Trader", "Ginner", "Spinner", "Export"};
+    private List<CountryModel> stateModelList = new ArrayList<>();
+    private List<CountryModel> dispatchcontryList = new ArrayList<>();
+    private List<CountryModel> destinationcontryList = new ArrayList<>();
+    private List<ProtModel> portList = new ArrayList<>();
+    private List<ProtModel> destinationportList = new ArrayList<>();
+
+    private int productid;
+    private int selectedStation;
+    private int dispatchcontryid;
+    private int destinationcontryid;
+    private int selectedport;
+    private int selecteddestinationport;
+
+    public PostDetailSpinerData detailSpinerData;
+    public String selectedTransmitCondition = "";
+    public int selectedTransmitConditionid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,22 +92,30 @@ public class PrivateSellActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isValidForm()) {
-                    try {
-                        JSONArray jsonArray = new JSONArray(new Gson().toJson(attributeRequestModels));
-                        Log.e("jsonArray", "jsonArray==" + jsonArray.toString());
-                        Intent intent = new Intent(mContext, com.ecotton.impex.activities.SelectSellerActivity.class);
-                        intent.putExtra("data", jsonArray.toString());
-                        intent.putExtra("productid", productid);
-                        intent.putExtra("price", binding.edtPrice.getText().toString().trim());
-                        intent.putExtra("no_of_bales", binding.edtBales.getText().toString().trim());
-                        intent.putExtra("seller_type", sellerType);
-                        intent.putExtra("d_e", impoert_exprot);
-                        startActivity(intent);
-                        finish();
-                    } catch (Exception e) {
-                        e.getMessage();
+                    if (selectedStation == -1) {
+                        Toast.makeText(mContext, "Please select country of origin", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (productid == -1) {
+                        Toast.makeText(mContext, "Please select Product", Toast.LENGTH_SHORT).show();
+                    } else {
+                        try {
+                            JSONArray jsonArray = new JSONArray(new Gson().toJson(attributeRequestModels));
+                            Log.e("jsonArray", "jsonArray==" + jsonArray.toString());
+                            Intent intent = new Intent(mContext, com.ecotton.impex.activities.SelectSellerActivity.class);
+                            intent.putExtra("data", jsonArray.toString());
+                            intent.putExtra("productid", productid);
+                            intent.putExtra("price", binding.edtPrice.getText().toString().trim());
+                            intent.putExtra("no_of_bales", binding.edtBales.getText().toString().trim());
+                            intent.putExtra("country_origin_id", selectedStation);
+                            intent.putExtra("delivery_condition_id", selectedTransmitConditionid);
+                            intent.putExtra("country_dispatch_id", dispatchcontryid);
+                            intent.putExtra("port_dispatch_id", selectedport);
+                            startActivity(intent);
+                            finish();
+                        } catch (Exception e) {
+                            e.getMessage();
+                        }
                     }
-
                 }
             }
         });
@@ -106,30 +132,6 @@ public class PrivateSellActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        ArrayAdapter adapter1 = new ArrayAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, Seller_Type);
-        binding.spinnerSellerType.setAdapter(adapter1);
-        binding.spinnerSellerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sellerType = parent.getItemAtPosition(position).toString();
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        ArrayAdapter adapter = new ArrayAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, import_export);
-        binding.spinnerDe.setAdapter(adapter);
-        binding.spinnerDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                impoert_exprot = parent.getItemAtPosition(position).toString();
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         getProductList();
 
         postToSellAttributeAdapter = new PostToSellAttributeAdapter(mContext);
@@ -142,11 +144,464 @@ public class PrivateSellActivity extends AppCompatActivity {
             }
         });
 
+        CountryList();
+        getSpinerData();
+
+    }
+
+    private void CountryList() {
+        Log.e("StateModel", "StateModel==");
+        customDialog.displayProgress(mContext);
+        Call<ResponseModel<List<CountryModel>>> call = APIClient.getInstance().country_list(mSessionUtil.getApiToken());
+        Log.e("StateModel", "StateModel==" + call);
+        Log.e("getApiToken", "getApiToken==" + mSessionUtil.getApiToken());
+        call.enqueue(new Callback<ResponseModel<List<CountryModel>>>() {
+            @Override
+            public void onResponse(Call<ResponseModel<List<CountryModel>>> call, Response<ResponseModel<List<CountryModel>>> response) {
+                Log.e("StateModel", "StateModel==" + new Gson().toJson(response.body().data));
+                customDialog.dismissProgress(mContext);
+                if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
+                    setUpSpinerStation(response.body().data);
+                    setUpSpinercountrydispatch(response.body().data);
+                    setUpSpinercountrydestination(response.body().data);
+                } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+                } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
+                    AppUtil.showToast(mContext, response.body().message);
+                    AppUtil.autoLogout(mContext);
+                } else {
+                    AppUtil.showToast(mContext, response.body().message);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel<List<CountryModel>>> call, Throwable t) {
+                customDialog.dismissProgress(mContext);
+            }
+        });
+    }
+
+    public void setUpSpinerStation(List<CountryModel> list) {
+        stateModelList.clear();
+        CountryModel countryModel = new CountryModel();
+        countryModel.setName("Country of origin");
+        countryModel.setId(-1);
+        stateModelList.add(countryModel);
+        stateModelList.addAll(list);
+        CountryAdapter adapter = new CountryAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, stateModelList);
+        binding.spinnerCountry.setAdapter(adapter);
+        binding.spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedStation = stateModelList.get(position).getId();
+                Log.e("selectedStation", "selectedStation==" + selectedStation);
+
+
+            } // to close the onItemSelected
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void setUpSpinercountrydispatch(List<CountryModel> list) {
+        dispatchcontryList.clear();
+        dispatchcontryList.addAll(list);
+        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, dispatchcontryList);
+        binding.spinnerCountryOfDispatch.setAdapter(adapter);
+        binding.spinnerCountryOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                dispatchcontryid = dispatchcontryList.get(position).getId();
+                Log.e("selectedStation", "selectedStation==" + dispatchcontryid);
+                PortList(dispatchcontryid);
+            } // to close the onItemSelected
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void setUpSpinercountrydestination(List<CountryModel> list) {
+        destinationcontryList.clear();
+        destinationcontryList.addAll(list);
+        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationcontryList);
+        binding.spinnerDestinationCountry.setAdapter(adapter);
+        binding.spinnerDestinationCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                destinationcontryid = destinationcontryList.get(position).getId();
+                Log.e("selectedStation", "selectedStation==" + dispatchcontryid);
+                DestinationPortList(destinationcontryid);
+            } // to close the onItemSelected
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void DestinationPortList(int countryid) {
+        try {
+            destinationportList.clear();
+            customDialog.displayProgress(mContext);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("user_type", mSessionUtil.getUsertype());
+            jsonObject.put("country_id", countryid);
+            String data = jsonObject.toString();
+            Call<ResponseModel<List<ProtModel>>> call = APIClient.getInstance().port_list(mSessionUtil.getApiToken(), data);
+            call.enqueue(new Callback<ResponseModel<List<ProtModel>>>() {
+                @Override
+                public void onResponse(Call<ResponseModel<List<ProtModel>>> call, Response<ResponseModel<List<ProtModel>>> response) {
+                    Log.e("ProtModel", "ProtModel==" + new Gson().toJson(response.body().data));
+                    customDialog.dismissProgress(mContext);
+                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
+                        setUpSpinerdestinationport(response.body().data);
+                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
+                        AppUtil.showToast(mContext, response.body().message);
+                        AppUtil.autoLogout(mContext);
+                    } else {
+                        AppUtil.showToast(mContext, response.body().message);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseModel<List<ProtModel>>> call, Throwable t) {
+                    customDialog.dismissProgress(mContext);
+                }
+            });
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    public void setUpSpinerdestinationport(List<ProtModel> list) {
+        destinationportList.clear();
+        destinationportList.addAll(list);
+        PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationportList);
+        binding.spinnerDestinationPort.setAdapter(adapter);
+        binding.spinnerDestinationPort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selecteddestinationport = destinationportList.get(position).getId();
+            } // to close the onItemSelected
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void PortList(int countryid) {
+        try {
+            portList.clear();
+            customDialog.displayProgress(mContext);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("user_type", mSessionUtil.getUsertype());
+            jsonObject.put("country_id", countryid);
+            String data = jsonObject.toString();
+            Call<ResponseModel<List<ProtModel>>> call = APIClient.getInstance().port_list(mSessionUtil.getApiToken(), data);
+            call.enqueue(new Callback<ResponseModel<List<ProtModel>>>() {
+                @Override
+                public void onResponse(Call<ResponseModel<List<ProtModel>>> call, Response<ResponseModel<List<ProtModel>>> response) {
+                    Log.e("ProtModel", "ProtModel==" + new Gson().toJson(response.body().data));
+                    customDialog.dismissProgress(mContext);
+                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
+                        setUpSpinerport(response.body().data);
+                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
+                        AppUtil.showToast(mContext, response.body().message);
+                        AppUtil.autoLogout(mContext);
+                    } else {
+                        AppUtil.showToast(mContext, response.body().message);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseModel<List<ProtModel>>> call, Throwable t) {
+                    customDialog.dismissProgress(mContext);
+                }
+            });
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    public void setUpSpinerport(List<ProtModel> list) {
+        portList.clear();
+        portList.addAll(list);
+        PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, portList);
+        binding.spinnerPortOfDispatch.setAdapter(adapter);
+        binding.spinnerPortOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedport = portList.get(position).getId();
+            } // to close the onItemSelected
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public class PortAdapter extends ArrayAdapter<ProtModel> {
+
+        LayoutInflater flater;
+
+        public PortAdapter(Context context, int resouceId, int textviewId, List<ProtModel> list) {
+
+            super(context, resouceId, textviewId, list);
+//        flater = context.getLayoutInflater();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            return rowview(convertView, position);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return rowview(convertView, position);
+        }
+
+        private View rowview(View convertView, int position) {
+
+            ProtModel rowItem = getItem(position);
+
+            PortAdapter.viewHolder holder;
+            View rowview = convertView;
+            if (rowview == null) {
+
+                holder = new PortAdapter.viewHolder();
+                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowview = flater.inflate(R.layout.spinner_layout, null, false);
+
+                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
+
+                rowview.setTag(holder);
+            } else {
+                holder = (PortAdapter.viewHolder) rowview.getTag();
+            }
+            holder.txtTitle.setText(rowItem.getName());
+
+            return rowview;
+        }
+
+        private class viewHolder {
+            AppCompatTextView txtTitle;
+        }
+    }
+
+    public class CountryDispatchAdapter extends ArrayAdapter<CountryModel> {
+
+        LayoutInflater flater;
+
+        public CountryDispatchAdapter(Context context, int resouceId, int textviewId, List<CountryModel> list) {
+
+            super(context, resouceId, textviewId, list);
+//        flater = context.getLayoutInflater();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            return rowview(convertView, position);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return rowview(convertView, position);
+        }
+
+        private View rowview(View convertView, int position) {
+
+            CountryModel rowItem = getItem(position);
+
+            CountryDispatchAdapter.viewHolder holder;
+            View rowview = convertView;
+            if (rowview == null) {
+
+                holder = new CountryDispatchAdapter.viewHolder();
+                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowview = flater.inflate(R.layout.spinner_layout, null, false);
+
+                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
+
+                rowview.setTag(holder);
+            } else {
+                holder = (CountryDispatchAdapter.viewHolder) rowview.getTag();
+            }
+            holder.txtTitle.setText(rowItem.getName());
+
+            return rowview;
+        }
+
+        private class viewHolder {
+            AppCompatTextView txtTitle;
+        }
+    }
+
+    public class CountryAdapter extends ArrayAdapter<CountryModel> {
+
+        LayoutInflater flater;
+
+        public CountryAdapter(Context context, int resouceId, int textviewId, List<CountryModel> list) {
+
+            super(context, resouceId, textviewId, list);
+//        flater = context.getLayoutInflater();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            return rowview(convertView, position);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return rowview(convertView, position);
+        }
+
+        private View rowview(View convertView, int position) {
+
+            CountryModel rowItem = getItem(position);
+
+            CountryAdapter.viewHolder holder;
+            View rowview = convertView;
+            if (rowview == null) {
+
+                holder = new CountryAdapter.viewHolder();
+                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowview = flater.inflate(R.layout.layout_spiner, null, false);
+
+                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
+
+                rowview.setTag(holder);
+            } else {
+                holder = (CountryAdapter.viewHolder) rowview.getTag();
+            }
+            holder.txtTitle.setText(rowItem.getName());
+
+            return rowview;
+        }
+
+        private class viewHolder {
+            AppCompatTextView txtTitle;
+        }
+    }
+
+    private void getSpinerData() {
+        try {
+            customDialog.displayProgress(mContext);
+            String strJson = "";
+            JSONObject object = new JSONObject();
+            object.put("user_id", mSessionUtil.getUserid());
+            object.put("user_type", mSessionUtil.getUsertype());
+            strJson = object.toString();
+            PrintLog.d("TAG SpinerData", strJson);
+            Call<ResponseModel<List<PostDetailSpinerData>>> call = APIClient.getInstance().getTransmitPaymentLabList(mSessionUtil.getApiToken(), strJson);
+            call.enqueue(new Callback<ResponseModel<List<PostDetailSpinerData>>>() {
+                @Override
+                public void onResponse(Call<ResponseModel<List<PostDetailSpinerData>>> call, Response<ResponseModel<List<PostDetailSpinerData>>> response) {
+                    Log.e("response", "spinerData==" + new Gson().toJson(response.body()));
+                    customDialog.dismissProgress(mContext);
+                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
+                        detailSpinerData = response.body().data.get(0);
+                        setSpinerData();
+                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+
+                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
+                        AppUtil.showToast(mContext, response.body().message);
+                        AppUtil.autoLogout(mContext);
+                    } else {
+                        AppUtil.showToast(mContext, response.body().message);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseModel<List<PostDetailSpinerData>>> call, Throwable t) {
+                    customDialog.dismissProgress(mContext);
+                }
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setSpinerData() {
+
+        CustomAdapter adapterTransmit = new CustomAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, detailSpinerData.getTransmit_condition());
+        binding.spinnerDeliveryCondition.setAdapter(adapterTransmit);
+
+        binding.spinnerDeliveryCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getName();
+                selectedTransmitConditionid = detailSpinerData.getTransmit_condition().get(position).getId();
+
+                if (selectedTransmitCondition.equals("FOB")) {
+                    binding.layoutDestinationCountry.setVisibility(View.GONE);
+                    binding.layoutDestinationPort.setVisibility(View.GONE);
+                } else {
+                    binding.layoutDestinationCountry.setVisibility(View.VISIBLE);
+                    binding.layoutDestinationPort.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+    public class CustomAdapter extends ArrayAdapter<PostDetailSpinerData.SpinerModel> {
+        LayoutInflater flater;
+
+        public CustomAdapter(Activity context, int resouceId, int textviewId, List<PostDetailSpinerData.SpinerModel> list) {
+
+            super(context, resouceId, textviewId, list);
+//        flater = context.getLayoutInflater();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            return rowview(convertView, position);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return rowview(convertView, position);
+        }
+
+        private View rowview(View convertView, int position) {
+
+            PostDetailSpinerData.SpinerModel rowItem = getItem(position);
+
+            CustomAdapter.viewHolder holder;
+            View rowview = convertView;
+            if (rowview == null) {
+
+                holder = new CustomAdapter.viewHolder();
+                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowview = flater.inflate(R.layout.spinner_layout, null, false);
+
+                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
+
+                rowview.setTag(holder);
+            } else {
+                holder = (CustomAdapter.viewHolder) rowview.getTag();
+            }
+            holder.txtTitle.setText(rowItem.getName());
+
+            return rowview;
+        }
+
+        private class viewHolder {
+            AppCompatTextView txtTitle;
+        }
     }
 
 
     private boolean isValidForm() {
-
         try {
             int price = Integer.parseInt(binding.edtPrice.getText().toString());
             if (TextUtils.isEmpty(binding.edtPrice.getText().toString()) || price == 0) {
@@ -225,13 +680,17 @@ public class PrivateSellActivity extends AppCompatActivity {
 
     public void setUpSpinnerProduct(List<ProductModel> list) {
         productModelList.clear();
+        ProductModel productModel = new ProductModel();
+        productModel.setName("Product type");
+        productModel.setId(-1);
+        productModelList.add(productModel);
         productModelList.addAll(list);
-        ProductAdapter adapter = new ProductAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, productModelList);
+        ProductAdapter adapter = new ProductAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, productModelList);
         binding.spinnerProduct.setAdapter(adapter);
         binding.spinnerProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 productid = productModelList.get(position).getId();
-                GetAttribute(productModelList.get(position).getId());
+                GetAttribute(productid);
 
             } // to close the onItemSelected
 
@@ -272,7 +731,7 @@ public class PrivateSellActivity extends AppCompatActivity {
 
                 holder = new viewHolder();
                 flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.spinner_layout, null, false);
+                rowview = flater.inflate(R.layout.layout_spiner, null, false);
 
                 holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
 
@@ -292,6 +751,8 @@ public class PrivateSellActivity extends AppCompatActivity {
 
     public void GetAttribute(int id) {
         try {
+            postToSellAttributeAdapter.mArrayList.clear();
+            postToSellAttributeAdapter.notifyDataSetChanged();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("product_id", id);
             String data = jsonObject.toString();

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/tab_text_color">
 
     <RelativeLayout
         android:id="@+id/rl_myprofile"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/light_grey">
+        android:layout_height="?actionBarSize">
 
         <ImageView
             android:id="@+id/backarrow"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_centerVertical="true"
-            android:clickable="true"
             android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:focusable="true"
+            app:tint="@color/white"
             android:padding="@dimen/_3sdp"
             android:src="@drawable/ic_back_arrow" />
 
@@ -31,7 +31,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center_horizontal"
             android:text="@string/profiletitle"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <ImageView
@@ -42,26 +42,34 @@
             android:layout_centerVertical="true"
             android:clickable="true"
             android:padding="@dimen/_8sdp"
-            android:src="@drawable/edit"
-            app:tint="@color/black" />
+            android:src="@drawable/edit" />
     </RelativeLayout>
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablaout"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_below="@id/rl_myprofile"
-        app:tabIndicatorColor="@color/colorPrimaryDark"
-        app:tabIndicatorHeight="3dp"
-        app:tabSelectedTextColor="@color/colorPrimary"
-        app:tabTextAppearance="@style/TabLayoutTextStyle"
-        app:tabTextColor="@color/tab_text_color_op" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/tab_view_pager"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tablaout" />
+        android:layout_below="@id/rl_myprofile"
+        android:background="@drawable/custome_bg_white">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablaout"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:tabIndicatorColor="@color/colorPrimaryDark"
+            app:tabIndicatorHeight="3dp"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextColor="@color/tab_text_color_op" />
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/tab_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tablaout" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue"
+    android:background="@color/tab_text_color"
     tools:context=".activities.PostToSellActivity"
     android:id="@+id/layout_main">
 
     <RelativeLayout
         android:id="@+id/layout_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/light_blue">
+        android:layout_height="?actionBarSize">
 
         <ImageView
             android:id="@+id/backarrow"
@@ -23,6 +22,7 @@
             android:background="?selectableItemBackgroundBorderless"
             android:focusable="true"
             android:padding="@dimen/_3sdp"
+            app:tint="@color/white"
             android:src="@drawable/ic_back_arrow" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
             android:text="@string/lbl_select_buyer"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
 
@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/lbl_state"
+                    android:text="@string/lbl_destination_country"
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
 
@@ -79,7 +79,7 @@
                     android:orientation="horizontal">
 
                     <Spinner
-                        android:id="@+id/spinner_state"
+                        android:id="@+id/spinner_country"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_centerVertical="true"
@@ -101,108 +101,6 @@
 
                 </RelativeLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/lbl_district"
-                    android:textColor="@color/tab_text_color"
-                    android:textSize="14sp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/textview_border"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <Spinner
-                        android:id="@+id/spinner_district"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:spinnerMode="dropdown" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:rotation="-90"
-                        android:src="@drawable/ic_back_arrow" />
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/Layout_station"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="@string/lbl_station"
-                        android:textColor="@color/tab_text_color"
-                        android:textSize="14sp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:background="@drawable/textview_border"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spinner_station"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:spinnerMode="dropdown" />
-
-                        <ImageView
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:rotation="-90"
-                            android:src="@drawable/ic_back_arrow" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/search_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:background="@drawable/serchview_bg"
-                    android:theme="@style/SearchViewStyle"
-                    app:defaultQueryHint="@string/lbl_search_seller"
-                    app:iconifiedByDefault="true"
-                    app:queryHint="@string/lbl_search_seller" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/selected_buyer_recyclerView"

@@ -41,10 +41,12 @@
     <string name="lbl_new_password">New Password</string>
     <string name="lbl_confrim_password">Confirm Password</string>
     <string name="lbl_post_to_sell">Post To Sell</string>
+    <string name="lbl_post_to_export">Post To Export</string>
     <string name="lbl_post_to_buy">Post To Buy</string>
     <string name="lbl_search">Search</string>
     <string name="lbl_private_sell">Private Sell</string>
     <string name="lbl_private_buy">Private Buy</string>
+    <string name="lbl_private_export">Private Export</string>
     <string name="lbl_update">Update</string>
     <string name="lbl_edit_personal_detail">Edit personal details</string>
     <string name="edit_company_detail">Edit Company Detail</string>
@@ -55,8 +57,6 @@
     <string name="station_name">Station Name</string>
     <string name="update">Update</string>
     <string name="turnover_in_crore">Tornover in crore(rs.)</string>
-
-
     <string name="lbl_contact_person">Contact Person Name</string>
     <string name="lbl_email_address">Email Address</string>
     <string name="lbl_company_name">Name Of Company</string>
@@ -86,6 +86,11 @@
     <string name="lbl_search_buyer">Search Buyer</string>
     <string name="lbl_seller_type">Seller Type</string>
     <string name="lbl_pending">Pending...</string>
+    <string name="lbl_dollar">$1200</string>
+    <string name="lbl_country_of_dispatch">Country of dispatch</string>
+    <string name="lbl_port_of_dispatch">Port of dispatch</string>
+    <string name="lbl_destination_country">Destination country</string>
+    <string name="lbl_destination_port">Destination port</string>
 
 
     <string name="err_min_text">Minimum</string>
@@ -331,8 +336,9 @@
     <string name="pan_number">PAN Number</string>
     <string name="bank_name">Bank Name</string>
     <string name="account_holder_name">Account Holder Name</string>
+    <string name="account_number">Account Number</string>
     <string name="branch_addresh">Branch Address</string>
-    <string name="ifsc_code">IFSC Code</string>
+    <string name="ifsc_code">IFSC Swift Code</string>
     <string name="referral_code">Referral code</string>
     <string name="stamp">Stamp</string>
     <string name="shapur">Shapur</string>
@@ -342,6 +348,7 @@
     <string name="lbl_lab">Lab</string>
 
     <string name="lbl_pan_of_company">Pan of company</string>
+    <string name="lbl_all_country">All Country</string>
     <string name="lbl_company_business_type">Company business type</string>
     <string name="lbl_country_name">Country Name</string>
 

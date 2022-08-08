@@ -8,22 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ecotton.impex.databinding.ActivityBuyerBinding;
-import com.ecotton.impex.databinding.ActivityLoginasBinding;
-import com.ecotton.impex.utils.Constants;
-import com.google.gson.Gson;
-import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
+import com.ecotton.impex.databinding.ActivityLoginasBinding;
 import com.ecotton.impex.models.login.LoginModel;
 import com.ecotton.impex.utils.AppUtil;
+import com.ecotton.impex.utils.Constants;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -157,6 +154,7 @@ public class LoginAsActivity extends AppCompatActivity {
                                 intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
                                 intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
                                 startActivity(intent);
+                                finish();
                             }
 
                         } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {

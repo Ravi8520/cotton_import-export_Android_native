@@ -24,7 +24,7 @@
                 android:background="@drawable/ic_right_bg"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:text="@string/lbl_post_to_sell"
+                android:text="@string/lbl_post_to_export"
                 android:textColor="@color/button_color"
                 android:textSize="@dimen/_12sdp" />
 
@@ -42,7 +42,7 @@
                 android:background="@drawable/ic_left_bg"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:text="@string/lbl_private_sell"
+                android:text="@string/lbl_private_export"
                 android:textColor="@color/button_color"
                 android:textSize="@dimen/_12sdp" />
 

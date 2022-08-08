@@ -186,7 +186,6 @@ public class HomeActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
-
         // e.g. bottom + left margins:
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 

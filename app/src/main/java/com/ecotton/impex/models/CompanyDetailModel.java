@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class CompanyDetailModel implements Serializable {
     public int company_id = 0, country_id = 0, state_id = 0, district_id = 0, city_id = 0, station_id = 0;
-    public String company_name = "", company_type = "", sellerBuyer_type = "", gst_no = "", address = "", establish_year = "", company_pan_no = "", pan_no = "", country_name = "", state_name = "", district_name = "", city_name = "", station_name = "", business_type = "", registration_no = "", registration_date = "", turnover_year_one = "", turnover_date_one = "", turnover_year_two = "", turnover_date_two = "", turnover_year_three = "", turnover_date_three = "", oper_in_cotton_trade = "", stamp_img = "", bank_name = "", account_holder_name = "", branch_address = "", ifsc_code = "";
+    public String company_name = "", company_type = "", iec = "", sellerBuyer_type = "", gst_no = "", address = "", establish_year = "", company_pan_no = "", pan_no = "", country_name = "", state_name = "", district_name = "", city_name = "", station_name = "", business_type = "", registration_no = "", registration_date = "", turnover_year_one = "", turnover_date_one = "", turnover_year_two = "", turnover_date_two = "", turnover_year_three = "", turnover_date_three = "", oper_in_cotton_trade = "", stamp_img = "", bank_name = "", account_holder_name = "", account_number = "", branch_address = "", ifsc_code = "";
 
     public int getCompany_id() {
         return company_id;
@@ -54,6 +54,14 @@ public class CompanyDetailModel implements Serializable {
         this.station_id = station_id;
     }
 
+    public String getIec() {
+        return iec;
+    }
+
+    public void setIec(String iec) {
+        this.iec = iec;
+    }
+
     public String getCompany_name() {
         return company_name;
     }
@@ -96,6 +104,14 @@ public class CompanyDetailModel implements Serializable {
 
     public String getState_name() {
         return state_name;
+    }
+
+    public String getAccount_number() {
+        return account_number;
+    }
+
+    public void setAccount_number(String account_number) {
+        this.account_number = account_number;
     }
 
     public void setState_name(String state_name) {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,14 +12,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/rl_companydetail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_15sdp">
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_companydetails"
@@ -70,6 +70,25 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_user_type"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/lbl_iec_number"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txt_iec_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_companypan"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
 
                 <TextView
                     android:id="@+id/tv_locationdetails"
@@ -89,11 +108,11 @@
                     android:layout_below="@id/tv_locationdetails"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/station"
+                    android:text="@string/country"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tv_station_name"
+                    android:id="@+id/txt_country_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_station"
@@ -102,67 +121,6 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/tv_district"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_station_name"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/district"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_district_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_district"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_district_name"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/state"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_state_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_state"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_state_name"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/lbl_address"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/txt_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_address"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_bankdetails"
@@ -196,31 +154,11 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/tv_pan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txt_gst_number"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/pan_number"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/txt_pan_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_pan"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_bank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txt_pan_number"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/bank_name"
@@ -244,11 +182,11 @@
                     android:layout_below="@id/tv_bank_name"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/account_holder_name"
+                    android:text="@string/account_number"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tv_account_holder_name"
+                    android:id="@+id/tv_account_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_holdername"
@@ -262,7 +200,6 @@
                     android:id="@+id/tv_br_addresh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_account_holder_name"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/branch_addresh"
@@ -307,14 +244,14 @@
                     android:layout_below="@id/tv_ifsc_number"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_bold"
-                    android:textColor="@color/black"
                     android:text="@string/stamp"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/img_stamp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_below="@id/tv_stamp"
                     android:layout_alignStart="@id/tv_stamp"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -323,7 +260,7 @@
                     android:src="@drawable/stamp" />
 
 
-            </RelativeLayout>
+            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 

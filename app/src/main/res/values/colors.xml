@@ -32,4 +32,7 @@
     <color name="new_light_grey">#485068</color>
     <color name="new_light_grey_op">#80485068</color>
     <color name="light_black_op">#66000000</color>
+    <color name="border_color">#262626</color>
+
+
 </resources>

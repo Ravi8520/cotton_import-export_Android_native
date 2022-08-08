@@ -17,6 +17,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.ecotton.impex.models.CountryModel;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -58,21 +59,22 @@ public class SelectSellerActivity extends AppCompatActivity {
     private SessionUtil mSessionUtil;
     private CustomDialog customDialog;
 
-    private final List<StateModel> stateModelList = new ArrayList<>();
-    private final List<DistrictModel> districtModelList = new ArrayList<>();
-    private final List<StationModel> stationModelList = new ArrayList<>();
+    private List<CountryModel> stateModelList = new ArrayList<>();
+
 
     private int selectedState;
     private int selectedDistrict;
     private int selectedStation;
 
     private String data;
-    private String impoert_exprot;
-    private String sellerType;
     private String price;
     private String no_of_bales;
     private int productid;
-    int compnayid;
+    private int country_origin_id;
+    private int delivery_condition_id;
+    private int country_dispatch_id;
+    private int port_dispatch_id;
+
 
     public static JSONArray jsonArray1;
 
@@ -131,7 +133,6 @@ public class SelectSellerActivity extends AppCompatActivity {
         });
         if (mSessionUtil.getUsertype().equals("buyer")) {
             binding.txtTitle.setText(getResources().getString(R.string.lbl_select_seller));
-            binding.LayoutStation.setVisibility(View.VISIBLE);
         }
 
         binding.btnSendNotification.setOnClickListener(new View.OnClickListener() {
@@ -155,36 +156,15 @@ public class SelectSellerActivity extends AppCompatActivity {
             price = intent.getStringExtra("price");
             no_of_bales = intent.getStringExtra("no_of_bales");
             productid = intent.getIntExtra("productid", 0);
-            sellerType = intent.getStringExtra("seller_type");
-            impoert_exprot = intent.getStringExtra("d_e");
+            country_origin_id = intent.getIntExtra("country_origin_id", 0);
+            delivery_condition_id = intent.getIntExtra("delivery_condition_id", 0);
+            country_dispatch_id = intent.getIntExtra("country_dispatch_id", 0);
+            port_dispatch_id = intent.getIntExtra("port_dispatch_id", 0);
 
         }
 
-        binding.searchView.setQueryHint("Search Buyer");
-        binding.searchView.setIconified(true);
-        binding.searchView.clearFocus();
+        CountryList();
 
-        binding.searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.searchView.setIconified(false);
-            }
-        });
-        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                sellectSellerAdapter.getFilter().filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                sellectSellerAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
-        StateList();
 
         binding.btnSendNotification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +177,106 @@ public class SelectSellerActivity extends AppCompatActivity {
         });
     }
 
+    private void CountryList() {
+        Log.e("StateModel", "StateModel==");
+        customDialog.displayProgress(mContext);
+        Call<ResponseModel<List<CountryModel>>> call = APIClient.getInstance().country_list(mSessionUtil.getApiToken());
+        Log.e("StateModel", "StateModel==" + call);
+        Log.e("getApiToken", "getApiToken==" + mSessionUtil.getApiToken());
+        call.enqueue(new Callback<ResponseModel<List<CountryModel>>>() {
+            @Override
+            public void onResponse(Call<ResponseModel<List<CountryModel>>> call, Response<ResponseModel<List<CountryModel>>> response) {
+                Log.e("StateModel", "StateModel==" + new Gson().toJson(response.body().data));
+                customDialog.dismissProgress(mContext);
+                if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
+                    setUpSpinerStation(response.body().data);
+                } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+                } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
+                    AppUtil.showToast(mContext, response.body().message);
+                    AppUtil.autoLogout(mContext);
+                } else {
+                    AppUtil.showToast(mContext, response.body().message);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel<List<CountryModel>>> call, Throwable t) {
+                customDialog.dismissProgress(mContext);
+            }
+        });
+    }
+    public void setUpSpinerStation(List<CountryModel> list) {
+        stateModelList.clear();
+        CountryModel countryModel = new CountryModel();
+        countryModel.setName("Country of origin");
+        countryModel.setId(-1);
+        stateModelList.add(countryModel);
+        stateModelList.addAll(list);
+        CountryAdapter adapter = new CountryAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, stateModelList);
+        binding.spinnerCountry.setAdapter(adapter);
+        binding.spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedStation = stateModelList.get(position).getId();
+                SearchCompany(selectedStation);
+                Log.e("selectedStation", "selectedStation==" + selectedStation);
+
+
+            } // to close the onItemSelected
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+    public class CountryAdapter extends ArrayAdapter<CountryModel> {
+
+        LayoutInflater flater;
+
+        public CountryAdapter(Context context, int resouceId, int textviewId, List<CountryModel> list) {
+
+            super(context, resouceId, textviewId, list);
+//        flater = context.getLayoutInflater();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            return rowview(convertView, position);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return rowview(convertView, position);
+        }
+
+        private View rowview(View convertView, int position) {
+
+            CountryModel rowItem = getItem(position);
+
+            CountryAdapter.viewHolder holder;
+            View rowview = convertView;
+            if (rowview == null) {
+
+                holder = new CountryAdapter.viewHolder();
+                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowview = flater.inflate(R.layout.layout_spiner, null, false);
+
+                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
+
+                rowview.setTag(holder);
+            } else {
+                holder = (CountryAdapter.viewHolder) rowview.getTag();
+            }
+            holder.txtTitle.setText(rowItem.getName());
+
+            return rowview;
+        }
+
+        private class viewHolder {
+            AppCompatTextView txtTitle;
+        }
+    }
+
     private void Notification_to_buy() {
         try {
             customDialog.displayProgress(mContext);
@@ -206,19 +286,12 @@ public class SelectSellerActivity extends AppCompatActivity {
             jsonObject.put("product_id", productid);
             jsonObject.put("price", price);
             jsonObject.put("no_of_bales", no_of_bales);
-            jsonObject.put("buy_for", "Self");
-            jsonObject.put("spinning_meal_name", "");
-            jsonObject.put("country_id", "1");
-            jsonObject.put("state_id", selectedState);
-            jsonObject.put("district_id", selectedDistrict);
-
-            jsonObject.put("seller_type", sellerType);
-            jsonObject.put("d_e", impoert_exprot);
+            jsonObject.put("country_origin_id", country_origin_id);
+            jsonObject.put("delivery_condition_id", delivery_condition_id);
+            jsonObject.put("country_dispatch_id", country_dispatch_id);
+            jsonObject.put("port_dispatch_id", port_dispatch_id);
 
 
-            if (mSessionUtil.getUsertype().equals("buyer")) {
-                jsonObject.put("city_id", selectedStation);
-            }
             jsonArray1 = new JSONArray();
             for (SearchCompanyModel obj : selectedList) {
                 jsonArray1.put(obj.getCompany_id());
@@ -296,7 +369,7 @@ public class SelectSellerActivity extends AppCompatActivity {
         }
     }
 
-    private void SearchCompany() {
+    private void SearchCompany(int selectedStation) {
         try {
             sellectSellerAdapter.mArrayList.clear();
             sellectSellerAdapter.filterArray.clear();
@@ -305,10 +378,7 @@ public class SelectSellerActivity extends AppCompatActivity {
             jsonObject.put("user_id", mSessionUtil.getUserid());
             jsonObject.put("company_id", mSessionUtil.getCompanyId());
             jsonObject.put("user_type", mSessionUtil.getUsertype());
-            jsonObject.put("country_id", "1");
-            jsonObject.put("state_id", selectedState);
-            jsonObject.put("district_id", selectedDistrict);
-            jsonObject.put("city_id", "");
+            jsonObject.put("country_id", selectedStation);
             String data = jsonObject.toString();
             Log.e("data", "data==" + data);
 
@@ -342,324 +412,6 @@ public class SelectSellerActivity extends AppCompatActivity {
     }
 
 
-    private void StateList() {
-        try {
-            customDialog.displayProgress(mContext);
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("country_id", "1");
-            String data = jsonObject.toString();
-            Call<ResponseModel<List<StateModel>>> call = APIClient.getInstance().state_list(mSessionUtil.getApiToken(), data);
-            call.enqueue(new Callback<ResponseModel<List<StateModel>>>() {
-                @Override
-                public void onResponse(Call<ResponseModel<List<StateModel>>> call, Response<ResponseModel<List<StateModel>>> response) {
-                    customDialog.dismissProgress(mContext);
-                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
-                        setUpSpinerState(response.body().data);
-                        //stateAdapter.addAllClass(response.body().data);
-                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-                        //stateAdapter.notifyDataSetChanged();
-                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
-                        AppUtil.showToast(mContext, response.body().message);
-                        AppUtil.autoLogout(mContext);
-                    } else {
-                        AppUtil.showToast(mContext, response.body().message);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseModel<List<StateModel>>> call, Throwable t) {
-                    customDialog.dismissProgress(mContext);
-                }
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setUpSpinerState(List<StateModel> list) {
-        stateModelList.clear();
-        stateModelList.addAll(list);
-        StateAdapter adapter = new StateAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, stateModelList);
-        binding.spinnerState.setAdapter(adapter);
-        binding.spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedState = stateModelList.get(position).getId();
-                sellectSellerAdapter.mArrayList.clear();
-                DistrictList(stateModelList.get(position).getId());
-
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void DistrictList(int id) {
-        try {
-            customDialog.displayProgress(mContext);
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("state_id", id);
-            String data = jsonObject.toString();
-            Call<ResponseModel<List<DistrictModel>>> call = APIClient.getInstance().district_list(mSessionUtil.getApiToken(), data);
-            call.enqueue(new Callback<ResponseModel<List<DistrictModel>>>() {
-                @Override
-                public void onResponse(Call<ResponseModel<List<DistrictModel>>> call, Response<ResponseModel<List<DistrictModel>>> response) {
-                    customDialog.dismissProgress(mContext);
-                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
-                        setUpSpinerDistrict(response.body().data);
-                        //stateAdapter.addAllClass(response.body().data);
-                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-                        //stateAdapter.notifyDataSetChanged();
-                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
-                        AppUtil.showToast(mContext, response.body().message);
-                        AppUtil.autoLogout(mContext);
-                    } else {
-                        AppUtil.showToast(mContext, response.body().message);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseModel<List<DistrictModel>>> call, Throwable t) {
-                    customDialog.dismissProgress(mContext);
-                }
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setUpSpinerDistrict(List<DistrictModel> list) {
-        districtModelList.clear();
-        districtModelList.addAll(list);
-        DistrictAdapter adapter = new DistrictAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, districtModelList);
-        binding.spinnerDistrict.setAdapter(adapter);
-        binding.spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sellectSellerAdapter.mArrayList.clear();
-                selectedDistrict = districtModelList.get(position).getId();
-                StationList(districtModelList.get(position).getId());
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void StationList(int id) {
-        try {
-            customDialog.displayProgress(mContext);
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("district_id", id);
-            String data = jsonObject.toString();
-            Call<ResponseModel<List<StationModel>>> call = APIClient.getInstance().station_list(mSessionUtil.getApiToken(), data);
-            call.enqueue(new Callback<ResponseModel<List<StationModel>>>() {
-                @Override
-                public void onResponse(Call<ResponseModel<List<StationModel>>> call, Response<ResponseModel<List<StationModel>>> response) {
-                    Log.e("TAG", "StationList==" + new Gson().toJson(response.body()));
-
-                    customDialog.dismissProgress(mContext);
-                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
-                        sellectSellerAdapter.mArrayList.clear();
-                        if (mSessionUtil.getUsertype().equals("buyer")) {
-                            setUpSpinerStation(response.body().data);
-                        } else {
-                            setUpSpinerStation(response.body().data);
-                            // SearchCompany();
-                        }
-                        //stateAdapter.addAllClass(response.body().data);
-                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-                        AppUtil.showToast(mContext, response.body().message);
-                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
-                        AppUtil.showToast(mContext, response.body().message);
-                        AppUtil.autoLogout(mContext);
-                    } else {
-                        AppUtil.showToast(mContext, response.body().message);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseModel<List<StationModel>>> call, Throwable t) {
-                    Log.e("TAG", "StationList==" + t.getMessage());
-
-                    customDialog.dismissProgress(mContext);
-                }
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setUpSpinerStation(List<StationModel> list) {
-        stationModelList.clear();
-        stationModelList.addAll(list);
-        StationAdapter adapter = new StationAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, stationModelList);
-        binding.spinnerStation.setAdapter(adapter);
-        binding.spinnerStation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedStation = stationModelList.get(position).getId();
-                sellectSellerAdapter.mArrayList.clear();
-                SearchCompany();
-                /*if (mSessionUtil.getUsertype().equals("buyer")) {
-                    SearchCompany();
-                }*/
-
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    public class StateAdapter extends ArrayAdapter<StateModel> {
-
-        LayoutInflater flater;
-
-        public StateAdapter(Context context, int resouceId, int textviewId, List<StateModel> list) {
-
-            super(context, resouceId, textviewId, list);
-//        flater = context.getLayoutInflater();
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            return rowview(convertView, position);
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return rowview(convertView, position);
-        }
-
-        private View rowview(View convertView, int position) {
-
-            StateModel rowItem = getItem(position);
-
-            viewHolder holder;
-            View rowview = convertView;
-            if (rowview == null) {
-
-                holder = new viewHolder();
-                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.spinner_layout, null, false);
-
-                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
-
-                rowview.setTag(holder);
-            } else {
-                holder = (viewHolder) rowview.getTag();
-            }
-            holder.txtTitle.setText(rowItem.getName());
-
-            return rowview;
-        }
-
-        private class viewHolder {
-            AppCompatTextView txtTitle;
-        }
-    }
-
-    public class StationAdapter extends ArrayAdapter<StationModel> {
-
-        LayoutInflater flater;
-
-        public StationAdapter(Context context, int resouceId, int textviewId, List<StationModel> list) {
-            super(context, resouceId, textviewId, list);
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            return rowview(convertView, position);
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return rowview(convertView, position);
-        }
-
-        private View rowview(View convertView, int position) {
-
-            StationModel rowItem = getItem(position);
-
-            viewHolder holder;
-            View rowview = convertView;
-            if (rowview == null) {
-
-                holder = new viewHolder();
-                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.spinner_layout, null, false);
-
-                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
-
-                rowview.setTag(holder);
-            } else {
-                holder = (viewHolder) rowview.getTag();
-            }
-            holder.txtTitle.setText(rowItem.getName());
-
-            return rowview;
-        }
-
-        private class viewHolder {
-            AppCompatTextView txtTitle;
-        }
-    }
-
-    public class DistrictAdapter extends ArrayAdapter<DistrictModel> {
-
-        LayoutInflater flater;
-
-        public DistrictAdapter(Context context, int resouceId, int textviewId, List<DistrictModel> list) {
-            super(context, resouceId, textviewId, list);
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            return rowview(convertView, position);
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return rowview(convertView, position);
-        }
-
-        private View rowview(View convertView, int position) {
-
-            DistrictModel rowItem = getItem(position);
-
-            viewHolder holder;
-            View rowview = convertView;
-            if (rowview == null) {
-
-                holder = new viewHolder();
-                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.spinner_layout, null, false);
-
-                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
-
-                rowview.setTag(holder);
-            } else {
-                holder = (viewHolder) rowview.getTag();
-            }
-            holder.txtTitle.setText(rowItem.getName());
-
-            return rowview;
-        }
-
-        private class viewHolder {
-            AppCompatTextView txtTitle;
-        }
-    }
 
     @Override
     public void onBackPressed() {

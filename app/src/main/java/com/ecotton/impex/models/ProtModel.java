@@ -2,9 +2,9 @@ package com.ecotton.impex.models;
 
 import java.io.Serializable;
 
-public class CountryModel implements Serializable {
-    private String name = "";
-    private int id = 0;
+public class ProtModel implements Serializable {
+    private int id=0;
+    private String name="";
 
     public int getId() {
         return id;
