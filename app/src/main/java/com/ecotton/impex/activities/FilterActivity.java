@@ -75,7 +75,7 @@ public class FilterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 filterRequest = new BuyerFilterRequest();
                 filterRequest.setCompany_id(mSessionUtil.getCompanyId());
-                filterRequest.setState_id("-1");
+                filterRequest.setCountry_id("-1");
                 startActivity(new Intent(mContext, com.ecotton.impex.activities.HomeActivity.class));
                 finishAffinity();
             }
@@ -88,9 +88,9 @@ public class FilterActivity extends AppCompatActivity {
                 else
                     filterRequest.setProduct_id("-1");
                 if (stateAdapter.ids.size() > 0)
-                    filterRequest.setState_id(TextUtils.join(",", stateAdapter.ids));
+                    filterRequest.setCountry_id(TextUtils.join(",", stateAdapter.ids));
                 else
-                    filterRequest.setState_id("-1");
+                    filterRequest.setCountry_id("-1");
                 setUpAtribultesadpter();
                /* if (filterRequest.getState_id().equals("-1")) {
                     if (isHomeFragment()) {
@@ -121,9 +121,7 @@ public class FilterActivity extends AppCompatActivity {
         return screen.equals(HomeFragment.class.getSimpleName());
     }
 
-    private boolean isBuyerState() {
-        return screen.equals(BuyerStateListActivity.class.getSimpleName());
-    }
+
 
     private boolean isDashboardCompany() {
         return screen.equals(com.ecotton.impex.activities.DashboardCompanyListActivity.class.getSimpleName());
@@ -153,9 +151,9 @@ public class FilterActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 if (position == 0)
-                    filterRequest.setState_id("-1");
+                    filterRequest.setCountry_id("-1");
                 else
-                    filterRequest.setState_id(stateAdapter.mArrayList.get(position).getId() + "");
+                    filterRequest.setCountry_id(stateAdapter.mArrayList.get(position).getId() + "");
             }
         });
         setupProductAttributs();
@@ -227,7 +225,7 @@ public class FilterActivity extends AppCompatActivity {
         try {
             customDialog.displayProgress(mContext);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("country_id", "1");
+            jsonObject.put("user_id", mSessionUtil.getUserid());
             String data = jsonObject.toString();
             Call<ResponseModel<List<ProductModel>>> call = APIClient.getInstance().state_list_for_dashboard_buyer_filter(mSessionUtil.getApiToken(), data);
             call.enqueue(new Callback<ResponseModel<List<ProductModel>>>() {
@@ -238,9 +236,9 @@ public class FilterActivity extends AppCompatActivity {
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         stateAdapter.addAllClass(response.body().data);
 
-                        if (!TextUtils.isEmpty(filterRequest.getState_id())) {
+                        if (!TextUtils.isEmpty(filterRequest.getCountry_id())) {
                             ArrayList<String> ids = new ArrayList<>();
-                            ids.addAll(Arrays.asList(filterRequest.getState_id().split(",", -1)));
+                            ids.addAll(Arrays.asList(filterRequest.getCountry_id().split(",", -1)));
                             stateAdapter.ids.addAll(ids);
                             stateAdapter.notifyDataSetChanged();
                         } else {

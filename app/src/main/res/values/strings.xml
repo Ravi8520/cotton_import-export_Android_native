@@ -128,6 +128,7 @@
     <string name="lbl_filter">Filter</string>
     <string name="lbl_select_product">Select Product</string>
     <string name="lbl_select_state">Select State</string>
+    <string name="lbl_select_coutnry">Select Countries</string>
     <string name="lbl_select_value">Select Value</string>
     <string name="lbl_please_fill_detail">Please fill all company <u><font color='#69BA53'>details \n to proceed</font></u></string>
 

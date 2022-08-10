@@ -22,13 +22,13 @@ import java.util.List;
 public class DashBoardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
 
     Context mcontext;
-    public ArrayList<DashBoardModel.StateModel> mArrayList;
+    public ArrayList<DashBoardModel> mArrayList;
     private OnItemClickListener onItemClickListener;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     private OnLoadMoreListener onLoadMoreListener;
     private boolean isMoreLoading = true;
-    public ArrayList<DashBoardModel.StateModel> filterArray = new ArrayList<>();
+    public ArrayList<DashBoardModel> filterArray = new ArrayList<>();
 
 
     public DashBoardAdapter(Context mcontext) {
@@ -52,14 +52,14 @@ public class DashBoardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         void onLoadMore();
     }
 
-    public void addAllClass(List<DashBoardModel.StateModel> models) {
+    public void addAllClass(List<DashBoardModel> models) {
         mArrayList.clear();
         filterArray.clear();
         mArrayList.addAll(models);
         filterArray.addAll(models);
     }
 
-    public void addItemMore(List<DashBoardModel.StateModel> lst) {
+    public void addItemMore(List<DashBoardModel> lst) {
         int sizeInit = mArrayList.size();
         mArrayList.addAll(lst);
         filterArray.addAll(lst);
@@ -122,7 +122,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
 
-        DashBoardModel.StateModel obj = mArrayList.get(position);
+        DashBoardModel obj = mArrayList.get(position);
         holder.binding.txtName.setText(obj.getName());
         holder.binding.txtBales.setText("Bales: " + obj.getBales());
         holder.binding.txtPost.setText("Post: " + obj.getCount());
@@ -171,9 +171,9 @@ public class DashBoardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     mArrayList = filterArray;
                 } else {
 
-                    ArrayList<DashBoardModel.StateModel> filteredList = new ArrayList<>();
+                    ArrayList<DashBoardModel> filteredList = new ArrayList<>();
 
-                    for (DashBoardModel.StateModel androidVersion : filterArray) {
+                    for (DashBoardModel androidVersion : filterArray) {
 
                         if (androidVersion.getName().toLowerCase().contains(charString)) {
                             filteredList.add(androidVersion);
@@ -190,7 +190,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mArrayList = (ArrayList<DashBoardModel.StateModel>) filterResults.values;
+                mArrayList = (ArrayList<DashBoardModel>) filterResults.values;
                 if (mArrayList.size() > 0) {
                     //  mListener.onListEmpty(true);
                 } else {

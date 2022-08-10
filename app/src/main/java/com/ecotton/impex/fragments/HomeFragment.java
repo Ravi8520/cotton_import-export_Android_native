@@ -2,7 +2,6 @@ package com.ecotton.impex.fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.ecotton.impex.MyApp.filterRequest;
-import static com.ecotton.impex.MyApp.stateWiseList;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -30,11 +29,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ecotton.impex.activities.DashboardCompanyListActivity;
 import com.ecotton.impex.utils.Constants;
 import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.activities.AddCompanyActivity;
-import com.ecotton.impex.activities.BuyerStateListActivity;
 import com.ecotton.impex.activities.DealsActivity;
 import com.ecotton.impex.activities.FilterActivity;
 import com.ecotton.impex.activities.HomeActivity;
@@ -80,7 +79,7 @@ public class HomeFragment extends Fragment {
     private HomeFragment activity;
 
     DashBoardAdapter dashBoardAdapter;
-    private List<DashBoardModel.StateModel> dashBoardModelList = new ArrayList<>();
+    private List<DashBoardModel> dashBoardModelList = new ArrayList<>();
     private String Usertype;
 
 
@@ -129,11 +128,7 @@ public class HomeFragment extends Fragment {
             e.getMessage();
         }
 
-        if (mSessionUtil.getUsertype().equals("seller")) {
-            Dashboard_buyer();
-        } else if (mSessionUtil.getUsertype().equals("buyer")) {
-            Dashboard_seller();
-        }
+
 
         binding.userLogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -322,85 +317,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void Dashboard_buyer() {
-        try {
-
-            String data = new Gson().toJson(filterRequest);
-            Log.e("data", "data==" + data);
-
-            Call<ResponseModel<List<DashBoardModel>>> call;
-            call = APIClient.getInstance().filterBuyer(mSessionUtil.getApiToken(), data);
-
-            call.enqueue(new Callback<ResponseModel<List<DashBoardModel>>>() {
-                @Override
-                public void onResponse(Call<ResponseModel<List<DashBoardModel>>> call, Response<ResponseModel<List<DashBoardModel>>> response) {
-                    Log.e("dashboard", "dashboard==" + new Gson().toJson(response.body()));
-                    customDialog.dismissProgress(mContext);
-
-                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS && response.body().data.size() > 0 && new Gson().toJson(response.body()) != null) {
-                        stateWiseList.clear();
-                        stateWiseList.addAll(response.body().data.get(0).getStateModelList());
-                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
-                        AppUtil.showToast(mContext, response.body().message);
-                        AppUtil.autoLogout(getActivity());
-                    } else {
-                        AppUtil.showToast(mContext, response.body().message);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseModel<List<DashBoardModel>>> call, Throwable t) {
-                    customDialog.dismissProgress(mContext);
-                    Log.e("dashboard", "dashboard==" + t.getMessage());
-                }
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void Dashboard_seller() {
-        try {
-
-            String data = new Gson().toJson(filterRequest);
-            Log.e("data", "data==" + data);
-
-            Call<ResponseModel<List<DashBoardModel>>> call;
-
-            call = APIClient.getInstance().filteSeller(mSessionUtil.getApiToken(), data);
-
-            call.enqueue(new Callback<ResponseModel<List<DashBoardModel>>>() {
-                @Override
-                public void onResponse(Call<ResponseModel<List<DashBoardModel>>> call, Response<ResponseModel<List<DashBoardModel>>> response) {
-                    Log.e("dashboard", "dashboard==" + new Gson().toJson(response.body()));
-                    customDialog.dismissProgress(mContext);
-                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS && response.body().data.size() > 0 && new Gson().toJson(response.body()) != null) {
-                        stateWiseList.clear();
-                        stateWiseList.addAll(response.body().data.get(0).getStateModelList());
-                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
-                        AppUtil.showToast(mContext, response.body().message);
-                        AppUtil.autoLogout(getActivity());
-                    } else {
-                        AppUtil.showToast(mContext, response.body().message);
-                    }
-                }
-
-                @Override
-
-                public void onFailure(Call<ResponseModel<List<DashBoardModel>>> call, Throwable t) {
-                    customDialog.dismissProgress(mContext);
-                    Log.e("dashboard", "dashboard==" + t.getMessage());
-
-                }
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     private void Dashboard_buyerFilter() {
@@ -416,7 +332,7 @@ public class HomeFragment extends Fragment {
                     customDialog.dismissProgress(mContext);
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS && response.body().data.size() > 0 && response.body() != null) {
                         binding.linStateData.setVisibility(View.VISIBLE);
-                        setUpSpiner(response.body().data.get(0).getStateModelList());
+                        setUpSpiner(response.body().data);
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                     } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
                         AppUtil.showToast(mContext, response.body().message);
@@ -452,7 +368,7 @@ public class HomeFragment extends Fragment {
                     customDialog.dismissProgress(mContext);
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS && response.body().data.size() > 0 && response.body() != null) {
                         binding.linStateData.setVisibility(View.VISIBLE);
-                        setUpSpiner(response.body().data.get(0).getStateModelList());
+                        setUpSpiner(response.body().data);
 
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                     } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
@@ -483,8 +399,8 @@ public class HomeFragment extends Fragment {
         if (TextUtils.isEmpty(filterRequest.getProduct_id())) {
             filterRequest.setProduct_id("-1");
         }
-        if (TextUtils.isEmpty(filterRequest.getState_id())) {
-            filterRequest.setState_id("-1");
+        if (TextUtils.isEmpty(filterRequest.getCountry_id())) {
+            filterRequest.setCountry_id("-1");
         }
         if (mSessionUtil.getUsertype().equals("seller")) {
             Dashboard_buyerFilter();
@@ -493,10 +409,10 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void setUpSpiner(List<DashBoardModel.StateModel> list) {
+    public void setUpSpiner(List<DashBoardModel> list) {
         dashBoardModelList.clear();
-        DashBoardModel.StateModel obj = new DashBoardModel.StateModel();
-        obj.setName("All State");
+        DashBoardModel obj = new DashBoardModel();
+        obj.setName("All countries");
         dashBoardModelList.add(obj);
         dashBoardModelList.addAll(list);
         try {
@@ -508,9 +424,9 @@ public class HomeFragment extends Fragment {
                     if (position == 0) {
                         setUpStateRecyclerVeiw(position);
                     } else {
-                        filterRequest.setState_id(dashBoardAdapter.mArrayList.get(position - 1).getState_id() + "");
-                        startActivity(new Intent(mContext, BuyerStateListActivity.class)
-                                .putExtra("stateID", dashBoardAdapter.mArrayList.get(position - 1).getState_id() + ""));
+                        filterRequest.setCountry_id(dashBoardAdapter.mArrayList.get(position - 1).getCountry_id() + "");
+                        startActivity(new Intent(mContext, DashboardCompanyListActivity.class)
+                                .putExtra("countryId", dashBoardAdapter.mArrayList.get(position - 1).getCountry_id() + ""));
                     }
                 } // to close the onItemSelected
 
@@ -523,11 +439,11 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public class CustomAdapter extends ArrayAdapter<DashBoardModel.StateModel> {
+    public class CustomAdapter extends ArrayAdapter<DashBoardModel> {
 
         LayoutInflater flater;
 
-        public CustomAdapter(Activity context, int resouceId, int textviewId, List<DashBoardModel.StateModel> list) {
+        public CustomAdapter(Activity context, int resouceId, int textviewId, List<DashBoardModel> list) {
 
             super(context, resouceId, textviewId, list);
 //        flater = context.getLayoutInflater();
@@ -546,7 +462,7 @@ public class HomeFragment extends Fragment {
 
         private View rowview(View convertView, int position) {
 
-            DashBoardModel.StateModel rowItem = getItem(position);
+            DashBoardModel rowItem = getItem(position);
 
             viewHolder holder;
             View rowview = convertView;
@@ -583,10 +499,9 @@ public class HomeFragment extends Fragment {
         dashBoardAdapter.setOnItemClickListener(new DashBoardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                filterRequest.setState_id(dashBoardAdapter.mArrayList.get(position).getState_id() + "");
-                startActivity(new Intent(getActivity(), BuyerStateListActivity.class)
-                        .putExtra("dashBoardModelList", new Gson().toJson(dashBoardModelList))
-                        .putExtra("stateID", dashBoardAdapter.mArrayList.get(position).getState_id() + ""));
+                filterRequest.setCountry_id(dashBoardAdapter.mArrayList.get(position).getCountry_id() + "");
+                startActivity(new Intent(getActivity(), DashboardCompanyListActivity.class)
+                        .putExtra("countryId", dashBoardAdapter.mArrayList.get(position).getCountry_id() + ""));
 
             }
         });

@@ -77,7 +77,6 @@ public class VerifyOTPActivity extends AppCompatActivity {
         isFrom = getIntent().getStringExtra("isFrom");
         is_invited = bundle.getInt(ISINVITED, 0);
         email = bundle.getString(EMAIL_ADDRESS, "");
-        isFrom = bundle.getString("isFrom", "");
         binding.txMobileNumber.setText(Html.fromHtml("Please enter the 6 digit code sent to your mail <b>" + email + "</b> "));
         Log.e("TAG", "EMAIL" + email);
         binding.btnVerify.setOnClickListener(view -> {

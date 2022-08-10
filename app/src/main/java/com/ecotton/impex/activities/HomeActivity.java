@@ -72,8 +72,8 @@ public class HomeActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(filterRequest.getProduct_id())) {
             filterRequest.setProduct_id("-1");
         }
-        if (TextUtils.isEmpty(filterRequest.getState_id())) {
-            filterRequest.setState_id("-1");
+        if (TextUtils.isEmpty(filterRequest.getCountry_id())) {
+            filterRequest.setCountry_id("-1");
         }
         filterRequest.setCompany_id(mSessionUtil.getCompanyId());
         homeFragment = new HomeFragment();

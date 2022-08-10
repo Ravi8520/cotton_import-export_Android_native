@@ -1,5 +1,7 @@
 package com.ecotton.impex.activities;
 
+import static com.ecotton.impex.MyApp.filterRequest;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -7,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +24,11 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ecotton.impex.api.APIClient;
+import com.ecotton.impex.api.ResponseModel;
+import com.ecotton.impex.utils.AppUtil;
+import com.ecotton.impex.utils.Utils;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.DashboardCompanyAdapter;
 import com.ecotton.impex.databinding.ActivityDashboardCompanyListBinding;
@@ -31,9 +37,12 @@ import com.ecotton.impex.models.dashboard.DashBoardModel;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashboardCompanyListActivity extends AppCompatActivity {
     public ActivityDashboardCompanyListBinding binding;
@@ -41,12 +50,10 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
     public DashboardCompanyListActivity mContext;
     private SessionUtil mSessionUtil;
     public DashboardCompanyAdapter companyAdapter;
-    public BuyerFilterRequest filterRequest;
-    public String districtID = "-1";
+    public String countryId = "-1";
     private List<DashBoardModel.CompanyModel> companyList = new ArrayList<>();
-    private List<DashBoardModel.CityModel> cityModelList = new ArrayList<>();
-    private List<DashBoardModel.StateModel> stateModelList = new ArrayList<>();
 
+    private List<DashBoardModel> dashBoardModelList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,18 +62,7 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
         mContext = this;
         mSessionUtil = new SessionUtil(mContext);
         customDialog = new CustomDialog();
-        districtID = getIntent().getStringExtra("districtID");
-        String jsonDashboard = getIntent().getStringExtra("stateModelList");
-        Type type = new TypeToken<List<DashBoardModel.StateModel>>() {
-        }.getType();
-        stateModelList = new Gson().fromJson(jsonDashboard, type);
-
-        String jsonCity = getIntent().getStringExtra("cityModelList");
-        type = new TypeToken<List<DashBoardModel.CityModel>>() {
-        }.getType();
-        cityModelList = new Gson().fromJson(jsonCity, type);
-
-        setUpSpiner();
+        countryId = getIntent().getStringExtra("countryId");
 
         binding.backarrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,45 +85,130 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void setUpSpiner() {
-
-        CustomAdapter adapter = new CustomAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, cityModelList);
-        binding.spinnerState.setAdapter(adapter);
-
-        for (int i = 0; i < cityModelList.size(); i++) {
-            if (cityModelList.get(i).getDistrict_id() == Integer.parseInt(districtID)) {
-                binding.spinnerState.setSelection(i);
-                break;
-            }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (TextUtils.isEmpty(filterRequest.getProduct_id())) {
+            filterRequest.setProduct_id("-1");
         }
-
-        binding.spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                districtID = cityModelList.get(position).getDistrict_id() + "";
-                // filterRequest.setState_id(cityModelList.get(position).getDistrict_id() + "");
-
-                binding.txtName.setText(cityModelList.get(position).getName());
-
-                binding.txtPost.setText("Post: " + cityModelList.get(position).getCount());
-                binding.txtBales.setText("Bales:  " + cityModelList.get(position).getBales());
-                setUpStateRecyclerVeiw(cityModelList.get(position).getCompanyModelList());
-                //Dashboard_buyer();
-
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        if (TextUtils.isEmpty(filterRequest.getCountry_id())) {
+            filterRequest.setCountry_id("-1");
+        }
+        if (mSessionUtil.getUsertype().equals("seller")) {
+            Dashboard_buyerFilter();
+        } else if (mSessionUtil.getUsertype().equals("buyer")) {
+            Dashboard_sellerFilter();
+        }
     }
 
-    public class CustomAdapter extends ArrayAdapter<DashBoardModel.CityModel> {
+    public void setUpSpiner(List<DashBoardModel> list) {
+        dashBoardModelList.clear();
+        dashBoardModelList.addAll(list);
+        try {
+            CustomAdapter adapter = new CustomAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, dashBoardModelList);
+            binding.spinnerState.setAdapter(adapter);
+            binding.spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String selectedItem = parent.getItemAtPosition(position).toString();
+                    countryId = dashBoardModelList.get(position).getCountry_id() + "";
+                    // filterRequest.setState_id(cityModelList.get(position).getDistrict_id() + "");
+
+                    binding.txtName.setText(dashBoardModelList.get(position).getName());
+
+                    binding.txtPost.setText("Post: " + dashBoardModelList.get(position).getCount());
+                    binding.txtBales.setText("Bales:  " + dashBoardModelList.get(position).getBales());
+                    setUpStateRecyclerVeiw(dashBoardModelList.get(position).getCompanyModelList());
+
+
+                } // to close the onItemSelected
+
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+    private void Dashboard_buyerFilter() {
+        try {
+
+            String data = new Gson().toJson(filterRequest);
+            Log.e("filterRequest", "filterRequest==" + data);
+            Call<ResponseModel<List<DashBoardModel>>> call = APIClient.getInstance().filterBuyer(mSessionUtil.getApiToken(), data);
+            call.enqueue(new Callback<ResponseModel<List<DashBoardModel>>>() {
+                @Override
+                public void onResponse(Call<ResponseModel<List<DashBoardModel>>> call, Response<ResponseModel<List<DashBoardModel>>> response) {
+                    Log.e("dashboard", "dashboard==" + new Gson().toJson(response.body()));
+                    customDialog.dismissProgress(mContext);
+                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS && response.body().data.size() > 0 && response.body() != null) {
+                        //binding.linStateData.setVisibility(View.VISIBLE);
+                        setUpSpiner(response.body().data);
+                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
+                        AppUtil.showToast(mContext, response.body().message);
+                        AppUtil.autoLogout(mContext);
+                    } else {
+                        //binding.linStateData.setVisibility(View.GONE);
+                        AppUtil.showToast(mContext, response.body().message);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseModel<List<DashBoardModel>>> call, Throwable t) {
+                    customDialog.dismissProgress(mContext);
+                    Log.e("dashboard", "dashboard==" + t.getMessage());
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void Dashboard_sellerFilter() {
+        try {
+            String data = new Gson().toJson(filterRequest);
+            Log.e("Dashboard_sellerFilter", "Dashboard_sellerFilter==" + data);
+            Call<ResponseModel<List<DashBoardModel>>> call = APIClient.getInstance().filteSeller(mSessionUtil.getApiToken(), data);
+            call.enqueue(new Callback<ResponseModel<List<DashBoardModel>>>() {
+                @Override
+                public void onResponse(Call<ResponseModel<List<DashBoardModel>>> call, Response<ResponseModel<List<DashBoardModel>>> response) {
+                    Log.e("dashboard", "dashboard==" + new Gson().toJson(response.body()));
+                    customDialog.dismissProgress(mContext);
+                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS && response.body().data.size() > 0 && response.body() != null) {
+                       // binding.linStateData.setVisibility(View.VISIBLE);
+                        setUpSpiner(response.body().data);
+
+                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
+                        AppUtil.showToast(mContext, response.body().message);
+                        AppUtil.autoLogout(mContext);
+                    } else {
+                        //binding.linStateData.setVisibility(View.GONE);
+                        AppUtil.showToast(mContext, response.body().message);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseModel<List<DashBoardModel>>> call, Throwable t) {
+                    customDialog.dismissProgress(mContext);
+                    Log.e("dashboard", "dashboard==" + t.getMessage());
+
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public class CustomAdapter extends ArrayAdapter<DashBoardModel> {
 
         LayoutInflater flater;
 
-        public CustomAdapter(Activity context, int resouceId, int textviewId, List<DashBoardModel.CityModel> list) {
+        public CustomAdapter(Activity context, int resouceId, int textviewId, List<DashBoardModel> list) {
 
             super(context, resouceId, textviewId, list);
 //        flater = context.getLayoutInflater();
@@ -146,7 +227,7 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
 
         private View rowview(View convertView, int position) {
 
-            DashBoardModel.CityModel rowItem = getItem(position);
+            DashBoardModel rowItem = getItem(position);
 
             viewHolder holder;
             View rowview = convertView;

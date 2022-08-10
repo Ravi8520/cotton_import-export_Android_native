@@ -21,7 +21,6 @@ import java.util.List;
 public class MyApp extends DarkThemeApplication {
     public static MyApp instance;
     public static String orderID = "";
-    public static List<DashBoardModel.StateModel> stateWiseList = new ArrayList<>();
 
     public static SessionUtil mSessionUtil;
     public static FirebaseAnalytics mFirebaseAnalytics;

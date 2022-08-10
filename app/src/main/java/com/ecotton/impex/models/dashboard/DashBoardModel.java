@@ -28,7 +28,7 @@ public class DashBoardModel implements Serializable {
 
     @SerializedName("data")
     @Expose
-    private List<StateModel> stateModelList = new ArrayList<>();
+    private List<CompanyModel> companyModelList = new ArrayList<>();
 
     public int getCount() {
         return count;
@@ -62,8 +62,8 @@ public class DashBoardModel implements Serializable {
         this.color_code = color_code;
     }
 
-    public List<StateModel> getStateModelList() {
-        return stateModelList;
+    public List<CompanyModel> getCompanyModelList() {
+        return companyModelList;
     }
     public int getCountry_id() {
         return country_id;
@@ -73,149 +73,10 @@ public class DashBoardModel implements Serializable {
         this.country_id = country_id;
     }
 
-    public void setStateModelList(List<StateModel> stateModelList) {
-        this.stateModelList = stateModelList;
+    public void setCompanyModelList(List<CompanyModel> companyModelList) {
+        this.companyModelList = companyModelList;
     }
 
-    public static class StateModel implements Serializable {
-        @SerializedName("count")
-        @Expose
-        private int count;
-        @SerializedName("bales")
-        @Expose
-        private BigInteger bales;
-        @SerializedName("state_id")
-        @Expose
-        private int state_id;
-        @SerializedName("name")
-        @Expose
-        private String name;
-        @SerializedName("color_code")
-        @Expose
-        private String color_code;
-
-        public int getState_id() {
-            return state_id;
-        }
-
-        public void setState_id(int state_id) {
-            this.state_id = state_id;
-        }
-
-        @SerializedName("data")
-        @Expose
-        private List<CityModel> cityModelList = new ArrayList<>();
-
-        public int getCount() {
-            return count;
-        }
-
-        public void setCount(int count) {
-            this.count = count;
-        }
-
-        public BigInteger getBales() {
-            return bales;
-        }
-
-        public void setBales(BigInteger bales) {
-            this.bales = bales;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getColor_code() {
-            return color_code;
-        }
-
-        public void setColor_code(String color_code) {
-            this.color_code = color_code;
-        }
-
-        public List<CityModel> getCityModelList() {
-            return cityModelList;
-        }
-
-        public void setCityModelList(List<CityModel> cityModelList) {
-            this.cityModelList = cityModelList;
-        }
-    }
-
-    public static class CityModel implements Serializable {
-        @SerializedName("count")
-        @Expose
-        private int count;
-        @SerializedName("bales")
-        @Expose
-        private BigInteger bales;
-        @SerializedName("district_id")
-        @Expose
-        private int district_id;
-
-        public int getDistrict_id() {
-            return district_id;
-        }
-
-        public void setDistrict_id(int district_id) {
-            this.district_id = district_id;
-        }
-
-        @SerializedName("name")
-        @Expose
-        private String name;
-        @SerializedName("color_code")
-        @Expose
-        private String color_code;
-        @SerializedName("data")
-        @Expose
-        private List<CompanyModel> companyModelList = new ArrayList<>();
-
-        public int getCount() {
-            return count;
-        }
-
-        public void setCount(int count) {
-            this.count = count;
-        }
-
-        public BigInteger getBales() {
-            return bales;
-        }
-
-        public void setBales(BigInteger bales) {
-            this.bales = bales;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getColor_code() {
-            return color_code;
-        }
-
-        public void setColor_code(String color_code) {
-            this.color_code = color_code;
-        }
-
-        public List<CompanyModel> getCompanyModelList() {
-            return companyModelList;
-        }
-
-        public void setCompanyModelList(List<CompanyModel> companyModelList) {
-            this.companyModelList = companyModelList;
-        }
-    }
 
     public static class CompanyModel implements Serializable {
         @SerializedName("post_id")

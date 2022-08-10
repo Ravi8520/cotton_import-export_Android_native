@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class PostDetail implements Serializable {
     public int id = 0,company_id=0;
     public String seller_buyer_id = "", user_type = "", product_id = "", product_name = "", no_of_bales = "",
-            price = "", address = "", date = "",company_name="",seller_buyer_name="";
+            price = "", address = "", date = "",company_name="",seller_buyer_name="",country_origin_name="";
     public ArrayList<PostDetailAttribute> attribute_array = new ArrayList<>();
 
     public String getSeller_buyer_name() {
@@ -15,6 +15,14 @@ public class PostDetail implements Serializable {
 
     public void setSeller_buyer_name(String seller_buyer_name) {
         this.seller_buyer_name = seller_buyer_name;
+    }
+
+    public String getCountry_origin_name() {
+        return country_origin_name;
+    }
+
+    public void setCountry_origin_name(String country_origin_name) {
+        this.country_origin_name = country_origin_name;
     }
 
     public int getId() {

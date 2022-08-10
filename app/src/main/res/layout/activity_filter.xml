@@ -78,7 +78,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="@string/lbl_select_state"
+                android:text="@string/lbl_select_coutnry"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

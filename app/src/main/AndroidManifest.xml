@@ -211,10 +211,6 @@
             android:screenOrientation="portrait"
              />
         <activity
-            android:name=".activities.BuyerStateListActivity"
-            android:screenOrientation="portrait"
-             />
-        <activity
             android:name=".activities.UpdateCompanyDetailsActivity"
             android:screenOrientation="portrait" />
         <activity

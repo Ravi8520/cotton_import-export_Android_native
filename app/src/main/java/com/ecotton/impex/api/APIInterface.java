@@ -283,7 +283,7 @@ public interface APIInterface {
     );
 
     @FormUrlEncoded
-    @POST("state_list_for_dashboard_buyer_filter")
+    @POST("country_list_for_dashboard_seller_filter")
     Call<ResponseModel<List<ProductModel>>> state_list_for_dashboard_buyer_filter(
             @Header("Authorization") String Authorization,
             @Field("data") String data

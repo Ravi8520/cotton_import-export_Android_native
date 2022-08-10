@@ -144,6 +144,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         Intent intent = new Intent(mContext, VerifyOTPActivity.class);
                         intent.putExtra(VerifyOTPActivity.EMAIL_ADDRESS, binding.edtEmail.getText().toString().trim());
                         intent.putExtra(VerifyOTPActivity.ISINVITED, model.getData().getIs_invited());
+                        intent.putExtra("isFrom", isFrom);
                         startActivity(intent);
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());
