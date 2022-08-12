@@ -10,7 +10,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
@@ -21,6 +20,7 @@ import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
 import com.ecotton.impex.utils.ValidationUtil;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -170,5 +170,18 @@ public class AddCompanyActivity extends AppCompatActivity {
         return m.matches();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (homeaddcompany != null) {
+            if (homeaddcompany.equals("homeaddcompany")) {
+                startActivity(new Intent(mContext, HomeActivity.class));
+                finish();
+            }
+        }
+        else {
+            startActivity(new Intent(mContext, CompanyListActivity.class));
+            finish();
+        }
 
+    }
 }

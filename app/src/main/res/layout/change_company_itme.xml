@@ -94,7 +94,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:padding="@dimen/_5sdp"
-            android:text="Buyer"
+            android:text="Importer"
             android:textColor="@color/white"
             android:textSize="9sp" />
 
@@ -118,7 +118,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:padding="@dimen/_5sdp"
-            android:text="Seller"
+            android:text="Exporter"
             android:textColor="@color/white"
             android:textSize="9sp" />
 

@@ -120,6 +120,7 @@ public class ActiveFragment extends Fragment {
                     Log.e("CancelPostModel", "CancelPostModel==" + new Gson().toJson(response.body().data));
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         AppUtil.showToast(mContext, response.body().message);
+                        MyActivePost();
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         activeTabAdapter.notifyDataSetChanged();
                     } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {

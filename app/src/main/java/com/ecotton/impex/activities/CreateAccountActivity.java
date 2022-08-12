@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.databinding.ActivityCreateAccountBinding;
@@ -21,6 +20,7 @@ import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
 import com.ecotton.impex.utils.ValidationUtil;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -186,7 +186,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                     Log.e("response", "response==" + dataa);
                     if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                         AppUtil.showToast1(mContext, model.getMessage());
-                        startActivity(new Intent(mContext, WitingApprovelActivity.class));
+                        Intent intent = new Intent(mContext, WitingApprovelActivity.class);
+                        intent.putExtra("create", "create");
+                        startActivity(intent);
                         finish();
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());

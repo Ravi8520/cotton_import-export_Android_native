@@ -85,7 +85,7 @@ public class NewsActivity extends AppCompatActivity {
 
     private void getPharmacyList() {
         try {
-            customDialog.displayProgress(mContext);
+           // customDialog.displayProgress(mContext);
             String strJson = "";
             JSONObject object = new JSONObject();
             object.put("offset", mPageIndex);

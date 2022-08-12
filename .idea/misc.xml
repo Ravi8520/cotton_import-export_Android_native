@@ -6,16 +6,13 @@
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/coustom_button_border.xml" value="0.11" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/ic_back_arrow.xml" value="0.154" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/ic_back_arrow_white.xml" value="0.154" />
-        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.111" />
-        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/ic_notifications_white.xml" value="0.111" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/spinner_border.xml" value="0.11" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/textview_border.xml" value="0.11" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_add_company.xml" value="0.33" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_buyer.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_calculator.xml" value="0.2289156626506024" />
-        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_changepassword.xml" value="0.16296296296296298" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_company_list.xml" value="0.16018518518518518" />
-        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_create_account.xml" value="0.33" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_create_account.xml" value="0.17604166666666668" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_edit_company_details.xml" value="0.18" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_filter.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_forgot_password.xml" value="0.20416666666666666" />
@@ -31,12 +28,9 @@
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_negotiation_detail_last_two.xml" value="0.22" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_news.xml" value="0.1" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_news_full_screen.xml" value="0.15" />
-        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_personal_sell.xml" value="0.21" />
-        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_post_detail.xml" value="0.22" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_report.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_select_buyer.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_success_transaction.xml" value="0.20416666666666666" />
-        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_update_company_details.xml" value="0.17314814814814813" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_verify_otpactivity.xml" value="0.128125" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/company_details_dialog.xml" value="0.22" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/custome_mywallet_layout.xml" value="0.18854166666666666" />
@@ -52,6 +46,45 @@
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/negotiation_item.xml" value="0.22" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/product_vlaue_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/drawable/custome_background.xml" value="0.266" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/drawable/custome_bg_white.xml" value="0.266" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/drawable/ic_back_arrow.xml" value="0.266" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.266" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/drawable/spinner_border.xml" value="0.266" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/drawable/textview_border.xml" value="0.266" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/drawable/top_radious_background.xml" value="0.266" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_buyer_state_list.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_dashboard_company_list.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_deals.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_filter.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_forgot_password.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_my_contract.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_my_profile.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_mypost.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_mypost_active_tab_data.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_personal_sell.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_post_to_sell.xml" value="0.33" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_select_seller.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_update_company_details.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/activity_verify_otpactivity.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/change_company_dialog.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/change_company_itme.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/company_details_dialog.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/custome_mypost_activetab_layout.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/custome_mypost_layout.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/deal_otp_dialog.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/fragment_company_detail.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/fragment_deal_notification.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/fragment_ginning.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/fragment_my_work.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/layout_selected_buyer.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/layout_spiner.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/post_dailog.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/posttosellatribute_item1.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/selectseller_item.xml" value="0.3333333333333333" />
+        <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/layout/spinner_layout.xml" value="0.3333333333333333" />
         <entry key="..\:/sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.1" />
       </map>
     </option>

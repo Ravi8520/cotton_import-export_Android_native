@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,18 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ecotton.impex.R;
+import com.ecotton.impex.adapters.MyContractAdapter;
+import com.ecotton.impex.api.APIClient;
+import com.ecotton.impex.api.ResponseModel;
+import com.ecotton.impex.databinding.ActivityMyContractBinding;
 import com.ecotton.impex.models.MyContractModel;
+import com.ecotton.impex.models.login.LoginModel;
+import com.ecotton.impex.utils.AppUtil;
+import com.ecotton.impex.utils.CustomDialog;
+import com.ecotton.impex.utils.PrintLog;
+import com.ecotton.impex.utils.SessionUtil;
+import com.ecotton.impex.utils.Utils;
 import com.gne.www.lib.PinView;
 import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
@@ -43,17 +55,6 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.ecotton.impex.R;
-import com.ecotton.impex.adapters.MyContractAdapter;
-import com.ecotton.impex.api.APIClient;
-import com.ecotton.impex.api.ResponseModel;
-import com.ecotton.impex.databinding.ActivityMyContractBinding;
-import com.ecotton.impex.models.login.LoginModel;
-import com.ecotton.impex.utils.AppUtil;
-import com.ecotton.impex.utils.CustomDialog;
-import com.ecotton.impex.utils.PrintLog;
-import com.ecotton.impex.utils.SessionUtil;
-import com.ecotton.impex.utils.Utils;
 import com.tfb.filepicker.Constants;
 
 import org.json.JSONException;
@@ -318,6 +319,7 @@ public class MyContractActivity extends AppCompatActivity {
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                         Button btn_verify = (Button) dialog.findViewById(R.id.btn_verify);
                         Button btn_resend = (Button) dialog.findViewById(R.id.btn_resend);
+                        ImageView img_close = (ImageView) dialog.findViewById(R.id.img_close);
                         PinView pinView = (PinView) dialog.findViewById(R.id.pinview);
                         TextView txt_mobile_no = (TextView) dialog.findViewById(R.id.txt_mobile_no);
                         String number = "<b>" + mSessionUtil.getMobileNo() + "</b> ";
@@ -338,6 +340,12 @@ public class MyContractActivity extends AppCompatActivity {
                                 } else {
                                     hitMackDealVerify(position, childPosition, pin);
                                 }
+                            }
+                        });
+                        img_close.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
                             }
                         });
                         dialog.show();

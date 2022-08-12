@@ -76,8 +76,20 @@ public class FilterActivity extends AppCompatActivity {
                 filterRequest = new BuyerFilterRequest();
                 filterRequest.setCompany_id(mSessionUtil.getCompanyId());
                 filterRequest.setCountry_id("-1");
-                startActivity(new Intent(mContext, com.ecotton.impex.activities.HomeActivity.class));
-                finishAffinity();
+
+                productAdapter.ids.clear();
+                productAdapter.selectedNames.clear();
+                productAdapter.ids.add("-1");
+                productAdapter.selectedNames.add("All");
+                productAdapter.notifyDataSetChanged();
+
+                stateAdapter.ids.clear();
+                stateAdapter.selectedNames.clear();
+                stateAdapter.ids.add("-1");
+                stateAdapter.selectedNames.add("All");
+                stateAdapter.notifyDataSetChanged();
+                /*startActivity(new Intent(mContext, com.ecotton.impex.activities.HomeActivity.class));
+                finishAffinity();*/
             }
         });
         binding.btnApplay.setOnClickListener(new View.OnClickListener() {
