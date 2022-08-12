@@ -128,7 +128,7 @@ public class ActiveTabAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
         holder.binding.txtProductName.setText(mArrayList.get(position).getProduct_name());
-        holder.binding.txtBeale.setText(mArrayList.get(position).getRemaining_bales() + " Bales");
+        holder.binding.txtBeale.setText(mArrayList.get(position).getNo_of_bales() + " Bales");
         holder.binding.txtAmount.setText(mcontext.getResources().getString(R.string.lbl_rupees_symbol_only) + mArrayList.get(position).getPrice());
         Calendar reject_date = DateTimeUtil.getCalendarWithUtcTimeZone(mArrayList.get(position).getDate(), DateTimeUtil.DISPLAY_DATE_TIME_FORMAT_WITH_COMMA);
         holder.binding.txtPostTime.setText(DateTimeUtil.getStringFromCalendar(reject_date, DateTimeUtil.DISPLAY_DATE_TIME_FORMAT));

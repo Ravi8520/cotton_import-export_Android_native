@@ -100,9 +100,10 @@ public class HomeFragment extends Fragment {
 
             binding.txtCompanyName.setText(mSessionUtil.getCompanyName());
             if (mSessionUtil.getUsertype().equals("seller")) {
-                binding.txtUserType.setText(Constants.EXPORTER);
+                binding.txtUserType.setText("Exporter");
+
             } else if (mSessionUtil.getUsertype().equals("buyer")) {
-                binding.txtUserType.setText(Constants.IMPORTER);
+                binding.txtUserType.setText("Importer");
             }
 
             CompanyList();

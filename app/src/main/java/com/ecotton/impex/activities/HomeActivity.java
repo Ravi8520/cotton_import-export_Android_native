@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ecotton.impex.R;
 import com.ecotton.impex.databinding.ActivityHomeBinding;
 import com.ecotton.impex.fragments.HomeFragment;
@@ -31,6 +30,7 @@ import com.ecotton.impex.fragments.MyWorkFragment;
 import com.ecotton.impex.fragments.SearchBuyerFragment;
 import com.ecotton.impex.fragments.UtilitiesFragment;
 import com.ecotton.impex.utils.SessionUtil;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -197,8 +197,8 @@ public class HomeActivity extends AppCompatActivity {
         TextView lbl_personal_buy = (TextView) dialog.findViewById(R.id.lbl_personal_buy);
 
         if (mSessionUtil.getUsertype().equals("buyer")) {
-            lbl_post_to_buy.setText(getResources().getString(R.string.lbl_post_to_buy));
-            lbl_personal_buy.setText(getResources().getString(R.string.lbl_private_buy));
+            lbl_post_to_buy.setText("Post to Import");
+            lbl_personal_buy.setText("Private Import");
         }
 
         lbl_post_to_buy.setOnClickListener(new View.OnClickListener() {
@@ -223,7 +223,6 @@ public class HomeActivity extends AppCompatActivity {
 
   /*  @OnClick(R.id.img_post_by)
     protected void img_post_byOnClick() {
-
 
     }*/
 

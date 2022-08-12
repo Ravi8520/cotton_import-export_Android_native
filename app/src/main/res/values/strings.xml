@@ -31,7 +31,7 @@
     <string name="lbl_deals">Deals</string>
     <string name="lbl_seller_name">Seller Name</string>
     <string name="lbl_rupees_symbol">\u20B9 40000</string>
-    <string name="lbl_rupees_symbol_only">\u20B9</string>
+    <string name="lbl_rupees_symbol_only">$</string>
 
 
     <string name="lbl_title_verify_otp">Verify OTP</string>
@@ -64,7 +64,7 @@
     <string name="lbl_gst_number">GST Number</string>
     <string name="lbl_iec_number">IEC number</string>
     <string name="lbl_buyer_seller">Buyer / Seller</string>
-    <string name="lbl_buyer">Buyer</string>
+    <string name="lbl_buyer">Importer</string>
     <string name="lbl_broker">Broker</string>
     <string name="lbl_referral_code">Referral Code</string>
     <string name="lbl_primary_broker">Primary Broker</string>
@@ -82,8 +82,8 @@
     <string name="lbl_state">State</string>
     <string name="lbl_district">District</string>
     <string name="lbl_station">Station</string>
-    <string name="lbl_search_seller">Search Seller</string>
-    <string name="lbl_search_buyer">Search Buyer</string>
+    <string name="lbl_search_seller">Search Exporter</string>
+    <string name="lbl_search_buyer">Search Importer</string>
     <string name="lbl_seller_type">Seller Type</string>
     <string name="lbl_pending">Pending...</string>
     <string name="lbl_dollar">$1200</string>
@@ -380,7 +380,7 @@
     <string name="my_contarcttitle">My Contract</string>
     <string name="company">Company</string>
     <string name="download">Download</string>
-    <string name="seller">Seller</string>
+    <string name="seller">Exporter</string>
 
     // My Favourites strings //
 

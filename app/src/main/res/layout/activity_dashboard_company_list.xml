@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey"
+    android:background="@color/tab_text_color"
     android:orientation="vertical"
     tools:context=".activities.DashboardCompanyListActivity">
 
     <RelativeLayout
         android:id="@+id/rl_newstitle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        android:background="@color/light_grey">
+        android:layout_height="@dimen/_50sdp">
 
         <ImageView
             android:id="@+id/backarrow"
@@ -23,6 +22,7 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="@dimen/_3sdp"
+            app:tint="@color/white"
             android:src="@drawable/ic_back_arrow" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:fontFamily="@font/poppins_regular"
             android:gravity="center_horizontal"
             android:text="@string/dashboard"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
             android:layout_toLeftOf="@id/img_notification"
             android:padding="@dimen/_3sdp"
             android:src="@drawable/ic_filter"
-            app:tint="@color/colorAccent" />
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/img_notification"
@@ -55,6 +55,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/_5sdp"
             android:padding="@dimen/_3sdp"
+            app:tint="@color/white"
             android:src="@drawable/ic_baseline_notifications_none_24" />
 
     </RelativeLayout>
