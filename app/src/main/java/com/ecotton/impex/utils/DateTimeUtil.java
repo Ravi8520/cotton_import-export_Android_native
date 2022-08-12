@@ -64,7 +64,6 @@ public class DateTimeUtil {
         try {
             SimpleDateFormat smDateFormat = new SimpleDateFormat(format);
             smDateFormat.setTimeZone(TimeZone.getTimeZone(TIME_ZONE_UTC));
-
             mCalendar.setTime(smDateFormat.parse(logDate));
             mCalendar.setTimeZone(TimeZone.getTimeZone(TIME_ZONE_ASIA_KOLKATA));
         } catch (Exception e) {
@@ -87,7 +86,16 @@ public class DateTimeUtil {
 
         return mCalendar;
     }
+    public static String getDate(long milliSeconds, String dateFormat)
+    {
+        // Create a DateFormatter object for displaying date in specified format.
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
+    }
     public static String getStringFromCalendar(Calendar mCalendar, String dateFormat) {
         SimpleDateFormat simpleDateformat = new SimpleDateFormat(dateFormat);
         // simpleDateformat.setTimeZone(mCalendar.getTimeZone());

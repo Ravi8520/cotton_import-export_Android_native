@@ -35,6 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.ProtModel;
+import com.ecotton.impex.utils.DateTimeUtil;
 import com.gne.www.lib.PinView;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -60,9 +61,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -76,7 +80,7 @@ public class PostDetailActivity extends AppCompatActivity {
     private CustomDialog customDialog;
     public PostDetail postDetail;
     public PostDetailSpinerData detailSpinerData;
-    public String selectedTransmitCondition = "", selectedPaymentCondition = "", selectedLab = "", selectedHeader = "", selectedBroker = "";
+    public String selectedTransmitCondition = "", selectedTransmitConditionName = "", selectedPaymentCondition = "", selectedLab = "", selectedHeader = "", selectedBroker = "";
     public String postID = "", type = "";
     public int noOfBales = 0, totalBales = 0;
     public String buyerId = "", sellerId = "", postedCompanyId = "", negotiationByCompanyId = "";
@@ -84,13 +88,13 @@ public class PostDetailActivity extends AppCompatActivity {
     public NegotiationDetail negotiationDetail;
     public List<BrokerModel> brokerModelList = new ArrayList<>();
 
-    public String Usertype = "", company_id = "", user_id = "", deal_id = "";
+    public String Usertype = "", company_id = "", user_id = "", deal_id = "",deliveryPeriod="";
 
     private List<CountryModel> dispatchcontryList = new ArrayList<>();
     private List<CountryModel> destinationcontryList = new ArrayList<>();
     private List<ProtModel> portList = new ArrayList<>();
     private List<ProtModel> destinationportList = new ArrayList<>();
-
+    ArrayList<PostDetailSpinerData.SpinerModel> deliveryConditionList;
     private int dispatchContryID;
     private int dispatchdportID;
     private int destinationContryID;
@@ -147,12 +151,19 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
-                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-                    @Override
-                    public void onPositiveButtonClick(Object selection) {
-                        binding.edtStartDate.setText(materialDatePicker.getHeaderText());
+                materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
+                    @Override public void onPositiveButtonClick(Pair<Long,Long> selection) {
+                        Long startDate = selection.first;
+                        Long endDate = selection.second;
+                        is_highlight_delivery_period = true;
+                        deliveryPeriod= DateTimeUtil.getDate(startDate,"yyyy-MM-dd")+"#"+DateTimeUtil.getDate(endDate,"yyyy-MM-dd");
+                        Log.e("TAG","Start-Date-"+ DateTimeUtil.getDate(startDate,"yyyy-MM-dd"));
+                        Log.e("TAG","End-Date-"+ DateTimeUtil.getDate(endDate,"yyyy-MM-dd"));
+                        //Do something...
+                        binding.edtStartDate.setText("TO - "+DateTimeUtil.getDate(startDate,"yyyy-MM-dd")+"   |   From - "+ DateTimeUtil.getDate(endDate,"yyyy-MM-dd"));
                     }
                 });
+
             }
         });
 
@@ -281,6 +292,12 @@ public class PostDetailActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+    }
+
+    private void outputDateFormat() {
+        SimpleDateFormat smDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        smDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
     }
 
@@ -502,8 +519,13 @@ public class PostDetailActivity extends AppCompatActivity {
 
     public void setSpinerData() {
 
+        deliveryConditionList = new ArrayList<>();
+        PostDetailSpinerData.SpinerModel obj = new PostDetailSpinerData.SpinerModel();
+        obj.setName("Select");
+        deliveryConditionList.add(obj);
+        deliveryConditionList.addAll(detailSpinerData.getTransmit_condition());
 
-        CustomAdapter adapterTransmit = new CustomAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, detailSpinerData.getTransmit_condition());
+        CustomAdapter adapterTransmit = new CustomAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, deliveryConditionList);
         binding.spTransmitCondition.setAdapter(adapterTransmit);
 
 
@@ -546,14 +568,22 @@ public class PostDetailActivity extends AppCompatActivity {
 
     public void setUpSpinercountrydispatch(List<CountryModel> list) {
         dispatchcontryList.clear();
+        CountryModel obj = new CountryModel();
+        obj.setName("Select");
+        dispatchcontryList.add(obj);
         dispatchcontryList.addAll(list);
         CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, dispatchcontryList);
         binding.spinnerCountryOfDispatch.setAdapter(adapter);
         binding.spinnerCountryOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                dispatchContryID = dispatchcontryList.get(position).getId();
-                Log.e("selectedStation", "selectedStation==" + dispatchContryID);
-                PortList(dispatchContryID);
+                if (position == 0) {
+                    dispatchContryID = 0;
+                } else {
+                    dispatchContryID = dispatchcontryList.get(position).getId();
+                    Log.e("selectedStation", "selectedStation==" + dispatchContryID);
+                    PortList(dispatchContryID);
+                }
+
             } // to close the onItemSelected
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -565,20 +595,32 @@ public class PostDetailActivity extends AppCompatActivity {
 
     public void setUpSpinercountrydestination(List<CountryModel> list) {
         destinationcontryList.clear();
+        CountryModel obj = new CountryModel();
+        obj.setName("Select");
+        destinationcontryList.add(obj);
         destinationcontryList.addAll(list);
         CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationcontryList);
         binding.spinnerDestinationCountry.setAdapter(adapter);
         binding.spinnerDestinationCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                destinationContryID = destinationcontryList.get(position).getId();
-                Log.e("selectedStation", "selectedStation==" + dispatchContryID);
-                DestinationPortList(destinationContryID);
+                if (position == 0) {
+                    destinationContryID = 0;
+                } else {
+                    destinationContryID = destinationcontryList.get(position).getId();
+                    Log.e("selectedStation", "selectedStation==" + dispatchContryID);
+                    DestinationPortList(destinationContryID);
+                }
+
             } // to close the onItemSelected
 
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+        binding.layoutDestinationCountry.setVisibility(View.GONE);
+        binding.layoutDestinationPort.setVisibility(View.GONE);
+        setSpinerData();
+        getNegotiationDetail();
     }
 
     private void PortList(int countryid) {
@@ -648,8 +690,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         setUpSpinerdestinationport(response.body().data);
-                        setSpinerData();
-                        getNegotiationDetail();
+
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                     } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
                         AppUtil.showToast(mContext, response.body().message);
@@ -683,56 +724,6 @@ public class PostDetailActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void getBroker() {
-        try {
-
-            String strJson = "";
-            JSONObject object = new JSONObject();
-            object.put("buyer_id", buyerId);
-            object.put("seller_id", sellerId);
-            object.put("type", mSessionUtil.getUsertype());
-            object.put("posted_company_id", postedCompanyId);
-            object.put("negotiation_by_company_id", negotiationByCompanyId);
-            strJson = object.toString();
-            PrintLog.d("TAG", strJson);
-
-            Call<ResponseModel<List<BrokerModel>>> call = APIClient.getInstance().getBrokerList(mSessionUtil.getApiToken(), strJson);
-            call.enqueue(new Callback<ResponseModel<List<BrokerModel>>>() {
-                @Override
-                public void onResponse(Call<ResponseModel<List<BrokerModel>>> call, Response<ResponseModel<List<BrokerModel>>> response) {
-                    Log.e("response", "Broker==" + new Gson().toJson(response.body()));
-
-                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
-                        brokerModelList.addAll(response.body().data);
-                        setBrokerSpinerData(response.body().data);
-                        setSpinerData();
-                        getNegotiationDetail();
-                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-
-                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
-                        AppUtil.showToast(mContext, response.body().message);
-                        AppUtil.autoLogout(mContext);
-                    } else {
-                        AppUtil.showToast(mContext, response.body().message);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseModel<List<BrokerModel>>> call, Throwable t) {
-
-                }
-            });
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setBrokerSpinerData(List<BrokerModel> list) {
-        BrokerCustomAdapter adapterTransmit = new BrokerCustomAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, list);
-        binding.spBroker.setAdapter(adapterTransmit);
     }
 
     private void getNegotiationDetail() {
@@ -825,6 +816,7 @@ public class PostDetailActivity extends AppCompatActivity {
             if (negotiationDetail.getTransmit_condition_id().equals(detailSpinerData.getTransmit_condition().get(i).getId() + "")) {
                 binding.spTransmitCondition.setSelection(i);
                 selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(i).getId() + "";
+                selectedTransmitConditionName = detailSpinerData.getTransmit_condition().get(i).getName();
             }
         }
 
@@ -867,9 +859,10 @@ public class PostDetailActivity extends AppCompatActivity {
         txtPaymentCondition =  binding.spPaymentCondition.findViewById(R.id.txt_company_name);
         txtPaymentCondition.setTypeface(typefacePaymentCondition);*/
 
-        if (TextUtils.isEmpty(negotiationDetail.getTransmit_condition_id()) && detailSpinerData.getTransmit_condition().size() > 0)
+        if (TextUtils.isEmpty(negotiationDetail.getTransmit_condition_id()) && detailSpinerData.getTransmit_condition().size() > 0) {
             selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(0).getId() + "";
-
+            selectedTransmitConditionName = detailSpinerData.getTransmit_condition().get(0).getName();
+        }
         if (TextUtils.isEmpty(negotiationDetail.getPayment_condition_id()) && detailSpinerData.getPayment_condition().size() > 0)
             selectedPaymentCondition = detailSpinerData.getPayment_condition().get(0).getId() + "";
 
@@ -890,12 +883,12 @@ public class PostDetailActivity extends AppCompatActivity {
         binding.spTransmitCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getId() + "";
-
-                if (detailSpinerData.getTransmit_condition().get(position).getName().equals("FOB")) {
+                selectedTransmitConditionName = detailSpinerData.getTransmit_condition().get(position).getName();
+                if (deliveryConditionList.get(position).getName().equals("FOB")) {
                     binding.layoutDestinationCountry.setVisibility(View.GONE);
                     binding.layoutDestinationPort.setVisibility(View.GONE);
-                    destinationContryID = 0;
-                    destinationPortID = 0;
+                    //destinationContryID = 0;
+                    //destinationPortID = 0;
                 } else {
                     binding.layoutDestinationCountry.setVisibility(View.VISIBLE);
                     binding.layoutDestinationPort.setVisibility(View.VISIBLE);
@@ -968,8 +961,7 @@ public class PostDetailActivity extends AppCompatActivity {
             textView = (AppCompatTextView) binding.spPaymentCondition.findViewById(R.id.txt_company_name);
             textView.setTypeface(typeface);
         }
-
-        if (negotiationDetail.getIs_highlight_transmit_condition().equalsIgnoreCase("false") || TextUtils.isEmpty(negotiationDetail.getIs_highlight_transmit_condition())) {
+        if (negotiationDetail.getIs_highlight_delivery_condition().equalsIgnoreCase("false") || TextUtils.isEmpty(negotiationDetail.getIs_highlight_transmit_condition())) {
             textView = (AppCompatTextView) binding.spTransmitCondition.findViewById(R.id.txt_company_name);
             textView.setTypeface(typeface);
         }
@@ -1011,6 +1003,10 @@ public class PostDetailActivity extends AppCompatActivity {
                 AppUtil.showToast(mContext, "Please enter valid price");
                 return;
             }
+            if (TextUtils.isEmpty(deliveryPeriod) ) {
+                AppUtil.showToast(mContext, "Please select delivery period");
+                return;
+            }
         } catch (Exception e) {
             e.getMessage();
         }
@@ -1038,14 +1034,32 @@ public class PostDetailActivity extends AppCompatActivity {
             object.put("notes", binding.edtNotes.getText().toString());
 
 
-            object.put("is_highlight_broker_name", is_highlight_broker_name);
             object.put("is_highlight_current_bales", is_highlight_current_bales);
             object.put("is_highlight_current_price", is_highlight_current_price);
-            object.put("is_highlight_header_name", is_highlight_header_name);
             object.put("is_highlight_lab", is_highlight_lab);
             object.put("is_highlight_notes", is_highlight_notes);
             object.put("is_highlight_payment_condition", is_highlight_payment_condition);
-            object.put("is_highlight_transmit_condition", is_highlight_transmit_condition);
+
+            object.put("is_highlight_delivery_condition", is_highlight_delivery_condition);
+            object.put("is_highlight_country_dispatch", is_highlight_country_dispatch);
+            object.put("is_highlight_port_dispatch", is_highlight_port_dispatch);
+            object.put("is_highlight_country_destination", is_highlight_country_destination);
+            object.put("is_highlight_port_destination", is_highlight_port_destination);
+            object.put("is_highlight_delivery_period", is_highlight_delivery_period);
+
+            object.put("delivery_condition_id", selectedTransmitCondition);
+            object.put("country_dispatch_id", dispatchContryID + "");
+            object.put("port_dispatch_id", dispatchdportID + "");
+
+            if (selectedTransmitConditionName.equals("FOB")) {
+                object.put("country_destination_id", "");
+                object.put("port_destination_id", "");
+            } else {
+                object.put("country_destination_id", destinationContryID);
+                object.put("port_destination_id", destinationPortID);
+            }
+            object.put("delivery_period", deliveryPeriod);
+
 
             strJson = object.toString();
             PrintLog.d("TAG", strJson);
@@ -1292,7 +1306,6 @@ public class PostDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
     public class CustomAdapter extends ArrayAdapter<PostDetailSpinerData.SpinerModel> {
 

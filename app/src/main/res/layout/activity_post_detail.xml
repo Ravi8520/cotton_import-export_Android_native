@@ -567,7 +567,7 @@
                     android:layout_marginEnd="@dimen/_5ssp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:weightSum="2">
 
 
@@ -622,7 +622,7 @@
                     android:layout_marginStart="@dimen/_5ssp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"

@@ -41,7 +41,7 @@ public class PostDetailSpinerData {
     public ArrayList<SpinerModel> header = new ArrayList<>();
     public ArrayList<SpinerModel> payment_condition = new ArrayList<>();
 
-    public class SpinerModel implements Serializable {
+    public static class SpinerModel implements Serializable {
         public String name = "";
         public int id = 0, is_dispatch = 0;
 
