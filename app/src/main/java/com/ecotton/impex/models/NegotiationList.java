@@ -4,10 +4,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class NegotiationList implements Serializable {
-    public int post_id = 0,notification_id=0,count = 0;
-    public String status = "", seller_buyer_id = "", name = "", broker_name = "", user_type = "", product_id = "", product_name = "",
-            no_of_bales = "", price = "", address = "", d_e = "", buy_for = "", negotiation_type = "", spinning_meal_name = "",
-            best_price = "", best_bales = "", best_name = "";
+    public int post_id = 0, notification_id = 0, count = 0;
+    public String status = "",
+            seller_buyer_id = "",
+            name = "",
+            broker_name = "",
+            user_type = "",
+            product_id = "",
+            product_name = "",
+            no_of_bales = "",
+            price = "",
+            address = "",
+            d_e = "",
+            buy_for = "",
+            negotiation_type = "",
+            spinning_meal_name = "",
+            best_price = "",
+            best_bales = "",
+            best_name = "";
     public ArrayList<PostDetail> post_detail = new ArrayList<>();
     public ArrayList<NotificatioDetail> notification_detail = new ArrayList<>();
 

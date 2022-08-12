@@ -65,7 +65,6 @@ public class NegotiationFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -78,14 +77,12 @@ public class NegotiationFragment extends Fragment {
         mContext = getActivity();
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_negotiation, container, false);
 
         mSessionUtil = new SessionUtil(mContext);
         customDialog = new CustomDialog();
-
 
         recyclerview_negotiation = view.findViewById(R.id.recyclerview_negotiation);
         recyclerview_negotiation.setLayoutManager(new LinearLayoutManager(getActivity()));

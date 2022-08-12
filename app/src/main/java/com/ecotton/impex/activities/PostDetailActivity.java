@@ -88,17 +88,17 @@ public class PostDetailActivity extends AppCompatActivity {
     public NegotiationDetail negotiationDetail;
     public List<BrokerModel> brokerModelList = new ArrayList<>();
 
-    public String Usertype = "", company_id = "", user_id = "", deal_id = "",deliveryPeriod="";
+    public String Usertype = "", company_id = "", user_id = "", deal_id = "", deliveryPeriod = "";
 
     private List<CountryModel> dispatchcontryList = new ArrayList<>();
     private List<CountryModel> destinationcontryList = new ArrayList<>();
     private List<ProtModel> portList = new ArrayList<>();
     private List<ProtModel> destinationportList = new ArrayList<>();
     ArrayList<PostDetailSpinerData.SpinerModel> deliveryConditionList;
-    private int dispatchContryID;
-    private int dispatchdportID;
-    private int destinationContryID;
-    private int destinationPortID;
+    private int dispatchContryID = -1;
+    private int dispatchdportID = -1;
+    private int destinationContryID = -1;
+    private int destinationPortID = -1;
 
     public boolean
             is_highlight_broker_name = false,
@@ -152,15 +152,16 @@ public class PostDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
                 materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
-                    @Override public void onPositiveButtonClick(Pair<Long,Long> selection) {
+                    @Override
+                    public void onPositiveButtonClick(Pair<Long, Long> selection) {
                         Long startDate = selection.first;
                         Long endDate = selection.second;
                         is_highlight_delivery_period = true;
-                        deliveryPeriod= DateTimeUtil.getDate(startDate,"yyyy-MM-dd")+"#"+DateTimeUtil.getDate(endDate,"yyyy-MM-dd");
-                        Log.e("TAG","Start-Date-"+ DateTimeUtil.getDate(startDate,"yyyy-MM-dd"));
-                        Log.e("TAG","End-Date-"+ DateTimeUtil.getDate(endDate,"yyyy-MM-dd"));
+                        deliveryPeriod = DateTimeUtil.getDate(startDate, "yyyy-MM-dd") + "#" + DateTimeUtil.getDate(endDate, "yyyy-MM-dd");
+                        Log.e("TAG", "Start-Date-" + DateTimeUtil.getDate(startDate, "yyyy-MM-dd"));
+                        Log.e("TAG", "End-Date-" + DateTimeUtil.getDate(endDate, "yyyy-MM-dd"));
                         //Do something...
-                        binding.edtStartDate.setText("TO - "+DateTimeUtil.getDate(startDate,"yyyy-MM-dd")+"   |   From - "+ DateTimeUtil.getDate(endDate,"yyyy-MM-dd"));
+                        binding.edtStartDate.setText("TO - " + DateTimeUtil.getDate(startDate, "yyyy-MM-dd") + "   |   From - " + DateTimeUtil.getDate(endDate, "yyyy-MM-dd"));
                     }
                 });
 
@@ -812,11 +813,11 @@ public class PostDetailActivity extends AppCompatActivity {
 
         //noOfBales = Integer.parseInt(negotiationDetail.getCurrent_no_of_bales());
 
-        for (int i = 0; i < detailSpinerData.getTransmit_condition().size(); i++) {
-            if (negotiationDetail.getTransmit_condition_id().equals(detailSpinerData.getTransmit_condition().get(i).getId() + "")) {
+        for (int i = 0; i < deliveryConditionList.size(); i++) {
+            if (negotiationDetail.getTransmit_condition_id().equals(deliveryConditionList.get(i).getId() + "")) {
                 binding.spTransmitCondition.setSelection(i);
-                selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(i).getId() + "";
-                selectedTransmitConditionName = detailSpinerData.getTransmit_condition().get(i).getName();
+                selectedTransmitCondition = deliveryConditionList.get(i).getId() + "";
+                selectedTransmitConditionName = deliveryConditionList.get(i).getName();
             }
         }
 
@@ -997,18 +998,40 @@ public class PostDetailActivity extends AppCompatActivity {
     }
 
     private void hitNagotiation() {
+        int price = 0;
         try {
-            int price = Integer.parseInt(binding.edtPrice.getText().toString());
-            if (TextUtils.isEmpty(binding.edtPrice.getText().toString()) || price == 0) {
-                AppUtil.showToast(mContext, "Please enter valid price");
-                return;
-            }
-            if (TextUtils.isEmpty(deliveryPeriod) ) {
-                AppUtil.showToast(mContext, "Please select delivery period");
-                return;
-            }
+            price = Integer.parseInt(binding.edtPrice.getText().toString());
         } catch (Exception e) {
             e.getMessage();
+        }
+        if (TextUtils.isEmpty(binding.edtPrice.getText().toString()) || price == 0) {
+            AppUtil.showToast(mContext, "Please enter valid price");
+            return;
+        }
+        if (TextUtils.isEmpty(deliveryPeriod)) {
+            AppUtil.showToast(mContext, "Please select delivery period");
+            return;
+        }
+        if (selectedTransmitCondition.equals("") || selectedTransmitCondition.equals("0")) {
+            AppUtil.showToast(mContext, "Please select Delivery Condition");
+            return;
+        }
+        if ( dispatchContryID < 1) {
+            AppUtil.showToast(mContext, "Please select dispatch country");
+            return;
+        }
+        if ( dispatchdportID < 1) {
+            AppUtil.showToast(mContext, "Please select dispatch port");
+            return;
+        }
+
+        if (!selectedTransmitConditionName.equals("FOB") && destinationContryID == -1) {
+            AppUtil.showToast(mContext, "Please select Destination country");
+            return;
+        }
+        if (!selectedTransmitConditionName.equals("FOB") && destinationPortID == -1) {
+            AppUtil.showToast(mContext, "Please select Destination port");
+            return;
         }
 
 
