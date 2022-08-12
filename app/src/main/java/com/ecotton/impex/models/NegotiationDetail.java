@@ -39,6 +39,62 @@ public class NegotiationDetail implements Serializable {
     public String is_highlight_lab="";
     public String is_highlight_broker_name="";
     public String is_highlight_notes="";
+
+    public String is_highlight_delivery_condition="";
+    public String is_highlight_country_dispatch="";
+    public String is_highlight_port_dispatch="";
+    public String is_highlight_country_destination="";
+    public String is_highlight_port_destination="";
+    public String is_highlight_delivery_period="";
+
+    public String getIs_highlight_delivery_condition() {
+        return is_highlight_delivery_condition;
+    }
+
+    public void setIs_highlight_delivery_condition(String is_highlight_delivery_condition) {
+        this.is_highlight_delivery_condition = is_highlight_delivery_condition;
+    }
+
+    public String getIs_highlight_country_dispatch() {
+        return is_highlight_country_dispatch;
+    }
+
+    public void setIs_highlight_country_dispatch(String is_highlight_country_dispatch) {
+        this.is_highlight_country_dispatch = is_highlight_country_dispatch;
+    }
+
+    public String getIs_highlight_port_dispatch() {
+        return is_highlight_port_dispatch;
+    }
+
+    public void setIs_highlight_port_dispatch(String is_highlight_port_dispatch) {
+        this.is_highlight_port_dispatch = is_highlight_port_dispatch;
+    }
+
+    public String getIs_highlight_country_destination() {
+        return is_highlight_country_destination;
+    }
+
+    public void setIs_highlight_country_destination(String is_highlight_country_destination) {
+        this.is_highlight_country_destination = is_highlight_country_destination;
+    }
+
+    public String getIs_highlight_port_destination() {
+        return is_highlight_port_destination;
+    }
+
+    public void setIs_highlight_port_destination(String is_highlight_port_destination) {
+        this.is_highlight_port_destination = is_highlight_port_destination;
+    }
+
+    public String getIs_highlight_delivery_period() {
+        return is_highlight_delivery_period;
+    }
+
+    public void setIs_highlight_delivery_period(String is_highlight_delivery_period) {
+        this.is_highlight_delivery_period = is_highlight_delivery_period;
+    }
+
     public String transmit_condition_id="";
     public String payment_condition_id="";
     public String lab_id="";

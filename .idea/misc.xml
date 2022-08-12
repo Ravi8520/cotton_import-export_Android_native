@@ -25,6 +25,7 @@
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_my_contract_filter.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_mypost.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_mywallet_plans.xml" value="0.18" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_negotiation_detail_last_two.xml" value="0.22" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_news.xml" value="0.1" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_news_full_screen.xml" value="0.15" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_report.xml" value="0.20416666666666666" />
@@ -41,6 +42,8 @@
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/fragment_search_buyer.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/fragment_utilities.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/mywallet_plans.xml" value="0.2" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/negotiation_detail_item.xml" value="0.1935185185185185" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/negotiation_item.xml" value="0.22" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/product_vlaue_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Jayesh/Curent Project/Cotton Project/cotton_import-export_Android_native/app/src/main/res/drawable/custome_background.xml" value="0.266" />
