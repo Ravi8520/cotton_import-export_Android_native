@@ -75,7 +75,7 @@ public class PostToSellActivity extends AppCompatActivity {
 
     public PostDetailSpinerData detailSpinerData;
     public String selectedTransmitCondition = "";
-    public int selectedTransmitConditionid;
+    public int is_destination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -505,7 +505,7 @@ public class PostToSellActivity extends AppCompatActivity {
             object.put("user_id", mSessionUtil.getUserid());
             object.put("user_type", mSessionUtil.getUsertype());
             strJson = object.toString();
-            PrintLog.d("TAG SpinerData", strJson);
+            PrintLog.e("TAG SpinerData", strJson);
             Call<ResponseModel<List<PostDetailSpinerData>>> call = APIClient.getInstance().getTransmitPaymentLabList(mSessionUtil.getApiToken(), strJson);
             call.enqueue(new Callback<ResponseModel<List<PostDetailSpinerData>>>() {
                 @Override
@@ -544,9 +544,9 @@ public class PostToSellActivity extends AppCompatActivity {
         binding.spinnerDeliveryCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getName();
-                selectedTransmitConditionid = detailSpinerData.getTransmit_condition().get(position).getId();
+                is_destination = detailSpinerData.getTransmit_condition().get(position).getIs_destination();
 
-                if (selectedTransmitCondition.equals("FOB")) {
+                if (is_destination == 0) {
                     binding.layoutDestinationCountry.setVisibility(View.GONE);
                     binding.layoutDestinationPort.setVisibility(View.GONE);
                 } else {
@@ -655,11 +655,11 @@ public class PostToSellActivity extends AppCompatActivity {
             jsonObject.put("price", binding.edtPrice.getText().toString().trim());
             jsonObject.put("no_of_bales", binding.edtBales.getText().toString().trim());
             jsonObject.put("country_origin_id", selectedStation);
-            jsonObject.put("delivery_condition_id", selectedTransmitConditionid);
+            jsonObject.put("delivery_condition_id", is_destination);
             jsonObject.put("country_dispatch_id", dispatchcontryid);
             jsonObject.put("port_dispatch_id", selectedport);
 
-            if (selectedTransmitConditionid == 1) {
+            if (is_destination == 0) {
                 jsonObject.put("country_destination_id", "");
                 jsonObject.put("port_destination_id", "");
             } else {
@@ -667,11 +667,6 @@ public class PostToSellActivity extends AppCompatActivity {
                 jsonObject.put("port_destination_id", selecteddestinationport);
             }
 
-           /* if (mSessionUtil.getUsertype().equals("buyer")) {
-                jsonObject.put("d_e", impoert_exprott);
-                jsonObject.put("buy_for", "Self");
-                jsonObject.put("spinning_meal_name", "");
-            }*/
 
             JSONArray jsonArray = new JSONArray(new Gson().toJson(attributeRequestModels));
 

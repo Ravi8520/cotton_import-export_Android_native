@@ -47,7 +47,9 @@ public class UtilitiesFragment extends Fragment {
         mSessionUtil = new SessionUtil(mContext);
 
         if (mSessionUtil.getUsertype().equals("buyer")) {
-            txt_buyer_directory.setText(getResources().getString(R.string.lbl_seller_directory));
+            txt_buyer_directory.setText(getResources().getString(R.string.lbl_exporter_directory));
+        } else {
+            txt_buyer_directory.setText(getResources().getString(R.string.lbl_importer_directory));
         }
 
         rl_buyer_dir.setOnClickListener(new View.OnClickListener() {

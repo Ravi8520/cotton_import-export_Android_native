@@ -221,11 +221,6 @@ public class HomeActivity extends AppCompatActivity {
         dialog.show();
     }
 
-  /*  @OnClick(R.id.img_post_by)
-    protected void img_post_byOnClick() {
-
-    }*/
-
     public void replaceFragment(Fragment fragment) {
 
         try {
@@ -243,7 +238,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
 
     @Override

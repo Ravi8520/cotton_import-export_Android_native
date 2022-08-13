@@ -146,7 +146,7 @@ public class MyFavouriteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
 
         holder.binding.txtCompanyName.setText(dataarraylist.get(position).getCompany_name());
-        holder.binding.txtStateName.setText(dataarraylist.get(position).getState_name());
+        holder.binding.txtStateName.setText(dataarraylist.get(position).getCountry_name());
         holder.binding.txtAddress.setText(dataarraylist.get(position).getAddress());
         holder.binding.txtDistrictName.setText(dataarraylist.get(position).getDistrict_name());
 

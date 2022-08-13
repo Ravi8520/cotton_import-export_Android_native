@@ -144,7 +144,8 @@ public class PostDetailActivity extends AppCompatActivity {
         }
 
         long daysMili = 1296000000;
-        MaterialDatePicker materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().
+        MaterialDatePicker materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
+                 .setTheme(R.style.Widget_AppTheme_MaterialDatePicker).
                 setSelection(Pair.create(MaterialDatePicker.todayInUtcMilliseconds(), (MaterialDatePicker.todayInUtcMilliseconds() + daysMili))).build();
 
         binding.linDeliveryPeriod.setOnClickListener(new View.OnClickListener() {

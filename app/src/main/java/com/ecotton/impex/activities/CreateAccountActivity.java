@@ -118,17 +118,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
 
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(binding.edtEmailAddress.getText().toString()).matches()) {
-            binding.edtEmailAddress.setError("Please Enter Proper Email Format");
-            binding.edtEmailAddress.requestFocus();
-            return false;
-        }
-        if (binding.edtEmailAddress.getText().toString().isEmpty()) {
-            binding.edtEmailAddress.setError("Please Enter Email");
-            binding.edtEmailAddress.requestFocus();
-            return false;
-        }
-
         final String password = binding.edtPassword.getText().toString();
         final String confirmPassword = binding.edtConfrimPassword.getText().toString();
 
@@ -140,6 +129,8 @@ public class CreateAccountActivity extends AppCompatActivity {
             return false;
         }
         return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtContactPerson, binding.mTilcontactPerson, mContext.getString(R.string.lbl_contact_person), 3, mContext.getString(R.string.err_name_character, 3), 20, "")
+                && ValidationUtil.isBlankETAndTextInputError(mContext,binding.edtEmailAddress,binding.mTilemailAddress,mContext.getString(R.string.err_enter_email_number))
+                && ValidationUtil.isValidEmailETErr(mContext, binding.edtEmailAddress, binding.mTilemailAddress, mContext.getString(R.string.err_enter_email_format))
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtMobileNumber, binding.mTilmobileNumber, mContext.getString(R.string.err_enter_mobile_number), 10, mContext.getString(R.string.err_enter_valid_mobile_number))
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtPassword, binding.mTilpassword, mContext.getString(R.string.err_enter_password), 6, mContext.getString(R.string.err_password, 6), 15, "")
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtConfrimPassword, binding.mTilconfrimPassword, mContext.getString(R.string.err_enter_password), 6, mContext.getString(R.string.err_password, 6), 15, "")

@@ -25,7 +25,11 @@
     <string name="lbl_personal_details">Personal Details</string>
     <string name="lbl_company_details">Company Details</string>
     <string name="lbl_select_seller">Select Seller</string>
+    <string name="lbl_select_importer">Select Importer</string>
+    <string name="lbl_select_exporter">Select Exporter</string>
     <string name="lbl_seller_directory">Seller directory</string>
+    <string name="lbl_exporter_directory">Exporter directory</string>
+    <string name="lbl_importer_directory">Importer directory</string>
     <string name="lbl_select_buyer">Select Buyer</string>
     <string name="lbl_add_broker">Add Broker</string>
     <string name="lbl_deals">Deals</string>
@@ -97,7 +101,8 @@
     <string name="err_max_text">Maximum</string>
     <string name="err_character_required">characters required.</string>
     <string name="err_enter_mobile_number">Please enter mobile number</string>
-    <string name="err_enter_email_number">Please enter email number</string>
+    <string name="err_enter_email_number">Please enter email</string>
+    <string name="err_enter_email_format">Please Enter Proper Email Format</string>
     <string name="err_enter_valid_mobile_number">Please enter valid mobile number</string>
     <string name="err_enter_valid_iec_number">Please enter valid iec number</string>
     <string name="err_enter_password">Please enter password</string>

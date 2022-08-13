@@ -31,8 +31,10 @@ public class WitingApprovelActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (create.equals("create")) {
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        if (create != null) {
+            if (create.equals("create")) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
         } else {
             startActivity(new Intent(getApplicationContext(), CompanyListActivity.class));
         }

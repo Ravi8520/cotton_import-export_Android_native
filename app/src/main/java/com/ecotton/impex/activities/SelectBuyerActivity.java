@@ -47,11 +47,8 @@ public class SelectBuyerActivity extends AppCompatActivity {
     AttributeAdapter attributeAdapter;
 
     private int productid;
-    private String price;
-    private String no_of_bales;
     private String productname;
-    private String impoert_exprot;
-    private String sellerType;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +63,7 @@ public class SelectBuyerActivity extends AppCompatActivity {
         if (intent != null) {
             data = intent.getStringExtra("data");
             productid = intent.getIntExtra("product_id", 0);
-            price = intent.getStringExtra("price");
-            no_of_bales = intent.getStringExtra("no_of_bales");
             productname = intent.getStringExtra("productname");
-            impoert_exprot = intent.getStringExtra("d_e");
-            sellerType = intent.getStringExtra("seller_type");
 
         }
         if (mSessionUtil.getUsertype().equals("buyer")) {
@@ -140,15 +133,16 @@ public class SelectBuyerActivity extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("company_id", mSessionUtil.getCompanyId());
-            jsonObject.put("user_id", mSessionUtil.getUserid());
+            jsonObject.put("seller_buyer_id", mSessionUtil.getUserid());
+            jsonObject.put("type","post");
             jsonObject.put("product_id", productid);
-            jsonObject.put("price", price);
-            jsonObject.put("no_of_bales", no_of_bales);
+
+          /*  jsonObject.put("price", price);
+            jsonObject.put("no_of_bales", no_of_bales);*/
             JSONArray jsonArray = new JSONArray(data);
 
             jsonObject.put("attribute_array", jsonArray);
 
-            jsonObject.put("seller_type", sellerType);
 
             String data = jsonObject.toString();
 
@@ -196,13 +190,12 @@ public class SelectBuyerActivity extends AppCompatActivity {
             jsonObject.put("seller_buyer_id", mSessionUtil.getUserid());
             jsonObject.put("type", "post");
             jsonObject.put("product_id", productid);
-            jsonObject.put("price", price);
-            jsonObject.put("no_of_bales", no_of_bales);
+           /* jsonObject.put("price", price);
+            jsonObject.put("no_of_bales", no_of_bales);*/
             JSONArray jsonArray = new JSONArray(data);
 
             jsonObject.put("attribute_array", jsonArray);
 
-            jsonObject.put("d_e", impoert_exprot);
 
             String data = jsonObject.toString();
 

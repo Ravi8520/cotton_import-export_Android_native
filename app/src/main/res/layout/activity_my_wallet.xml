@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/tab_text_color">
 
     <RelativeLayout
         android:id="@+id/rl_walletHeader"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/light_grey">
+        android:layout_height="?actionBarSize">
 
         <ImageView
             android:id="@+id/backarrow"
@@ -20,6 +19,7 @@
             android:background="?selectableItemBackgroundBorderless"
             android:focusable="true"
             android:padding="@dimen/_3sdp"
+            app:tint="@color/white"
             android:src="@drawable/ic_back_arrow" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:letterSpacing="-0.048"
             android:text="@string/wallet"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
     </RelativeLayout>
@@ -45,7 +45,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
             android:weightSum="2">

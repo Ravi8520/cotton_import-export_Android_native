@@ -481,10 +481,9 @@ public class UpdateCompanyDetailsActivity extends AppCompatActivity {
                         Log.e("CompanyDetailModel", "CompanyDetailModel==" + new Gson().toJson(response.body().data));
                         arraylist = response.body().data;
                         binding.edtGstNumber.setText(response.body().data.getGst_no());
-                        //binding.edtGstNumber.setEnabled(false);
-                        //  productValueAdapter.addAllClass(response.body().data);
+                        binding.edtIecNumber.setText(response.body().data.getIec());
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-                        // productValueAdapter.notifyDataSetChanged();
+                        AppUtil.showToast(mContext, response.body().message);
                     } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
                         AppUtil.showToast(mContext, response.body().message);
                         AppUtil.autoLogout(mContext);
