@@ -73,6 +73,7 @@ public class PrivateSellActivity extends AppCompatActivity {
     public PostDetailSpinerData detailSpinerData;
     public String selectedTransmitCondition = "";
     public int is_destination;
+    public int delivery_condition_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,9 @@ public class PrivateSellActivity extends AppCompatActivity {
 
         if (mSessionUtil.getUsertype().equals("buyer")) {
             binding.txtTitle.setText(getResources().getString(R.string.lbl_private_buy));
-            binding.btnSelectBuyer.setText(getResources().getString(R.string.lbl_select_seller));
+            binding.btnSelectBuyer.setText(getResources().getString(R.string.lbl_select_exporter));
+        } else {
+            binding.btnSelectBuyer.setText(getResources().getString(R.string.lbl_select_importer));
         }
 
         binding.btnSelectBuyer.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +110,7 @@ public class PrivateSellActivity extends AppCompatActivity {
                             intent.putExtra("price", binding.edtPrice.getText().toString().trim());
                             intent.putExtra("no_of_bales", binding.edtBales.getText().toString().trim());
                             intent.putExtra("country_origin_id", selectedStation);
-                            intent.putExtra("delivery_condition_id", is_destination);
+                            intent.putExtra("delivery_condition_id", delivery_condition_id);
                             intent.putExtra("country_dispatch_id", dispatchcontryid);
                             intent.putExtra("port_dispatch_id", selectedport);
                             startActivity(intent);
@@ -536,6 +539,7 @@ public class PrivateSellActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getName();
                 is_destination = detailSpinerData.getTransmit_condition().get(position).getIs_destination();
+                delivery_condition_id = detailSpinerData.getTransmit_condition().get(position).getId();
 
                 if (is_destination == 0) {
                     binding.layoutDestinationCountry.setVisibility(View.GONE);

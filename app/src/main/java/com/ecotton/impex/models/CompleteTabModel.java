@@ -12,6 +12,10 @@ public class CompleteTabModel implements Serializable {
     @Expose
     private int post_id;
 
+    @SerializedName("notification_id")
+    @Expose
+    private int notification_id;
+
     @SerializedName("company_id")
     @Expose
     private int company_id;
@@ -84,6 +88,14 @@ public class CompleteTabModel implements Serializable {
     @Expose
     private List<Negotiation> negotiation_array = new ArrayList();
 
+
+    public int getNotification_id() {
+        return notification_id;
+    }
+
+    public void setNotification_id(int notification_id) {
+        this.notification_id = notification_id;
+    }
 
     public int getPost_id() {
         return post_id;

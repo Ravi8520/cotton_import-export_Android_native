@@ -10,7 +10,6 @@ import android.widget.Filterable;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecotton.impex.R;
@@ -126,14 +125,12 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
-        holder.binding.txtCountryName.setText(mArrayList.get(position).getName()+" "+"("+mArrayList.get(position).getCount()+")");
 
+        holder.binding.txtCompanyName.setText(mArrayList.get(position).getCompany_name());
+        holder.binding.txtName.setText(mArrayList.get(position).getName());
+        holder.binding.txtPrice.setText(mcontext.getString(R.string.lbl_dollar_only) + " " + mArrayList.get(position).getPrice() + "(" + mArrayList.get(position).getRemaining_bales() + ")");
 
-        SearchBuyerStateAdapter stateAdapter = new SearchBuyerStateAdapter(mcontext, mArrayList.get(position).getStateModelList());
-        holder.binding.recyclerState.setLayoutManager(new LinearLayoutManager(mcontext));
-        holder.binding.recyclerState.setAdapter(stateAdapter);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.binding.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onItemClickListener.onItemClick(view, position);

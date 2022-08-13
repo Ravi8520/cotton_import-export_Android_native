@@ -1,67 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/_3sdp"
+        android:padding="@dimen/_3sdp">
 
-        <com.github.florent37.expansionpanel.ExpansionHeader
-            android:id="@+id/layout_toolbar"
+        <LinearLayout
+            android:id="@+id/layout_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:expansion_headerIndicator="@id/headerIndicator"
-            app:expansion_headerIndicatorRotationCollapsed="180"
-            app:expansion_headerIndicatorRotationExpanded="270"
-            app:expansion_layout="@id/mELOrderTimeline">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_1sdp"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txt_country_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/lbl_company"
+                    android:textColor="@color/tab_text_color_op"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txt_company_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/lbl_company"
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_view"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:background="@drawable/custome_button"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/lbl_view"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_data"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/lbl_buyer"
+                    android:textColor="@color/tab_text_color_op"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txt_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/lbl_country_name"
+                    android:text=""
                     android:textColor="@color/tab_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="13sp" />
 
-                <ImageView
-                    android:id="@+id/headerIndicator"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:contentDescription="@null"
-                    android:padding="5dp"
-                    android:rotation="180"
-                    android:src="@drawable/ic_back_arrow" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
-        </com.github.florent37.expansionpanel.ExpansionHeader>
-
-        <com.github.florent37.expansionpanel.ExpansionLayout
-            android:id="@+id/mELOrderTimeline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_state"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/price"
+                    android:textColor="@color/tab_text_color_op"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txt_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text=""
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="13sp" />
 
 
-        </com.github.florent37.expansionpanel.ExpansionLayout>
+            </LinearLayout>
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

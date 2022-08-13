@@ -56,9 +56,29 @@ public class PostDetailsModel implements Serializable {
     @Expose
     private String date;
 
+    @SerializedName("updated_at")
+    @Expose
+    private String updated_at;
+
+    @SerializedName("status")
+    @Expose
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @SerializedName("attribute_array")
     @Expose
     private List<Attribute> attribute_array = new ArrayList();
+
+    @SerializedName("sent_to")
+    @Expose
+    private List<SendTo> sent_to = new ArrayList();
 
     public int getId() {
         return id;
@@ -83,7 +103,21 @@ public class PostDetailsModel implements Serializable {
     public void setSeller_buyer_id(String seller_buyer_id) {
         this.seller_buyer_id = seller_buyer_id;
     }
+    public String getUpdated_at() {
+        return updated_at;
+    }
 
+    public List<SendTo> getSent_to() {
+        return sent_to;
+    }
+
+    public void setSent_to(List<SendTo> sent_to) {
+        this.sent_to = sent_to;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
+    }
     public String getSeller_buyer_name() {
         return seller_buyer_name;
     }
@@ -225,6 +259,32 @@ public class PostDetailsModel implements Serializable {
 
         public void setNotification_id(String notification_id) {
             this.notification_id = notification_id;
+        }
+    }
+
+    public class SendTo implements Serializable {
+        @SerializedName("name")
+        @Expose
+        private String name;
+
+        @SerializedName("city")
+        @Expose
+        private String city;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
         }
     }
 }

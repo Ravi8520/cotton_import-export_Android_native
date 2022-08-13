@@ -92,10 +92,13 @@ public class CompleteFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(mContext, MypostActiveTabDataActivity.class);
-                intent.putExtra("post_notification_id", completeTabAdapter.mArrayList.get(position).getPost_id());
+                if (completeTabAdapter.mArrayList.get(position).getType().equals("notification")) {
+                    intent.putExtra("post_notification_id", completeTabAdapter.mArrayList.get(position).getNotification_id());
+                } else {
+                    intent.putExtra("post_notification_id", completeTabAdapter.mArrayList.get(position).getPost_id());
+                }
                 intent.putExtra("type", completeTabAdapter.mArrayList.get(position).getType());
                 startActivity(intent);
-                ((Activity) mContext).finish();
             }
         });
     }

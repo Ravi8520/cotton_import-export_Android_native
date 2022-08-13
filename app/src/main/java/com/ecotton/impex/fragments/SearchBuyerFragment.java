@@ -70,7 +70,9 @@ public class SearchBuyerFragment extends Fragment {
     public PostDetailSpinerData detailSpinerData;
     public String selectedTransmitCondition = "";
 
+
     public int is_destination;
+    public int delivery_condition_id;
     private int dispatchcontryid;
     private int selectedport;
 
@@ -91,7 +93,9 @@ public class SearchBuyerFragment extends Fragment {
         getProductList();
         SetAdapter();
 
-
+        if (mSessionUtil.getUsertype().equals("buyer")) {
+            binding.txtTitle.setText(mContext.getString(R.string.lbl_search_seller));
+        }
         binding.btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +108,7 @@ public class SearchBuyerFragment extends Fragment {
                         intent.putExtra("data", jsonArray.toString());
                         intent.putExtra("product_id", productid);
                         intent.putExtra("productname", productname);
-                        intent.putExtra("is_destination", is_destination);
+                        intent.putExtra("delivery_condition_id", delivery_condition_id);
                         intent.putExtra("dispatchcontryid", dispatchcontryid);
                         intent.putExtra("selectedport", selectedport);
                         intent.putExtra("destinationcontryid", destinationcontryid);
@@ -437,7 +441,7 @@ public class SearchBuyerFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getName();
                 is_destination = detailSpinerData.getTransmit_condition().get(position).getIs_destination();
-
+                delivery_condition_id = detailSpinerData.getTransmit_condition().get(position).getId();
                 if (is_destination == 0) {
                     binding.layoutDestinationCountry.setVisibility(View.GONE);
                     binding.layoutDestinationPort.setVisibility(View.GONE);
@@ -445,9 +449,7 @@ public class SearchBuyerFragment extends Fragment {
                     binding.layoutDestinationCountry.setVisibility(View.VISIBLE);
                     binding.layoutDestinationPort.setVisibility(View.VISIBLE);
                 }
-
             }
-
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
@@ -459,9 +461,7 @@ public class SearchBuyerFragment extends Fragment {
         public CustomAdapter(Activity context, int resouceId, int textviewId, List<PostDetailSpinerData.SpinerModel> list) {
 
             super(context, resouceId, textviewId, list);
-//        flater = context.getLayoutInflater();
         }
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 

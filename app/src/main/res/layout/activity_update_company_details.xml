@@ -147,6 +147,7 @@
                     android:inputType="text"
                     android:maxLength="10"
                     android:padding="@dimen/_8sdp"
+                    android:textColor="@color/tab_text_color"
                     android:singleLine="true"
                     android:textAllCaps="true"
                     android:textSize="14sp" />
@@ -448,7 +449,6 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
-
 
         </RelativeLayout>
 
