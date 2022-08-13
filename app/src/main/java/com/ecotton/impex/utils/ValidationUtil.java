@@ -65,23 +65,16 @@ public class ValidationUtil {
         return result.trim();
     }
 
-    public static boolean isValidEmailETErr(Context context, String msg, EditText editText) {
-        /*if (!(editText.getText().toString().trim().toLowerCase()
+    public static boolean isValidEmailETErr(Context context, EditText editText,TextInputLayout textInputLayout, String msg) {
+        if (!(editText.getText().toString().trim().toLowerCase()
                 .matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"))) {
-            editText.setError(msg);
-            editText.requestFocus();
-            return false;
-        } else {
-            return true;
-        }*/
-
-        if (isEmailValid(editText.getText().toString().trim().toLowerCase()) == false) {
-            editText.setError(msg);
+            textInputLayout.setError(msg);
             editText.requestFocus();
             return false;
         } else {
             return true;
         }
+
     }
 
     public static boolean isValidEmailETAndTextInputErr(Context context, String msg, EditText editText, TextInputLayout textInputLayout) {

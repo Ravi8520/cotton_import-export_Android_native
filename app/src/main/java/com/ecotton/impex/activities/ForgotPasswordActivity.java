@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.databinding.ActivityForgotPasswordBinding;
@@ -17,6 +15,8 @@ import com.ecotton.impex.models.login.LoginModel;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.Constants;
 import com.ecotton.impex.utils.Utils;
+import com.ecotton.impex.utils.ValidationUtil;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,7 +55,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         } else {
             Log.e("Forgot_password", "Forgot_password==");
             binding.txtTitle.setText(mContext.getResources().getString(R.string.lbl_forgot_password));
-
         }
         binding.btnSubmit.setOnClickListener(view -> {
             if (isValidForm()) {
@@ -169,18 +168,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
 
     private boolean isValidForm() {
+        return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtEmail, binding.mTilEmail, mContext.getString(R.string.err_enter_email_number))
+                && ValidationUtil.isValidEmailETErr(mContext, binding.edtEmail, binding.mTilEmail, mContext.getString(R.string.err_enter_email_format));
 
-        if (binding.edtEmail.getText().toString().isEmpty()) {
-            binding.edtEmail.setError("Please Enter Email");
-            binding.edtEmail.requestFocus();
-            return false;
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(binding.edtEmail.getText().toString()).matches()) {
-            binding.edtEmail.setError("Please Enter Proper Email Format");
-            binding.edtEmail.requestFocus();
-            return false;
-        }
-        return true;
     }
 
     @Override

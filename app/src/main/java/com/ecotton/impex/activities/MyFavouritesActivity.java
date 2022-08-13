@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ecotton.impex.R;
 import com.google.gson.Gson;
 import com.ecotton.impex.adapters.MyFavouriteAdapter;
 import com.ecotton.impex.api.APIClient;
@@ -74,15 +76,17 @@ public class MyFavouritesActivity extends AppCompatActivity {
             object.put("user_id", mSessionUtil.getUserid());
             object.put("company_id", mSessionUtil.getCompanyId());
             object.put("user_type", mSessionUtil.getUsertype());
-            Log.e("response", "response==" + mSessionUtil.getUserid() + mSessionUtil.getCompanyId());
+
             strJson = object.toString();
             PrintLog.d("TAG", strJson);
+
+            Log.e("response", "response==" + strJson);
 
             Call<ResponseModel<List<MyFavouriteModel>>> call = APIClient.getInstance().my_favourites(mSessionUtil.getApiToken(), strJson);
             call.enqueue(new Callback<ResponseModel<List<MyFavouriteModel>>>() {
                 @Override
                 public void onResponse(Call<ResponseModel<List<MyFavouriteModel>>> call, Response<ResponseModel<List<MyFavouriteModel>>> response) {
-                    Log.e("response", "response==" + new Gson().toJson(response.body()));
+                    Log.e("response", "response==" + new Gson().toJson(response.body().data));
                     customDialog.dismissProgress(mContext);
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         if (response.body().data.isEmpty()) {
@@ -111,9 +115,15 @@ public class MyFavouritesActivity extends AppCompatActivity {
     }
 
     private void setAdapter() {
+        DividerItemDecoration divider =
+                new DividerItemDecoration(getApplicationContext(),
+                        DividerItemDecoration.VERTICAL);
+        divider.setDrawable(getResources().getDrawable(R.drawable.line_divider));
         adapter = new MyFavouriteAdapter(MyFavouritesActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         binding.myfavouriteRv.setLayoutManager(layoutManager);
+        binding.myfavouriteRv.addItemDecoration(divider);
+        binding.myfavouriteRv.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
         binding.myfavouriteRv.setAdapter(adapter);
 
     }

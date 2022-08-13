@@ -13,31 +13,27 @@ import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.ecotton.impex.models.CountryModel;
-import com.google.android.flexbox.AlignItems;
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexWrap;
-import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.SellectSellerAdapter;
 import com.ecotton.impex.adapters.SellectedSellerAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivitySelectSellerBinding;
-import com.ecotton.impex.models.DistrictModel;
+import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.PrivatSellNotificationModel;
 import com.ecotton.impex.models.SearchCompanyModel;
-import com.ecotton.impex.models.StateModel;
-import com.ecotton.impex.models.StationModel;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -132,7 +128,9 @@ public class SelectSellerActivity extends AppCompatActivity {
             }
         });
         if (mSessionUtil.getUsertype().equals("buyer")) {
-            binding.txtTitle.setText(getResources().getString(R.string.lbl_select_seller));
+            binding.txtTitle.setText(getResources().getString(R.string.lbl_select_exporter));
+        } else {
+            binding.txtTitle.setText(getResources().getString(R.string.lbl_select_importer));
         }
 
         binding.btnSendNotification.setOnClickListener(new View.OnClickListener() {

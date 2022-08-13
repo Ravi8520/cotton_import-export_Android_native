@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isValidForm() {
         return ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtMobileNumber, binding.mTilMobile, mContext.getString(R.string.err_enter_email_number))
+                && ValidationUtil.isValidEmailETErr(mContext, binding.edtMobileNumber, binding.mTilMobile, mContext.getString(R.string.err_enter_email_format))
                 && ValidationUtil.isBlankETAndTextInputError(mContext, binding.edtPassword, binding.mTilPassword, mContext.getString(R.string.err_enter_password), 6, mContext.getString(R.string.err_password_contain_character, 6), 15, "");
     }
 

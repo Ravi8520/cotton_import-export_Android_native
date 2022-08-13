@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.BuyerAdapter;
 import com.ecotton.impex.api.APIClient;
@@ -27,6 +26,7 @@ import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.PrintLog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,7 +89,9 @@ public class BuyerActivity extends AppCompatActivity implements BuyerAdapter.OnI
             }
         });
         if (mSessionUtil.getUsertype().equals("buyer")) {
-            binding.txtTitle.setText(getResources().getString(R.string.lbl_seller_directory));
+            binding.txtTitle.setText(getResources().getString(R.string.lbl_exporter_directory));
+        } else {
+            binding.txtTitle.setText(getResources().getString(R.string.lbl_importer_directory));
         }
     }
 
@@ -158,7 +160,7 @@ public class BuyerActivity extends AppCompatActivity implements BuyerAdapter.OnI
             call.enqueue(new Callback<ResponseModel<List<CompanyDirectory>>>() {
                 @Override
                 public void onResponse(Call<ResponseModel<List<CompanyDirectory>>> call, Response<ResponseModel<List<CompanyDirectory>>> response) {
-                    Log.e("response", "" + "" + new Gson().toJson(response.body()));
+                    Log.e("response",  "CompanyDirectory==" + new Gson().toJson(response.body()));
                     customDialog.dismissProgress(mContext);
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         adapter.addAllClass(response.body().data);

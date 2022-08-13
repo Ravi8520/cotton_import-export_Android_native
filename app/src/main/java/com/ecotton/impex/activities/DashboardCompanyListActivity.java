@@ -307,4 +307,10 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
 
         dialog.show();
     }
+    @Override
+    public void onBackPressed() {
+        filterRequest.setCountry_id("-1");
+        filterRequest.setProduct_id("-1");
+        super.onBackPressed();
+    }
 }

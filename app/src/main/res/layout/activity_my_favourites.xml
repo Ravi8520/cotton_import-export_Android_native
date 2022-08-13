@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/tab_text_color">
 
 
     <RelativeLayout
         android:id="@+id/rl_myfavourite"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/light_grey">
+        android:layout_height="?actionBarSize">
 
         <ImageView
             android:id="@+id/backarrow"
@@ -21,6 +20,7 @@
             android:background="?selectableItemBackgroundBorderless"
             android:focusable="true"
             android:padding="@dimen/_3sdp"
+            app:tint="@color/white"
             android:src="@drawable/ic_back_arrow" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center_horizontal"
             android:text="@string/myfavourite_title"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
 

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.FragmentPersonalDetailBinding;
@@ -19,6 +18,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -120,7 +120,13 @@ public class PersonalDetailFragment extends Fragment {
 
         binding.tvUsername.setText(arraylist.getName());
         binding.tvContactName.setText(arraylist.getName());
-        binding.tvUserType.setText(arraylist.getUser_type());
+
+        if (arraylist.getUser_type().equals("buyer")) {
+            binding.tvUserType.setText("Importer");
+        } else {
+            binding.tvUserType.setText("Exporter");
+        }
+
         binding.tvMobile.setText(arraylist.getMobile_number());
         binding.tvEmail.setText(arraylist.getEmail());
     }

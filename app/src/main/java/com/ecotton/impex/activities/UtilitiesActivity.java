@@ -23,6 +23,7 @@ public class UtilitiesActivity extends AppCompatActivity {
         rl_news = findViewById(R.id.rl_news);
 
 
+
         rl_buyer_dir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -43,7 +43,7 @@ public class PostDetailSpinerData {
 
     public static class SpinerModel implements Serializable {
         public String name = "";
-        public int id = 0, is_dispatch = 0;
+        public int id = 0, is_dispatch = 0,is_destination=0;
 
         public String getName() {
             return name;
@@ -67,6 +67,14 @@ public class PostDetailSpinerData {
 
         public void setIs_dispatch(int is_dispatch) {
             this.is_dispatch = is_dispatch;
+        }
+
+        public int getIs_destination() {
+            return is_destination;
+        }
+
+        public void setIs_destination(int is_destination) {
+            this.is_destination = is_destination;
         }
     }
 }

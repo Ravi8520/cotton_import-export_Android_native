@@ -128,9 +128,8 @@ public class BuyerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         // holder.binding.ownername.setText(mArrayList.get(position).getCompany_name());
         holder.binding.address.setText("Address : " + mArrayList.get(position).getAddress());
         holder.binding.contactTv.setText(mArrayList.get(position).getMobile_number());
-        holder.binding.txtDistrict.setText(mArrayList.get(position).getDistrict());
-        holder.binding.txtState.setText(mArrayList.get(position).getState());
-        holder.binding.country.setText(mArrayList.get(position).getCountry());
+        //holder.binding.txtPort.setText(mArrayList.get(position).getDistrict());
+        holder.binding.txtCountry.setText(mArrayList.get(position).getCountry());
 
         holder.binding.layoutContact.setOnClickListener(new View.OnClickListener() {
             @Override

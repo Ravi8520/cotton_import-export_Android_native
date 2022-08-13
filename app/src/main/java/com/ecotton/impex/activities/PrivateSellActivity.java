@@ -72,7 +72,7 @@ public class PrivateSellActivity extends AppCompatActivity {
 
     public PostDetailSpinerData detailSpinerData;
     public String selectedTransmitCondition = "";
-    public int selectedTransmitConditionid;
+    public int is_destination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +107,7 @@ public class PrivateSellActivity extends AppCompatActivity {
                             intent.putExtra("price", binding.edtPrice.getText().toString().trim());
                             intent.putExtra("no_of_bales", binding.edtBales.getText().toString().trim());
                             intent.putExtra("country_origin_id", selectedStation);
-                            intent.putExtra("delivery_condition_id", selectedTransmitConditionid);
+                            intent.putExtra("delivery_condition_id", is_destination);
                             intent.putExtra("country_dispatch_id", dispatchcontryid);
                             intent.putExtra("port_dispatch_id", selectedport);
                             startActivity(intent);
@@ -535,9 +535,9 @@ public class PrivateSellActivity extends AppCompatActivity {
         binding.spinnerDeliveryCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getName();
-                selectedTransmitConditionid = detailSpinerData.getTransmit_condition().get(position).getId();
+                is_destination = detailSpinerData.getTransmit_condition().get(position).getIs_destination();
 
-                if (selectedTransmitCondition.equals("FOB")) {
+                if (is_destination == 0) {
                     binding.layoutDestinationCountry.setVisibility(View.GONE);
                     binding.layoutDestinationPort.setVisibility(View.GONE);
                 } else {

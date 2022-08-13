@@ -315,17 +315,6 @@ public class VerifyOTPActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-    protected void img_editOnClick() {
-        Intent intent = new Intent(mContext, ForgotPasswordActivity.class);
-        Log.e("number0", "number==" + email);
-        intent.putExtra(NEWMOBILE_NO, email);
-        startActivity(intent);
-        finish();
-    }
-
     @Override
     protected void onDestroy() {
 
