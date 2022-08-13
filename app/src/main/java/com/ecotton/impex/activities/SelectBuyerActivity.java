@@ -9,20 +9,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.ecotton.impex.models.AttributeModel;
-import com.ecotton.impex.models.AttributeModelFromTo;
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.AttributeAdapter;
 import com.ecotton.impex.adapters.CountryAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivitySelectBuyerBinding;
+import com.ecotton.impex.models.AttributeModelFromTo;
 import com.ecotton.impex.models.SearchSellerModel;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -49,6 +48,12 @@ public class SelectBuyerActivity extends AppCompatActivity {
     private int productid;
     private String productname;
 
+    private int is_destination;
+    private int dispatchcontryid;
+    private int selectedport;
+    private int destinationcontryid;
+    private int selecteddestinationport;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +69,17 @@ public class SelectBuyerActivity extends AppCompatActivity {
             data = intent.getStringExtra("data");
             productid = intent.getIntExtra("product_id", 0);
             productname = intent.getStringExtra("productname");
+            is_destination = intent.getIntExtra("is_destination", 0);
+            dispatchcontryid = intent.getIntExtra("dispatchcontryid", 0);
+            selectedport = intent.getIntExtra("selectedport", 0);
+            destinationcontryid = intent.getIntExtra("destinationcontryid", 0);
+            selecteddestinationport = intent.getIntExtra("selecteddestinationport", 0);
 
         }
         if (mSessionUtil.getUsertype().equals("buyer")) {
-            binding.txtTitle.setText(getResources().getString(R.string.lbl_select_seller));
+            binding.txtTitle.setText(getResources().getString(R.string.lbl_select_exporter));
+        } else {
+            binding.txtTitle.setText(getResources().getString(R.string.lbl_select_importer));
         }
 
         binding.txtProductName.setText(productname);
@@ -134,14 +146,27 @@ public class SelectBuyerActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("company_id", mSessionUtil.getCompanyId());
             jsonObject.put("seller_buyer_id", mSessionUtil.getUserid());
-            jsonObject.put("type","post");
+            jsonObject.put("type", "post");
             jsonObject.put("product_id", productid);
+            jsonObject.put("no_of_bales", "");
+            jsonObject.put("price", "");
 
-          /*  jsonObject.put("price", price);
-            jsonObject.put("no_of_bales", no_of_bales);*/
             JSONArray jsonArray = new JSONArray(data);
 
             jsonObject.put("attribute_array", jsonArray);
+
+
+            jsonObject.put("delivery_condition_id", is_destination);
+            jsonObject.put("country_dispatch_id", dispatchcontryid);
+            jsonObject.put("port_dispatch_id", selectedport);
+
+            if (is_destination == 0) {
+                jsonObject.put("country_destination_id", "");
+                jsonObject.put("port_destination_id", "");
+            } else {
+                jsonObject.put("country_destination_id", destinationcontryid);
+                jsonObject.put("port_destination_id", selecteddestinationport);
+            }
 
 
             String data = jsonObject.toString();
@@ -155,7 +180,7 @@ public class SelectBuyerActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponseModel<List<SearchSellerModel>>> call, Response<ResponseModel<List<SearchSellerModel>>> response) {
                     customDialog.dismissProgress(mContext);
-                    Log.e("Response", "Response==" + new Gson().toJson(response.body()));
+                    Log.e("SearchSellerModel", "SearchSellerModel==" + new Gson().toJson(response.body()));
                     if (response.body().status != 0) {
                         if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                             AppUtil.showToast(mContext, response.body().message);
@@ -190,11 +215,25 @@ public class SelectBuyerActivity extends AppCompatActivity {
             jsonObject.put("seller_buyer_id", mSessionUtil.getUserid());
             jsonObject.put("type", "post");
             jsonObject.put("product_id", productid);
-           /* jsonObject.put("price", price);
-            jsonObject.put("no_of_bales", no_of_bales);*/
+            jsonObject.put("no_of_bales", "");
+            jsonObject.put("price", "");
+
             JSONArray jsonArray = new JSONArray(data);
 
             jsonObject.put("attribute_array", jsonArray);
+
+
+            jsonObject.put("delivery_condition_id", is_destination);
+            jsonObject.put("country_dispatch_id", dispatchcontryid);
+            jsonObject.put("port_dispatch_id", selectedport);
+
+            if (is_destination == 0) {
+                jsonObject.put("country_destination_id", "");
+                jsonObject.put("port_destination_id", "");
+            } else {
+                jsonObject.put("country_destination_id", destinationcontryid);
+                jsonObject.put("port_destination_id", selecteddestinationport);
+            }
 
 
             String data = jsonObject.toString();
@@ -208,7 +247,7 @@ public class SelectBuyerActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponseModel<List<SearchSellerModel>>> call, Response<ResponseModel<List<SearchSellerModel>>> response) {
                     customDialog.dismissProgress(mContext);
-                    Log.e("Response", "Response==" + new Gson().toJson(response.body()));
+                    Log.e("SearchSellerModel", "SearchSellerModel==" + new Gson().toJson(response.body()));
                     if (response.body().status != 0) {
                         if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                             AppUtil.showToast(mContext, response.body().message);

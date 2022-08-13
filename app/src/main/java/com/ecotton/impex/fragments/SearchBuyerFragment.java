@@ -69,11 +69,12 @@ public class SearchBuyerFragment extends Fragment {
 
     public PostDetailSpinerData detailSpinerData;
     public String selectedTransmitCondition = "";
-    public int is_destination;
 
+    public int is_destination;
     private int dispatchcontryid;
-    private int destinationcontryid;
     private int selectedport;
+
+    private int destinationcontryid;
     private int selecteddestinationport;
 
     @Override
@@ -103,6 +104,11 @@ public class SearchBuyerFragment extends Fragment {
                         intent.putExtra("data", jsonArray.toString());
                         intent.putExtra("product_id", productid);
                         intent.putExtra("productname", productname);
+                        intent.putExtra("is_destination", is_destination);
+                        intent.putExtra("dispatchcontryid", dispatchcontryid);
+                        intent.putExtra("selectedport", selectedport);
+                        intent.putExtra("destinationcontryid", destinationcontryid);
+                        intent.putExtra("selecteddestinationport", selecteddestinationport);
 
                         startActivity(intent);
                     }
