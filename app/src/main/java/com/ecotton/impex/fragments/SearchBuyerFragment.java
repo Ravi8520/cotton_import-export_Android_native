@@ -58,7 +58,6 @@ public class SearchBuyerFragment extends Fragment {
     PostToSellAttributeAdapter1 postToSellAttributeAdapter;
     List<AttributeRequestModel> attributeRequestModels = new ArrayList<>();
 
-    private List<CountryModel> stateModelList = new ArrayList<>();
     private List<CountryModel> dispatchcontryList = new ArrayList<>();
     private List<CountryModel> destinationcontryList = new ArrayList<>();
     private List<ProtModel> portList = new ArrayList<>();
@@ -127,10 +126,8 @@ public class SearchBuyerFragment extends Fragment {
     }
 
     private void CountryList() {
-        Log.e("StateModel", "StateModel==");
         customDialog.displayProgress(mContext);
         Call<ResponseModel<List<CountryModel>>> call = APIClient.getInstance().country_list(mSessionUtil.getApiToken());
-        Log.e("StateModel", "StateModel==" + call);
         Log.e("getApiToken", "getApiToken==" + mSessionUtil.getApiToken());
         call.enqueue(new Callback<ResponseModel<List<CountryModel>>>() {
             @Override
@@ -148,7 +145,6 @@ public class SearchBuyerFragment extends Fragment {
                     AppUtil.showToast(mContext, response.body().message);
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseModel<List<CountryModel>>> call, Throwable t) {
                 customDialog.dismissProgress(mContext);
@@ -451,6 +447,7 @@ public class SearchBuyerFragment extends Fragment {
                 }
             }
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -533,14 +530,12 @@ public class SearchBuyerFragment extends Fragment {
     }
 
     public void setAttributeArray1(String attribute, String value) {
-
         for (AttributeRequestModel obj : attributeRequestModels) {
             if (obj.getAttribute().equals(attribute)) {
                 obj.setTo(value);
             }
         }
     }
-
 
     private void getProductList() {
         try {
@@ -564,7 +559,6 @@ public class SearchBuyerFragment extends Fragment {
                         }
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ResponseModel<List<ProductModel>>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);
@@ -586,12 +580,11 @@ public class SearchBuyerFragment extends Fragment {
         ProductAdapter adapter = new ProductAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, productModelList);
         binding.spinnerProduct.setAdapter(adapter);
         binding.spinnerProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
                 productid = productModelList.get(position).getId();
                 productname = productModelList.get(position).getName();
                 GetAttribute(productModelList.get(position).getId());
-                //GetAttribute1(productModelList.get(position).getId());
-
             } // to close the onItemSelected
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -601,9 +594,7 @@ public class SearchBuyerFragment extends Fragment {
     }
 
     public class ProductAdapter extends ArrayAdapter<ProductModel> {
-
         LayoutInflater flater;
-
         public ProductAdapter(Context context, int resouceId, int textviewId, List<ProductModel> list) {
 
             super(context, resouceId, textviewId, list);
@@ -615,7 +606,6 @@ public class SearchBuyerFragment extends Fragment {
 
             return rowview(convertView, position);
         }
-
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
             return rowview(convertView, position);
@@ -663,13 +653,9 @@ public class SearchBuyerFragment extends Fragment {
                 public void onResponse(Call<ResponseModel<List<ProductAttributeModel>>> call, Response<ResponseModel<List<ProductAttributeModel>>> response) {
                     customDialog.dismissProgress(mContext);
                     Log.e("TAG", "GetAttribute==" + new Gson().toJson(response.body()));
-
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         postToSellAttributeAdapter.addAllClass(response.body().data);
-
                         fillAttributs1(response.body().data);
-                        // fillAttributs1(response.body().data);
-
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         postToSellAttributeAdapter.notifyDataSetChanged();
                     } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
@@ -679,7 +665,6 @@ public class SearchBuyerFragment extends Fragment {
                         AppUtil.showToast(mContext, response.body().message);
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ResponseModel<List<ProductAttributeModel>>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);
@@ -705,9 +690,6 @@ public class SearchBuyerFragment extends Fragment {
                 objs.setTo("");
             }
             attributeRequestModels.add(objs);
-
         }
     }
-
-
 }

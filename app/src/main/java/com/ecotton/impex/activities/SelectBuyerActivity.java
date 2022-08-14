@@ -217,16 +217,21 @@ public class SelectBuyerActivity extends AppCompatActivity {
             jsonObject.put("attribute_array", jsonArray);
 
 
-            jsonObject.put("delivery_condition_id", delivery_condition_id);
-            jsonObject.put("country_dispatch_id", dispatchcontryid);
-            jsonObject.put("port_dispatch_id", selectedport);
+            jsonObject.put("delivery_condition_id", "");
+            jsonObject.put("country_dispatch_id", "");
+            jsonObject.put("port_dispatch_id", "");
+           /* selectedport
+                    dispatchcontryid
+            delivery_condition_id*/
 
             if (delivery_condition_id == 1) {
                 jsonObject.put("country_destination_id", "");
                 jsonObject.put("port_destination_id", "");
             } else {
-                jsonObject.put("country_destination_id", destinationcontryid);
-                jsonObject.put("port_destination_id", selecteddestinationport);
+                //destinationcontryid
+                // selecteddestinationport
+                jsonObject.put("country_destination_id", "");
+                jsonObject.put("port_destination_id", "");
             }
 
 
