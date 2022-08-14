@@ -132,6 +132,8 @@ public class UpdateCompanyDetailsActivity extends AppCompatActivity {
             binding.edtBranchAddress.setText(arraylist.getBranch_address());
             binding.edtIfscCode.setText(arraylist.getIfsc_code());
             binding.edtIecNumber.setText(arraylist.getIec());
+            binding.edtIecNumber.setEnabled(false);
+            binding.edtGstNumber.setEnabled(false);
             Glide.with(mContext).load(arraylist.getStamp_img()).placeholder(R.drawable.placeholder).into(binding.imgUploadStamp);
         }
 

@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Gujrat"
         android:textColor="@color/tab_text_color"
         android:textSize="14sp" />
 
@@ -22,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
-        android:text="Bales: 10000"
         android:textColor="@color/tab_text_color"
         android:textSize="12sp" />
 
@@ -31,7 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
-        android:text="Post: 10000"
         android:textColor="@color/tab_text_color"
         android:textSize="12sp" />
 

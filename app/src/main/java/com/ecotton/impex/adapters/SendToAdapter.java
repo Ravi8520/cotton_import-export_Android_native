@@ -12,42 +12,39 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.ecotton.impex.R;
-import com.ecotton.impex.databinding.CountryItemBinding;
-import com.ecotton.impex.models.SearchSellerModel;
+import com.ecotton.impex.databinding.SendtoItemBinding;
+import com.ecotton.impex.models.PostDetailsModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
-
+public class SendToAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
     Context mcontext;
-    public ArrayList<SearchSellerModel> mArrayList;
-    private OnItemClickListener onItemClickListener;
+    public ArrayList<PostDetailsModel.SendTo> mArrayList;
+    private PostDetailAttributeAdapter.OnItemClickListener onItemClickListener;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
-    private OnLoadMoreListener onLoadMoreListener;
+    private PostDetailAttributeAdapter.OnLoadMoreListener onLoadMoreListener;
     private boolean isMoreLoading = true;
-    public ArrayList<SearchSellerModel> filterArray = new ArrayList<>();
-
-    public int pos = 0;
+    public ArrayList<PostDetailsModel.SendTo> filterArray = new ArrayList<>();
 
 
-    public CountryAdapter(Context mcontext) {
+    public SendToAdapter(Context mcontext) {
         this.mcontext = mcontext;
         mArrayList = new ArrayList<>();
-
     }
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener myClickListener) {
+    public void setOnItemClickListener(PostDetailAttributeAdapter.OnItemClickListener myClickListener) {
         this.onItemClickListener = myClickListener;
     }
 
-    public void setOnLoadMore(OnLoadMoreListener myClickListener) {
+    public void setOnLoadMore(PostDetailAttributeAdapter.OnLoadMoreListener myClickListener) {
         this.onLoadMoreListener = myClickListener;
     }
 
@@ -55,7 +52,7 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         void onLoadMore();
     }
 
-    public void addAllClass(List<SearchSellerModel> models) {
+    public void addAllClass(List<PostDetailsModel.SendTo> models) {
         mArrayList.clear();
         filterArray.clear();
         mArrayList.addAll(models);
@@ -63,7 +60,7 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged();
     }
 
-    public void addItemMore(List<SearchSellerModel> lst) {
+    public void addItemMore(List<PostDetailsModel.SendTo> lst) {
         int sizeInit = mArrayList.size();
         mArrayList.addAll(lst);
         filterArray.addAll(lst);
@@ -105,7 +102,7 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         View view;
         if (viewType == VIEW_ITEM) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            CountryItemBinding itemCardBinding = CountryItemBinding.inflate(layoutInflater, parent, false);
+            SendtoItemBinding itemCardBinding = SendtoItemBinding.inflate(layoutInflater, parent, false);
             return new DataViewHolder(itemCardBinding);
         } else {
             return new ProgressViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.progressbar, parent, false));
@@ -125,19 +122,8 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
-
-        holder.binding.txtCompanyName.setText(mArrayList.get(position).getCompany_name());
-        holder.binding.txtName.setText(mArrayList.get(position).getName());
-        holder.binding.txtPrice.setText(mcontext.getString(R.string.lbl_dollar_only) + " " + mArrayList.get(position).getPrice() + "(" + mArrayList.get(position).getRemaining_bales() + ")");
-
-        holder.binding.btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onItemClickListener.onItemClick(view, position);
-            }
-        });
-
-
+        holder.binding.txtCompanyName.setText(mArrayList.get(position).getName());
+        holder.binding.txtCityName.setText(mArrayList.get(position).getCity());
     }
 
     @Override
@@ -145,13 +131,13 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return mArrayList.size();
     }
 
-    class DataViewHolder extends RecyclerView.ViewHolder {
-        public CountryItemBinding binding;
 
-        public DataViewHolder(CountryItemBinding itemView) {
+    class DataViewHolder extends RecyclerView.ViewHolder {
+        public SendtoItemBinding binding;
+
+        public DataViewHolder(SendtoItemBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
-
         }
     }
 
@@ -162,7 +148,6 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(v);
             pBar = (ProgressBar) v.findViewById(R.id.progressBar1);
         }
-
     }
 
     @Override
@@ -178,14 +163,14 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     mArrayList = filterArray;
                 } else {
 
-                    ArrayList<SearchSellerModel> filteredList = new ArrayList<>();
+                    ArrayList<PostDetailsModel.SendTo> filteredList = new ArrayList<>();
 
-                  /*  for (CountryModel androidVersion : filterArray) {
+                    for (PostDetailsModel.SendTo androidVersion : filterArray) {
 
-                        if (androidVersion.getLabel().toLowerCase().contains(charString)) {
+                       /* if (PostDetailsModel.Attribute.ge().toLowerCase().contains(charString)) {
                             filteredList.add(androidVersion);
-                        }
-                    }*/
+                        }*/
+                    }
 
                     mArrayList = filteredList;
                 }
@@ -197,7 +182,7 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mArrayList = (ArrayList<SearchSellerModel>) filterResults.values;
+                mArrayList = (ArrayList<PostDetailsModel.SendTo>) filterResults.values;
                 if (mArrayList.size() > 0) {
                     //  mListener.onListEmpty(true);
                 } else {
@@ -208,3 +193,5 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         };
     }
 }
+
+

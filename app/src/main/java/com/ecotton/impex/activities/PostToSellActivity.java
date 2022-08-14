@@ -76,6 +76,7 @@ public class PostToSellActivity extends AppCompatActivity {
     public PostDetailSpinerData detailSpinerData;
     public String selectedTransmitCondition = "";
     public int is_destination;
+    public int delivery_condition_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -545,6 +546,7 @@ public class PostToSellActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getName();
                 is_destination = detailSpinerData.getTransmit_condition().get(position).getIs_destination();
+                delivery_condition_id = detailSpinerData.getTransmit_condition().get(position).getId();
 
                 if (is_destination == 0) {
                     binding.layoutDestinationCountry.setVisibility(View.GONE);
@@ -655,11 +657,11 @@ public class PostToSellActivity extends AppCompatActivity {
             jsonObject.put("price", binding.edtPrice.getText().toString().trim());
             jsonObject.put("no_of_bales", binding.edtBales.getText().toString().trim());
             jsonObject.put("country_origin_id", selectedStation);
-            jsonObject.put("delivery_condition_id", is_destination);
+            jsonObject.put("delivery_condition_id", delivery_condition_id);
             jsonObject.put("country_dispatch_id", dispatchcontryid);
             jsonObject.put("port_dispatch_id", selectedport);
 
-            if (is_destination == 0) {
+            if (delivery_condition_id == 1) {
                 jsonObject.put("country_destination_id", "");
                 jsonObject.put("port_destination_id", "");
             } else {

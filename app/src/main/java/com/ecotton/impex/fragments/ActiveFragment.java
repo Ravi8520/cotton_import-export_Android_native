@@ -78,14 +78,12 @@ public class ActiveFragment extends Fragment {
                     intent.putExtra("post_notification_id", activeTabAdapter.mArrayList.get(position).getId());
                     intent.putExtra("type", activeTabAdapter.mArrayList.get(position).getType());
                     startActivity(intent);
-                    ((Activity) mContext).finish();
                 }
                 if (view.getId() == R.id.recyclerview_attribute) {
                     Intent intent = new Intent(mContext, MypostActiveTabDataActivity.class);
                     intent.putExtra("post_notification_id", activeTabAdapter.mArrayList.get(position).getId());
                     intent.putExtra("type", activeTabAdapter.mArrayList.get(position).getType());
                     startActivity(intent);
-                    ((Activity) mContext).finish();
                 }
                 if (view.getId() == R.id.btn_cancle) {
                     CancelPost(position);
