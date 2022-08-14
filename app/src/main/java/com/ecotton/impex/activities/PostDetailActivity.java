@@ -145,7 +145,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         long daysMili = 1296000000;
         MaterialDatePicker materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
-                 .setTheme(R.style.Widget_AppTheme_MaterialDatePicker).
+                .setTheme(R.style.Widget_AppTheme_MaterialDatePicker).
                 setSelection(Pair.create(MaterialDatePicker.todayInUtcMilliseconds(), (MaterialDatePicker.todayInUtcMilliseconds() + daysMili))).build();
 
         binding.linDeliveryPeriod.setOnClickListener(new View.OnClickListener() {
@@ -574,7 +574,7 @@ public class PostDetailActivity extends AppCompatActivity {
         obj.setName("Select");
         dispatchcontryList.add(obj);
         dispatchcontryList.addAll(list);
-        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, dispatchcontryList);
+        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, dispatchcontryList);
         binding.spinnerCountryOfDispatch.setAdapter(adapter);
         binding.spinnerCountryOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -601,7 +601,7 @@ public class PostDetailActivity extends AppCompatActivity {
         obj.setName("Select");
         destinationcontryList.add(obj);
         destinationcontryList.addAll(list);
-        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationcontryList);
+        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, destinationcontryList);
         binding.spinnerDestinationCountry.setAdapter(adapter);
         binding.spinnerDestinationCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -663,8 +663,16 @@ public class PostDetailActivity extends AppCompatActivity {
     public void setUpSpinerport(List<ProtModel> list) {
         portList.clear();
         portList.addAll(list);
-        PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, portList);
+        PortAdapter adapter = new PortAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, portList);
         binding.spinnerPortOfDispatch.setAdapter(adapter);
+
+        for (int i = 0; i < portList.size(); i++) {
+            if (negotiationDetail.getPort_dispatch_id().equals(portList.get(i).getId() + "")) {
+                binding.spinnerPortOfDispatch.setSelection(i);
+                dispatchdportID = portList.get(i).getId();
+            }
+        }
+
         binding.spinnerPortOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 dispatchdportID = portList.get(position).getId();
@@ -715,8 +723,16 @@ public class PostDetailActivity extends AppCompatActivity {
     public void setUpSpinerdestinationport(List<ProtModel> list) {
         destinationportList.clear();
         destinationportList.addAll(list);
-        PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationportList);
+        PortAdapter adapter = new PortAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, destinationportList);
         binding.spinnerDestinationPort.setAdapter(adapter);
+
+        for (int i = 0; i < destinationportList.size(); i++) {
+            if (negotiationDetail.getPort_dispatch_id().equals(destinationportList.get(i).getId() + "")) {
+                binding.spinnerDestinationPort.setSelection(i);
+                destinationPortID = destinationportList.get(i).getId();
+            }
+        }
+
         binding.spinnerDestinationPort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 destinationPortID = destinationportList.get(position).getId();
@@ -794,7 +810,8 @@ public class PostDetailActivity extends AppCompatActivity {
     public void setNegotiationData() {
         binding.edtPrice.setText(negotiationDetail.getCurrent_price());
         binding.edtNotes.setText(negotiationDetail.getNotes());
-
+        binding.edtStartDate.setText(negotiationDetail.getDelivery_period());
+        deliveryPeriod=negotiationDetail.getDelivery_period();
         if (mSessionUtil.getUsertype().equals("seller")) {
             if (negotiationDetail.getSeller_id().equals("")) {
                 noOfBales = Integer.parseInt(negotiationDetail.getRemain_bales());
@@ -836,34 +853,25 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         }
 
-
-        for (int i = 0; i < brokerModelList.size(); i++) {
-            if (negotiationDetail.getBroker_id().equals(brokerModelList.get(i).getId() + "")) {
-                binding.spBroker.setSelection(i);
-                selectedBroker = brokerModelList.get(i).getId() + "";
+        for (int i = 0; i < dispatchcontryList.size(); i++) {
+            if (negotiationDetail.getCountry_dispatch_id().equals(dispatchcontryList.get(i).getId() + "")) {
+                binding.spinnerCountryOfDispatch.setSelection(i);
+                dispatchContryID = dispatchcontryList.get(i).getId();
             }
         }
 
-       /* AppCompatTextView txtTransmitCondition, txtPaymentCondition, txtLab, txtHeader, txtBroker;
-        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.poppins_bold);
-        Typeface typefaceTransmitCondition = ResourcesCompat.getFont(mContext, R.font.poppins_bold);
-        Typeface typefacePaymentCondition = ResourcesCompat.getFont(mContext, R.font.poppins_bold);
-        Typeface typefaceLab = ResourcesCompat.getFont(mContext, R.font.poppins_bold);
-        Typeface typefaceHeader = ResourcesCompat.getFont(mContext, R.font.poppins_bold);
-        txtBroker =  binding.spBroker.findViewById(R.id.txt_company_name);
-        txtBroker.setTypeface(typeface);
-        txtLab =binding.spLab.findViewById(R.id.txt_company_name);
-        txtLab.setTypeface(typefaceLab);
-        txtHeader =  binding.spHeader.findViewById(R.id.txt_company_name);
-        txtHeader.setTypeface(typefaceHeader);
-        txtTransmitCondition =  binding.spTransmitCondition.findViewById(R.id.txt_company_name);
-        txtTransmitCondition.setTypeface(typefaceTransmitCondition);
-        txtPaymentCondition =  binding.spPaymentCondition.findViewById(R.id.txt_company_name);
-        txtPaymentCondition.setTypeface(typefacePaymentCondition);*/
 
-        if (TextUtils.isEmpty(negotiationDetail.getTransmit_condition_id()) && detailSpinerData.getTransmit_condition().size() > 0) {
-            selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(0).getId() + "";
-            selectedTransmitConditionName = detailSpinerData.getTransmit_condition().get(0).getName();
+        for (int i = 0; i < destinationcontryList.size(); i++) {
+            if (negotiationDetail.getCountry_destination_id().equals(destinationcontryList.get(i).getId() + "")) {
+                binding.spinnerDestinationCountry.setSelection(i);
+                destinationContryID = destinationcontryList.get(i).getId();
+            }
+        }
+
+
+        if (TextUtils.isEmpty(negotiationDetail.getTransmit_condition_id()) && deliveryConditionList.size() > 0) {
+            selectedTransmitCondition = deliveryConditionList.get(0).getId() + "";
+            selectedTransmitConditionName = deliveryConditionList.get(0).getName();
         }
         if (TextUtils.isEmpty(negotiationDetail.getPayment_condition_id()) && detailSpinerData.getPayment_condition().size() > 0)
             selectedPaymentCondition = detailSpinerData.getPayment_condition().get(0).getId() + "";
@@ -874,8 +882,11 @@ public class PostDetailActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(negotiationDetail.getHeader()) && detailSpinerData.getHeader().size() > 0)
             selectedHeader = detailSpinerData.getHeader().get(0).getId() + "";
 
-        if (TextUtils.isEmpty(negotiationDetail.getBroker_id()) && brokerModelList.size() > 0)
-            selectedBroker = brokerModelList.get(0).getId() + "";
+        if (TextUtils.isEmpty(negotiationDetail.getCountry_dispatch_id()) && dispatchcontryList.size() > 0)
+            dispatchContryID = dispatchcontryList.get(0).getId();
+
+        if (TextUtils.isEmpty(negotiationDetail.getCountry_destination_id()) && destinationcontryList.size() > 0)
+            destinationContryID = destinationcontryList.get(0).getId();
 
 
         setSpinerClick();
@@ -884,8 +895,8 @@ public class PostDetailActivity extends AppCompatActivity {
     public void setSpinerClick() {
         binding.spTransmitCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getId() + "";
-                selectedTransmitConditionName = detailSpinerData.getTransmit_condition().get(position).getName();
+                selectedTransmitCondition = deliveryConditionList.get(position).getId() + "";
+                selectedTransmitConditionName = deliveryConditionList.get(position).getName();
                 if (deliveryConditionList.get(position).getName().equals("FOB")) {
                     binding.layoutDestinationCountry.setVisibility(View.GONE);
                     binding.layoutDestinationPort.setVisibility(View.GONE);
@@ -959,6 +970,17 @@ public class PostDetailActivity extends AppCompatActivity {
 
         AppCompatTextView textView;
 
+
+        if (selectedTransmitConditionName.equals("FOB")) {
+            binding.layoutDestinationCountry.setVisibility(View.GONE);
+            binding.layoutDestinationPort.setVisibility(View.GONE);
+            //destinationContryID = 0;
+            //destinationPortID = 0;
+        } else {
+            binding.layoutDestinationCountry.setVisibility(View.VISIBLE);
+            binding.layoutDestinationPort.setVisibility(View.VISIBLE);
+        }
+
         if (negotiationDetail.getIs_highlight_payment_condition().equalsIgnoreCase("false") || TextUtils.isEmpty(negotiationDetail.getIs_highlight_payment_condition())) {
             textView = (AppCompatTextView) binding.spPaymentCondition.findViewById(R.id.txt_company_name);
             textView.setTypeface(typeface);
@@ -972,8 +994,31 @@ public class PostDetailActivity extends AppCompatActivity {
             textView.setTypeface(typeface);
         }
 
+        if (negotiationDetail.getIs_highlight_country_destination().equalsIgnoreCase("false") || TextUtils.isEmpty(negotiationDetail.getIs_highlight_country_destination())) {
+            textView = (AppCompatTextView) binding.spinnerDestinationCountry.findViewById(R.id.txt_company_name);
+            if (textView != null)
+                textView.setTypeface(typeface);
+        }
+
+        if (negotiationDetail.getIs_highlight_country_dispatch().equalsIgnoreCase("false") || TextUtils.isEmpty(negotiationDetail.getIs_highlight_country_dispatch())) {
+            textView = (AppCompatTextView) binding.spinnerCountryOfDispatch.findViewById(R.id.txt_company_name);
+            if (textView != null) textView.setTypeface(typeface);
+        }
+        if (negotiationDetail.getIs_highlight_port_dispatch().equalsIgnoreCase("false") || TextUtils.isEmpty(negotiationDetail.getIs_highlight_port_dispatch())) {
+            textView = (AppCompatTextView) binding.spinnerPortOfDispatch.findViewById(R.id.txt_company_name);
+            if (textView != null) textView.setTypeface(typeface);
+        }
+        if (negotiationDetail.getIs_highlight_port_destination().equalsIgnoreCase("false") || TextUtils.isEmpty(negotiationDetail.getIs_highlight_port_destination())) {
+            textView = (AppCompatTextView) binding.spinnerDestinationPort.findViewById(R.id.txt_company_name);
+            if (textView != null) textView.setTypeface(typeface);
+        }
+
         if (negotiationDetail.getIs_highlight_notes().equals("true")) {
             binding.edtNotes.setTypeface(typefaceBold);
+        }
+
+        if (negotiationDetail.getIs_highlight_delivery_period().equals("true")) {
+            binding.edtStartDate.setTypeface(typefaceBold);
         }
 
         if (negotiationDetail.getIs_highlight_current_bales().equals("true")) {
@@ -1017,11 +1062,11 @@ public class PostDetailActivity extends AppCompatActivity {
             AppUtil.showToast(mContext, "Please select Delivery Condition");
             return;
         }
-        if ( dispatchContryID < 1) {
+        if (dispatchContryID < 1) {
             AppUtil.showToast(mContext, "Please select dispatch country");
             return;
         }
-        if ( dispatchdportID < 1) {
+        if (dispatchdportID < 1) {
             AppUtil.showToast(mContext, "Please select dispatch port");
             return;
         }
@@ -1291,8 +1336,8 @@ public class PostDetailActivity extends AppCompatActivity {
             object.put("user_type", mSessionUtil.getUsertype());
             object.put("company_id", mSessionUtil.getCompanyId());
             object.put("deal_id", makeDeal.getDeal_id());
-            object.put("email_otp", makeDeal.getEmail_otp());
-            object.put("mobile_otp", otp);
+            object.put("email_otp", otp);
+            object.put("mobile_otp", makeDeal.getMobile_otp());
 
             strJson = object.toString();
 
@@ -1380,54 +1425,6 @@ public class PostDetailActivity extends AppCompatActivity {
         }
     }
 
-    public class BrokerCustomAdapter extends ArrayAdapter<BrokerModel> {
-
-        LayoutInflater flater;
-
-        public BrokerCustomAdapter(Activity context, int resouceId, int textviewId, List<BrokerModel> list) {
-
-            super(context, resouceId, textviewId, list);
-//        flater = context.getLayoutInflater();
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            return rowview(convertView, position);
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return rowview(convertView, position);
-        }
-
-        private View rowview(View convertView, int position) {
-
-            BrokerModel rowItem = getItem(position);
-
-            viewHolder holder;
-            View rowview = convertView;
-            if (rowview == null) {
-
-                holder = new viewHolder();
-                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.layout_spiner, null, false);
-
-                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
-
-                rowview.setTag(holder);
-            } else {
-                holder = (viewHolder) rowview.getTag();
-            }
-            holder.txtTitle.setText(rowItem.getName());
-
-            return rowview;
-        }
-
-        private class viewHolder {
-            AppCompatTextView txtTitle;
-        }
-    }
 
     public class PortAdapter extends ArrayAdapter<ProtModel> {
 
@@ -1460,7 +1457,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
                 holder = new PortAdapter.viewHolder();
                 flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.spinner_layout, null, false);
+                rowview = flater.inflate(R.layout.layout_spiner, null, false);
 
                 holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
 
@@ -1509,7 +1506,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
                 holder = new CountryDispatchAdapter.viewHolder();
                 flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.spinner_layout, null, false);
+                rowview = flater.inflate(R.layout.layout_spiner, null, false);
 
                 holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
 

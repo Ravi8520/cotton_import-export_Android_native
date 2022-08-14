@@ -255,8 +255,8 @@ public class MyContractActivity extends AppCompatActivity {
             object.put("user_id", mSessionUtil.getUserid());
             object.put("user_type", mSessionUtil.getUsertype());
             object.put("deal_id", myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getDeal_id());
-            object.put("email_otp", myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getEmail_otp());
-            object.put("mobile_otp", mobileotp);
+            object.put("email_otp", mobileotp);
+            object.put("mobile_otp", myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getEmail_otp());
             object.put("company_id", mSessionUtil.getCompanyId());
 
             strJson = object.toString();

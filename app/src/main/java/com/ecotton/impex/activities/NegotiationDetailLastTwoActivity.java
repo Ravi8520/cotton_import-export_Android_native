@@ -204,10 +204,7 @@ public class NegotiationDetailLastTwoActivity extends AppCompatActivity {
                 binding.txtCompanyLTDTwo.setText(list.get(1).getBuyer_company_name());
             }
         }
-
-
     }
-
     public void setBuyerData(Nagoatiaationdetaillasttwo obj) {
 
 

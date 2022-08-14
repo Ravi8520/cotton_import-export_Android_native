@@ -47,6 +47,119 @@ public class NegotiationDetail implements Serializable {
     public String is_highlight_port_destination="";
     public String is_highlight_delivery_period="";
 
+
+    public String country_origin_name;
+    public String delivery_period;
+    public String delivery_condition_id;
+    public String delivery_condition_name;
+    public String country_dispatch_id;
+    public String country_dispatch_name;
+
+
+    public String port_dispatch_id;
+    public String port_dispatch_name;
+    public String country_destination_id;
+    public String country_destination_name;
+
+    public String getCountry_origin_name() {
+        return country_origin_name;
+    }
+
+    public void setCountry_origin_name(String country_origin_name) {
+        this.country_origin_name = country_origin_name;
+    }
+
+    public String getDelivery_period() {
+        return delivery_period;
+    }
+
+    public void setDelivery_period(String delivery_period) {
+        this.delivery_period = delivery_period;
+    }
+
+    public String getDelivery_condition_id() {
+        return delivery_condition_id;
+    }
+
+    public void setDelivery_condition_id(String delivery_condition_id) {
+        this.delivery_condition_id = delivery_condition_id;
+    }
+
+    public String getDelivery_condition_name() {
+        return delivery_condition_name;
+    }
+
+    public void setDelivery_condition_name(String delivery_condition_name) {
+        this.delivery_condition_name = delivery_condition_name;
+    }
+
+    public String getCountry_dispatch_id() {
+        return country_dispatch_id;
+    }
+
+    public void setCountry_dispatch_id(String country_dispatch_id) {
+        this.country_dispatch_id = country_dispatch_id;
+    }
+
+    public String getCountry_dispatch_name() {
+        return country_dispatch_name;
+    }
+
+    public void setCountry_dispatch_name(String country_dispatch_name) {
+        this.country_dispatch_name = country_dispatch_name;
+    }
+
+    public String getPort_dispatch_id() {
+        return port_dispatch_id;
+    }
+
+    public void setPort_dispatch_id(String port_dispatch_id) {
+        this.port_dispatch_id = port_dispatch_id;
+    }
+
+    public String getPort_dispatch_name() {
+        return port_dispatch_name;
+    }
+
+    public void setPort_dispatch_name(String port_dispatch_name) {
+        this.port_dispatch_name = port_dispatch_name;
+    }
+
+    public String getCountry_destination_id() {
+        return country_destination_id;
+    }
+
+    public void setCountry_destination_id(String country_destination_id) {
+        this.country_destination_id = country_destination_id;
+    }
+
+    public String getCountry_destination_name() {
+        return country_destination_name;
+    }
+
+    public void setCountry_destination_name(String country_destination_name) {
+        this.country_destination_name = country_destination_name;
+    }
+
+    public String getPort_destination_id() {
+        return port_destination_id;
+    }
+
+    public void setPort_destination_id(String port_destination_id) {
+        this.port_destination_id = port_destination_id;
+    }
+
+    public String getPort_destination_name() {
+        return port_destination_name;
+    }
+
+    public void setPort_destination_name(String port_destination_name) {
+        this.port_destination_name = port_destination_name;
+    }
+
+    public String port_destination_id;
+    public String port_destination_name;
+
     public String getIs_highlight_delivery_condition() {
         return is_highlight_delivery_condition;
     }
