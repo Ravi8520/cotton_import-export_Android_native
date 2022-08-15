@@ -217,7 +217,7 @@
     <string name="report">Report</string>
     <string name="status">Status</string>
     <string name="date_range">Date Range</string>
-    <string name="seller_wise">Seller Wise</string>
+    <string name="seller_wise">Exporter Wise</string>
     <string name="broker_wise">Broker Wise</string>
     <string name="product_wise">Product Wise</string>
     <string name="company_name">Company Name</string>

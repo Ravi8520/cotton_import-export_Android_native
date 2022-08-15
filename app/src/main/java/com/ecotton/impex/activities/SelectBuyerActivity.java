@@ -1,14 +1,9 @@
 package com.ecotton.impex.activities;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -53,13 +48,6 @@ public class SelectBuyerActivity extends AppCompatActivity {
     private int productid;
     private String productname;
 
-    private int delivery_condition_id;
-    private int dispatchcontryid;
-    private int selectedport;
-    private int destinationcontryid;
-    private int selecteddestinationport;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,11 +62,7 @@ public class SelectBuyerActivity extends AppCompatActivity {
             data = intent.getStringExtra("data");
             productid = intent.getIntExtra("product_id", 0);
             productname = intent.getStringExtra("productname");
-            delivery_condition_id = intent.getIntExtra("delivery_condition_id", 0);
-            dispatchcontryid = intent.getIntExtra("dispatchcontryid", 0);
-            selectedport = intent.getIntExtra("selectedport", 0);
-            destinationcontryid = intent.getIntExtra("destinationcontryid", 0);
-            selecteddestinationport = intent.getIntExtra("selecteddestinationport", 0);
+
 
         }
         if (mSessionUtil.getUsertype().equals("buyer")) {
@@ -132,38 +116,6 @@ public class SelectBuyerActivity extends AppCompatActivity {
 
         countryAdapter.addAllClass(countryModelList);
 
-        countryAdapter.setOnItemClickListener(new CountryAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if (view.getId()==R.id.btn_view)
-                {
-                    if (mSessionUtil.getUsertype().equals("buyer")) {
-                        SharedPreferences prefs = getSharedPreferences("cotton", MODE_PRIVATE);
-                        int idName = prefs.getInt("issetup", 0);
-                        if (idName == 0) {
-                            CompanyDetailDailog();
-                        } else if (idName == 1) {
-                           startActivity(new Intent(mContext, PostDetailActivity.class)
-                                    .putExtra("screen", "home")
-                                    .putExtra("post_id", countryAdapter.mArrayList.get(position).getPost_id() + "")
-                                    .putExtra("post_type", "post"));
-                        }
-                    } else {
-                        SharedPreferences prefs = getSharedPreferences("cotton", MODE_PRIVATE);
-                        int idName = prefs.getInt("issetup", 0);
-                        if (idName == 0) {
-                            CompanyDetailDailog();
-                        } else if (idName == 1) {
-                           startActivity(new Intent(mContext, PostDetailActivity.class)
-                                    .putExtra("screen", "home")
-                                    .putExtra("post_id", countryAdapter.mArrayList.get(position).getPost_id() + "")
-                                    .putExtra("post_type", "post"));
-                        }
-
-                    }
-                }
-            }
-        });
         if (mSessionUtil.getUsertype().equals("seller")) {
             SearchBuyer();
         } else if (mSessionUtil.getUsertype().equals("buyer")) {
@@ -172,67 +124,18 @@ public class SelectBuyerActivity extends AppCompatActivity {
 
     }
 
-    public void CompanyDetailDailog() {
-        final Dialog dialog = new Dialog(mContext);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.setContentView(R.layout.company_details_dialog);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-        TextView txt_cancel = (TextView) dialog.findViewById(R.id.txt_cancel);
-        TextView txt_ok = (TextView) dialog.findViewById(R.id.txt_ok);
-
-        txt_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        txt_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                startActivity(new Intent(mContext, UpdateCompanyDetailsActivity.class));
-            }
-        });
-
-        dialog.show();
-    }
 
     private void SearchSeller() {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("company_id", mSessionUtil.getCompanyId());
-            jsonObject.put("seller_buyer_id", mSessionUtil.getUserid());
+            jsonObject.put("user_id", mSessionUtil.getUserid());
             jsonObject.put("type", "post");
             jsonObject.put("product_id", productid);
-            jsonObject.put("no_of_bales", "");
-            jsonObject.put("price", "");
 
             JSONArray jsonArray = new JSONArray(data);
 
             jsonObject.put("attribute_array", jsonArray);
-
-
-            jsonObject.put("delivery_condition_id", "");
-            jsonObject.put("country_dispatch_id", "");
-            jsonObject.put("port_dispatch_id", "");
-           /* selectedport
-                    dispatchcontryid
-            delivery_condition_id*/
-
-            if (delivery_condition_id == 1) {
-                jsonObject.put("country_destination_id", "");
-                jsonObject.put("port_destination_id", "");
-            } else {
-                //destinationcontryid
-                // selecteddestinationport
-                jsonObject.put("country_destination_id", "");
-                jsonObject.put("port_destination_id", "");
-            }
 
 
             String data = jsonObject.toString();
@@ -278,29 +181,13 @@ public class SelectBuyerActivity extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("company_id", mSessionUtil.getCompanyId());
-            jsonObject.put("seller_buyer_id", mSessionUtil.getUserid());
+            jsonObject.put("user_id", mSessionUtil.getUserid());
             jsonObject.put("type", "post");
             jsonObject.put("product_id", productid);
-            jsonObject.put("no_of_bales", "");
-            jsonObject.put("price", "");
 
             JSONArray jsonArray = new JSONArray(data);
 
             jsonObject.put("attribute_array", jsonArray);
-
-
-            jsonObject.put("delivery_condition_id", delivery_condition_id);
-            jsonObject.put("country_dispatch_id", dispatchcontryid);
-            jsonObject.put("port_dispatch_id", selectedport);
-
-            if (delivery_condition_id == 1) {
-                jsonObject.put("country_destination_id", "");
-                jsonObject.put("port_destination_id", "");
-            } else {
-                jsonObject.put("country_destination_id", destinationcontryid);
-                jsonObject.put("port_destination_id", selecteddestinationport);
-            }
-
 
             String data = jsonObject.toString();
 

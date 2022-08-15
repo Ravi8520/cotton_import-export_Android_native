@@ -213,7 +213,7 @@ public class MyContractActivity extends AppCompatActivity {
                     if (myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getIs_buyer_otp_verify() == 0 || myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getIs_seller_otp_verify() == 0) {
                         Log.e("btn_download111", "btn_download111===");
                         ResendOtp(position, childPosition);
-                    } else if (myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getIs_buyer_otp_verify() == 1 && myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getIs_seller_otp_verify() == 1 && myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getIs_broker_otp_verify() == 1) {
+                    } else if (myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getIs_buyer_otp_verify() == 1 && myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getIs_seller_otp_verify() == 1) {
                         Log.e("Click", "Click==");
                         if (checkAndRequestPermissions()) {
                             String filepath = myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getUrl();
@@ -247,7 +247,7 @@ public class MyContractActivity extends AppCompatActivity {
     }
 
 
-    private void hitMackDealVerify(int position, int childPosition, String mobileotp) {
+    private void hitMackDealVerify(int position, int childPosition, String emailotp) {
         try {
 
             String strJson = "";
@@ -255,8 +255,8 @@ public class MyContractActivity extends AppCompatActivity {
             object.put("user_id", mSessionUtil.getUserid());
             object.put("user_type", mSessionUtil.getUsertype());
             object.put("deal_id", myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getDeal_id());
-            object.put("email_otp", mobileotp);
-            object.put("mobile_otp", myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getEmail_otp());
+            object.put("email_otp", emailotp);
+            object.put("mobile_otp", myContractAdapter.mArrayList.get(position).getDeal_details().get(childPosition).getMobile_otp());
             object.put("company_id", mSessionUtil.getCompanyId());
 
             strJson = object.toString();

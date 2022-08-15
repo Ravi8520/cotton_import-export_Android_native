@@ -58,25 +58,12 @@ public class SearchBuyerFragment extends Fragment {
     PostToSellAttributeAdapter1 postToSellAttributeAdapter;
     List<AttributeRequestModel> attributeRequestModels = new ArrayList<>();
 
-    private List<CountryModel> dispatchcontryList = new ArrayList<>();
-    private List<CountryModel> destinationcontryList = new ArrayList<>();
-    private List<ProtModel> portList = new ArrayList<>();
-    private List<ProtModel> destinationportList = new ArrayList<>();
 
     private int productid;
     private String productname;
 
     public PostDetailSpinerData detailSpinerData;
-    public String selectedTransmitCondition = "";
 
-
-    public int is_destination;
-    public int delivery_condition_id;
-    private int dispatchcontryid;
-    private int selectedport;
-
-    private int destinationcontryid;
-    private int selecteddestinationport;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -107,12 +94,6 @@ public class SearchBuyerFragment extends Fragment {
                         intent.putExtra("data", jsonArray.toString());
                         intent.putExtra("product_id", productid);
                         intent.putExtra("productname", productname);
-                        intent.putExtra("delivery_condition_id", delivery_condition_id);
-                        intent.putExtra("dispatchcontryid", dispatchcontryid);
-                        intent.putExtra("selectedport", selectedport);
-                        intent.putExtra("destinationcontryid", destinationcontryid);
-                        intent.putExtra("selecteddestinationport", selecteddestinationport);
-
                         startActivity(intent);
                     }
                 } catch (Exception e) {
@@ -120,272 +101,8 @@ public class SearchBuyerFragment extends Fragment {
             }
         });
         getSpinerData();
-        CountryList();
 
         return binding.getRoot();
-    }
-
-    private void CountryList() {
-        customDialog.displayProgress(mContext);
-        Call<ResponseModel<List<CountryModel>>> call = APIClient.getInstance().country_list(mSessionUtil.getApiToken());
-        Log.e("getApiToken", "getApiToken==" + mSessionUtil.getApiToken());
-        call.enqueue(new Callback<ResponseModel<List<CountryModel>>>() {
-            @Override
-            public void onResponse(Call<ResponseModel<List<CountryModel>>> call, Response<ResponseModel<List<CountryModel>>> response) {
-                Log.e("StateModel", "StateModel==" + new Gson().toJson(response.body().data));
-                customDialog.dismissProgress(mContext);
-                if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
-                    setUpSpinercountrydispatch(response.body().data);
-                    setUpSpinercountrydestination(response.body().data);
-                } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-                } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
-                    AppUtil.showToast(mContext, response.body().message);
-                    AppUtil.autoLogout(getActivity());
-                } else {
-                    AppUtil.showToast(mContext, response.body().message);
-                }
-            }
-            @Override
-            public void onFailure(Call<ResponseModel<List<CountryModel>>> call, Throwable t) {
-                customDialog.dismissProgress(mContext);
-            }
-        });
-    }
-
-    public void setUpSpinercountrydispatch(List<CountryModel> list) {
-        dispatchcontryList.clear();
-        dispatchcontryList.addAll(list);
-        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, dispatchcontryList);
-        binding.spinnerCountryOfDispatch.setAdapter(adapter);
-        binding.spinnerCountryOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                dispatchcontryid = dispatchcontryList.get(position).getId();
-                Log.e("selectedStation", "selectedStation==" + dispatchcontryid);
-                PortList(dispatchcontryid);
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    public void setUpSpinercountrydestination(List<CountryModel> list) {
-        destinationcontryList.clear();
-        destinationcontryList.addAll(list);
-        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationcontryList);
-        binding.spinnerDestinationCountry.setAdapter(adapter);
-        binding.spinnerDestinationCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                destinationcontryid = destinationcontryList.get(position).getId();
-                Log.e("selectedStation", "selectedStation==" + dispatchcontryid);
-                DestinationPortList(destinationcontryid);
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void DestinationPortList(int countryid) {
-        try {
-            destinationportList.clear();
-            customDialog.displayProgress(mContext);
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("user_type", mSessionUtil.getUsertype());
-            jsonObject.put("country_id", countryid);
-            String data = jsonObject.toString();
-            Call<ResponseModel<List<ProtModel>>> call = APIClient.getInstance().port_list(mSessionUtil.getApiToken(), data);
-            call.enqueue(new Callback<ResponseModel<List<ProtModel>>>() {
-                @Override
-                public void onResponse(Call<ResponseModel<List<ProtModel>>> call, Response<ResponseModel<List<ProtModel>>> response) {
-                    Log.e("ProtModel", "ProtModel==" + new Gson().toJson(response.body().data));
-                    customDialog.dismissProgress(mContext);
-                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
-                        setUpSpinerdestinationport(response.body().data);
-                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
-                        AppUtil.showToast(mContext, response.body().message);
-                        AppUtil.autoLogout(getActivity());
-                    } else {
-                        AppUtil.showToast(mContext, response.body().message);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseModel<List<ProtModel>>> call, Throwable t) {
-                    customDialog.dismissProgress(mContext);
-                }
-            });
-        } catch (Exception e) {
-            e.getMessage();
-        }
-    }
-
-    public void setUpSpinerdestinationport(List<ProtModel> list) {
-        destinationportList.clear();
-        destinationportList.addAll(list);
-        PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationportList);
-        binding.spinnerDestinationPort.setAdapter(adapter);
-        binding.spinnerDestinationPort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selecteddestinationport = destinationportList.get(position).getId();
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void PortList(int countryid) {
-        try {
-            portList.clear();
-            customDialog.displayProgress(mContext);
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("user_type", mSessionUtil.getUsertype());
-            jsonObject.put("country_id", countryid);
-            String data = jsonObject.toString();
-            Call<ResponseModel<List<ProtModel>>> call = APIClient.getInstance().port_list(mSessionUtil.getApiToken(), data);
-            call.enqueue(new Callback<ResponseModel<List<ProtModel>>>() {
-                @Override
-                public void onResponse(Call<ResponseModel<List<ProtModel>>> call, Response<ResponseModel<List<ProtModel>>> response) {
-                    Log.e("ProtModel", "ProtModel==" + new Gson().toJson(response.body().data));
-                    customDialog.dismissProgress(mContext);
-                    if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
-                        setUpSpinerport(response.body().data);
-                    } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-                    } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
-                        AppUtil.showToast(mContext, response.body().message);
-                        AppUtil.autoLogout(getActivity());
-                    } else {
-                        AppUtil.showToast(mContext, response.body().message);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseModel<List<ProtModel>>> call, Throwable t) {
-                    customDialog.dismissProgress(mContext);
-                }
-            });
-        } catch (Exception e) {
-            e.getMessage();
-        }
-    }
-
-    public void setUpSpinerport(List<ProtModel> list) {
-        portList.clear();
-        portList.addAll(list);
-        PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, portList);
-        binding.spinnerPortOfDispatch.setAdapter(adapter);
-        binding.spinnerPortOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedport = portList.get(position).getId();
-            } // to close the onItemSelected
-
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    public class PortAdapter extends ArrayAdapter<ProtModel> {
-
-        LayoutInflater flater;
-
-        public PortAdapter(Context context, int resouceId, int textviewId, List<ProtModel> list) {
-
-            super(context, resouceId, textviewId, list);
-//        flater = context.getLayoutInflater();
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            return rowview(convertView, position);
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return rowview(convertView, position);
-        }
-
-        private View rowview(View convertView, int position) {
-
-            ProtModel rowItem = getItem(position);
-
-            PortAdapter.viewHolder holder;
-            View rowview = convertView;
-            if (rowview == null) {
-
-                holder = new PortAdapter.viewHolder();
-                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.spinner_layout, null, false);
-
-                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
-
-                rowview.setTag(holder);
-            } else {
-                holder = (PortAdapter.viewHolder) rowview.getTag();
-            }
-            holder.txtTitle.setText(rowItem.getName());
-
-            return rowview;
-        }
-
-        private class viewHolder {
-            AppCompatTextView txtTitle;
-        }
-    }
-
-    public class CountryDispatchAdapter extends ArrayAdapter<CountryModel> {
-
-        LayoutInflater flater;
-
-        public CountryDispatchAdapter(Context context, int resouceId, int textviewId, List<CountryModel> list) {
-
-            super(context, resouceId, textviewId, list);
-//        flater = context.getLayoutInflater();
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            return rowview(convertView, position);
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return rowview(convertView, position);
-        }
-
-        private View rowview(View convertView, int position) {
-
-            CountryModel rowItem = getItem(position);
-
-            CountryDispatchAdapter.viewHolder holder;
-            View rowview = convertView;
-            if (rowview == null) {
-
-                holder = new CountryDispatchAdapter.viewHolder();
-                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.spinner_layout, null, false);
-
-                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
-
-                rowview.setTag(holder);
-            } else {
-                holder = (CountryDispatchAdapter.viewHolder) rowview.getTag();
-            }
-            holder.txtTitle.setText(rowItem.getName());
-
-            return rowview;
-        }
-
-        private class viewHolder {
-            AppCompatTextView txtTitle;
-        }
     }
 
 
@@ -406,7 +123,6 @@ public class SearchBuyerFragment extends Fragment {
                     customDialog.dismissProgress(mContext);
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         detailSpinerData = response.body().data.get(0);
-                        setSpinerData();
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
 
                     } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
@@ -428,75 +144,8 @@ public class SearchBuyerFragment extends Fragment {
         }
     }
 
-    public void setSpinerData() {
 
-        CustomAdapter adapterTransmit = new CustomAdapter(getActivity(), R.layout.spinner_layout, R.id.txt_company_name, detailSpinerData.getTransmit_condition());
-        binding.spinnerDeliveryCondition.setAdapter(adapterTransmit);
 
-        binding.spinnerDeliveryCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getName();
-                is_destination = detailSpinerData.getTransmit_condition().get(position).getIs_destination();
-                delivery_condition_id = detailSpinerData.getTransmit_condition().get(position).getId();
-                if (is_destination == 0) {
-                    binding.layoutDestinationCountry.setVisibility(View.GONE);
-                    binding.layoutDestinationPort.setVisibility(View.GONE);
-                } else {
-                    binding.layoutDestinationCountry.setVisibility(View.VISIBLE);
-                    binding.layoutDestinationPort.setVisibility(View.VISIBLE);
-                }
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    public class CustomAdapter extends ArrayAdapter<PostDetailSpinerData.SpinerModel> {
-        LayoutInflater flater;
-
-        public CustomAdapter(Activity context, int resouceId, int textviewId, List<PostDetailSpinerData.SpinerModel> list) {
-
-            super(context, resouceId, textviewId, list);
-        }
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            return rowview(convertView, position);
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return rowview(convertView, position);
-        }
-
-        private View rowview(View convertView, int position) {
-
-            PostDetailSpinerData.SpinerModel rowItem = getItem(position);
-
-            CustomAdapter.viewHolder holder;
-            View rowview = convertView;
-            if (rowview == null) {
-
-                holder = new CustomAdapter.viewHolder();
-                flater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowview = flater.inflate(R.layout.spinner_layout, null, false);
-
-                holder.txtTitle = rowview.findViewById(R.id.txt_company_name);
-
-                rowview.setTag(holder);
-            } else {
-                holder = (CustomAdapter.viewHolder) rowview.getTag();
-            }
-            holder.txtTitle.setText(rowItem.getName());
-
-            return rowview;
-        }
-
-        private class viewHolder {
-            AppCompatTextView txtTitle;
-        }
-    }
 
     private void SetAdapter() {
         postToSellAttributeAdapter = new PostToSellAttributeAdapter1(mContext);

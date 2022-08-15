@@ -25,6 +25,10 @@ public class ContractDetailModel implements Serializable {
     @Expose
     private int is_dispatch;
 
+    @SerializedName("is_destination")
+    @Expose
+    private int is_destination;
+
     @SerializedName("is_sample")
     @Expose
     private int is_sample;
@@ -36,6 +40,30 @@ public class ContractDetailModel implements Serializable {
     @SerializedName("post_date")
     @Expose
     private String post_date;
+
+    @SerializedName("country_origin_name")
+    @Expose
+    private String country_origin_name;
+
+    @SerializedName("delivery_condition_name")
+    @Expose
+    private String delivery_condition_name;
+
+    @SerializedName("country_dispatch_name")
+    @Expose
+    private String country_dispatch_name;
+
+    @SerializedName("port_dispatch_name")
+    @Expose
+    private String port_dispatch_name;
+
+    @SerializedName("country_destination_name")
+    @Expose
+    private String country_destination_name;
+
+    @SerializedName("port_destination_name")
+    @Expose
+    private String port_destination_name;
 
     @SerializedName("buyer_id")
     @Expose
@@ -175,6 +203,63 @@ public class ContractDetailModel implements Serializable {
 
     public void setNegotiation_by_company_id(int negotiation_by_company_id) {
         this.negotiation_by_company_id = negotiation_by_company_id;
+    }
+
+    public int getIs_destination() {
+        return is_destination;
+    }
+
+
+    public String getCountry_origin_name() {
+        return country_origin_name;
+    }
+
+    public void setCountry_origin_name(String country_origin_name) {
+        this.country_origin_name = country_origin_name;
+    }
+
+    public String getDelivery_condition_name() {
+        return delivery_condition_name;
+    }
+
+    public void setDelivery_condition_name(String delivery_condition_name) {
+        this.delivery_condition_name = delivery_condition_name;
+    }
+
+    public String getCountry_dispatch_name() {
+        return country_dispatch_name;
+    }
+
+    public void setCountry_dispatch_name(String country_dispatch_name) {
+        this.country_dispatch_name = country_dispatch_name;
+    }
+
+    public String getPort_dispatch_name() {
+        return port_dispatch_name;
+    }
+
+    public void setPort_dispatch_name(String port_dispatch_name) {
+        this.port_dispatch_name = port_dispatch_name;
+    }
+
+    public String getCountry_destination_name() {
+        return country_destination_name;
+    }
+
+    public void setCountry_destination_name(String country_destination_name) {
+        this.country_destination_name = country_destination_name;
+    }
+
+    public String getPort_destination_name() {
+        return port_destination_name;
+    }
+
+    public void setPort_destination_name(String port_destination_name) {
+        this.port_destination_name = port_destination_name;
+    }
+
+    public void setIs_destination(int is_destination) {
+        this.is_destination = is_destination;
     }
 
     public int getIs_dispatch() {

@@ -234,7 +234,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/textview_border"
                         android:fontFamily="@font/poppins_medium"
-                        android:hint="₹ 0"
+                        android:hint="$ 0"
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:padding="@dimen/_8sdp"

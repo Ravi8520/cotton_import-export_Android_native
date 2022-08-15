@@ -14,20 +14,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.95"
                 android:layout_marginRight="@dimen/_5sdp"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/_1sdp">
+                android:layout_marginBottom="@dimen/_1sdp"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.7"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/lbl_company"
                     android:textColor="@color/tab_text_color_op"
@@ -45,44 +44,18 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.95"
-                android:layout_marginLeft="@dimen/_3sdp"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/_1sdp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.7"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/lbl_buyer"
-                    android:textColor="@color/tab_text_color_op"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/txt_buyer_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="Jone Deo"
-                    android:textColor="@color/tab_text_color"
-                    android:textSize="13sp" />
-
-
-            </LinearLayout>
-
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_view"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_weight="1.1"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
                 android:background="@drawable/custome_button"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/lbl_view"
                 android:textAllCaps="false"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
 
 
@@ -93,42 +66,62 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_data"
             android:layout_marginTop="1dp"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="0.7"
-                android:fontFamily="@font/poppins_regular"
-                android:text="@string/lbl_buyer"
-                android:textColor="@color/tab_text_color"
-                android:textSize="12sp" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <RelativeLayout
+                <TextView
+                    android:id="@+id/txt_importer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/lbl_buyer"
+                    android:textColor="@color/tab_text_color_op"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text=""
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/price"
+                    android:textColor="@color/tab_text_color_op"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/txt_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="@string/lbl_rupees_symbol"
+                    android:text=""
                     android:textColor="@color/tab_text_color"
                     android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/txt_beale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_toRightOf="@+id/txt_price"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="11"
-                    android:textColor="@color/tab_text_color"
-                    android:textSize="13sp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
 
         </LinearLayout>

@@ -437,7 +437,7 @@ public class PostDetailActivity extends AppCompatActivity {
         binding.txtCountryOfOrgin.setText(postDetail.getCountry_origin_name());
         binding.txtCompanyName.setText(postDetail.getCompany_name());
         binding.txtUserName.setText(postDetail.getSeller_buyer_name());
-        binding.txtPrice.setText("₹ " + postDetail.getPrice() + "(" + postDetail.getNo_of_bales() + ")");
+        binding.txtPrice.setText("$ " + postDetail.getPrice() + "(" + postDetail.getNo_of_bales() + ")");
         binding.txtTitle.setText(postDetail.getProduct_name());
         binding.txtQty.setText(postDetail.getNo_of_bales());
         binding.edtPrice.setText("" + postDetail.getPrice());
@@ -827,7 +827,7 @@ public class PostDetailActivity extends AppCompatActivity {
         }
         totalBales = noOfBales;
         binding.txtQty.setText(noOfBales + "");
-        binding.txtPrice.setText("₹ " + postDetail.getPrice() + "(" + noOfBales + ")");
+        binding.txtPrice.setText("$ " + postDetail.getPrice() + "(" + noOfBales + ")");
 
         //noOfBales = Integer.parseInt(negotiationDetail.getCurrent_no_of_bales());
 

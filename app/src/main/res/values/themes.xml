@@ -201,9 +201,13 @@
         <item name="materialCalendarHeaderToggleButton">
             @style/Widget.AppTheme.MaterialCalendar.HeaderToggleButton
         </item>
+        <item name="subheaderTextAppearance">?attr/textAppearanceTitleSmall</item>
     </style>
 
     <style name="Widget.AppTheme.MaterialCalendar.HeaderToggleButton" parent="Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton">
         <item name="android:visibility">gone</item>
+        <item name="android:headerBackground">#ffffff</item>
+        <item name="android:textColorPrimary">#000000</item>
     </style>
+
 </resources>

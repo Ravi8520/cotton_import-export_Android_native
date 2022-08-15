@@ -3,10 +3,12 @@ package com.ecotton.impex.api;
 import com.ecotton.impex.models.AddCompanyModel;
 import com.ecotton.impex.models.AddMemberModel;
 import com.ecotton.impex.models.BrokerModel;
+import com.ecotton.impex.models.BrokerReportModel;
 import com.ecotton.impex.models.CancelPostModel;
 import com.ecotton.impex.models.CompanyDetailModel;
 import com.ecotton.impex.models.CompleteTabModel;
 import com.ecotton.impex.models.ContractDetailModel;
+import com.ecotton.impex.models.ContractProductModel;
 import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.DistrictModel;
 import com.ecotton.impex.models.DocumentUploadModel;
@@ -612,6 +614,59 @@ public interface APIInterface {
     @FormUrlEncoded
     @POST("lab_report_status")
     Call<ResponseModel> updateLabReportStatus(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
+
+    @FormUrlEncoded
+    @POST("post_report")
+    Call<ResponseModel<BrokerReportModel>> post_report(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
+
+    @FormUrlEncoded
+    @POST("contract_party_list")
+    Call<ResponseModel<BrokerReportModel>> contract_party_list(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
+
+    @FormUrlEncoded
+    @POST("broker_party_wise_contract_report")
+    Call<ResponseModel<BrokerReportModel>> broker_party_wise_contract_report(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
+
+    @FormUrlEncoded
+    @POST("party_wise_contract_report")
+    Call<ResponseModel<BrokerReportModel>> party_wise_contract_report(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
+    @FormUrlEncoded
+    @POST("contract_broker_list")
+    Call<ResponseModel<List<ContractProductModel>>> contract_broker_list(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
+    @FormUrlEncoded
+    @POST("contract_product_list")
+    Call<ResponseModel<List<ContractProductModel>>> contract_product_list(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
+
+    @FormUrlEncoded
+    @POST("broker_wise_contract_report")
+    Call<ResponseModel<ContractProductModel>> broker_wise_contract_report(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
+    @FormUrlEncoded
+    @POST("product_wise_contract_report")
+    Call<ResponseModel<ContractProductModel>> product_wise_contract_report(
             @Header("Authorization") String Authorization,
             @Field("data") String data
     );

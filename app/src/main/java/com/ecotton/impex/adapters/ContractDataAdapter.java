@@ -41,7 +41,7 @@ public class ContractDataAdapter extends RecyclerView.Adapter<ContractDataAdapte
     }
 
     public class DataHolder extends RecyclerView.ViewHolder {
-        TextView txt_product_name, txt_company_name, txt_seller_name, txt_amount;
+        TextView txt_product_name, txt_company_name, txt_seller_name, txt_amount,sellertitle_txt;
         Button btn_download;
         RelativeLayout layout_main;
 
@@ -53,6 +53,7 @@ public class ContractDataAdapter extends RecyclerView.Adapter<ContractDataAdapte
             txt_amount = itemView.findViewById(R.id.txt_amount);
             btn_download = itemView.findViewById(R.id.btn_download);
             layout_main = itemView.findViewById(R.id.layout_main);
+            sellertitle_txt = itemView.findViewById(R.id.sellertitle_txt);
         }
     }
 
@@ -69,12 +70,16 @@ public class ContractDataAdapter extends RecyclerView.Adapter<ContractDataAdapte
 
         holder.txt_product_name.setText(dealDetailsList.get(position).getProduct_name());
         holder.txt_amount.setText(context.getResources().getString(R.string.lbl_rupees_symbol_only) + " " + dealDetailsList.get(position).getPost_price());
-        holder.txt_seller_name.setText(dealDetailsList.get(position).getSeller_name());
+
 
         if (sessionUtil.getUsertype().equals("buyer")) {
             holder.txt_company_name.setText(dealDetailsList.get(position).getSeller_company_name());
+            holder.txt_seller_name.setText(dealDetailsList.get(position).getSeller_name());
+            holder.sellertitle_txt.setText("Exporter");
         } else {
             holder.txt_company_name.setText(dealDetailsList.get(position).getBuyer_company_name());
+            holder.txt_seller_name.setText(dealDetailsList.get(position).getBuyer_name());
+            holder.sellertitle_txt.setText("Importer");
         }
 
         if (sessionUtil.getUsertype().equals("buyer")) {
@@ -87,7 +92,7 @@ public class ContractDataAdapter extends RecyclerView.Adapter<ContractDataAdapte
                 holder.btn_download.setEnabled(false);
                 holder.btn_download.setBackground(context.getResources().getDrawable(R.drawable.custome_button1));
             }
-            if (dealDetailsList.get(position).getIs_broker_otp_verify() == 1 && dealDetailsList.get(position).getIs_buyer_otp_verify() == 1 && dealDetailsList.get(position).getIs_seller_otp_verify() == 1) {
+            if (dealDetailsList.get(position).getIs_buyer_otp_verify() == 1 && dealDetailsList.get(position).getIs_seller_otp_verify() == 1) {
                 holder.btn_download.setText(context.getResources().getString(R.string.download));
                 holder.btn_download.setEnabled(true);
                 holder.btn_download.setBackground(context.getResources().getDrawable(R.drawable.custome_button));
@@ -104,7 +109,7 @@ public class ContractDataAdapter extends RecyclerView.Adapter<ContractDataAdapte
                 holder.btn_download.setEnabled(false);
                 holder.btn_download.setBackground(context.getResources().getDrawable(R.drawable.custome_button1));
             }
-            if (dealDetailsList.get(position).getIs_broker_otp_verify() == 1 && dealDetailsList.get(position).getIs_buyer_otp_verify() == 1 && dealDetailsList.get(position).getIs_seller_otp_verify() == 1) {
+            if (dealDetailsList.get(position).getIs_buyer_otp_verify() == 1 && dealDetailsList.get(position).getIs_seller_otp_verify() == 1) {
                 holder.btn_download.setText(context.getResources().getString(R.string.download));
                 holder.btn_download.setEnabled(true);
                 holder.btn_download.setBackground(context.getResources().getDrawable(R.drawable.custome_button));
@@ -122,7 +127,7 @@ public class ContractDataAdapter extends RecyclerView.Adapter<ContractDataAdapte
             public void onClick(View view) {
                 Gson gson = new Gson();
                 String attribute = gson.toJson(dealDetailsList.get(position).getAttribute_array());
-                if (dealDetailsList.get(position).getIs_broker_otp_verify() == 1 && dealDetailsList.get(position).getIs_buyer_otp_verify() == 1 && dealDetailsList.get(position).getIs_seller_otp_verify() == 1) {
+                if (dealDetailsList.get(position).getIs_buyer_otp_verify() == 1 && dealDetailsList.get(position).getIs_seller_otp_verify() == 1) {
                     Intent intent = new Intent(context, MyContractDetailsActivity.class);
                     intent.putExtra("deal_id", dealDetailsList.get(position).getDeal_id());
                     intent.putExtra("attribute", attribute);
