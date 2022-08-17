@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:gravity="center"
-                android:text="We have sent verification code \non your number 9876543210"
+                android:text="We have sent verification code \non your Email"
                 android:textColor="#53616C"
                 android:textSize="13sp" />
 

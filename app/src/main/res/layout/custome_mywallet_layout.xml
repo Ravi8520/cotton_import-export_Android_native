@@ -60,7 +60,7 @@
             android:layout_weight="1.2"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="end"
-            android:text="+Rs.10,000"
+            android:text="0"
             android:textSize="14sp" />
 
     </LinearLayout>

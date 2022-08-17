@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ecotton.impex.databinding.FragmentExportsBinding;
+import com.ecotton.impex.utils.AppUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,6 +61,13 @@ public class ExportsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentExportsBinding.inflate(getLayoutInflater());
+
+        binding.layoutMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppUtil.hideSoftKeyboard(getActivity());
+            }
+        });
         return binding.getRoot();
     }
 

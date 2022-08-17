@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.adapters.MyMemberAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
@@ -19,6 +18,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -52,6 +52,7 @@ public class MyMemberActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MyMemberActivity.this, MyMemberDataActivity.class));
+                finish();
             }
         });
         binding.backarrow.setOnClickListener(new View.OnClickListener() {

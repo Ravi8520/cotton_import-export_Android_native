@@ -12,11 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ecotton.impex.models.MyContractModel;
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.activities.MyContractDetailsActivity;
+import com.ecotton.impex.models.MyContractModel;
 import com.ecotton.impex.utils.SessionUtil;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class ContractDataAdapter extends RecyclerView.Adapter<ContractDataAdapte
     public void onBindViewHolder(@NonNull DataHolder holder, int position) {
 
         holder.txt_product_name.setText(dealDetailsList.get(position).getProduct_name());
-        holder.txt_amount.setText(context.getResources().getString(R.string.lbl_rupees_symbol_only) + " " + dealDetailsList.get(position).getPost_price());
+        holder.txt_amount.setText(context.getResources().getString(R.string.lbl_rupees_symbol_only) + " " + dealDetailsList.get(position).getPost_price() + "(" + dealDetailsList.get(position).getPost_bales() + ")");
 
 
         if (sessionUtil.getUsertype().equals("buyer")) {

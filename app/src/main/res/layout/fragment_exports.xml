@@ -1,172 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/linear_1"
+        android:id="@+id/layout_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="@dimen/_130sdp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/cotton_rate"
-            android:textColor="@color/tab_text_color"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/et_cotonratecandy"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="50dp"
-            android:background="@drawable/custome_edittext"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:hint="@string/cotton_rate"
-            android:inputType="numberDecimal"
-            android:textSize="@dimen/_12ssp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/rs_per_candy"
-            android:textColor="@color/tab_text_color"
-            android:textSize="10sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linear_1"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/_130sdp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/expenses"
-            android:textColor="@color/tab_text_color"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/et_export_exp"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="50dp"
-            android:background="@drawable/custome_edittext"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:hint="@string/expenses"
-            android:inputType="numberDecimal"
-            android:textSize="@dimen/_12ssp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/rs_per_candy"
-            android:textColor="@color/tab_text_color"
-            android:textSize="10sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linear_2"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/_130sdp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/exchange_rate"
-            android:textColor="@color/tab_text_color"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/et_excg_rate"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="50dp"
-            android:background="@drawable/custome_edittext"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:hint="@string/exchange_rate"
-            android:inputType="numberDecimal"
-            android:textSize="@dimen/_12ssp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/usd_inr"
-            android:textColor="@color/tab_text_color"
-            android:textSize="10sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linear_3"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:fontFamily="@font/poppins_regular"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/export_rate"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tv_exportrate"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linear_1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5sdp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="0"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp" />
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/cotton_rate"
+                android:textColor="@color/tab_text_color"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_cotonratecandy"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="50dp"
+                android:background="@drawable/custome_edittext"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:hint="@string/cotton_rate"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/rs_per_candy"
+                android:textColor="@color/tab_text_color"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_below="@id/linear_1"
             android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/expenses"
+                android:textColor="@color/tab_text_color"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_export_exp"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="50dp"
+                android:background="@drawable/custome_edittext"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:hint="@string/expenses"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/rs_per_candy"
+                android:textColor="@color/tab_text_color"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_2"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/exchange_rate"
+                android:textColor="@color/tab_text_color"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_excg_rate"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="50dp"
+                android:background="@drawable/custome_edittext"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:hint="@string/exchange_rate"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/usd_inr"
+                android:textColor="@color/tab_text_color"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_3"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/poppins_regular"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/cents_per_bales"
-            android:textColor="@color/tab_text_color"
-            android:textSize="10sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/export_rate"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_exportrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="0"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/cents_per_bales"
+                android:textColor="@color/tab_text_color"
+                android:textSize="10sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-
 </RelativeLayout>

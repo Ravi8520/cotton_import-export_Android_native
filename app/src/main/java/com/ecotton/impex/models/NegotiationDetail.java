@@ -61,6 +61,9 @@ public class NegotiationDetail implements Serializable {
     public String country_destination_id;
     public String country_destination_name;
 
+    public String seller_company_name="";
+    public String buyer_company_name="";
+
     public String getCountry_origin_name() {
         return country_origin_name;
     }
@@ -123,6 +126,22 @@ public class NegotiationDetail implements Serializable {
 
     public void setPort_dispatch_name(String port_dispatch_name) {
         this.port_dispatch_name = port_dispatch_name;
+    }
+
+    public String getSeller_company_name() {
+        return seller_company_name;
+    }
+
+    public void setSeller_company_name(String seller_company_name) {
+        this.seller_company_name = seller_company_name;
+    }
+
+    public String getBuyer_company_name() {
+        return buyer_company_name;
+    }
+
+    public void setBuyer_company_name(String buyer_company_name) {
+        this.buyer_company_name = buyer_company_name;
     }
 
     public String getCountry_destination_id() {

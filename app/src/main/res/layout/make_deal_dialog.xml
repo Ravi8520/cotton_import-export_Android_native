@@ -64,11 +64,12 @@
                 android:weightSum="2">
 
                 <TextView
+                    android:id="@+id/txt_seller"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Seller Name : "
+                    android:text="Exporter Name : "
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
 
@@ -96,12 +97,41 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Broker Name : "
+                    android:text="Importer Name : "
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txt_broker_name"
+                    android:id="@+id/txt_buyer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text=" "
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Price : "
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txt_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_3sdp"
@@ -124,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Bales : "
+                    android:text="Quantity in ton : "
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
 
@@ -152,12 +182,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Price : "
+                    android:text="Country of origin : "
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txt_price"
+                    android:id="@+id/txt_country_of_origin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_3sdp"
@@ -208,12 +238,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Header : "
+                    android:text="Delivery Period : "
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txt_header"
+                    android:id="@+id/txt_delivery_period"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_3sdp"
@@ -236,12 +266,41 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Transmit Condition : "
+                    android:text="Inspection : "
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txt_transmit_condition"
+                    android:id="@+id/txt_inspection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text=" "
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Delivery Condition : "
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txt_delivery_condition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_3sdp"
@@ -264,18 +323,75 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Lab Condition : "
+                    android:text="Country of dispatch: "
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/txt_lab_condition"
+                    android:id="@+id/txt_country_of_dispatch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_3sdp"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_regular"
                     android:text=" "
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Port of dispatch: "
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txt_port_of_dispatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text=" "
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Note: "
+                    android:textColor="@color/tab_text_color"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txt_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/textview_border"
+                    android:fontFamily="@font/poppins_regular"
+                    android:padding="@dimen/_5sdp"
+                    android:text=""
                     android:textColor="@color/tab_text_color"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -312,8 +428,8 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

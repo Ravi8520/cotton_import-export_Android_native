@@ -22,9 +22,17 @@ public class InvitedDataModel implements Serializable {
     @Expose
     private String mobile_number;
 
+    @SerializedName("email")
+    @Expose
+    private String email;
+
     @SerializedName("company_name")
     @Expose
     private String company_name;
+
+    @SerializedName("company_iec")
+    @Expose
+    private String company_iec;
 
     @SerializedName("company_gst_no")
     @Expose
@@ -46,6 +54,14 @@ public class InvitedDataModel implements Serializable {
         return company_id;
     }
 
+    public String getCompany_iec() {
+        return company_iec;
+    }
+
+    public void setCompany_iec(String company_iec) {
+        this.company_iec = company_iec;
+    }
+
     public void setCompany_id(int company_id) {
         this.company_id = company_id;
     }
@@ -56,6 +72,14 @@ public class InvitedDataModel implements Serializable {
 
     public void setCompany_broker_id(int company_broker_id) {
         this.company_broker_id = company_broker_id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {

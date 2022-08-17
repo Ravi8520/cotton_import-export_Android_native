@@ -326,6 +326,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="center_vertical"
                         android:singleLine="true"
+                        android:text="select Delivery Period"
                         android:textColor="@color/tab_text_color"
                         android:textSize="@dimen/_10ssp" />
 

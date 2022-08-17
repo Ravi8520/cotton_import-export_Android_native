@@ -124,7 +124,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         DashBoardModel obj = mArrayList.get(position);
         holder.binding.txtName.setText(obj.getName());
-        holder.binding.txtBales.setText("Bales: " + obj.getBales());
+        holder.binding.txtBales.setText("Ton: " + obj.getBales());
         holder.binding.txtPost.setText("Post: " + obj.getCount());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -133,7 +133,7 @@ public class DealNotifictonAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         holder.binding.txtProductName.setText(mArrayList.get(position).getProduct_name());
         holder.binding.txtSendBy.setText(mArrayList.get(position).getSend_by());
         holder.binding.txtPrice.setText(mcontext.getResources().getString(R.string.lbl_rupees_symbol_only) + " " + mArrayList.get(position).getPrice() + " (" + mArrayList.get(position).getNo_of_bales() + ")");
-
+        holder.binding.txtCompanyName.setText(mArrayList.get(position).getCompany_name());
         holder.binding.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

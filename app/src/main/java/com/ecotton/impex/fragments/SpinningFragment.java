@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ecotton.impex.databinding.FragmentSpinningBinding;
+import com.ecotton.impex.utils.AppUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -62,6 +63,13 @@ public class SpinningFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentSpinningBinding.inflate(getLayoutInflater());
+
+        binding.layoutMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppUtil.hideSoftKeyboard(getActivity());
+            }
+        });
         return binding.getRoot();
     }
 

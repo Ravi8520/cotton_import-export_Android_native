@@ -202,7 +202,7 @@ public class MyContractDetailsActivity extends AppCompatActivity {
         }
         binding.txtCountryOfOrigin.setText(contractDetailModel.getCountry_origin_name());
         binding.txtInspection.setText(contractDetailModel.getLab());
-        //binding.txtDeliveryPeriod.setText();
+        binding.txtDeliveryPeriod.setText(contractDetailModel.getDelivery_period());
         binding.txtCountryOfDispatch.setText(contractDetailModel.getCountry_dispatch_name());
         binding.txtPaymentCondition.setText(contractDetailModel.getPayment_condition());
         if (contractDetailModel.getPort_dispatch_name() != null) {

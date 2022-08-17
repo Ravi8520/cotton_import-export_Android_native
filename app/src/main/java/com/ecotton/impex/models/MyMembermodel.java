@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MyMembermodel implements Serializable {
     private int id, status;
-    private String name,mobile_number,designation;
+    private String name,mobile_number,designation,email;
 
     public int getId() {
         return id;
@@ -44,5 +44,13 @@ public class MyMembermodel implements Serializable {
 
     public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -46,10 +46,10 @@
     <string name="lbl_confrim_password">Confirm Password</string>
     <string name="lbl_post_to_sell">Post To Sell</string>
     <string name="lbl_post_to_export">Post To Export</string>
-    <string name="lbl_post_to_buy">Post To Buy</string>
+    <string name="lbl_post_to_buy">Post To Import</string>
     <string name="lbl_search">Search</string>
-    <string name="lbl_private_sell">Private Sell</string>
-    <string name="lbl_private_buy">Private Buy</string>
+    <string name="lbl_private_sell">Private Export</string>
+    <string name="lbl_private_buy">Private Import</string>
     <string name="lbl_private_export">Private Export</string>
     <string name="lbl_update">Update</string>
     <string name="lbl_edit_personal_detail">Edit personal details</string>
@@ -284,9 +284,9 @@
 
     <string name="Post_time">Post Time</string>
     <string name="cancel_time">Cancel Time</string>
-    <string name="bales_price">Bales/ Price</string>
-    <string name="post_bales">Post Bales</string>
-    <string name="sell_bales">Sell Bales</string>
+    <string name="bales_price">Ton/ Price</string>
+    <string name="post_bales">Post Ton</string>
+    <string name="sell_bales">Sell Ton</string>
     <string name="post_price">Post Price</string>
     <string name="sell_price">Sell Price</string>
     <string name="post">Post</string>
@@ -391,7 +391,7 @@
     // My Favourites strings //
 
     <string name="myfavourite_title">My Favourites</string>
-    <string name="lbl_bales_price_detail">Bales/ Price Details</string>
+    <string name="lbl_bales_price_detail">Ton/ Price Details</string>
     <string name="lbl_seller_otp_verify">Seller OTP Verify</string>
     <string name="lbl_buyer_otp_verify">Buyer OTP Verify</string>
     <string name="lbl_broker_otp_verify">Broker OTP Verify</string>

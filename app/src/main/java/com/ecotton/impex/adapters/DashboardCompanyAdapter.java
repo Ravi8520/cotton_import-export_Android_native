@@ -127,7 +127,7 @@ public class DashboardCompanyAdapter extends RecyclerView.Adapter<RecyclerView.V
         holder.binding.txtCompanyName.setText(obj.getCompany_name());
         holder.binding.txtName.setText(obj.getName());
         holder.binding.txtBales.setText(obj.getRemaining_bales());
-        holder.binding.txtPice.setText(obj.getPrice());
+        holder.binding.txtPice.setText("$ "+obj.getPrice());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/tab_text_color">
 
     <RelativeLayout
         android:id="@+id/rl_mypost"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/purple_700">
+        android:layout_height="?actionBarSize">
 
         <ImageView
             android:id="@+id/backarrow"
@@ -41,18 +40,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_mypost"
-        android:background="@color/light_grey">
+        android:background="@drawable/custome_bg_white">
 
         <com.google.android.material.tabs.TabLayout
-
             android:id="@+id/tablaout"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@drawable/custome_bg_white"
             app:tabIndicatorColor="@color/colorPrimaryDark"
             app:tabIndicatorHeight="@dimen/_2sdp"
             app:tabSelectedTextColor="@color/colorPrimary"
             app:tabTextAppearance="@style/TabLayoutTextStyle"
+            android:layout_marginTop="@dimen/_10sdp"
             app:tabTextColor="@color/tab_text_color_op">
 
             <com.google.android.material.tabs.TabItem
@@ -75,6 +73,7 @@
         android:id="@+id/tab_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/post_tabs" />
+        android:layout_below="@id/post_tabs"
+        android:background="@color/white" />
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -37,6 +38,26 @@ public class MYPostActivity extends AppCompatActivity {
 
         mypostAdapter = new MypostAdapter(getSupportFragmentManager(), tablaout.getTabCount());
         tab_view_pager.setAdapter(mypostAdapter);
+
+        tab_view_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                Fragment fragment = mypostAdapter.getItem(position);
+                if (fragment != null) {
+                    fragment.onResume();
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         tablaout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

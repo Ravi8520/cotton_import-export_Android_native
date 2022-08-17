@@ -19,6 +19,10 @@ public class NotificatioListModel implements Serializable {
     @Expose
     private String status;
 
+    @SerializedName("company_name")
+    @Expose
+    private String company_name;
+
     @SerializedName("seller_buyer_id")
     @Expose
     private String seller_buyer_id;
@@ -109,6 +113,14 @@ public class NotificatioListModel implements Serializable {
 
     public void setSeller_buyer_id(String seller_buyer_id) {
         this.seller_buyer_id = seller_buyer_id;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
     }
 
     public String getSend_by() {

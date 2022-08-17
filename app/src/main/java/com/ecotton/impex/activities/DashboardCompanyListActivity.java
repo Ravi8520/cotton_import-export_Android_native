@@ -116,9 +116,9 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
                     binding.txtName.setText(dashBoardModelList.get(position).getName());
 
                     binding.txtPost.setText("Post: " + dashBoardModelList.get(position).getCount());
-                    binding.txtBales.setText("Bales:  " + dashBoardModelList.get(position).getBales());
-                    setUpStateRecyclerVeiw(dashBoardModelList.get(position).getCompanyModelList());
+                    binding.txtBales.setText("Ton:  " + dashBoardModelList.get(position).getBales());
 
+                    setUpStateRecyclerVeiw(dashBoardModelList.get(position).getCompanyModelList());
 
                 } // to close the onItemSelected
 

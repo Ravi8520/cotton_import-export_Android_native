@@ -1,13 +1,14 @@
 package com.ecotton.impex.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivityMyMemberDataBinding;
@@ -16,6 +17,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -72,11 +74,18 @@ public class MyMemberDataActivity extends AppCompatActivity {
             binding.edtName.requestFocus();
             return false;
         }
-        if (binding.edtNumber.getText().toString().length() < 10) {
-            binding.edtNumber.setError("Name should contain at least 10 characters");
+        if (binding.edtNumber.getText().toString().isEmpty()) {
+            binding.edtNumber.setError("Please Enter Email ");
             binding.edtNumber.requestFocus();
             return false;
         }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(binding.edtNumber.getText().toString()).matches()) {
+            binding.edtNumber.setError("Please Enter Proper Email Format ");
+            binding.edtNumber.requestFocus();
+            return false;
+        }
+
         if (binding.edtDesignation.getText().toString().trim().equals("")) {
             binding.edtDesignation.setError("Please Enter Designation");
             binding.edtDesignation.requestFocus();
@@ -93,7 +102,7 @@ public class MyMemberDataActivity extends AppCompatActivity {
             jsonObject.put("company_id", mSessionUtil.getCompanyId());
             jsonObject.put("user_type", mSessionUtil.getUsertype());
             jsonObject.put("name", binding.edtName.getText().toString().trim());
-            jsonObject.put("mobile_number", binding.edtNumber.getText().toString().trim());
+            jsonObject.put("email", binding.edtNumber.getText().toString().trim());
             jsonObject.put("designation", binding.edtDesignation.getText().toString().trim());
 
             String data = jsonObject.toString();
@@ -118,7 +127,6 @@ public class MyMemberDataActivity extends AppCompatActivity {
                         AppUtil.showToast(mContext, response.body().message);
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ResponseModel<AddMemberModel>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);
@@ -132,6 +140,7 @@ public class MyMemberDataActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        startActivity(new Intent(mContext, MyMemberActivity.class));
+        finish();
     }
 }

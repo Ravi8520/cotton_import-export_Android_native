@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.ecotton.impex.databinding.FragmentGinningBinding;
+import com.ecotton.impex.utils.AppUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -53,6 +54,14 @@ public class GinningFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentGinningBinding.inflate(getLayoutInflater());
+
+        binding.layoutMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppUtil.hideSoftKeyboard(getActivity());
+            }
+        });
+
         return binding.getRoot();
     }
 
