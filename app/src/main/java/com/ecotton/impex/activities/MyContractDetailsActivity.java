@@ -135,10 +135,7 @@ public class MyContractDetailsActivity extends AppCompatActivity {
                 }
             }
         });
-
         GetDealData();
-
-
     }
 
 

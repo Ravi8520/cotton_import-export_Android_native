@@ -2,6 +2,9 @@ package com.ecotton.impex;
 
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -25,12 +28,14 @@ public class MyApp extends DarkThemeApplication {
     public static SessionUtil mSessionUtil;
     public static FirebaseAnalytics mFirebaseAnalytics;
     public static BuyerFilterRequest filterRequest;
+    public static String BaseURL = "";
+
     public void onCreate() {
         super.onCreate();
         try {
             instance = this;
             mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-            filterRequest= new BuyerFilterRequest();
+            filterRequest = new BuyerFilterRequest();
             mSessionUtil = new SessionUtil(this);
 
             FirebaseMessaging.getInstance().subscribeToTopic("news")
@@ -44,14 +49,14 @@ public class MyApp extends DarkThemeApplication {
                             Log.e("TAG", msg);
                         }
                     });
-              Class.forName("android.os.AsyncTask");
-
+            Class.forName("android.os.AsyncTask");
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
     }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);

@@ -1,6 +1,8 @@
 package com.ecotton.impex.api;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+
 
 import com.ecotton.impex.BuildConfig;
 
@@ -33,7 +35,6 @@ public class APIClient {
                     .writeTimeout(30, TimeUnit.SECONDS)
                     .addInterceptor(logging)
                     .build();
-
 
             instance = new Retrofit.Builder()
                     .baseUrl(BuildConfig.BASE_URL+BuildConfig.API_PATH)
