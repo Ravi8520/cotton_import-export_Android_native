@@ -32,7 +32,7 @@
             android:layout_centerVertical="true"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
-            android:text="@string/lbl_post_to_sell"
+            android:text="@string/lbl_post_to_export"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp" />
 

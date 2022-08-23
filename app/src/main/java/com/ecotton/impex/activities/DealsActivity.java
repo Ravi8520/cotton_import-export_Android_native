@@ -38,6 +38,7 @@ public class DealsActivity extends AppCompatActivity {
         TabLayoutAdapter adapter = new TabLayoutAdapter(mContext, getSupportFragmentManager(), binding.tablayout.getTabCount());
         binding.viewPager.setAdapter(adapter);
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tablayout));
+
         binding.tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override

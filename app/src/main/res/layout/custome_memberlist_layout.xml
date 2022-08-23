@@ -28,7 +28,7 @@
             android:layout_below="@id/member_name"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/poppins_regular"
-            android:text="@string/mobile"
+            android:text="Email :"
             android:textColor="@color/tab_text_color"
             android:textSize="12sp" />
 

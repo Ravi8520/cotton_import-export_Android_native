@@ -149,8 +149,8 @@ public class NegotiationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         try {
             if (mArrayList.get(position).getNegotiation_type().equals("post")) {
                 postDetail = obj.getPost_detail().get(obj.getPost_detail().size() - 1);
-                holder.binding.txtPreviousPrice.setText("₹ " + postDetail.getPrev_price() + "(" + postDetail.getPrev_no_of_bales() + ")");
-                holder.binding.txtNewPrice.setText("₹ " + postDetail.getCurrent_price() + "(" + postDetail.getCurrent_no_of_bales() + ")");
+                holder.binding.txtPreviousPrice.setText("$ " + postDetail.getPrev_price() + "(" + postDetail.getPrev_no_of_bales() + ")");
+                holder.binding.txtNewPrice.setText("$ " + postDetail.getCurrent_price() + "(" + postDetail.getCurrent_no_of_bales() + ")");
                 holder.binding.txtPosterName.setText(postDetail.getPosted_company_name());
 
                 if (obj.getSeller_buyer_id().equals(MyApp.mSessionUtil.getUserid())) {
@@ -179,8 +179,8 @@ public class NegotiationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 }
             } else {
                 notificatioDetail = obj.getNotification_detail().get(obj.getNotification_detail().size() - 1);
-                holder.binding.txtPreviousPrice.setText("₹ " + notificatioDetail.getPrev_price() + "(" + notificatioDetail.getPrev_no_of_bales() + ")");
-                holder.binding.txtNewPrice.setText("₹ " + notificatioDetail.getCurrent_price() + "(" + notificatioDetail.getCurrent_no_of_bales() + ")");
+                holder.binding.txtPreviousPrice.setText("$ " + notificatioDetail.getPrev_price() + "(" + notificatioDetail.getPrev_no_of_bales() + ")");
+                holder.binding.txtNewPrice.setText("$ " + notificatioDetail.getCurrent_price() + "(" + notificatioDetail.getCurrent_no_of_bales() + ")");
                 holder.binding.txtPosterName.setText(notificatioDetail.getPosted_company_name());
 
                 if (obj.getSeller_buyer_id().equals(MyApp.mSessionUtil.getUserid())) {

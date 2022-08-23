@@ -1,20 +1,13 @@
 package com.ecotton.impex.activities;
 
-import android.app.Dialog;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.RequestAdapter;
 import com.ecotton.impex.api.APIClient;
@@ -25,6 +18,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,8 +54,9 @@ public class RequestActivity extends AppCompatActivity {
             }
         });
 
-
         GetRequestList();
+
+
         DividerItemDecoration divider =
                 new DividerItemDecoration(mContext,
                         DividerItemDecoration.VERTICAL);
@@ -77,43 +72,21 @@ public class RequestActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 if (view.getId() == R.id.btn_accept) {
-                    final Dialog dialog = new Dialog(mContext);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setCancelable(true);
-                    dialog.setContentView(R.layout.broker_dialog);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-                    dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                    dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    AcceptRequest(requestAdapter.mArrayList.get(position).getRequested_company_broker(), position, "accept");
 
-
-                    dialog.show();
-                    Button btn_done = (Button) dialog.findViewById(R.id.btn_done);
-                    EditText editText = (EditText) dialog.findViewById(R.id.edt_referral_code);
-
-                    editText.setText(requestAdapter.mArrayList.get(position).getRequested_company_broker());
-                    editText.setSelection(editText.getText().length());
-
-                    btn_done.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialog.dismiss();
-                            AcceptRequest(editText.getText().toString().trim(), position, "accept");
-                        }
-                    });
-
-                    dialog.show();
+                    // dialog.show();
                 }
                 if (view.getId() == R.id.btn_reject) {
                     RejectRequest(position, "reject");
                 }
             }
         });
-
     }
 
     private void RejectRequest(int position, String accept) {
         try {
+            customDialog.displayProgress(mContext);
             JSONObject object = new JSONObject();
             object.put("user_id", mSessionUtil.getUserid());
             object.put("user_type", mSessionUtil.getUsertype());
@@ -153,6 +126,7 @@ public class RequestActivity extends AppCompatActivity {
 
     private void AcceptRequest(String referralcode, int position, String accept) {
         try {
+            customDialog.displayProgress(mContext);
             JSONObject object = new JSONObject();
             object.put("user_id", mSessionUtil.getUserid());
             object.put("user_type", mSessionUtil.getUsertype());
@@ -193,6 +167,7 @@ public class RequestActivity extends AppCompatActivity {
 
     private void GetRequestList() {
         try {
+            customDialog.displayProgress(mContext);
             JSONObject object = new JSONObject();
             object.put("user_id", mSessionUtil.getUserid());
             object.put("user_type", mSessionUtil.getUsertype());

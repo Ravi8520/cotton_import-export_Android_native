@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.ecotton.impex.adapters.SendToAdapter;
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.PostDetailAttributeAdapter;
+import com.ecotton.impex.adapters.SendToAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivityMypostActiveTabDataBinding;
@@ -23,6 +22,7 @@ import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.DateTimeUtil;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -144,6 +144,10 @@ public class MypostActiveTabDataActivity extends AppCompatActivity {
         binding.txtAmount.setText(getResources().getString(R.string.lbl_rupees_symbol_only) + " " + postDetailsModelList.get(0).getPrice());
         Calendar post_date = DateTimeUtil.getCalendarWithUtcTimeZone(postDetailsModelList.get(0).getDate(), DateTimeUtil.DISPLAY_DATE_TIME_FORMAT_WITH_COMMA);
         binding.txtPostDate.setText(DateTimeUtil.getStringFromCalendar(post_date, DateTimeUtil.DISPLAY_DATE_TIME_FORMAT));
+        binding.txtCountryOfOrigin.setText(postDetailsModelList.get(0).getCountry_origin_name());
+        binding.txtCountryOfDispatch.setText(postDetailsModelList.get(0).getCountry_dispatch_name());
+        binding.txtPortOfDispatch.setText(postDetailsModelList.get(0).getPort_dispatch_name());
+        binding.txtDeliveryCondition.setText(postDetailsModelList.get(0).getDelivery_condition_name());
 
         if (!postDetailsModelList.get(0).getStatus().equals("null")) {
             if (postDetailsModelList.get(0).getStatus().equals("complete")) {
@@ -158,7 +162,7 @@ public class MypostActiveTabDataActivity extends AppCompatActivity {
         }
 
         if (mSessionUtil.getUsertype().equals("seller")) {
-            binding.txtTitle.setText("Notification to Buyer");
+            binding.txtTitle.setText("Notification to Importer");
         }
         if (type.equals("post")) {
             binding.txtTitle.setVisibility(View.GONE);
@@ -166,6 +170,7 @@ public class MypostActiveTabDataActivity extends AppCompatActivity {
         if (type.equals("notification")) {
             binding.tvPostat.setText("Notification Send at");
             binding.postLbl.setText("Notification");
+            binding.layoutNotification.setVisibility(View.VISIBLE);
         }
 
         Calendar txtUpdateDate = DateTimeUtil.getCalendarWithUtcTimeZone(postDetailsModelList.get(0).getUpdated_at(), DateTimeUtil.DISPLAY_DATE_TIME_FORMAT_WITH_COMMA);

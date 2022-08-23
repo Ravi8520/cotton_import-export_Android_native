@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +20,7 @@ import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
 import com.ecotton.impex.utils.ValidationUtil;
 import com.google.gson.Gson;
+import com.hbb20.CountryCodePicker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +48,8 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     CustomDialog customDialog;
 
+    String selected_country_code;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         binding.edtEmailAddress.setEnabled(false);
 
-         binding.edtGstNumber.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+        binding.edtGstNumber.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         binding.btnCreate.setOnClickListener(view -> {
             btn_createOnClick();
@@ -72,6 +74,14 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         binding.backarrow.setOnClickListener(view -> {
             img_backOnClick();
+        });
+
+        binding.ccp1.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                selected_country_code = binding.ccp1.getSelectedCountryCodeWithPlus();
+            }
+
         });
 
 
@@ -149,6 +159,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             customDialog.displayProgress(mContext);
             JSONObject object = new JSONObject();
             object.put("mobile_number", binding.edtMobileNumber.getText().toString().trim());
+            object.put("country_code", selected_country_code);
             object.put("name", binding.edtContactPerson.getText().toString().trim());
             object.put("email", binding.edtEmailAddress.getText().toString().trim());
             object.put("password", binding.edtPassword.getText().toString().trim());

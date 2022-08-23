@@ -173,6 +173,11 @@ public class ContractDetailModel implements Serializable {
     @Expose
     private String lab_report_status;
 
+    @SerializedName("delivery_period")
+    @Expose
+    private String delivery_period;
+
+
     @SerializedName("attribute_array")
     @Expose
     private List<AttributeArray> attribute_array = new ArrayList();
@@ -484,6 +489,14 @@ public class ContractDetailModel implements Serializable {
 
     public void setGst_reciept_mime(String gst_reciept_mime) {
         this.gst_reciept_mime = gst_reciept_mime;
+    }
+
+    public String getDelivery_period() {
+        return delivery_period;
+    }
+
+    public void setDelivery_period(String delivery_period) {
+        this.delivery_period = delivery_period;
     }
 
     public String getProduct_name() {

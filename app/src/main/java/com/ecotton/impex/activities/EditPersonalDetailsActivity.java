@@ -17,6 +17,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.hbb20.CountryCodePicker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +33,7 @@ public class EditPersonalDetailsActivity extends AppCompatActivity {
     EditPersonalDetailsActivity mContext;
     private SessionUtil mSessionUtil;
     private CustomDialog customDialog;
-
+    String selected_country_code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +45,9 @@ public class EditPersonalDetailsActivity extends AppCompatActivity {
 
         binding.edtContactPersonNumber.setText(mSessionUtil.getMobileNo());
         binding.edtContactPerson.setText(mSessionUtil.getName());
+
         binding.edtContactPersonEmail.setText(mSessionUtil.getEmail());
-        binding.edtContactPersonNumber.setEnabled(false);
+        binding.edtContactPersonEmail.setEnabled(false);
 
         binding.scrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -61,6 +63,14 @@ public class EditPersonalDetailsActivity extends AppCompatActivity {
                 AppUtil.hideSoftKeyboard(mContext);
                 return false;
             }
+        });
+
+        binding.ccp1.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                selected_country_code = binding.ccp1.getSelectedCountryCodeWithPlus();
+            }
+
         });
 
         binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +97,7 @@ public class EditPersonalDetailsActivity extends AppCompatActivity {
             object.put("name", binding.edtContactPerson.getText().toString());
             object.put("mobile_number", binding.edtContactPersonNumber.getText().toString());
             object.put("email", binding.edtContactPersonEmail.getText().toString());
+            object.put("country_code", selected_country_code);
             String data = object.toString();
             Log.e("data", "data==" + data);
             Call<ResponseModel<EditProfileModel>> call = APIClient.getInstance().edit_profile(mSessionUtil.getApiToken(), data);

@@ -224,17 +224,19 @@ public class MyContractActivity extends AppCompatActivity {
                             } catch (MalformedURLException e) {
                                 e.printStackTrace();
                             }
-                            fileName = url.getPath();
-                            fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
-                            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url + ""));
-                            request.setTitle(fileName);
-                            request.setMimeType("applcation/pdf");
-                            request.allowScanningByMediaScanner();
-                            request.setAllowedOverMetered(true);
-                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-                            DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-                            dm.enqueue(request);
+                            if (url.getPath() != null) {
+                                fileName = url.getPath();
+                                fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
+                                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url + ""));
+                                request.setTitle(fileName);
+                                request.setMimeType("applcation/pdf");
+                                request.allowScanningByMediaScanner();
+                                request.setAllowedOverMetered(true);
+                                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+                                DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                                dm.enqueue(request);
+                            }
                         }
                     } else if (!checkAndRequestPermissions()) {
                         requestStoragePermission();
@@ -322,8 +324,8 @@ public class MyContractActivity extends AppCompatActivity {
                         ImageView img_close = (ImageView) dialog.findViewById(R.id.img_close);
                         PinView pinView = (PinView) dialog.findViewById(R.id.pinview);
                         TextView txt_mobile_no = (TextView) dialog.findViewById(R.id.txt_mobile_no);
-                        String number = "<b>" + mSessionUtil.getMobileNo() + "</b> ";
-                        txt_mobile_no.setText(Html.fromHtml("We have sent verification \ncode on your number  " + number));
+                        String number = "<b>" + mSessionUtil.getEmail() + "</b> ";
+                        txt_mobile_no.setText(Html.fromHtml("We have sent verification \ncode on your Email" + number));
                         btn_resend.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

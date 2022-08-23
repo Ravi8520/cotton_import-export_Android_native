@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_700">
@@ -218,7 +217,7 @@
                 android:layout_below="@id/rl_mybroker"
                 android:layout_alignStart="@id/rl_mypost"
                 android:layout_alignEnd="@id/rl_mypost"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginTop="@dimen/_5sdp">
 
                 <ImageView

@@ -18,7 +18,7 @@
     <item
         android:id="@+id/utilites"
         android:icon="@drawable/ic_utilites"
-        android:title="Utilites" />
+        android:title="Utilities" />
 
     <item
         android:id="@+id/mywork"

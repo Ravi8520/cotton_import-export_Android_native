@@ -1,5 +1,6 @@
 package com.ecotton.impex.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +61,7 @@ public class ChangeCpmapnyAdapter extends RecyclerView.Adapter<ChangeCpmapnyAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChangeCpmapnyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ChangeCpmapnyHolder holder, @SuppressLint("RecyclerView") int position) {
 
         CompanyListModel companyListModel = companyListModels.get(position);
         holder.txt_company_name.setText(companyListModel.getCompany_name());
@@ -81,8 +82,9 @@ public class ChangeCpmapnyAdapter extends RecyclerView.Adapter<ChangeCpmapnyAdap
         holder.firsLetter.setText(first);
         holder.secondLetter.setText(second);
 
-        if (companyListModel.getCompany_name().equals(sessionUtil.getCompanyName())) {
+        int CompanyId = Integer.parseInt(sessionUtil.getCompanyId());
 
+        if (companyListModel.getCompany_id() == CompanyId) {
             if (sessionUtil.getUsertype().equals("buyer")) {
                 holder.txt_buyer.setBackground(context.getDrawable(R.drawable.white_bg));
                 holder.txt_buyer.setTextColor(context.getResources().getColor(R.color.colorPrimary));

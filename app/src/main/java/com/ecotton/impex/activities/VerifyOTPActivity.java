@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gne.www.lib.PinView;
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
@@ -23,6 +21,8 @@ import com.ecotton.impex.utils.Constants;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.gne.www.lib.PinView;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,7 +97,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         try {
             customDialog.displayProgress(mContext);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("mobile_number", email);
+            jsonObject.put("email", email);
             String data = jsonObject.toString();
             Call<ResponseModel<List<InvitedDataModel>>> call = APIClient.getInstance().get_invited_by_company_details(Constants.AUTH, data);
             call.enqueue(new Callback<ResponseModel<List<InvitedDataModel>>>() {
@@ -110,12 +110,13 @@ public class VerifyOTPActivity extends AppCompatActivity {
                         for (int i = 0; i < invitedDataModelList.size(); i++) {
                             Intent intent = new Intent(mContext, IsInvitedCreateAccountActivity.class);
                             intent.putExtra(IsInvitedCreateAccountActivity.NAME, invitedDataModelList.get(i).get(i).getName());
-                            intent.putExtra(IsInvitedCreateAccountActivity.MOBILE_NO, invitedDataModelList.get(i).get(i).getMobile_number());
+                            intent.putExtra(IsInvitedCreateAccountActivity.EMAIL, invitedDataModelList.get(i).get(i).getEmail());
                             intent.putExtra(IsInvitedCreateAccountActivity.COMPANY_NAME, invitedDataModelList.get(i).get(i).getCompany_name());
                             intent.putExtra(IsInvitedCreateAccountActivity.COMPANY_GST_NO, invitedDataModelList.get(i).get(i).getCompany_gst_no());
                             intent.putExtra(IsInvitedCreateAccountActivity.COMPANY_TYPE, invitedDataModelList.get(i).get(i).getCompany_type());
                             intent.putExtra(IsInvitedCreateAccountActivity.COMPANY_BROKER_CODE, invitedDataModelList.get(i).get(i).getCompany_broker_code());
                             intent.putExtra(IsInvitedCreateAccountActivity.COMPANY_ID, invitedDataModelList.get(i).get(i).getCompany_id());
+                            intent.putExtra(IsInvitedCreateAccountActivity.IEC_NUMBER, invitedDataModelList.get(i).get(i).getCompany_iec());
                             startActivity(intent);
                             finish();
                         }
@@ -191,15 +192,15 @@ public class VerifyOTPActivity extends AppCompatActivity {
                         map.put(SessionUtil.EMAIL, model.getData().getEmail());
                         map.put(SessionUtil.API_TOKEN, model.getData().getApiToken());
                         mSessionUtil.setData(map);
-                        /*if (is_invited == 1) {
+                        if (is_invited == 1) {
                             Toast.makeText(mContext, ISINVITED, Toast.LENGTH_LONG).show();
                             InvitedData();
                         } else {
-                        }*/
-                        Intent intent = new Intent(mContext, CreateAccountActivity.class);
-                        intent.putExtra(CreateAccountActivity.EMAIL_ADDRESS, email);
-                        startActivity(intent);
-                        finish();
+                            Intent intent = new Intent(mContext, CreateAccountActivity.class);
+                            intent.putExtra(CreateAccountActivity.EMAIL_ADDRESS, email);
+                            startActivity(intent);
+                            finish();
+                        }
                     } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         AppUtil.showToast(mContext, model.getMessage());
                     } else if (model.getStatus() == Utils.StandardStatusCodes.UNAUTHORISE) {

@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.BuildConfig;
 import com.ecotton.impex.R;
 import com.ecotton.impex.activities.DealsActivity;
@@ -30,6 +29,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -83,7 +83,7 @@ public class NegotiationFragment extends Fragment {
 
         mSessionUtil = new SessionUtil(mContext);
         customDialog = new CustomDialog();
-
+        Log.e("getUsertype", "getUsertype==" + mSessionUtil.getUsertype());
         recyclerview_negotiation = view.findViewById(R.id.recyclerview_negotiation);
         recyclerview_negotiation.setLayoutManager(new LinearLayoutManager(getActivity()));
         negotiationAdapter = new NegotiationAdapter(getActivity());
@@ -223,12 +223,17 @@ public class NegotiationFragment extends Fragment {
     }
 
     public void setSocket() {
-        socketSlug = "negotiation_" + mSessionUtil.getUsertype() + "_" + mSessionUtil.getCompanyId() + "_" + mSessionUtil.getUserid();
-        mSocket.on(Socket.EVENT_CONNECT, onConnect);
-        mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect);
-        mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
-        mSocket.on(socketSlug, mcxEvent);
-        mSocket.connect();
+        try {
+            socketSlug = "negotiation_" + mSessionUtil.getUsertype() + "_" + mSessionUtil.getCompanyId() + "_" + mSessionUtil.getUserid();
+            mSocket.on(Socket.EVENT_CONNECT, onConnect);
+            mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect);
+            mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
+            mSocket.on(socketSlug, mcxEvent);
+            mSocket.connect();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
     }
 
     private Emitter.Listener mcxEvent = new Emitter.Listener() {

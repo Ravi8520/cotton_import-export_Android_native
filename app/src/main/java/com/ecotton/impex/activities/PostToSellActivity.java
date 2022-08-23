@@ -103,11 +103,12 @@ public class PostToSellActivity extends AppCompatActivity {
 
         if (mSessionUtil.getUsertype().equals("buyer")) {
             binding.txtTitle.setText(getResources().getString(R.string.lbl_post_to_buy));
+        } else {
+            binding.txtTitle.setText(getResources().getString(R.string.lbl_post_to_export));
         }
 
         getProductList();
-
-
+        
 
         binding.recyclerviewPostToSell.setOnTouchListener(new View.OnTouchListener() {
             @Override

@@ -33,29 +33,29 @@ import androidx.core.util.Pair;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ecotton.impex.models.CountryModel;
-import com.ecotton.impex.models.ProtModel;
-import com.ecotton.impex.utils.DateTimeUtil;
-import com.gne.www.lib.PinView;
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.PostDetailAttributesAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivityPostDetailBinding;
 import com.ecotton.impex.models.BrokerModel;
+import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.MakeDeal;
 import com.ecotton.impex.models.NegotiationDetail;
 import com.ecotton.impex.models.PostDetail;
 import com.ecotton.impex.models.PostDetailSpinerData;
+import com.ecotton.impex.models.ProtModel;
 import com.ecotton.impex.models.login.LoginModel;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
+import com.ecotton.impex.utils.DateTimeUtil;
 import com.ecotton.impex.utils.PrintLog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.gne.www.lib.PinView;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,7 +65,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 
 import okhttp3.ResponseBody;
@@ -165,7 +164,6 @@ public class PostDetailActivity extends AppCompatActivity {
                         binding.edtStartDate.setText("TO - " + DateTimeUtil.getDate(startDate, "yyyy-MM-dd") + "   |   From - " + DateTimeUtil.getDate(endDate, "yyyy-MM-dd"));
                     }
                 });
-
             }
         });
 
@@ -255,26 +253,40 @@ public class PostDetailActivity extends AppCompatActivity {
                 TextView txt_cancel = (TextView) dialog.findViewById(R.id.txt_cancel);
                 TextView txt_company_name = (TextView) dialog.findViewById(R.id.txt_company_name);
                 TextView txt_seller_name = (TextView) dialog.findViewById(R.id.txt_seller_name);
-                TextView txt_broker_name = (TextView) dialog.findViewById(R.id.txt_broker_name);
+                TextView txt_buyer_name = (TextView) dialog.findViewById(R.id.txt_buyer_name);
+
                 TextView txt_bales = (TextView) dialog.findViewById(R.id.txt_bales);
                 TextView txt_price = (TextView) dialog.findViewById(R.id.txt_price);
                 TextView txt_payment_condition = (TextView) dialog.findViewById(R.id.txt_payment_condition);
-                TextView txt_header = (TextView) dialog.findViewById(R.id.txt_header);
-                TextView txt_transmit_condition = (TextView) dialog.findViewById(R.id.txt_transmit_condition);
-                TextView txt_lab_condition = (TextView) dialog.findViewById(R.id.txt_lab_condition);
+                TextView txt_delivery_condition = (TextView) dialog.findViewById(R.id.txt_delivery_condition);
+                TextView txt_country_of_dispatch = (TextView) dialog.findViewById(R.id.txt_country_of_dispatch);
+                TextView txt_port_of_dispatch = (TextView) dialog.findViewById(R.id.txt_port_of_dispatch);
+                TextView country_origin_name = (TextView) dialog.findViewById(R.id.txt_country_of_origin);
+                TextView txt_delivery_period = (TextView) dialog.findViewById(R.id.txt_delivery_period);
+                TextView txt_inspection = (TextView) dialog.findViewById(R.id.txt_inspection);
+                TextView txt_note = (TextView) dialog.findViewById(R.id.txt_note);
 
-                if (!negotiationDetail.getNegotiation_by_company_name().equals("null")) {
-                    txt_company_name.setText(negotiationDetail.getNegotiation_by_company_name());
-                }
+                country_origin_name.setText(negotiationDetail.getCountry_origin_name());
+                txt_delivery_period.setText(negotiationDetail.getDelivery_period());
+                txt_inspection.setText(negotiationDetail.getLab());
+
                 txt_seller_name.setText(negotiationDetail.getSeller_name());
-                txt_company_name.setText(negotiationDetail.getNegotiation_by_company_name());
-                txt_broker_name.setText(negotiationDetail.getBroker_name());
+                txt_buyer_name.setText(negotiationDetail.getBuyer_name());
+                if (mSessionUtil.getUsertype().equals("buyer")) {
+                    txt_company_name.setText(negotiationDetail.getSeller_company_name());
+                } else if (mSessionUtil.getUsertype().equals("seller")) {
+                    txt_company_name.setText(negotiationDetail.getBuyer_company_name());
+                }
+
+                txt_seller_name.setText(negotiationDetail.getSeller_name());
+                txt_note.setText(negotiationDetail.getNotes());
+
                 txt_bales.setText(negotiationDetail.getCurrent_no_of_bales());
-                txt_price.setText(negotiationDetail.getCurrent_price());
+                txt_price.setText("$ " + negotiationDetail.getCurrent_price());
                 txt_payment_condition.setText(negotiationDetail.getPayment_condition());
-                txt_header.setText(negotiationDetail.getHeader_name());
-                txt_transmit_condition.setText(negotiationDetail.getTransmit_condition());
-                txt_lab_condition.setText(negotiationDetail.getLab());
+                txt_delivery_condition.setText(negotiationDetail.getDelivery_condition_name());
+                txt_country_of_dispatch.setText(negotiationDetail.getCountry_dispatch_name());
+                txt_port_of_dispatch.setText(negotiationDetail.getPort_dispatch_name());
 
                 txt_cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -374,7 +386,6 @@ public class PostDetailActivity extends AppCompatActivity {
         return isFromScreen.equals("negotiation");
     }
 
-
     private void getPostDetail() {
         try {
 
@@ -419,7 +430,6 @@ public class PostDetailActivity extends AppCompatActivity {
                         AppUtil.showToast(mContext, response.body().message);
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ResponseModel<List<PostDetail>>> call, Throwable t) {
 
@@ -440,6 +450,16 @@ public class PostDetailActivity extends AppCompatActivity {
         binding.txtPrice.setText("$ " + postDetail.getPrice() + "(" + postDetail.getNo_of_bales() + ")");
         binding.txtTitle.setText(postDetail.getProduct_name());
         binding.txtQty.setText(postDetail.getNo_of_bales());
+
+        binding.txtQty.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    binding.txtQty.setSelection(binding.txtQty.getText().length());
+                }
+            }
+        });
+
         binding.edtPrice.setText("" + postDetail.getPrice());
         binding.rvAttributs.setVisibility(View.VISIBLE);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false);
@@ -449,34 +469,9 @@ public class PostDetailActivity extends AppCompatActivity {
         adapter.addAllClass(postDetail.getAttribute_array());
 
         noOfBales = Integer.parseInt(postDetail.getNo_of_bales());
-        binding.imgPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.txtQty.setText(noOfBales + "");
 
-                if (noOfBales >= totalBales) {
-                    noOfBales = totalBales;
-                } else {
-                    noOfBales++;
 
-                }
-                is_highlight_current_bales = true;
-                binding.txtQty.setText(noOfBales + "");
-
-            }
-        });
-
-        binding.imgMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (noOfBales <= 1) {
-                    noOfBales = 1;
-                } else {
-                    noOfBales--;
-                }
-                is_highlight_current_bales = true;
-                binding.txtQty.setText(noOfBales + "");
-            }
-        });
     }
 
     private void getSpinerData() {
@@ -827,7 +822,7 @@ public class PostDetailActivity extends AppCompatActivity {
         }
         totalBales = noOfBales;
         binding.txtQty.setText(noOfBales + "");
-        binding.txtPrice.setText("$ " + postDetail.getPrice() + "(" + noOfBales + ")");
+        //binding.txtPrice.setText("$ " + postDetail.getPrice() + "(" + noOfBales + ")");
 
         //noOfBales = Integer.parseInt(negotiationDetail.getCurrent_no_of_bales());
 
@@ -1046,42 +1041,60 @@ public class PostDetailActivity extends AppCompatActivity {
     private void hitNagotiation() {
         int price = 0;
         try {
+            int bales = Integer.parseInt(binding.txtQty.getText().toString());
+            if (TextUtils.isEmpty(binding.txtQty.getText().toString()) || bales == 0) {
+                AppUtil.showToast(mContext, "Please enter valid Quantity in ton");
+                return;
+            }
+
+            int bales11 = Integer.parseInt(binding.txtQty.getText().toString());
+            int bales22 = Integer.parseInt(postDetail.getNo_of_bales());
+
+            if (bales11 > bales22) {
+                AppUtil.showToast(mContext, "Please enter valid Quantity in ton");
+                return;
+            }
+
             price = Integer.parseInt(binding.edtPrice.getText().toString());
+
+            if (TextUtils.isEmpty(binding.edtPrice.getText().toString()) || price == 0) {
+                AppUtil.showToast(mContext, "Please enter valid price");
+                return;
+            }
+            if (TextUtils.isEmpty(deliveryPeriod)) {
+                AppUtil.showToast(mContext, "Please select delivery period");
+                return;
+            }
+            if (selectedTransmitCondition.equals("") || selectedTransmitCondition.equals("0")) {
+                AppUtil.showToast(mContext, "Please select Delivery Condition");
+                return;
+            }
+            if (dispatchContryID < 1) {
+                AppUtil.showToast(mContext, "Please select dispatch country");
+                return;
+            }
+            if (dispatchdportID < 1) {
+                AppUtil.showToast(mContext, "Please select dispatch port");
+                return;
+            }
+
+            if (!selectedTransmitConditionName.equals("FOB") && destinationContryID == -1) {
+                AppUtil.showToast(mContext, "Please select Destination country");
+                return;
+            }
+            if (!selectedTransmitConditionName.equals("FOB") && destinationPortID == -1) {
+                AppUtil.showToast(mContext, "Please select Destination port");
+                return;
+            }
+
+
         } catch (Exception e) {
             e.getMessage();
         }
-        if (TextUtils.isEmpty(binding.edtPrice.getText().toString()) || price == 0) {
-            AppUtil.showToast(mContext, "Please enter valid price");
-            return;
-        }
-        if (TextUtils.isEmpty(deliveryPeriod)) {
-            AppUtil.showToast(mContext, "Please select delivery period");
-            return;
-        }
-        if (selectedTransmitCondition.equals("") || selectedTransmitCondition.equals("0")) {
-            AppUtil.showToast(mContext, "Please select Delivery Condition");
-            return;
-        }
-        if (dispatchContryID < 1) {
-            AppUtil.showToast(mContext, "Please select dispatch country");
-            return;
-        }
-        if (dispatchdportID < 1) {
-            AppUtil.showToast(mContext, "Please select dispatch port");
-            return;
-        }
-
-        if (!selectedTransmitConditionName.equals("FOB") && destinationContryID == -1) {
-            AppUtil.showToast(mContext, "Please select Destination country");
-            return;
-        }
-        if (!selectedTransmitConditionName.equals("FOB") && destinationPortID == -1) {
-            AppUtil.showToast(mContext, "Please select Destination port");
-            return;
-        }
-
 
         try {
+            if (!negotiationDetail.getCurrent_no_of_bales().equals(binding.txtQty.getText().toString()))
+                is_highlight_current_bales = true;
             customDialog.displayProgress(mContext);
             String strJson = "";
             JSONObject object = new JSONObject();
@@ -1094,7 +1107,7 @@ public class PostDetailActivity extends AppCompatActivity {
             object.put("negotiation_by", mSessionUtil.getUsertype());
 
             object.put("price", binding.edtPrice.getText().toString());
-            object.put("no_of_bales", noOfBales);
+            object.put("no_of_bales", binding.txtQty.getText().toString());
             object.put("payment_condition", selectedPaymentCondition);
             object.put("transmit_condition", selectedTransmitCondition);
             object.put("lab", selectedLab);
@@ -1198,8 +1211,8 @@ public class PostDetailActivity extends AppCompatActivity {
                         Button btn_resend = (Button) dialog.findViewById(R.id.btn_resend);
                         PinView pinView = (PinView) dialog.findViewById(R.id.pinview);
                         TextView txt_mobile_no = (TextView) dialog.findViewById(R.id.txt_mobile_no);
-                        String number = "<b>" + mSessionUtil.getMobileNo() + "</b> ";
-                        txt_mobile_no.setText(Html.fromHtml("We have sent verification \ncode on your number  " + number));
+                        String number = "<b>" + mSessionUtil.getEmail() + "</b> ";
+                        txt_mobile_no.setText(Html.fromHtml("We have sent verification \ncode on your Email " + number));
                         btn_resend.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -1273,11 +1286,10 @@ public class PostDetailActivity extends AppCompatActivity {
                         Button btn_resend = (Button) dialog.findViewById(R.id.btn_resend);
                         ImageView img_close = (ImageView) dialog.findViewById(R.id.img_close);
 
-
                         PinView pinView = (PinView) dialog.findViewById(R.id.pinview);
                         TextView txt_mobile_no = (TextView) dialog.findViewById(R.id.txt_mobile_no);
-                        String number = "<b>" + mSessionUtil.getMobileNo() + "</b> ";
-                        txt_mobile_no.setText(Html.fromHtml("We have sent verification \ncode on your number  " + number));
+                        String number = "<b>" + mSessionUtil.getEmail() + "</b> ";
+                        txt_mobile_no.setText(Html.fromHtml("We have sent verification \ncode on your Email" + number));
                         btn_resend.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

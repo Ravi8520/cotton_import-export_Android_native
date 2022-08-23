@@ -66,7 +66,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/contact_person_name"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/edt_contact_person"
@@ -80,39 +80,96 @@
                     android:singleLine="true"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/contact_person_mobile"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
-
-                <EditText
-                    android:id="@+id/edt_contact_person_number"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/custome_edittext"
-                    android:fontFamily="@font/poppins_regular"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/tab_text_color"
-                    android:textSize="14sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.4"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Country Code"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <com.hbb20.CountryCodePicker
+                            android:id="@+id/ccp1"
+                            android:layout_width="match_parent"
+                            android:layout_height="?actionBarSize"
+                            android:layout_gravity="top"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@drawable/textview_border"
+                            android:gravity="center_vertical"
+                            app:ccp_contentColor="@color/black"
+                            app:ccp_defaultNameCode="in"
+                            app:ccp_textSize="@dimen/_10sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text=" Mobile Number"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/mTilmobile_number"
+                            style="@style/LoginTextInputLayoutStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            app:errorEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edt_contact_person_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="?actionBarSize"
+                                android:fontFamily="@font/poppins_regular"
+                                android:hint="@string/lbl_mobile_number"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:singleLine="true"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/email_address"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/edt_contact_person_email"

@@ -124,7 +124,7 @@ public class MyMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
         holder.binding.memberName.setText(mArrayList.get(position).getName());
-        holder.binding.txtMobileNumber.setText(mArrayList.get(position).getMobile_number());
+        holder.binding.txtMobileNumber.setText(mArrayList.get(position).getEmail());
 
         if (mArrayList.get(position).getStatus() == 1) {
             holder.binding.txtPending.setVisibility(View.GONE);
