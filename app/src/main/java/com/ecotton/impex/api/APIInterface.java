@@ -670,4 +670,10 @@ public interface APIInterface {
             @Header("Authorization") String Authorization,
             @Field("data") String data
     );
+    @FormUrlEncoded
+    @POST("unread_negotiation_notification")
+    Call<ResponseBody> unreadNegotiationNotification(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
 }
