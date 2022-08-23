@@ -65,7 +65,6 @@ public class MywalletPlansActivity extends AppCompatActivity {
     }
 
     private void setWalletplanAdapter() {
-
         WalletPlansAdapter adapter = new WalletPlansAdapter(getApplicationContext());
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
         plans_recycler.setLayoutManager(layoutManager);
