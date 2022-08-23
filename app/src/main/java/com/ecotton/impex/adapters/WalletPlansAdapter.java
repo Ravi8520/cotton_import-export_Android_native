@@ -59,7 +59,6 @@ public class WalletPlansAdapter extends RecyclerView.Adapter<WalletPlansAdapter.
 
         public PlansViewHolder(@NonNull View itemView) {
             super(itemView);
-
             linMain = itemView.findViewById(R.id.linMain);
         }
     }

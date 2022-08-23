@@ -68,7 +68,7 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
-        android:background="@drawable/login_button"
+        android:background="@drawable/custome_button"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/poppins_medium"
