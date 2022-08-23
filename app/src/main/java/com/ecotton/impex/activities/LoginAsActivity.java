@@ -85,8 +85,6 @@ public class LoginAsActivity extends AppCompatActivity {
                 if (position == 0) {
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
                 }
-
-
                 // Showing selected spinner item
             }
 
@@ -123,7 +121,6 @@ public class LoginAsActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     try {
-
                         String dataa = null;
                         try {
                             dataa = new String(response.body().bytes());
@@ -156,7 +153,6 @@ public class LoginAsActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             }
-
                         } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                             AppUtil.showToast(mContext, model.getMessage());
                             startActivity(new Intent(mContext, WitingApprovelActivity.class));
@@ -171,10 +167,8 @@ public class LoginAsActivity extends AppCompatActivity {
                         e.getMessage();
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-
                 }
             });
 

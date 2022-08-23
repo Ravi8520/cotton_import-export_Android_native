@@ -8,19 +8,15 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecotton.impex.R;
 import com.ecotton.impex.adapters.WalletPlansAdapter;
-import com.ecotton.impex.databinding.ActivityLoginasBinding;
 import com.ecotton.impex.databinding.ActivityMywalletPlansBinding;
 import com.ecotton.impex.utils.SessionUtil;
 
 public class MywalletPlansActivity extends AppCompatActivity {
 
-    ImageView backarrow;
-    RecyclerView plans_recycler;
 
     private SessionUtil mSessionUtil;
     private Context mContext;
@@ -33,8 +29,6 @@ public class MywalletPlansActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMywalletPlansBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        plans_recycler = findViewById(R.id.plans_recycler);
-        backarrow = findViewById(R.id.backarrow);
 
         mContext = this;
         mSessionUtil = new SessionUtil(mContext);
@@ -43,12 +37,13 @@ public class MywalletPlansActivity extends AppCompatActivity {
             company_name = intent.getStringExtra("Company_name");
             user_type = intent.getStringExtra("User_type");
         }
-        backarrow.setOnClickListener(new View.OnClickListener() {
+        binding.backarrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
+
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,13 +56,11 @@ public class MywalletPlansActivity extends AppCompatActivity {
         });
 
         setWalletplanAdapter();
-
     }
 
     private void setWalletplanAdapter() {
         WalletPlansAdapter adapter = new WalletPlansAdapter(getApplicationContext());
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
-        plans_recycler.setLayoutManager(layoutManager);
-        plans_recycler.setAdapter(adapter);
+        binding.plansRecycler.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+        binding.plansRecycler.setAdapter(adapter);
     }
 }
