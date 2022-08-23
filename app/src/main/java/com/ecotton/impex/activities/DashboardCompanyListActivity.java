@@ -18,14 +18,17 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ecotton.impex.BuildConfig;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
+import com.ecotton.impex.models.NegotiationNotifyCount;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.Utils;
 import com.google.gson.Gson;
@@ -37,9 +40,18 @@ import com.ecotton.impex.models.dashboard.DashBoardModel;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,6 +66,22 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
     private List<DashBoardModel.CompanyModel> companyList = new ArrayList<>();
 
     private List<DashBoardModel> dashBoardModelList = new ArrayList<>();
+
+
+    private static Socket mSocket;
+    public String socketSlug = "";
+
+    static {
+        try {
+            IO.Options options = new IO.Options();
+            options.port = 3001;
+            mSocket = IO.socket(BuildConfig.SOCKET_URI_NGOTIATION);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +127,8 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
         } else if (mSessionUtil.getUsertype().equals("buyer")) {
             Dashboard_sellerFilter();
         }
+        setSocket();
+        NegotiationNotifyCount();
     }
 
     public void setUpSpiner(List<DashBoardModel> list) {
@@ -312,5 +342,165 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
         filterRequest.setCountry_id("-1");
         filterRequest.setProduct_id("-1");
         super.onBackPressed();
+    }
+
+
+    private void NegotiationNotifyCount() {
+        try {
+            JSONObject object = new JSONObject();
+            object.put("user_id", mSessionUtil.getUserid());
+            object.put("user_type", mSessionUtil.getUsertype());
+            object.put("company_id", mSessionUtil.getCompanyId());
+            String data = object.toString();
+            Log.e("data", "data==" + data);
+            Call<ResponseBody> call = APIClient.getInstance().unreadNegotiationNotification(mSessionUtil.getApiToken(), data);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
+
+                        String dataa = null;
+                        try {
+                            dataa = new String(response.body().bytes());
+                            Log.e("response", "response==" + dataa);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Gson gson = new Gson();
+                        NegotiationNotifyCount model = gson.fromJson(dataa, NegotiationNotifyCount.class);
+                        if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
+                            int count = model.getData().getCount();
+                            if (count > 0) {
+                                binding.txtNotifyCount.setVisibility(View.VISIBLE);
+                                binding.txtNotifyCount.setText(count + "");
+                            } else {
+
+                                binding.txtNotifyCount.setVisibility(View.GONE);
+                            }
+
+                        } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+
+
+                        } else if (model.getStatus() == Utils.StandardStatusCodes.UNAUTHORISE) {
+                            AppUtil.showToast(mContext, model.getMessage());
+                            AppUtil.autoLogout(DashboardCompanyListActivity.this);
+                        } else {
+                            AppUtil.showToast(mContext, model.getMessage());
+                        }
+                    } catch (Exception e) {
+                        e.getMessage();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                }
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setSocket() {
+        socketSlug = "UnreadNotifications" + "_" + mSessionUtil.getCompanyId() + "_" + mSessionUtil.getUsertype() + "_" + mSessionUtil.getUserid();
+        mSocket.on(Socket.EVENT_CONNECT, onConnect);
+        mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect);
+        mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
+        mSocket.on(socketSlug, mcxEvent);
+        mSocket.connect();
+    }
+
+    private Emitter.Listener mcxEvent = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        JSONObject jsonObject = new JSONObject(args[0].toString());
+
+                        Log.d("TAG", jsonObject.toString());
+
+                        int count = jsonObject.getJSONObject("data").getInt("UnreadNotifications");
+                        if (count >= 0) {
+                            binding.txtNotifyCount.setVisibility(View.VISIBLE);
+                            binding.txtNotifyCount.setText(count + "");
+                        } else {
+
+                            binding.txtNotifyCount.setVisibility(View.GONE);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onConnect = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    //if(!mSocket.connected()) {
+                    Log.d("TAG", "Connected");
+                    // isConnected = true;
+                    // }
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onDisconnect = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.i("TAG", "disconnected");
+                    //isConnected = false;
+                    Toast.makeText(DashboardCompanyListActivity.this,
+                            "Disconnected", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+    };
+
+    private Emitter.Listener onConnectError = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("TAG", "Error connecting " + args[0].toString());
+                    Toast.makeText(DashboardCompanyListActivity.this,
+                            "Error connecting", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            });
+        }
+    };
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mSocket.off(Socket.EVENT_CONNECT, onConnect);
+        mSocket.off(Socket.EVENT_DISCONNECT, onDisconnect);
+        mSocket.off(Socket.EVENT_CONNECT_ERROR, onConnectError);
+        mSocket.off(socketSlug, mcxEvent);
+        mSocket.disconnect();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSocket.off(Socket.EVENT_CONNECT, onConnect);
+        mSocket.off(Socket.EVENT_DISCONNECT, onDisconnect);
+        mSocket.off(Socket.EVENT_CONNECT_ERROR, onConnectError);
+        mSocket.off(socketSlug, mcxEvent);
+        mSocket.disconnect();
     }
 }

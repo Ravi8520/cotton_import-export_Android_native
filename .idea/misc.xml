@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/circle_green.xml" value="0.1295" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/drawable/logo_bg.xml" value="0.1295" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/activity_dashboard_company_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android Projects/Project/FreeBird/CottonImportExport/app/src/main/res/layout/fragment_home.xml" value="0.19722222222222222" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" project-jdk-name="13" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="true" project-jdk-name="13" project-jdk-type="JavaSDK" />
 </project>
