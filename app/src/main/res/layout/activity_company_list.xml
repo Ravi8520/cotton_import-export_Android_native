@@ -22,6 +22,7 @@
             android:background="?selectableItemBackgroundBorderless"
             android:focusable="true"
             android:padding="@dimen/_3sdp"
+            android:visibility="gone"
             android:src="@drawable/ic_back_arrow" />
 
         <TextView
