@@ -92,6 +92,8 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
         customDialog = new CustomDialog();
         countryId = getIntent().getStringExtra("countryId");
 
+        Log.e("countryId", "countryId==" + countryId);
+
         binding.backarrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,6 +143,7 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     String selectedItem = parent.getItemAtPosition(position).toString();
                     countryId = dashBoardModelList.get(position).getCountry_id() + "";
+                    Log.e("countryId111", "countryId11==" + countryId);
                     // filterRequest.setState_id(cityModelList.get(position).getDistrict_id() + "");
 
                     binding.txtName.setText(dashBoardModelList.get(position).getName());

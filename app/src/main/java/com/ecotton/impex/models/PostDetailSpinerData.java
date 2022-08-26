@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class PostDetailSpinerData {
+
     public ArrayList<SpinerModel> getTransmit_condition() {
         return transmit_condition;
     }

@@ -507,7 +507,6 @@ public class ContractFragment extends Fragment {
 
                         list = response.body().data;
 
-
                         SetData();
 
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {

@@ -483,7 +483,6 @@ public class HomeFragment extends Fragment {
                 }
             });
             binding.spinnerState.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-
                 @Override
                 public void onNothingSelected(MaterialSpinner spinner) {
                     //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
@@ -559,7 +558,6 @@ public class HomeFragment extends Fragment {
                 filterRequest.setCountry_id(dashBoardAdapter.mArrayList.get(position).getCountry_id() + "");
                 startActivity(new Intent(getActivity(), DashboardCompanyListActivity.class)
                         .putExtra("countryId", dashBoardAdapter.mArrayList.get(position).getCountry_id() + ""));
-
             }
         });
     }
@@ -577,7 +575,6 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     try {
-
                         String dataa = null;
                         try {
                             dataa = new String(response.body().bytes());
@@ -593,13 +590,9 @@ public class HomeFragment extends Fragment {
                                 binding.txtNotifyCount.setVisibility(View.VISIBLE);
                                 binding.txtNotifyCount.setText(count + "");
                             } else {
-
                                 binding.txtNotifyCount.setVisibility(View.GONE);
                             }
-
                         } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-
-
                         } else if (model.getStatus() == Utils.StandardStatusCodes.UNAUTHORISE) {
                             AppUtil.showToast(mContext, model.getMessage());
                             AppUtil.autoLogout(getActivity());
@@ -610,12 +603,10 @@ public class HomeFragment extends Fragment {
                         e.getMessage();
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                 }
             });
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
