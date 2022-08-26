@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecotton.impex.BuildConfig;
 import com.ecotton.impex.activities.DashboardCompanyListActivity;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.NegotiationNotifyCount;
 import com.ecotton.impex.utils.Constants;
 import com.google.gson.Gson;
@@ -441,7 +442,7 @@ public class HomeFragment extends Fragment {
         dashBoardModelList.add(obj);
         dashBoardModelList.addAll(list);
         try {
-            CustomAdapter adapter = new CustomAdapter(activity.getActivity(), R.layout.layout_spiner, R.id.txt_company_name, dashBoardModelList);
+           /* CustomAdapter adapter = new CustomAdapter(activity.getActivity(), R.layout.layout_spiner, R.id.txt_company_name, dashBoardModelList);
             binding.spinnerState.setAdapter(adapter);
             binding.spinnerState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -459,6 +460,37 @@ public class HomeFragment extends Fragment {
 
                 }
             });
+        } catch (Exception e) {
+            e.getMessage();
+        }*/
+            ArrayList<String> minAttribute = new ArrayList<>();
+            for (DashBoardModel objs : dashBoardModelList) {
+                minAttribute.add(objs.getName());
+            }
+            binding.spinnerState.setItems(minAttribute);
+            binding.spinnerState.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+                @Override
+                public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                    //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                    if (position == 0) {
+                        setUpStateRecyclerVeiw(position);
+                    } else {
+                        filterRequest.setCountry_id(dashBoardModelList.get(position - 1).getCountry_id() + "");
+                        startActivity(new Intent(mContext, DashboardCompanyListActivity.class)
+                                .putExtra("countryId", dashBoardModelList.get(position - 1).getCountry_id() + ""));
+                    }
+                }
+            });
+            binding.spinnerState.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+                @Override
+                public void onNothingSelected(MaterialSpinner spinner) {
+                    //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+                }
+            });
+
+            setUpStateRecyclerVeiw(0);
         } catch (Exception e) {
             e.getMessage();
         }

@@ -142,8 +142,10 @@ public class PostDetailActivity extends AppCompatActivity {
             negotiationByCompanyId = getIntent().getStringExtra("negotiation_by_company_id");
         }
 
+
         long daysMili = 1296000000;
-        MaterialDatePicker materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
+
+        MaterialDatePicker materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText("Select Delivery Period")
                 .setTheme(R.style.Widget_AppTheme_MaterialDatePicker).
                 setSelection(Pair.create(MaterialDatePicker.todayInUtcMilliseconds(), (MaterialDatePicker.todayInUtcMilliseconds() + daysMili))).build();
 
@@ -151,6 +153,7 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
+
                 materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
                     @Override
                     public void onPositiveButtonClick(Pair<Long, Long> selection) {
@@ -160,6 +163,7 @@ public class PostDetailActivity extends AppCompatActivity {
                         deliveryPeriod = DateTimeUtil.getDate(startDate, "yyyy-MM-dd") + "#" + DateTimeUtil.getDate(endDate, "yyyy-MM-dd");
                         Log.e("TAG", "Start-Date-" + DateTimeUtil.getDate(startDate, "yyyy-MM-dd"));
                         Log.e("TAG", "End-Date-" + DateTimeUtil.getDate(endDate, "yyyy-MM-dd"));
+
                         //Do something...
                         binding.edtStartDate.setText("TO - " + DateTimeUtil.getDate(startDate, "yyyy-MM-dd") + "   |   From - " + DateTimeUtil.getDate(endDate, "yyyy-MM-dd"));
                     }
@@ -430,6 +434,7 @@ public class PostDetailActivity extends AppCompatActivity {
                         AppUtil.showToast(mContext, response.body().message);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ResponseModel<List<PostDetail>>> call, Throwable t) {
 
@@ -802,11 +807,18 @@ public class PostDetailActivity extends AppCompatActivity {
         }
     }
 
+    boolean flag = false;
+
     public void setNegotiationData() {
         binding.edtPrice.setText(negotiationDetail.getCurrent_price());
         binding.edtNotes.setText(negotiationDetail.getNotes());
+
+
         binding.edtStartDate.setText(negotiationDetail.getDelivery_period());
-        deliveryPeriod=negotiationDetail.getDelivery_period();
+
+
+        deliveryPeriod = negotiationDetail.getDelivery_period();
+
         if (mSessionUtil.getUsertype().equals("seller")) {
             if (negotiationDetail.getSeller_id().equals("")) {
                 noOfBales = Integer.parseInt(negotiationDetail.getRemain_bales());
@@ -855,14 +867,12 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         }
 
-
         for (int i = 0; i < destinationcontryList.size(); i++) {
             if (negotiationDetail.getCountry_destination_id().equals(destinationcontryList.get(i).getId() + "")) {
                 binding.spinnerDestinationCountry.setSelection(i);
                 destinationContryID = destinationcontryList.get(i).getId();
             }
         }
-
 
         if (TextUtils.isEmpty(negotiationDetail.getTransmit_condition_id()) && deliveryConditionList.size() > 0) {
             selectedTransmitCondition = deliveryConditionList.get(0).getId() + "";

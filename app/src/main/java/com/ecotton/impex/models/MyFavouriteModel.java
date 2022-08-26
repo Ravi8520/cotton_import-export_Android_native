@@ -3,7 +3,7 @@ package com.ecotton.impex.models;
 public class MyFavouriteModel {
 
     public int company_id = 0, id = 0, country_id = 0, state_id = 0, district_id = 0, city_id = 0;
-    public String company_name = "", address = "", mobile_number = "", country = "", state_name = "", district = "", country_name = "", district_name = "", city_name = "";
+    public String company_name = "", address = "", mobile_number = "", country = "", state_name = "", district = "", country_name = "", district_name = "", city_name = "",email="";
 
     public int getCompany_id() {
         return company_id;
@@ -123,5 +123,13 @@ public class MyFavouriteModel {
 
     public void setCity_name(String city_name) {
         this.city_name = city_name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

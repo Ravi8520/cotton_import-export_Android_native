@@ -44,6 +44,9 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:background="@android:color/transparent"
+                android:elevation="@dimen/_10sdp"
+                android:padding="1dp"
+                android:popupBackground="@drawable/gradient_spinner"
                 android:gravity="center"
                 android:spinnerMode="dropdown" />
 

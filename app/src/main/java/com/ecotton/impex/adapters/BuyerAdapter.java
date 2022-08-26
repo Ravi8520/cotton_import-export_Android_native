@@ -31,7 +31,7 @@ public class BuyerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private OnLoadMoreListener onLoadMoreListener;
     private boolean isMoreLoading = true;
     public ArrayList<CompanyDirectory> filterArray = new ArrayList<>();
-   public  Boolean clicked = true;
+    public Boolean clicked = true;
 
     public BuyerAdapter(Context mcontext) {
         this.mcontext = mcontext;
@@ -125,11 +125,10 @@ public class BuyerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
         holder.binding.companyname.setText(mArrayList.get(position).getCompany_name());
-        // holder.binding.ownername.setText(mArrayList.get(position).getCompany_name());
         holder.binding.address.setText("Address : " + mArrayList.get(position).getAddress());
         holder.binding.contactTv.setText(mArrayList.get(position).getMobile_number());
-        //holder.binding.txtPort.setText(mArrayList.get(position).getDistrict());
         holder.binding.txtCountry.setText(mArrayList.get(position).getCountry());
+        holder.binding.txtEmail.setText(mArrayList.get(position).getEmail());
 
         holder.binding.layoutContact.setOnClickListener(new View.OnClickListener() {
             @Override

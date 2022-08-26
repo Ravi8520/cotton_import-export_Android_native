@@ -103,7 +103,7 @@
 
             <TextView
                 android:id="@+id/txt_address"
-                android:layout_width="@dimen/_170sdp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_toEndOf="@id/tv_address"
@@ -115,6 +115,20 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_below="@+id/rl_userdetail"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/new_light_grey"
+            android:textSize="14sp" />
+
     </RelativeLayout>
+
+
 
 </RelativeLayout>

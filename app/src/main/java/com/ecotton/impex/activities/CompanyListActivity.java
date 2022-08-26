@@ -74,8 +74,6 @@ public class CompanyListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(mContext, AddCompanyActivity.class));
-
-
             }
         });
         setSellerinfo();
