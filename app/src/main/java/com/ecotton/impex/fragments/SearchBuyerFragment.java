@@ -1,6 +1,5 @@
 package com.ecotton.impex.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -25,11 +23,9 @@ import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.FragmentSearchBuyerBinding;
 import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.AttributeRequestModel;
-import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.PostDetailSpinerData;
 import com.ecotton.impex.models.ProductAttributeModel;
 import com.ecotton.impex.models.ProductModel;
-import com.ecotton.impex.models.ProtModel;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.PrintLog;
@@ -91,6 +87,7 @@ public class SearchBuyerFragment extends Fragment {
                         Toast.makeText(mContext, "Please select Product", Toast.LENGTH_SHORT).show();
                     } else {
                         JSONArray jsonArray = new JSONArray(new Gson().toJson(attributeRequestModels));
+                        Log.e("jsonArray", "jsonArray===" + jsonArray);
                         Intent intent = new Intent(mContext, SelectBuyerActivity.class);
                         intent.putExtra("data", jsonArray.toString());
                         intent.putExtra("product_id", productid);
@@ -144,8 +141,6 @@ public class SearchBuyerFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-
 
 
     private void SetAdapter() {
@@ -209,6 +204,7 @@ public class SearchBuyerFragment extends Fragment {
                         }
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ResponseModel<List<ProductModel>>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);
@@ -291,6 +287,7 @@ public class SearchBuyerFragment extends Fragment {
 
     public class ProductAdapter extends ArrayAdapter<ProductModel> {
         LayoutInflater flater;
+
         public ProductAdapter(Context context, int resouceId, int textviewId, List<ProductModel> list) {
 
             super(context, resouceId, textviewId, list);
@@ -302,6 +299,7 @@ public class SearchBuyerFragment extends Fragment {
 
             return rowview(convertView, position);
         }
+
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
             return rowview(convertView, position);
@@ -361,6 +359,7 @@ public class SearchBuyerFragment extends Fragment {
                         AppUtil.showToast(mContext, response.body().message);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ResponseModel<List<ProductAttributeModel>>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);
@@ -386,6 +385,7 @@ public class SearchBuyerFragment extends Fragment {
                 objs.setTo("");
             }
             attributeRequestModels.add(objs);
+            Log.e("attributeRequestModels", "attributeRequestModels==" + new Gson().toJson(attributeRequestModels));
         }
     }
 }

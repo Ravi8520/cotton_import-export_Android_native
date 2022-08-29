@@ -107,6 +107,7 @@ public class PostToSellActivity extends AppCompatActivity {
             binding.txtTitle.setText(getResources().getString(R.string.lbl_post_to_export));
         }
 
+
         getProductList();
 
 
@@ -274,7 +275,6 @@ public class PostToSellActivity extends AppCompatActivity {
 
             }
         });
-
         binding.spinnerCountry.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
 
             @Override
@@ -282,10 +282,7 @@ public class PostToSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
-
         selectedStation = stateModelList.get(0).getId();
-
-
         //GetAttribute(productModelList.get(0).getId());
       /*  }
 
@@ -333,7 +330,6 @@ public class PostToSellActivity extends AppCompatActivity {
             }
         });
         selecteddestinationport = destinationportList.get(0).getId();
-
        /* PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationportList);
         binding.spinnerDestinationPort.setAdapter(adapter);
         binding.spinnerDestinationPort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -345,7 +341,6 @@ public class PostToSellActivity extends AppCompatActivity {
 
             }
         });*/
-
     }
 
     public void setUpSpinerport(List<ProtModel> list) {
@@ -374,7 +369,9 @@ public class PostToSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
+
         selectedport = portList.get(0).getId();
+
         /*PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, portList);
         binding.spinnerPortOfDispatch.setAdapter(adapter);
         binding.spinnerPortOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -531,7 +528,6 @@ public class PostToSellActivity extends AppCompatActivity {
 
             }
         });*/
-
     }
 
     public void setUpSpinercountrydestination(List<CountryModel> list) {
@@ -989,6 +985,7 @@ public class PostToSellActivity extends AppCompatActivity {
         productid = productModelList.get(0).getId();
         GetAttribute(productModelList.get(0).getId());
     }
+
        /* ProductAdapter adapter = new ProductAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, productModelList);
         binding.spinnerProduct.setAdapter(adapter);
         binding.spinnerProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
