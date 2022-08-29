@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -26,6 +25,7 @@ import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivityUpdateCompanyDetailsBinding;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.CompanyDetailModel;
 import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.SellertypeBuyerTypeModel;
@@ -134,6 +134,7 @@ public class UpdateCompanyDetailsActivity extends AppCompatActivity {
             binding.edtIecNumber.setText(arraylist.getIec());
             binding.edtIecNumber.setEnabled(false);
             binding.edtGstNumber.setEnabled(false);
+            binding.edtCompanyPanNumber.setEnabled(false);
             Glide.with(mContext).load(arraylist.getStamp_img()).placeholder(R.drawable.placeholder).into(binding.imgUploadStamp);
         }
 
@@ -221,7 +222,32 @@ public class UpdateCompanyDetailsActivity extends AppCompatActivity {
     public void setUpSpinerStation(List<CountryModel> list) {
         stateModelList.clear();
         stateModelList.addAll(list);
-        StateAdapter adapter = new StateAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, stateModelList);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (CountryModel obj : stateModelList) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerCountry.setItems(minAttribute);
+        binding.spinnerCountry.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int i, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                selectedStation = stateModelList.get(i).getId();
+
+            }
+        });
+        binding.spinnerCountry.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        selectedStation = stateModelList.get(0).getId();
+
+
+     /*   StateAdapter adapter = new StateAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, stateModelList);
         binding.spinnerCountry.setAdapter(adapter);
         binding.spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -231,7 +257,7 @@ public class UpdateCompanyDetailsActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
     public class StateAdapter extends ArrayAdapter<CountryModel> {
@@ -323,7 +349,31 @@ public class UpdateCompanyDetailsActivity extends AppCompatActivity {
     public void setUpSpiner(List<SellertypeBuyerTypeModel.SellerBuyerType> list) {
         sellerBuyerTypes.clear();
         sellerBuyerTypes.addAll(list);
-        CustomAdapter adapter = new CustomAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, sellerBuyerTypes);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (SellertypeBuyerTypeModel.SellerBuyerType obj : sellerBuyerTypes) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerType.setItems(minAttribute);
+        binding.spinnerType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int i, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                selectedItem = sellerBuyerTypes.get(i).getName();
+
+            }
+        });
+        binding.spinnerType.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        selectedItem = sellerBuyerTypes.get(0).getName();
+
+      /*  CustomAdapter adapter = new CustomAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, sellerBuyerTypes);
         binding.spinnerType.setAdapter(adapter);
         binding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -335,7 +385,7 @@ public class UpdateCompanyDetailsActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
 

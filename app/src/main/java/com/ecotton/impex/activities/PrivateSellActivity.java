@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -229,6 +228,8 @@ public class PrivateSellActivity extends AppCompatActivity {
 
             }
         });*/
+
+        selectedStation = stateModelList.get(0).getId();
     }
 
     public void setUpSpinercountrydispatch(List<CountryModel> list) {
@@ -261,7 +262,7 @@ public class PrivateSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
-
+        dispatchcontryid = dispatchcontryList.get(0).getId();
         PortList(dispatchcontryList.get(0).getId());
 
       /*  CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, dispatchcontryList);
@@ -306,7 +307,8 @@ public class PrivateSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
-        DestinationPortList( destinationcontryList.get(0).getId());
+        destinationcontryid = destinationcontryList.get(0).getId();
+        DestinationPortList(destinationcontryList.get(0).getId());
 
        /* CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationcontryList);
         binding.spinnerDestinationCountry.setAdapter(adapter);
@@ -384,7 +386,7 @@ public class PrivateSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
-
+        selecteddestinationport = destinationportList.get(0).getId();
        /* PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationportList);
         binding.spinnerDestinationPort.setAdapter(adapter);
         binding.spinnerDestinationPort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -460,6 +462,7 @@ public class PrivateSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
+
         selectedport = portList.get(0).getId();
        /* PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, portList);
         binding.spinnerPortOfDispatch.setAdapter(adapter);
@@ -693,7 +696,9 @@ public class PrivateSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
-        is_destination=detailSpinerData.getTransmit_condition().get(0).getIs_destination();
+        is_destination = detailSpinerData.getTransmit_condition().get(0).getIs_destination();
+        selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(0).getName();
+        delivery_condition_id = detailSpinerData.getTransmit_condition().get(0).getId();
         if (is_destination == 0) {
             binding.layoutDestinationCountry.setVisibility(View.GONE);
             binding.layoutDestinationPort.setVisibility(View.GONE);
@@ -883,7 +888,7 @@ public class PrivateSellActivity extends AppCompatActivity {
             }
         });
         GetAttribute(productModelList.get(0).getId());
-
+        productid = productModelList.get(0).getId();
        /* ProductAdapter adapter = new ProductAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, productModelList);
         binding.spinnerProduct.setAdapter(adapter);
         binding.spinnerProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -986,15 +991,18 @@ public class PrivateSellActivity extends AppCompatActivity {
     }
 
     public void fillAttributs(List<ProductAttributeModel> array) {
+        attributeRequestModels.clear();
         for (ProductAttributeModel obj : array) {
             AttributeRequestModel objs = new AttributeRequestModel();
             objs.setAttribute(obj.getLabel());
             if (obj.getStateModelList().size() > 0)
-                objs.setAttribute_value(obj.getStateModelList().get(0).getValue());
+                objs.setAttribute_value(obj.getStateModelList().get(0).getLabel());
             else
                 objs.setAttribute_value("");
-
+            Log.e("getLabel", "getLabel==" + obj.getLabel());
+            Log.e("getValue", "getValue==" + obj.getStateModelList().get(0).getLabel());
             attributeRequestModels.add(objs);
+            Log.e("attributeRequestModels", "attributeRequestModels==" + new Gson().toJson(attributeRequestModels));
         }
     }
 

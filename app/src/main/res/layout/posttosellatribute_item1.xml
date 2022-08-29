@@ -37,7 +37,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Spinner
+            <com.ecotton.impex.materialspinner.MaterialSpinner
                 android:id="@+id/spinner_attribute"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"

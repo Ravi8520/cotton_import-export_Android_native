@@ -234,6 +234,7 @@ public class SelectSellerActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
+        selectedStation = stateModelList.get(0).getId();
         //selectedStation = stateModelList.get(0).getId();
 
       /*

@@ -132,7 +132,7 @@ public class PostToSellAttributeAdapter extends RecyclerView.Adapter<RecyclerVie
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
         holder.binding.txtLabel.setText(mArrayList.get(position).getLabel());
 
-      /*  ArrayList<String> minAttribute = new ArrayList<>();
+        ArrayList<String> minAttribute = new ArrayList<>();
         for (ProductAttributeModel.Value obj : mArrayList.get(position).getStateModelList()) {
             minAttribute.add(obj.getLabel());
         }
@@ -143,18 +143,16 @@ public class PostToSellAttributeAdapter extends RecyclerView.Adapter<RecyclerVie
             public void onItemSelected(MaterialSpinner view, int i, long id, String item) {
                 //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
                 onItemClickListener.onItemClick(view, mArrayList.get(position).getLabel(), mArrayList.get(position).getStateModelList().get(i).getLabel());
-
             }
         });
         holder.binding.spinnerAttribute.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-
             @Override
             public void onNothingSelected(MaterialSpinner spinner) {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
-        });*/
+        });
         //onItemClickListener.onItemClick(view, mArrayList.get(position).getLabel(), mArrayList.get(position).getStateModelList().get(pos).getLabel());
-        SppinerAdapter adapter = new SppinerAdapter(mcontext, R.layout.spinner_layout, R.id.txt_company_name, mArrayList.get(position).getStateModelList());
+       /* SppinerAdapter adapter = new SppinerAdapter(mcontext, R.layout.spinner_layout, R.id.txt_company_name, mArrayList.get(position).getStateModelList());
         holder.binding.spinnerAttribute.setAdapter(adapter);
         holder.binding.spinnerAttribute.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -165,7 +163,7 @@ public class PostToSellAttributeAdapter extends RecyclerView.Adapter<RecyclerVie
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
     @Override

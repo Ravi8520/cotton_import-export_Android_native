@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -33,6 +32,7 @@ import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.FragmentContractBinding;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.BrokerReportModel;
 import com.ecotton.impex.models.ContractProductModel;
 import com.ecotton.impex.utils.AppUtil;
@@ -302,7 +302,34 @@ public class ContractFragment extends Fragment {
     }
 
     public void SetData1() {
-        StateAdapter adapter = new StateAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, brokerReportModellist.getCompany_list());
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (BrokerReportModel.CompanyList obj : brokerReportModellist.getCompany_list()) {
+            minAttribute.add(obj.getCompany_name());
+        }
+        binding.companySpinner.setItems(minAttribute);
+        binding.companySpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                PDFPath = null;
+                DistrictList(position);
+                // GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.companySpinner.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        PDFPath = null;
+        DistrictList(0);
+
+      /*  StateAdapter adapter = new StateAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, brokerReportModellist.getCompany_list());
         binding.companySpinner.setAdapter(adapter);
         binding.companySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -314,7 +341,7 @@ public class ContractFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
     public class StateAdapter extends ArrayAdapter<BrokerReportModel.CompanyList> {
@@ -371,6 +398,40 @@ public class ContractFragment extends Fragment {
             BrokerReportModel.MemberList brokerReportModel = new BrokerReportModel.MemberList();
             brokerReportModel.setSeller_buyer_name(brokerReportModellist1.getMember_list().get(pos).getSeller_buyer_name());
             CompanyList1.add(brokerReportModel);
+
+
+            ArrayList<String> minAttribute = new ArrayList<>();
+            for (BrokerReportModel.MemberList obj : CompanyList1) {
+                minAttribute.add(obj.getSeller_buyer_name());
+            }
+            binding.spinnerUser.setItems(minAttribute);
+            binding.spinnerUser.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+                @Override
+                public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                    //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                    PDFPath = "";
+                    seller_buyer_id = brokerReportModellist1.getMember_list().get(pos).getSeller_buyer_id();
+                    company_id = brokerReportModellist1.getMember_list().get(pos).getCompany_id();
+                    binding.txtName.setText(brokerReportModellist1.getMember_list().get(pos).getSeller_buyer_name());
+                    // GetAttribute(productModelList.get(i).getId());
+
+                }
+            });
+
+            binding.spinnerUser.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+                @Override
+                public void onNothingSelected(MaterialSpinner spinner) {
+                    //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+                }
+            });
+
+            PDFPath = "";
+            seller_buyer_id = brokerReportModellist1.getMember_list().get(pos).getSeller_buyer_id();
+            company_id = brokerReportModellist1.getMember_list().get(pos).getCompany_id();
+            binding.txtName.setText(brokerReportModellist1.getMember_list().get(pos).getSeller_buyer_name());
+          /*
             memberAdapter = new MemberAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, CompanyList1);
             binding.spinnerUser.setAdapter(memberAdapter);
             binding.spinnerUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -384,7 +445,7 @@ public class ContractFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) {
 
                 }
-            });
+            });*/
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -633,7 +694,36 @@ public class ContractFragment extends Fragment {
         contractProductModel.setProduct_id(-1);
         CompanyList.add(contractProductModel);
         CompanyList.addAll(list);
-        ProductAdapter adapter = new ProductAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, CompanyList);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (ContractProductModel obj : CompanyList) {
+            minAttribute.add(obj.getProduct_name());
+        }
+        binding.spinnerUser.setItems(minAttribute);
+        binding.spinnerUser.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                product_name = CompanyList.get(position).getProduct_name();
+                product_id = CompanyList.get(position).getProduct_id();
+                binding.txtName.setText(product_name);
+                // GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.spinnerUser.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        product_name = CompanyList.get(0).getProduct_name();
+        product_id = CompanyList.get(0).getProduct_id();
+        binding.txtName.setText(product_name);
+
+       /* ProductAdapter adapter = new ProductAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, CompanyList);
         binding.spinnerUser.setAdapter(adapter);
         binding.spinnerUser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -646,7 +736,7 @@ public class ContractFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
 

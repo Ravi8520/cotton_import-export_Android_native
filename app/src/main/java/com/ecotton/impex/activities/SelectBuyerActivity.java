@@ -1,9 +1,14 @@
 package com.ecotton.impex.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -63,7 +68,7 @@ public class SelectBuyerActivity extends AppCompatActivity {
             productid = intent.getIntExtra("product_id", 0);
             productname = intent.getStringExtra("productname");
 
-
+            Log.e("newdata", "newdata==" + data);
         }
         if (mSessionUtil.getUsertype().equals("buyer")) {
             binding.txtTitle.setText(getResources().getString(R.string.lbl_select_exporter));
@@ -140,7 +145,7 @@ public class SelectBuyerActivity extends AppCompatActivity {
 
             String data = jsonObject.toString();
 
-            Log.e("data", "data==" + data);
+            Log.e("jayesh", "jayesh==" + data);
 
             customDialog.displayProgress(mContext);
 
@@ -154,6 +159,27 @@ public class SelectBuyerActivity extends AppCompatActivity {
                         if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                             AppUtil.showToast(mContext, response.body().message);
                             countryAdapter.addAllClass(response.body().data);
+                            if (response.body().message.equals("Records not found")) {
+                                final Dialog dialog = new Dialog(mContext);
+                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                dialog.setCancelable(false);
+                                dialog.setCanceledOnTouchOutside(false);
+                                dialog.setContentView(R.layout.importer_exporter_notfound_dialog);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                                TextView txt_title = dialog.findViewById(R.id.txt_title);
+                                txt_title.setText("No Exporter Found !");
+                                Button btn_ok = dialog.findViewById(R.id.btn_ok);
+
+                                btn_ok.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        onBackPressed();
+                                    }
+                                });
+
+                                dialog.show();
+                            }
                         } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                             AppUtil.showToast(mContext, response.body().message);
                         } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
@@ -200,11 +226,33 @@ public class SelectBuyerActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponseModel<List<SearchSellerModel>>> call, Response<ResponseModel<List<SearchSellerModel>>> response) {
                     customDialog.dismissProgress(mContext);
-                    Log.e("SearchSellerModel", "SearchSellerModel==" + new Gson().toJson(response.body()));
+                    Log.e("SearchSellerModel", "SearchSellerModel==" + new Gson().toJson(response.body().data));
                     if (response.body().status != 0) {
                         if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                             AppUtil.showToast(mContext, response.body().message);
                             countryAdapter.addAllClass(response.body().data);
+
+                            if (response.body().message.equals("Records not found")) {
+                                final Dialog dialog = new Dialog(mContext);
+                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                dialog.setCancelable(false);
+                                dialog.setCanceledOnTouchOutside(false);
+                                dialog.setContentView(R.layout.importer_exporter_notfound_dialog);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                                TextView txt_title = dialog.findViewById(R.id.txt_title);
+                                txt_title.setText("No Importer Found !");
+                                Button btn_ok = dialog.findViewById(R.id.btn_ok);
+
+                                btn_ok.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        onBackPressed();
+                                    }
+                                });
+
+                                dialog.show();
+                            }
                         } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                             AppUtil.showToast(mContext, response.body().message);
                         } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
