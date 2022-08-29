@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ecotton.impex.BuildConfig;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.NegotiationNotifyCount;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.Utils;
@@ -39,11 +40,13 @@ import com.ecotton.impex.models.BuyerFilterRequest;
 import com.ecotton.impex.models.dashboard.DashBoardModel;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +97,10 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
 
         Log.e("countryId", "countryId==" + countryId);
 
+       /* String jsonDashboard = getIntent().getStringExtra("dashBoardModelList");
+        Type type = new TypeToken<List<DashBoardModel.CompanyModel>>() {
+        }.getType();
+        dashBoardModelList = new Gson().fromJson(jsonDashboard, type);*/
         binding.backarrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +143,61 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
     public void setUpSpiner(List<DashBoardModel> list) {
         dashBoardModelList.clear();
         dashBoardModelList.addAll(list);
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (DashBoardModel objs : dashBoardModelList) {
+            minAttribute.add(objs.getName());
+        }
+        binding.spinnerState.setItems(minAttribute);
+        binding.spinnerState.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+
+                String selectedItem = item;
+                countryId = dashBoardModelList.get(position).getCountry_id() + "";
+                Log.e("countryId111", "countryId11==" + countryId);
+                // filterRequest.setState_id(cityModelList.get(position).getDistrict_id() + "");
+
+                binding.txtName.setText(dashBoardModelList.get(position).getName());
+
+                binding.txtPost.setText("Post: " + dashBoardModelList.get(position).getCount());
+                binding.txtBales.setText("Ton:  " + dashBoardModelList.get(position).getBales());
+
+                setUpStateRecyclerVeiw(dashBoardModelList.get(position).getCompanyModelList());
+               /* districtID = cityModelList.get(position).getDistrict_id() + "";
+                // filterRequest.setState_id(cityModelList.get(position).getDistrict_id() + "");
+
+                binding.txtName.setText(cityModelList.get(position).getName());
+
+                binding.txtPost.setText("Post: " + cityModelList.get(position).getCount());
+                binding.txtBales.setText("Bales:  " + cityModelList.get(position).getBales());
+                setUpStateRecyclerVeiw(cityModelList.get(position).getCompanyModelList());*/
+            }
+        });
+        binding.spinnerState.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+        for (int i = 0; i < dashBoardModelList.size(); i++) {
+            if (dashBoardModelList.get(i).getCountry_id() == Integer.parseInt(countryId)) {
+                binding.spinnerState.setSelectedIndex(i);
+                countryId = dashBoardModelList.get(i).getCountry_id() + "";
+                // filterRequest.setState_id(cityModelList.get(position).getDistrict_id() + "");
+
+                binding.txtName.setText(dashBoardModelList.get(i).getName());
+
+                binding.txtPost.setText("Post: " + dashBoardModelList.get(i).getCount());
+                binding.txtBales.setText("Bales:  " + dashBoardModelList.get(i).getBales());
+                setUpStateRecyclerVeiw(dashBoardModelList.get(i).getCompanyModelList());
+                break;
+            }
+        }
+       /* dashBoardModelList.clear();
+        dashBoardModelList.addAll(list);
         try {
             CustomAdapter adapter = new CustomAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, dashBoardModelList);
             binding.spinnerState.setAdapter(adapter);
@@ -161,7 +223,7 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
             });
         } catch (Exception e) {
             e.getMessage();
-        }
+        }*/
     }
     private void Dashboard_buyerFilter() {
         try {
