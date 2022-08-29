@@ -45,8 +45,8 @@
     <string name="lbl_new_password">New Password</string>
     <string name="lbl_confrim_password">Confirm Password</string>
     <string name="lbl_post_to_sell">Post To Sell</string>
-    <string name="lbl_post_to_export">Post To Export</string>
-    <string name="lbl_post_to_buy">Post To Import</string>
+    <string name="lbl_post_to_export">Open Export</string>
+    <string name="lbl_post_to_buy">Open Import</string>
     <string name="lbl_search">Search</string>
     <string name="lbl_private_sell">Private Export</string>
     <string name="lbl_private_buy">Private Import</string>

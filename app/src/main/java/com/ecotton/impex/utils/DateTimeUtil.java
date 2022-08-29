@@ -94,6 +94,7 @@ public class DateTimeUtil {
         // Create a calendar object that will convert the date and time value in milliseconds to date.
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliSeconds);
+
         return formatter.format(calendar.getTime());
     }
     public static String getStringFromCalendar(Calendar mCalendar, String dateFormat) {

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -23,6 +22,7 @@ import com.ecotton.impex.adapters.PostToSellAttributeAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivityPersonalSellBinding;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.AttributeRequestModel;
 import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.PostDetailSpinerData;
@@ -147,6 +147,7 @@ public class PrivateSellActivity extends AppCompatActivity {
             }
         });
 
+
         CountryList();
         getSpinerData();
 
@@ -190,7 +191,30 @@ public class PrivateSellActivity extends AppCompatActivity {
         countryModel.setId(-1);
         stateModelList.add(countryModel);
         stateModelList.addAll(list);
-        CountryAdapter adapter = new CountryAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, stateModelList);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (CountryModel obj : stateModelList) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerCountry.setItems(minAttribute);
+        binding.spinnerCountry.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                selectedStation = stateModelList.get(position).getId();
+                // GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.spinnerCountry.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+       /* CountryAdapter adapter = new CountryAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, stateModelList);
         binding.spinnerCountry.setAdapter(adapter);
         binding.spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -203,13 +227,45 @@ public class PrivateSellActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
+
+        selectedStation = stateModelList.get(0).getId();
     }
 
     public void setUpSpinercountrydispatch(List<CountryModel> list) {
         dispatchcontryList.clear();
         dispatchcontryList.addAll(list);
-        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, dispatchcontryList);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (CountryModel obj : dispatchcontryList) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerCountryOfDispatch.setItems(minAttribute);
+        binding.spinnerCountryOfDispatch.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                dispatchcontryid = dispatchcontryList.get(position).getId();
+                Log.e("dispatchcontryid", "dispatchcontryid==" + dispatchcontryid);
+
+                PortList(dispatchcontryid);
+
+
+                // GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.spinnerCountryOfDispatch.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        dispatchcontryid = dispatchcontryList.get(0).getId();
+        PortList(dispatchcontryList.get(0).getId());
+
+      /*  CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, dispatchcontryList);
         binding.spinnerCountryOfDispatch.setAdapter(adapter);
         binding.spinnerCountryOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -221,13 +277,40 @@ public class PrivateSellActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
     public void setUpSpinercountrydestination(List<CountryModel> list) {
         destinationcontryList.clear();
         destinationcontryList.addAll(list);
-        CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationcontryList);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (CountryModel obj : destinationcontryList) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerDestinationCountry.setItems(minAttribute);
+        binding.spinnerDestinationCountry.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                destinationcontryid = destinationcontryList.get(position).getId();
+                DestinationPortList(destinationcontryid);
+                // GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.spinnerDestinationCountry.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        destinationcontryid = destinationcontryList.get(0).getId();
+        DestinationPortList(destinationcontryList.get(0).getId());
+
+       /* CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationcontryList);
         binding.spinnerDestinationCountry.setAdapter(adapter);
         binding.spinnerDestinationCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -239,7 +322,7 @@ public class PrivateSellActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
     private void DestinationPortList(int countryid) {
@@ -280,7 +363,31 @@ public class PrivateSellActivity extends AppCompatActivity {
     public void setUpSpinerdestinationport(List<ProtModel> list) {
         destinationportList.clear();
         destinationportList.addAll(list);
-        PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationportList);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (ProtModel obj : destinationportList) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerDestinationPort.setItems(minAttribute);
+        binding.spinnerDestinationPort.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                selecteddestinationport = destinationportList.get(position).getId();
+                // GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.spinnerDestinationPort.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        selecteddestinationport = destinationportList.get(0).getId();
+       /* PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationportList);
         binding.spinnerDestinationPort.setAdapter(adapter);
         binding.spinnerDestinationPort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -290,7 +397,7 @@ public class PrivateSellActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
     private void PortList(int countryid) {
@@ -331,7 +438,33 @@ public class PrivateSellActivity extends AppCompatActivity {
     public void setUpSpinerport(List<ProtModel> list) {
         portList.clear();
         portList.addAll(list);
-        PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, portList);
+
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (ProtModel obj : portList) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerPortOfDispatch.setItems(minAttribute);
+        binding.spinnerPortOfDispatch.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                selectedport = portList.get(position).getId();
+                // GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.spinnerPortOfDispatch.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+        selectedport = portList.get(0).getId();
+       /* PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, portList);
         binding.spinnerPortOfDispatch.setAdapter(adapter);
         binding.spinnerPortOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -341,7 +474,7 @@ public class PrivateSellActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
     public class PortAdapter extends ArrayAdapter<ProtModel> {
@@ -532,7 +665,49 @@ public class PrivateSellActivity extends AppCompatActivity {
 
     public void setSpinerData() {
 
-        CustomAdapter adapterTransmit = new CustomAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, detailSpinerData.getTransmit_condition());
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (PostDetailSpinerData.SpinerModel obj : detailSpinerData.getTransmit_condition()) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerDeliveryCondition.setItems(minAttribute);
+        binding.spinnerDeliveryCondition.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(position).getName();
+                Log.e("selectedTransmitCondition", "selectedTransmitCondition==" + selectedTransmitCondition);
+                is_destination = detailSpinerData.getTransmit_condition().get(position).getIs_destination();
+                delivery_condition_id = detailSpinerData.getTransmit_condition().get(position).getId();
+                // GetAttribute(productModelList.get(i).getId());
+                if (is_destination == 0) {
+                    binding.layoutDestinationCountry.setVisibility(View.GONE);
+                    binding.layoutDestinationPort.setVisibility(View.GONE);
+                } else {
+                    binding.layoutDestinationCountry.setVisibility(View.VISIBLE);
+                    binding.layoutDestinationPort.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        binding.spinnerDeliveryCondition.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        is_destination = detailSpinerData.getTransmit_condition().get(0).getIs_destination();
+        selectedTransmitCondition = detailSpinerData.getTransmit_condition().get(0).getName();
+        delivery_condition_id = detailSpinerData.getTransmit_condition().get(0).getId();
+        if (is_destination == 0) {
+            binding.layoutDestinationCountry.setVisibility(View.GONE);
+            binding.layoutDestinationPort.setVisibility(View.GONE);
+        } else {
+            binding.layoutDestinationCountry.setVisibility(View.VISIBLE);
+            binding.layoutDestinationPort.setVisibility(View.VISIBLE);
+        }
+
+       /* CustomAdapter adapterTransmit = new CustomAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, detailSpinerData.getTransmit_condition());
         binding.spinnerDeliveryCondition.setAdapter(adapterTransmit);
 
         binding.spinnerDeliveryCondition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -553,7 +728,7 @@ public class PrivateSellActivity extends AppCompatActivity {
 
             public void onNothingSelected(AdapterView<?> parent) {
             }
-        });
+        });*/
     }
 
     public class CustomAdapter extends ArrayAdapter<PostDetailSpinerData.SpinerModel> {
@@ -689,7 +864,32 @@ public class PrivateSellActivity extends AppCompatActivity {
         productModel.setId(-1);
         productModelList.add(productModel);
         productModelList.addAll(list);
-        ProductAdapter adapter = new ProductAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, productModelList);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (ProductModel obj : productModelList) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerProduct.setItems(minAttribute);
+        binding.spinnerProduct.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int i, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                productid = productModelList.get(i).getId();
+                GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.spinnerProduct.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        GetAttribute(productModelList.get(0).getId());
+        productid = productModelList.get(0).getId();
+       /* ProductAdapter adapter = new ProductAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, productModelList);
         binding.spinnerProduct.setAdapter(adapter);
         binding.spinnerProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -701,7 +901,7 @@ public class PrivateSellActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
 
     public class ProductAdapter extends ArrayAdapter<ProductModel> {
@@ -791,15 +991,18 @@ public class PrivateSellActivity extends AppCompatActivity {
     }
 
     public void fillAttributs(List<ProductAttributeModel> array) {
+        attributeRequestModels.clear();
         for (ProductAttributeModel obj : array) {
             AttributeRequestModel objs = new AttributeRequestModel();
             objs.setAttribute(obj.getLabel());
             if (obj.getStateModelList().size() > 0)
-                objs.setAttribute_value(obj.getStateModelList().get(0).getValue());
+                objs.setAttribute_value(obj.getStateModelList().get(0).getLabel());
             else
                 objs.setAttribute_value("");
-
+            Log.e("getLabel", "getLabel==" + obj.getLabel());
+            Log.e("getValue", "getValue==" + obj.getStateModelList().get(0).getLabel());
             attributeRequestModels.add(objs);
+            Log.e("attributeRequestModels", "attributeRequestModels==" + new Gson().toJson(attributeRequestModels));
         }
     }
 

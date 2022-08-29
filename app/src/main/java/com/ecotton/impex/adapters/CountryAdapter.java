@@ -1,7 +1,9 @@
 package com.ecotton.impex.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ecotton.impex.R;
 import com.ecotton.impex.databinding.CountryItemBinding;
 import com.ecotton.impex.models.SearchSellerModel;
+import com.github.florent37.expansionpanel.ExpansionLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,6 +136,26 @@ public class CountryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         holder.binding.recyclerData.setLayoutManager(new LinearLayoutManager(mcontext));
         holder.binding.recyclerData.setAdapter(searchBuyerDataAdapter);
         searchBuyerDataAdapter.addAllClass(mArrayList.get(position).getData());
+
+        holder.binding.mELOrderTimeline.addIndicatorListener(new ExpansionLayout.IndicatorListener() {
+            @Override
+            public void onStartedExpand(ExpansionLayout expansionLayout, boolean willExpand) {
+                Log.e("expanded", "expanded==" + willExpand);
+                if (willExpand == true) {
+                    holder.binding.txtCountryName.setTypeface(null, Typeface.BOLD);
+                } else {
+                    holder.binding.txtCountryName.setTypeface(null, Typeface.NORMAL);
+                }
+            }
+        /* {
+            @Override
+            public void onExpansionChanged(ExpansionLayout expansionLayout, boolean expanded) {
+                Log.e("expanded", "expanded==" + expanded);
+                if (expanded == true) {
+                    holder.binding.txtCountryName.setTypeface(null, Typeface.BOLD);
+                }
+            }*/
+        });
     }
 
     @Override

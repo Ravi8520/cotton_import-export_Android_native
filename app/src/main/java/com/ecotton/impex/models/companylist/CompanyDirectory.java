@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class CompanyDirectory implements Serializable {
 
-    public int company_id = 0, is_my_favourite = 0,favourite_id=0;
-    public String company_name = "", address = "", mobile_number = "", country = "", state = "", district = "";
+    public int company_id = 0, is_my_favourite = 0, favourite_id = 0;
+    public String company_name = "", address = "", mobile_number = "", country = "", state = "", district = "", email = "";
 
     public int getCompany_id() {
         return company_id;
@@ -77,5 +77,13 @@ public class CompanyDirectory implements Serializable {
 
     public void setFavourite_id(int favourite_id) {
         this.favourite_id = favourite_id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

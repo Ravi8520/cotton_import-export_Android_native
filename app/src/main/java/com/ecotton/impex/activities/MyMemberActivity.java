@@ -62,6 +62,27 @@ public class MyMemberActivity extends AppCompatActivity {
             }
         });
         binding.tvCompanyname.setText(mSessionUtil.getCompanyName());
+
+        try {
+            String test = mSessionUtil.getCompanyName();
+            Log.e("getCompanyName", "getCompanyName==" + test);
+            String first = String.valueOf(test.charAt(0));
+
+            String str = test;
+            String separator = " ";
+            int sepPos = str.indexOf(separator);
+            if (sepPos == -1) {
+                System.out.println("");
+            }
+            String data = str.substring(sepPos + separator.length());
+
+            String second = String.valueOf(data.charAt(0));
+
+            binding.firsLetter.setText(first);
+            binding.secondLetter.setText(second);
+        } catch (Exception e) {
+            e.getMessage();
+        }
         setAddapter();
         GetMemberList();
     }

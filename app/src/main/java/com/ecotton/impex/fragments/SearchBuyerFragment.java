@@ -23,6 +23,7 @@ import com.ecotton.impex.adapters.PostToSellAttributeAdapter1;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.FragmentSearchBuyerBinding;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.AttributeRequestModel;
 import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.PostDetailSpinerData;
@@ -221,6 +222,52 @@ public class SearchBuyerFragment extends Fragment {
 
     public void setUpSpinnerProduct(List<ProductModel> list) {
         productModelList.clear();
+        productModelList.addAll(list);
+        ProductAdapter adapter = new ProductAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, productModelList);
+        //binding.spinnerProduct.setAdapter(adapter);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (ProductModel obj : productModelList) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerProduct.setItems(minAttribute);
+        binding.spinnerProduct.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int i, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                productid = productModelList.get(i).getId();
+                productname = productModelList.get(i).getName();
+                GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.spinnerProduct.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        productid = productModelList.get(0).getId();
+        GetAttribute(productModelList.get(0).getId());
+        /*binding.spinnerProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                productid = productModelList.get(position).getId();
+                productname = productModelList.get(position).getName();
+                GetAttribute(productModelList.get(position).getId());
+                //GetAttribute1(productModelList.get(position).getId());
+
+            } // to close the onItemSelected
+
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });*/
+    }
+
+   /* public void setUpSpinnerProduct(List<ProductModel> list) {
+        productModelList.clear();
         ProductModel productModel = new ProductModel();
         productModel.setName("Product type");
         productModel.setId(-1);
@@ -240,7 +287,7 @@ public class SearchBuyerFragment extends Fragment {
 
             }
         });
-    }
+    }*/
 
     public class ProductAdapter extends ArrayAdapter<ProductModel> {
         LayoutInflater flater;

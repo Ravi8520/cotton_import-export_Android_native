@@ -149,6 +149,7 @@ public class MyFavouriteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         holder.binding.txtStateName.setText(dataarraylist.get(position).getCountry_name());
         holder.binding.txtAddress.setText(dataarraylist.get(position).getAddress());
         holder.binding.txtDistrictName.setText(dataarraylist.get(position).getDistrict_name());
+        holder.binding.txtEmail.setText(dataarraylist.get(position).getEmail());
 
         String test = dataarraylist.get(position).getCompany_name();
         String first = String.valueOf(test.charAt(0));

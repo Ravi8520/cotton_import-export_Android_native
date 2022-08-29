@@ -73,6 +73,7 @@ public class ProductAttributeModel implements Serializable {
         @SerializedName("value")
         @Expose
         private String value;
+
         @SerializedName("label")
         @Expose
         private String label;

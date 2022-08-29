@@ -197,7 +197,7 @@ public class HomeActivity extends AppCompatActivity {
         TextView lbl_personal_buy = (TextView) dialog.findViewById(R.id.lbl_personal_buy);
 
         if (mSessionUtil.getUsertype().equals("buyer")) {
-            lbl_post_to_buy.setText("Post to Import");
+            lbl_post_to_buy.setText("Open Import");
             lbl_personal_buy.setText("Private Import");
         }
 

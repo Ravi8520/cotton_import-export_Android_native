@@ -16,8 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +29,7 @@ import com.ecotton.impex.R;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.FragmentPostBinding;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.BrokerReportModel;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
@@ -125,7 +124,26 @@ public class PostFragment extends Fragment {
             }
         });
 
-        ArrayAdapter adapter1 = new ArrayAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, status);
+        binding.spinnerStatus.setItems(status);
+        binding.spinnerStatus.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                status_string = item;
+                // GetAttribute(productModelList.get(i).getId());
+
+            }
+        });
+        binding.spinnerStatus.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        status_string = "active";
+       /* ArrayAdapter adapter1 = new ArrayAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, status);
         binding.spinnerStatus.setAdapter(adapter1);
         binding.spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -136,7 +154,7 @@ public class PostFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
         binding.layoutDownload.setOnClickListener(new View.OnClickListener() {
             @Override

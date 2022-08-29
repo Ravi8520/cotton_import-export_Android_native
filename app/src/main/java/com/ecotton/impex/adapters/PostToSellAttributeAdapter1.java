@@ -6,7 +6,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecotton.impex.R;
 import com.ecotton.impex.databinding.PosttosellattributeItemBinding;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.ProductAttributeModel;
 
 import java.util.ArrayList;
@@ -138,7 +138,29 @@ public class PostToSellAttributeAdapter1 extends RecyclerView.Adapter<RecyclerVi
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
         holder.binding.txtLabel.setText(mArrayList.get(position).getLabel());
 
-        SppinerAdapter adapter = new SppinerAdapter(mcontext, R.layout.spinner_layout, R.id.txt_company_name, mArrayList.get(position).getStateModelList());
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (ProductAttributeModel.Value obj : mArrayList.get(position).getStateModelList()) {
+            minAttribute.add(obj.getLabel());
+        }
+        holder.binding.spinnerAttribute.setItems(minAttribute);
+        holder.binding.spinnerAttribute.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int i, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                onItemClickListener1.onItemClick1(view, mArrayList.get(position).getLabel(), mArrayList.get(position).getStateModelList().get(i).getLabel());
+
+            }
+        });
+        holder.binding.spinnerAttribute.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+    /*    SppinerAdapter adapter = new SppinerAdapter(mcontext, R.layout.spinner_layout, R.id.txt_company_name, mArrayList.get(position).getStateModelList());
         holder.binding.spinnerAttribute.setAdapter(adapter);
         holder.binding.spinnerAttribute.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -149,7 +171,7 @@ public class PostToSellAttributeAdapter1 extends RecyclerView.Adapter<RecyclerVi
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
         if (mArrayList.get(position).getIs_double() == 0) {
             holder.binding.layoutProductMax.setVisibility(View.GONE);
@@ -157,7 +179,29 @@ public class PostToSellAttributeAdapter1 extends RecyclerView.Adapter<RecyclerVi
             holder.binding.layoutProduct.setGravity(Gravity.CENTER);
         }
 
-        SppinerAdapter1 adapter1 = new SppinerAdapter1(mcontext, R.layout.spinner_layout, R.id.txt_company_name, mArrayList.get(position).getStateModelList());
+        ArrayList<String> maxAttribute = new ArrayList<>();
+        for (ProductAttributeModel.Value obj : mArrayList.get(position).getStateModelList()) {
+            maxAttribute.add(obj.getLabel());
+        }
+        holder.binding.maxSpinnerAttribute.setItems(maxAttribute);
+        holder.binding.maxSpinnerAttribute.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int i, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                onItemClickListener1.onItemClick1(view, mArrayList.get(position).getLabel(), mArrayList.get(position).getStateModelList().get(i).getLabel());
+
+            }
+        });
+        holder.binding.maxSpinnerAttribute.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+        /*SppinerAdapter1 adapter1 = new SppinerAdapter1(mcontext, R.layout.spinner_layout, R.id.txt_company_name, mArrayList.get(position).getStateModelList());
         holder.binding.maxSpinnerAttribute.setAdapter(adapter1);
         holder.binding.maxSpinnerAttribute.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -169,7 +213,7 @@ public class PostToSellAttributeAdapter1 extends RecyclerView.Adapter<RecyclerVi
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
+        });*/
     }
 
 

@@ -1,7 +1,9 @@
 package com.ecotton.impex.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -131,7 +133,22 @@ public class MyWorkFragment extends Fragment {
         binding.rlLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LogOut();
+                new AlertDialog.Builder(mContext)
+                        .setTitle("Alert")
+                        .setMessage("Are you sure you want to Logout this App?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                LogOut();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
 

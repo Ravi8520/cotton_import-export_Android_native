@@ -22,6 +22,7 @@ import com.ecotton.impex.adapters.SellectedSellerAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivitySelectSellerBinding;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.CountryModel;
 import com.ecotton.impex.models.PrivatSellNotificationModel;
 import com.ecotton.impex.models.SearchCompanyModel;
@@ -210,6 +211,33 @@ public class SelectSellerActivity extends AppCompatActivity {
         countryModel.setId(-1);
         stateModelList.add(countryModel);
         stateModelList.addAll(list);
+
+        ArrayList<String> minAttribute = new ArrayList<>();
+        for (CountryModel obj : stateModelList) {
+            minAttribute.add(obj.getName());
+        }
+        binding.spinnerCountry.setItems(minAttribute);
+        binding.spinnerCountry.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                selectedStation = stateModelList.get(position).getId();
+                // GetAttribute(productModelList.get(i).getId());
+                SearchCompany(selectedStation);
+            }
+        });
+        binding.spinnerCountry.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+
+            @Override
+            public void onNothingSelected(MaterialSpinner spinner) {
+                //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        selectedStation = stateModelList.get(0).getId();
+        //selectedStation = stateModelList.get(0).getId();
+
+      /*
         CountryAdapter adapter = new CountryAdapter(mContext, R.layout.layout_spiner, R.id.txt_company_name, stateModelList);
         binding.spinnerCountry.setAdapter(adapter);
         binding.spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -224,7 +252,7 @@ public class SelectSellerActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
     }
     public class CountryAdapter extends ArrayAdapter<CountryModel> {
 
