@@ -914,6 +914,6 @@ public class ContractFragment extends Fragment {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", mContext.getPackageName(), null);
         intent.setData(uri);
-        startActivityForResult(intent, 101);
+        startActivity(intent);
     }
 }

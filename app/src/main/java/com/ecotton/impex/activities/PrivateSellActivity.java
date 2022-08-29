@@ -137,6 +137,15 @@ public class PrivateSellActivity extends AppCompatActivity {
         });
         getProductList();
 
+        setUpAttributAdapter();
+
+
+        CountryList();
+        getSpinerData();
+
+    }
+
+    public void setUpAttributAdapter(){
         postToSellAttributeAdapter = new PostToSellAttributeAdapter(mContext);
         binding.recyclerviewPostToSell.setLayoutManager(new LinearLayoutManager(mContext));
         binding.recyclerviewPostToSell.setAdapter(postToSellAttributeAdapter);
@@ -146,13 +155,7 @@ public class PrivateSellActivity extends AppCompatActivity {
                 setAttributeArray(attributs, value);
             }
         });
-
-
-        CountryList();
-        getSpinerData();
-
     }
-
     private void CountryList() {
         Log.e("StateModel", "StateModel==");
         customDialog.displayProgress(mContext);
@@ -968,6 +971,7 @@ public class PrivateSellActivity extends AppCompatActivity {
                     customDialog.dismissProgress(mContext);
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         fillAttributs(response.body().data);
+                        setUpAttributAdapter();
                         postToSellAttributeAdapter.addAllClass(response.body().data);
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         postToSellAttributeAdapter.notifyDataSetChanged();
@@ -978,7 +982,6 @@ public class PrivateSellActivity extends AppCompatActivity {
                         AppUtil.showToast(mContext, response.body().message);
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ResponseModel<List<ProductAttributeModel>>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);

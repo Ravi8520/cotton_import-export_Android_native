@@ -476,9 +476,9 @@ public class HomeFragment extends Fragment {
                     if (position == 0) {
                         setUpStateRecyclerVeiw(position);
                     } else {
-                        filterRequest.setCountry_id(dashBoardModelList.get(position - 1).getCountry_id() + "");
+                        filterRequest.setCountry_id(dashBoardModelList.get(position).getCountry_id() + "");
                         startActivity(new Intent(mContext, DashboardCompanyListActivity.class)
-                                .putExtra("countryId", dashBoardModelList.get(position - 1).getCountry_id() + ""));
+                                .putExtra("countryId", dashBoardModelList.get(position ).getCountry_id() + ""));
                     }
                 }
             });

@@ -118,15 +118,7 @@ public class PostToSellActivity extends AppCompatActivity {
             }
         });
 
-        postToSellAttributeAdapter = new PostToSellAttributeAdapter(mContext);
-        binding.recyclerviewPostToSell.setLayoutManager(new LinearLayoutManager(mContext));
-        binding.recyclerviewPostToSell.setAdapter(postToSellAttributeAdapter);
-        postToSellAttributeAdapter.setOnItemClickListener(new PostToSellAttributeAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, String attributs, String value) {
-                setAttributeArray(attributs, value);
-            }
-        });
+        setUpAttributAdapter();
 
         binding.btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +139,18 @@ public class PostToSellActivity extends AppCompatActivity {
         CountryList();
         getSpinerData();
 
+    }
+
+    public void setUpAttributAdapter(){
+        postToSellAttributeAdapter = new PostToSellAttributeAdapter(mContext);
+        binding.recyclerviewPostToSell.setLayoutManager(new LinearLayoutManager(mContext));
+        binding.recyclerviewPostToSell.setAdapter(postToSellAttributeAdapter);
+        postToSellAttributeAdapter.setOnItemClickListener(new PostToSellAttributeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, String attributs, String value) {
+                setAttributeArray(attributs, value);
+            }
+        });
     }
 
     private void CountryList() {
@@ -1084,6 +1088,7 @@ public class PostToSellActivity extends AppCompatActivity {
                     customDialog.dismissProgress(mContext);
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         fillAttributs(response.body().data);
+                        setUpAttributAdapter();
                         postToSellAttributeAdapter.addAllClass(response.body().data);
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                         postToSellAttributeAdapter.notifyDataSetChanged();
