@@ -348,6 +348,7 @@ public class SearchBuyerFragment extends Fragment {
                     customDialog.dismissProgress(mContext);
                     Log.e("TAG", "GetAttribute==" + new Gson().toJson(response.body()));
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
+                        SetAdapter();
                         postToSellAttributeAdapter.addAllClass(response.body().data);
                         fillAttributs1(response.body().data);
                     } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {

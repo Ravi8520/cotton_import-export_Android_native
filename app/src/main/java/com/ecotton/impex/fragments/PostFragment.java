@@ -116,7 +116,7 @@ public class PostFragment extends Fragment {
                         if (date != null) {
                             GetContractData(date);
                         } else {
-                            Toast.makeText(mContext, "Plase Select Date", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, "Please Select Date", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
@@ -131,6 +131,10 @@ public class PostFragment extends Fragment {
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
                 status_string = item;
+                binding.pickDateButton.setText("Select Date");
+                binding.activeDate.setText("");
+                date = null;
+                binding.layoutDownload.setVisibility(View.GONE);
                 // GetAttribute(productModelList.get(i).getId());
 
             }

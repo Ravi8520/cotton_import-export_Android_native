@@ -3,6 +3,7 @@ package com.ecotton.impex.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -68,6 +69,17 @@ public class BuyerActivity extends AppCompatActivity implements BuyerAdapter.OnI
                 return false;
             }
         });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                binding.searchBar.clearFocus();
+            }
+        }, 100);
+
+        if (mSessionUtil.getUsertype().equals("seller")) {
+            binding.searchBar.setQueryHint("Search Importer");
+        }
 
         binding.backarrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +172,7 @@ public class BuyerActivity extends AppCompatActivity implements BuyerAdapter.OnI
             call.enqueue(new Callback<ResponseModel<List<CompanyDirectory>>>() {
                 @Override
                 public void onResponse(Call<ResponseModel<List<CompanyDirectory>>> call, Response<ResponseModel<List<CompanyDirectory>>> response) {
-                    Log.e("response",  "CompanyDirectory==" + new Gson().toJson(response.body()));
+                    Log.e("response", "CompanyDirectory==" + new Gson().toJson(response.body()));
                     customDialog.dismissProgress(mContext);
                     if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                         adapter.addAllClass(response.body().data);

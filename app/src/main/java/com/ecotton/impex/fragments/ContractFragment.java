@@ -187,9 +187,10 @@ public class ContractFragment extends Fragment {
                         binding.pickDateButton.setText(simpleFormat.format(startDate) + "/" + simpleFormat.format(endDate));
                         date = simpleFormat.format(startDate) + "#" + simpleFormat.format(endDate);
 
+
                         if (sellerwise.equals("sellerwise")) {
-                            Log.e("sellerwise", "sellerwise===" + sellerwise);
                             if (date != null) {
+                                binding.txtDate.setText(date);
                                 GetContractData(seller_buyer_id, company_id, date);
                                 binding.pickDateButton.setText(simpleFormat.format(startDate) + "/" + simpleFormat.format(endDate));
                             } else {
@@ -200,8 +201,8 @@ public class ContractFragment extends Fragment {
                         }
 
                         if (productwise.equals("productwise")) {
-                            Log.e("productwise", "productwise===" + productwise);
                             if (date != null) {
+                                binding.txtDate.setText(date);
                                 GetLabReport(date);
                                 binding.pickDateButton.setText(simpleFormat.format(startDate) + "/" + simpleFormat.format(endDate));
                             } else {
@@ -314,7 +315,10 @@ public class ContractFragment extends Fragment {
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
                 PDFPath = null;
+                date = null;
                 DistrictList(position);
+                binding.pickDateButton.setText("Select Date");
+                binding.layoutDownload.setVisibility(View.GONE);
                 // GetAttribute(productModelList.get(i).getId());
 
             }
@@ -414,6 +418,7 @@ public class ContractFragment extends Fragment {
                     seller_buyer_id = brokerReportModellist1.getMember_list().get(pos).getSeller_buyer_id();
                     company_id = brokerReportModellist1.getMember_list().get(pos).getCompany_id();
                     binding.txtName.setText(brokerReportModellist1.getMember_list().get(pos).getSeller_buyer_name());
+
                     // GetAttribute(productModelList.get(i).getId());
 
                 }
@@ -708,6 +713,9 @@ public class ContractFragment extends Fragment {
                 product_name = CompanyList.get(position).getProduct_name();
                 product_id = CompanyList.get(position).getProduct_id();
                 binding.txtName.setText(product_name);
+                binding.pickDateButton.setText("Select Date");
+                date = null;
+                binding.layoutDownload.setVisibility(View.GONE);
                 // GetAttribute(productModelList.get(i).getId());
 
             }

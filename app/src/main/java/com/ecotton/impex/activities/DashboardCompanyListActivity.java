@@ -191,7 +191,7 @@ public class DashboardCompanyListActivity extends AppCompatActivity {
                 binding.txtName.setText(dashBoardModelList.get(i).getName());
 
                 binding.txtPost.setText("Post: " + dashBoardModelList.get(i).getCount());
-                binding.txtBales.setText("Bales:  " + dashBoardModelList.get(i).getBales());
+                binding.txtBales.setText("Ton:  " + dashBoardModelList.get(i).getBales());
                 setUpStateRecyclerVeiw(dashBoardModelList.get(i).getCompanyModelList());
                 break;
             }

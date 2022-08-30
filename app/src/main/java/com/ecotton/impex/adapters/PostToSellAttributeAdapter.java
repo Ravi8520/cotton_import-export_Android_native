@@ -1,12 +1,13 @@
 package com.ecotton.impex.adapters;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -20,6 +21,7 @@ import com.ecotton.impex.R;
 import com.ecotton.impex.databinding.PosttosellatributeItem1Binding;
 import com.ecotton.impex.materialspinner.MaterialSpinner;
 import com.ecotton.impex.models.ProductAttributeModel;
+import com.ecotton.impex.utils.AppUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,6 +133,14 @@ public class PostToSellAttributeAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public void bindMyViewHolder(final DataViewHolder holder, final int position) {
         holder.binding.txtLabel.setText(mArrayList.get(position).getLabel());
+
+        holder.binding.spinnerAttribute.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                AppUtil.hideSoftKeyboard((Activity) mcontext);
+                return false;
+            }
+        });
 
         ArrayList<String> minAttribute = new ArrayList<>();
         for (ProductAttributeModel.Value obj : mArrayList.get(position).getStateModelList()) {
