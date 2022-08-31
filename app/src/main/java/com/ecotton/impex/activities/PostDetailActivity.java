@@ -1097,7 +1097,6 @@ public class PostDetailActivity extends AppCompatActivity {
                 return;
             }
 
-
         } catch (Exception e) {
             e.getMessage();
         }

@@ -2,6 +2,7 @@ package com.ecotton.impex.api;
 
 import com.ecotton.impex.models.AddCompanyModel;
 import com.ecotton.impex.models.AddMemberModel;
+import com.ecotton.impex.models.AddPlanModel;
 import com.ecotton.impex.models.BrokerModel;
 import com.ecotton.impex.models.BrokerReportModel;
 import com.ecotton.impex.models.CancelPostModel;
@@ -25,6 +26,7 @@ import com.ecotton.impex.models.NegotiationDetail;
 import com.ecotton.impex.models.NegotiationList;
 import com.ecotton.impex.models.NewsList;
 import com.ecotton.impex.models.NotificatioListModel;
+import com.ecotton.impex.models.Plan;
 import com.ecotton.impex.models.PostDetail;
 import com.ecotton.impex.models.PostDetailSpinerData;
 import com.ecotton.impex.models.PostDetailsModel;
@@ -676,4 +678,20 @@ public interface APIInterface {
             @Header("Authorization") String Authorization,
             @Field("data") String data
     );
+
+    @FormUrlEncoded
+    @POST("plan_list")
+    Call<ResponseModel<List<Plan>>> getPlanList(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+    );
+
+    @FormUrlEncoded
+    @POST("add_user_plan")
+    Call<ResponseModel<AddPlanModel>> add_user_plan(
+            @Header("Authorization") String Authorization,
+            @Field("data") String data
+
+    );
+
 }

@@ -48,7 +48,8 @@ public class MyWalletActivity extends AppCompatActivity {
         binding.btnAddBalance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MyWalletActivity.this, com.ecotton.impex.activities.MywalletPlansActivity.class));
+                startActivity(new Intent(MyWalletActivity.this, MywalletPlansActivity.class));
+                finish();
             }
         });
 

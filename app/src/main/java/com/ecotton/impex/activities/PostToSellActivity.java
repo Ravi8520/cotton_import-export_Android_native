@@ -142,7 +142,7 @@ public class PostToSellActivity extends AppCompatActivity {
 
     }
 
-    public void setUpAttributAdapter(){
+    public void setUpAttributAdapter() {
         postToSellAttributeAdapter = new PostToSellAttributeAdapter(mContext);
         binding.recyclerviewPostToSell.setLayoutManager(new LinearLayoutManager(mContext));
         binding.recyclerviewPostToSell.setAdapter(postToSellAttributeAdapter);
@@ -326,14 +326,16 @@ public class PostToSellActivity extends AppCompatActivity {
 
             }
         });
-        binding.spinnerDestinationPort.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
 
+        binding.spinnerDestinationPort.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
             @Override
             public void onNothingSelected(MaterialSpinner spinner) {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
-        selecteddestinationport = destinationportList.get(0).getId();
+        if (selecteddestinationport > 0) {
+            selecteddestinationport = destinationportList.get(0).getId();
+        }
        /* PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationportList);
         binding.spinnerDestinationPort.setAdapter(adapter);
         binding.spinnerDestinationPort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -374,8 +376,9 @@ public class PostToSellActivity extends AppCompatActivity {
             }
         });
 
-        selectedport = portList.get(0).getId();
-
+        if (selectedport >= 0) {
+            selectedport = portList.get(0).getId();
+        }
         /*PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, portList);
         binding.spinnerPortOfDispatch.setAdapter(adapter);
         binding.spinnerPortOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -516,8 +519,10 @@ public class PostToSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
-        dispatchcontryid = dispatchcontryList.get(0).getId();
-        PortList(dispatchcontryList.get(0).getId());
+        if (dispatchcontryid >= 0) {
+            dispatchcontryid = dispatchcontryList.get(0).getId();
+            PortList(dispatchcontryList.get(0).getId());
+        }
 
       /*  CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, dispatchcontryList);
         binding.spinnerCountryOfDispatch.setAdapter(adapter);
@@ -562,6 +567,7 @@ public class PostToSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
+
         destinationcontryid = destinationcontryList.get(0).getId();
         DestinationPortList(destinationcontryList.get(0).getId());
         /*CountryDispatchAdapter adapter = new CountryDispatchAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationcontryList);
@@ -735,12 +741,11 @@ public class PostToSellActivity extends AppCompatActivity {
                     binding.layoutDestinationCountry.setVisibility(View.VISIBLE);
                     binding.layoutDestinationPort.setVisibility(View.VISIBLE);
                 }
-
             }
-
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });*/
+
     }
 
     public class CustomAdapter extends ArrayAdapter<PostDetailSpinerData.SpinerModel> {
@@ -830,6 +835,7 @@ public class PostToSellActivity extends AppCompatActivity {
 
     public void PostToSell() {
         try {
+            customDialog.displayProgress(mContext);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("company_id", mSessionUtil.getCompanyId());
             jsonObject.put("seller_buyer_id", mSessionUtil.getUserid());
@@ -860,8 +866,9 @@ public class PostToSellActivity extends AppCompatActivity {
 
             Log.e("Post_to_sellDATA", "Post_to_sellDATA==" + data);
 
+            Log.e("getUsertype", "getUsertype==" + mSessionUtil.getUsertype());
+
             if (mSessionUtil.getUsertype().equals("buyer")) {
-                customDialog.displayProgress(mContext);
                 Call<ResponseModel<PostToSellModel>> call = APIClient.getInstance().Post_to_buy(mSessionUtil.getApiToken(), data);
                 call.enqueue(new Callback<ResponseModel<PostToSellModel>>() {
                     @Override
@@ -870,7 +877,7 @@ public class PostToSellActivity extends AppCompatActivity {
                         Log.e("PostToSellModel", "PostToSellModel==" + new Gson().toJson(response.body()));
                         if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                             AppUtil.showToast(mContext, response.body().message);
-                            startActivity(new Intent(mContext, com.ecotton.impex.activities.HomeActivity.class));
+                            startActivity(new Intent(mContext, HomeActivity.class));
                             finish();
                         } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                             AppUtil.showToast(mContext, response.body().message);
@@ -887,8 +894,9 @@ public class PostToSellActivity extends AppCompatActivity {
                         customDialog.dismissProgress(mContext);
                     }
                 });
-            } else if (mSessionUtil.getUsertype().equals("seller")) {
-                customDialog.displayProgress(mContext);
+            }
+
+            if (mSessionUtil.getUsertype().equals("seller")) {
                 Call<ResponseModel<PostToSellModel>> call = APIClient.getInstance().Post_to_sell(mSessionUtil.getApiToken(), data);
                 call.enqueue(new Callback<ResponseModel<PostToSellModel>>() {
                     @Override
@@ -897,7 +905,7 @@ public class PostToSellActivity extends AppCompatActivity {
                         Log.e("Post_to_sell", "Post_to_sell==" + new Gson().toJson(response.body()));
                         if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                             AppUtil.showToast(mContext, response.body().message);
-                            startActivity(new Intent(mContext, com.ecotton.impex.activities.HomeActivity.class));
+                            startActivity(new Intent(mContext, HomeActivity.class));
                             finish();
                         } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                             AppUtil.showToast(mContext, response.body().message);

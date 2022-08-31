@@ -4,24 +4,35 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecotton.impex.R;
-import com.google.android.material.card.MaterialCardView;
+import com.ecotton.impex.models.Plan;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WalletPlansAdapter extends RecyclerView.Adapter<WalletPlansAdapter.PlansViewHolder> {
 
     Context mcontext;
     int row_index = -1;
-
-    public WalletPlansAdapter(Context mcontext) {
+    public List<Plan> planList = new ArrayList<>();
+    private OnItemClickListener onItemClickListener;
+    public WalletPlansAdapter(Context mcontext, List<Plan> planArrayList) {
         this.mcontext = mcontext;
+        this.planList = planArrayList;
+    }
+
+    public interface OnItemClickListener {
+        public void onItemClick(View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener myClickListener) {
+        this.onItemClickListener = myClickListener;
     }
 
     @NonNull
@@ -33,33 +44,39 @@ public class WalletPlansAdapter extends RecyclerView.Adapter<WalletPlansAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PlansViewHolder holder, int position) {
+
+        holder.validity_txt.setText(planList.get(position).getValidity() + " Days");
+        holder.amount_txt.setText(planList.get(position).getPrice() + "");
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 row_index = position;
+                onItemClickListener.onItemClick(view, position);
                 notifyDataSetChanged();
             }
         });
         if (row_index == position) {
             holder.linMain.setBackgroundResource(R.drawable.spinner_border);
-        }else{
+        } else {
             holder.linMain.setBackgroundResource(R.drawable.textview_border);
         }
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return planList.size();
     }
 
     public class PlansViewHolder extends RecyclerView.ViewHolder {
-
-
+        TextView validity_txt, amount_txt;
         LinearLayout linMain;
 
         public PlansViewHolder(@NonNull View itemView) {
             super(itemView);
             linMain = itemView.findViewById(R.id.linMain);
+            validity_txt = itemView.findViewById(R.id.validity_txt);
+            amount_txt = itemView.findViewById(R.id.txtPrice);
         }
     }
 }

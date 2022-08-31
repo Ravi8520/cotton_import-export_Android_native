@@ -92,10 +92,10 @@ public class LoginAsActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-        binding.btnNext.setOnClickListener(v->{
+        binding.btnNext.setOnClickListener(v -> {
             btn_nextOnClick();
         });
-        binding.backarrow.setOnClickListener(v->{
+        binding.backarrow.setOnClickListener(v -> {
             img_backOnClick();
         });
 
@@ -132,15 +132,17 @@ public class LoginAsActivity extends AppCompatActivity {
                         LoginModel model = gson.fromJson(dataa, LoginModel.class);
                         if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
                             HashMap<String, String> map = new HashMap<>();
-                            map.put(SessionUtil.API_TOKEN, mSessionUtil.getApiToken());
-                            map.put(SessionUtil.EMAIL, mSessionUtil.getEmail());
-                            map.put(SessionUtil.PASS, mSessionUtil.getPass());
-                            map.put(SessionUtil.COMPANY_NAME, model.getData().getCompany_name());
-                            map.put(SessionUtil.USER_TYPE, model.getData().getUser_type());
-                            map.put(SessionUtil.USERID, model.getData().getUserId());
-                            map.put(SessionUtil.COMPANY_ID, model.getData().getCompany_id());
-                            mSessionUtil.setData(map);
+
                             if (model.getData().getIs_user_plan() == 1) {
+                                map.put(SessionUtil.API_TOKEN, mSessionUtil.getApiToken());
+                                map.put(SessionUtil.EMAIL, mSessionUtil.getEmail());
+                                map.put(SessionUtil.PASS, mSessionUtil.getPass());
+                                map.put(SessionUtil.COMPANY_NAME, model.getData().getCompany_name());
+                                map.put(SessionUtil.USER_TYPE, model.getData().getUser_type());
+                                map.put(SessionUtil.USERID, model.getData().getUserId());
+                                map.put(SessionUtil.COMPANY_ID, model.getData().getCompany_id());
+                                mSessionUtil.setData(map);
+
                                 Intent intent = new Intent(mContext, HomeActivity.class);
                                 intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
                                 intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
@@ -148,8 +150,7 @@ public class LoginAsActivity extends AppCompatActivity {
                                 finish();
                             } else {
                                 Intent intent = new Intent(mContext, MywalletPlansActivity.class);
-                                intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
-                                intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
+                                intent.putExtra("home", "home");
                                 startActivity(intent);
                                 finish();
                             }
@@ -167,6 +168,7 @@ public class LoginAsActivity extends AppCompatActivity {
                         e.getMessage();
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                 }

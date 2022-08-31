@@ -145,7 +145,7 @@ public class PrivateSellActivity extends AppCompatActivity {
 
     }
 
-    public void setUpAttributAdapter(){
+    public void setUpAttributAdapter() {
         postToSellAttributeAdapter = new PostToSellAttributeAdapter(mContext);
         binding.recyclerviewPostToSell.setLayoutManager(new LinearLayoutManager(mContext));
         binding.recyclerviewPostToSell.setAdapter(postToSellAttributeAdapter);
@@ -156,6 +156,7 @@ public class PrivateSellActivity extends AppCompatActivity {
             }
         });
     }
+
     private void CountryList() {
         Log.e("StateModel", "StateModel==");
         customDialog.displayProgress(mContext);
@@ -389,7 +390,9 @@ public class PrivateSellActivity extends AppCompatActivity {
                 //Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
             }
         });
-        selecteddestinationport = destinationportList.get(0).getId();
+        if (selecteddestinationport > 0) {
+            selecteddestinationport = destinationportList.get(0).getId();
+        }
        /* PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, destinationportList);
         binding.spinnerDestinationPort.setAdapter(adapter);
         binding.spinnerDestinationPort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -466,7 +469,9 @@ public class PrivateSellActivity extends AppCompatActivity {
             }
         });
 
-        selectedport = portList.get(0).getId();
+        if (selectedport > 0) {
+            selectedport = portList.get(0).getId();
+        }
        /* PortAdapter adapter = new PortAdapter(mContext, R.layout.spinner_layout, R.id.txt_company_name, portList);
         binding.spinnerPortOfDispatch.setAdapter(adapter);
         binding.spinnerPortOfDispatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -982,6 +987,7 @@ public class PrivateSellActivity extends AppCompatActivity {
                         AppUtil.showToast(mContext, response.body().message);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ResponseModel<List<ProductAttributeModel>>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);

@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,22 +31,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecotton.impex.BuildConfig;
-import com.ecotton.impex.MyApp;
-import com.ecotton.impex.activities.DashboardCompanyListActivity;
-import com.ecotton.impex.materialspinner.MaterialSpinner;
-import com.ecotton.impex.models.NegotiationNotifyCount;
-import com.ecotton.impex.utils.Constants;
-import com.google.gson.Gson;
 import com.ecotton.impex.R;
 import com.ecotton.impex.activities.AddCompanyActivity;
+import com.ecotton.impex.activities.DashboardCompanyListActivity;
 import com.ecotton.impex.activities.DealsActivity;
 import com.ecotton.impex.activities.FilterActivity;
 import com.ecotton.impex.activities.HomeActivity;
+import com.ecotton.impex.activities.MywalletPlansActivity;
 import com.ecotton.impex.adapters.ChangeCpmapnyAdapter;
 import com.ecotton.impex.adapters.DashBoardAdapter;
 import com.ecotton.impex.api.APIClient;
 import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.FragmentHomeBinding;
+import com.ecotton.impex.materialspinner.MaterialSpinner;
+import com.ecotton.impex.models.NegotiationNotifyCount;
 import com.ecotton.impex.models.companylist.CompanyListModel;
 import com.ecotton.impex.models.dashboard.DashBoardModel;
 import com.ecotton.impex.models.login.LoginModel;
@@ -55,6 +52,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -259,20 +257,29 @@ public class HomeFragment extends Fragment {
                         Gson gson = new Gson();
                         LoginModel model = gson.fromJson(dataa, LoginModel.class);
                         if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
+
                             HashMap<String, String> map = new HashMap<>();
-                            map.put(SessionUtil.API_TOKEN, mSessionUtil.getApiToken());
-                            map.put(SessionUtil.EMAIL, mSessionUtil.getEmail());
-                            map.put(SessionUtil.PASS, mSessionUtil.getPass());
-                            map.put(SessionUtil.COMPANY_NAME, model.getData().getCompany_name());
-                            map.put(SessionUtil.USER_TYPE, model.getData().getUser_type());
-                            map.put(SessionUtil.USERID, model.getData().getUserId());
-                            map.put(SessionUtil.COMPANY_ID, model.getData().getCompany_id());
-                            mSessionUtil.setData(map);
-                            Intent intent = new Intent(mContext, HomeActivity.class);
-                            intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
-                            intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
-                            startActivity(intent);
-                            ((Activity) mContext).finish();
+                            if (model.getData().getIs_user_plan() == 1) {
+                                map.put(SessionUtil.API_TOKEN, mSessionUtil.getApiToken());
+                                map.put(SessionUtil.EMAIL, mSessionUtil.getEmail());
+                                map.put(SessionUtil.PASS, mSessionUtil.getPass());
+                                map.put(SessionUtil.COMPANY_NAME, model.getData().getCompany_name());
+                                map.put(SessionUtil.USER_TYPE, model.getData().getUser_type());
+                                map.put(SessionUtil.USERID, model.getData().getUserId());
+                                map.put(SessionUtil.COMPANY_ID, model.getData().getCompany_id());
+                                mSessionUtil.setData(map);
+
+                                Intent intent = new Intent(mContext, HomeActivity.class);
+                                intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
+                                intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
+                                startActivity(intent);
+                                ((Activity)mContext).finish();
+                            } else {
+                                Intent intent = new Intent(mContext, MywalletPlansActivity.class);
+                                intent.putExtra("home", "home");
+                                startActivity(intent);
+                                ((Activity)mContext).finish();
+                            }
                         } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
 
                             final Dialog dialog = new Dialog(mContext);
@@ -307,6 +314,7 @@ public class HomeFragment extends Fragment {
                         e.getMessage();
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                 }
@@ -336,6 +344,7 @@ public class HomeFragment extends Fragment {
                         AppUtil.showToast(mContext, response.body().message);
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ResponseModel<List<CompanyListModel>>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);
@@ -566,7 +575,7 @@ public class HomeFragment extends Fragment {
                     } else {
                         filterRequest.setCountry_id(dashBoardModelList.get(position).getCountry_id() + "");
                         startActivity(new Intent(mContext, DashboardCompanyListActivity.class)
-                                .putExtra("countryId", dashBoardModelList.get(position ).getCountry_id() + ""));
+                                .putExtra("countryId", dashBoardModelList.get(position).getCountry_id() + ""));
                     }
                 }
             });
@@ -692,6 +701,7 @@ public class HomeFragment extends Fragment {
                         e.getMessage();
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                 }
@@ -700,6 +710,7 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
     public void setSocket() {
         socketSlug = "UnreadNotifications" + "_" + mSessionUtil.getCompanyId() + "_" + mSessionUtil.getUsertype() + "_" + mSessionUtil.getUserid();
         mSocket.on(Socket.EVENT_CONNECT, onConnect);
