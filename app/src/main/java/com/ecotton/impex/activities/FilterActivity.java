@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.ecotton.impex.adapters.ProductAdapter;
 import com.ecotton.impex.adapters.ProductValueAdapter;
 import com.ecotton.impex.adapters.StateAdapter;
@@ -28,6 +27,7 @@ import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
 import com.ecotton.impex.utils.Utils;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -59,7 +59,7 @@ public class FilterActivity extends AppCompatActivity {
         binding = ActivityFilterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mContext = this;
-      //  getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        //  getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         productModelArrayList = new ArrayList<>();
         mSessionUtil = new SessionUtil(mContext);
         customDialog = new CustomDialog();
@@ -88,6 +88,15 @@ public class FilterActivity extends AppCompatActivity {
                 stateAdapter.ids.add("-1");
                 stateAdapter.selectedNames.add("All");
                 stateAdapter.notifyDataSetChanged();
+
+
+                productValueAdapter.mArrayList.clear();
+
+
+                productValueAdapter.notifyDataSetChanged();
+
+                getProductValue();
+
                 /*startActivity(new Intent(mContext, com.ecotton.impex.activities.HomeActivity.class));
                 finishAffinity();*/
             }
@@ -132,7 +141,6 @@ public class FilterActivity extends AppCompatActivity {
     private boolean isHomeFragment() {
         return screen.equals(HomeFragment.class.getSimpleName());
     }
-
 
 
     private boolean isDashboardCompany() {

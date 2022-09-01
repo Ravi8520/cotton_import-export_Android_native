@@ -137,10 +137,20 @@ public class MyWalletAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (mArrayList.get(position).getType().equals("withdraw")) {
             holder.binding.txtRupee.setTextColor(mcontext.getResources().getColor(R.color.dark_red));
             holder.binding.txtRupee.setText("- " + mcontext.getResources().getString(R.string.lbl_rupees_symbol_only) + " " + mArrayList.get(position).getAmount());
-        }else if (mArrayList.get(position).getType().equals("deposite")) {
+        } else if (mArrayList.get(position).getType().equals("payment_failed")) {
+            holder.binding.txtRupee.setTextColor(mcontext.getResources().getColor(R.color.dark_red));
+            holder.binding.txtRupee.setText("- " + mcontext.getResources().getString(R.string.lbl_rupees_symbol_only) + " " + mArrayList.get(position).getAmount());
+        } else if (mArrayList.get(position).getType().equals("deposite")) {
             holder.binding.txtRupee.setTextColor(mcontext.getResources().getColor(R.color.colorPrimary));
             holder.binding.txtRupee.setText("- " + mcontext.getResources().getString(R.string.lbl_rupees_symbol_only) + " " + mArrayList.get(position).getAmount());
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickListener.onItemClick(view, position);
+            }
+        });
     }
 
     @Override

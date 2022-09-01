@@ -63,6 +63,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
     String Days;
     String Price;
     String Id;
+    String PlanName;
 
 
     @Override
@@ -98,7 +99,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Days != null && Price != null && Id != null) {
+                if (Days != null && Price != null && Id != null && PlanName != null) {
                     Log.e("onClick", "onClick==");
                     startPayment();
                 } else {
@@ -121,6 +122,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
                 Days = String.valueOf(adapter.planList.get(position).getValidity());
                 Price = String.valueOf(adapter.planList.get(position).getPrice());
                 Id = String.valueOf(adapter.planList.get(position).getId());
+                PlanName = adapter.planList.get(position).getName();
                 Log.e("Id", "Id==" + Id);
                 Log.e("Days", "Days==" + Days);
                 Log.e("Price", "Price==" + Price);
@@ -175,13 +177,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
         try {
             JSONObject options = new JSONObject();
 
-
-            Log.e("login_as", "login_as==" + login_as);
-            if (login_as.equals("buyer")) {
-                options.put("name", "Importer" + " " + user_id);
-            } else {
-                options.put("name", "Exporter" + " " + user_id);
-            }
+            options.put("name", PlanName);
             options.put("description", "Payment of Plan Free with " + Days + " Days..");
             options.put("send_sms_hash", true);
             options.put("allow_rotation", true);
@@ -278,6 +274,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
                             onBackPressed();
                         } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                             AppUtil.showToast(mContext, response.body().message);
+                            onBackPressed();
                         } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
                             AppUtil.showToast(mContext, response.body().message);
                             AppUtil.autoLogout(mContext);
@@ -391,17 +388,16 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
 
                                 if (home != null) {
                                     if (home.equals("wallet")) {
-                                        startActivity(new Intent(MywalletPlansActivity.this, MyWalletActivity.class));
+                                        startActivity(new Intent(mContext, MyWalletActivity.class));
+                                        finish();
+                                    } else {
+                                        Intent intent = new Intent(mContext, HomeActivity.class);
+                                        intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
+                                        intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
+                                        startActivity(intent);
                                         finish();
                                     }
-                                } else {
-                                    Intent intent = new Intent(mContext, HomeActivity.class);
-                                    intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
-                                    intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
-                                    startActivity(intent);
-                                    finish();
                                 }
-
 
                             } else {
                                 Intent intent = new Intent(mContext, MywalletPlansActivity.class);
@@ -441,13 +437,13 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
     public void onBackPressed() {
         if (home != null) {
             if (home.equals("home")) {
-                startActivity(new Intent(MywalletPlansActivity.this, HomeActivity.class));
+                startActivity(new Intent(mContext, HomeActivity.class));
                 finish();
             } else if (home.equals("loginas")) {
-                startActivity(new Intent(MywalletPlansActivity.this, LoginAsActivity.class));
+                startActivity(new Intent(mContext, LoginAsActivity.class));
                 finish();
             } else if (home.equals("wallet")) {
-                startActivity(new Intent(MywalletPlansActivity.this, MyWalletActivity.class));
+                startActivity(new Intent(mContext, MyWalletActivity.class));
                 finish();
             }
         }

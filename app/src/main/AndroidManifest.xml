@@ -244,7 +244,7 @@
             android:screenOrientation="portrait"
              />
         <activity
-            android:name=".activities.SuccessTransactionActivity"
+            android:name=".activities.WalletDetailsActivity"
             android:screenOrientation="portrait"
              />
         <activity

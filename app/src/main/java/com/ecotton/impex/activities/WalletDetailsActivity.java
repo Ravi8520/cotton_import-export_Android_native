@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ecotton.impex.databinding.ActivitySuccessTransactionBinding;
 
-public class SuccessTransactionActivity extends AppCompatActivity {
+public class WalletDetailsActivity extends AppCompatActivity {
 
 
     ActivitySuccessTransactionBinding binding;

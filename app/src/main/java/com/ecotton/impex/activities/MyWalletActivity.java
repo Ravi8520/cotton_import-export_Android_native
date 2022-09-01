@@ -77,6 +77,12 @@ public class MyWalletActivity extends AppCompatActivity {
         myWalletAdapter = new MyWalletAdapter(mcontext, myWalletModelList.getTransaction_history());
         binding.transactionRv.setLayoutManager(new LinearLayoutManager(mcontext));
         binding.transactionRv.setAdapter(myWalletAdapter);
+        myWalletAdapter.setOnItemClickListener(new MyWalletAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                startActivity(new Intent(mcontext, WalletDetailsActivity.class));
+            }
+        });
 
     }
 
