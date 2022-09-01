@@ -48,7 +48,14 @@ public class MyWalletActivity extends AppCompatActivity {
         binding.btnAddBalance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MyWalletActivity.this, MywalletPlansActivity.class));
+
+                int company_id = Integer.parseInt(mSessionUtil.getCompanyId());
+                Intent intent = new Intent(mcontext, MywalletPlansActivity.class);
+                intent.putExtra("home", "wallet");
+                intent.putExtra("login_as", mSessionUtil.getUsertype());
+                intent.putExtra("user_id", mSessionUtil.getUserid());
+                intent.putExtra("company_id", company_id);
+                startActivity(intent);
                 finish();
             }
         });
@@ -124,6 +131,10 @@ public class MyWalletActivity extends AppCompatActivity {
 
     private void SetData() {
         binding.txtWalletAmount.setText(getResources().getString(R.string.lbl_rupees_symbol_only) + " " + myWalletModelList.getWallet_amount());
+        binding.txtLeftDays.setText(myWalletModelList.getLeft_days());
+        Log.e("getLeft_days", "getLeft_days==" + myWalletModelList.getLeft_days());
+        binding.walletProgressBar.setMax(Integer.parseInt(myWalletModelList.getValidity()));
+        binding.walletProgressBar.setProgress(Integer.parseInt(myWalletModelList.getLeft_days()));
     }
 
 }

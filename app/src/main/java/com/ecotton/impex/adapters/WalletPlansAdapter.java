@@ -46,7 +46,7 @@ public class WalletPlansAdapter extends RecyclerView.Adapter<WalletPlansAdapter.
     public void onBindViewHolder(@NonNull PlansViewHolder holder, int position) {
 
         holder.validity_txt.setText(planList.get(position).getValidity() + " Days");
-        holder.amount_txt.setText(planList.get(position).getPrice() + "");
+        holder.amount_txt.setText("$ "+planList.get(position).getPrice() + "");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

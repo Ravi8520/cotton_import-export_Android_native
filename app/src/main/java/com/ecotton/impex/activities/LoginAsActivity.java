@@ -131,9 +131,11 @@ public class LoginAsActivity extends AppCompatActivity {
                         Gson gson = new Gson();
                         LoginModel model = gson.fromJson(dataa, LoginModel.class);
                         if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
-                            HashMap<String, String> map = new HashMap<>();
+
 
                             if (model.getData().getIs_user_plan() == 1) {
+
+                                HashMap<String, String> map = new HashMap<>();
                                 map.put(SessionUtil.API_TOKEN, mSessionUtil.getApiToken());
                                 map.put(SessionUtil.EMAIL, mSessionUtil.getEmail());
                                 map.put(SessionUtil.PASS, mSessionUtil.getPass());
@@ -148,9 +150,14 @@ public class LoginAsActivity extends AppCompatActivity {
                                 intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
                                 startActivity(intent);
                                 finish();
+
                             } else {
                                 Intent intent = new Intent(mContext, MywalletPlansActivity.class);
-                                intent.putExtra("home", "home");
+                                intent.putExtra("home", "loginas");
+                                intent.putExtra("login_as", Usertype);
+                                intent.putExtra("company_id", company_id);
+                                intent.putExtra("user_id", model.getData().getUserId());
+                                Log.e("map", "map==" + model.getData().getUserId());
                                 startActivity(intent);
                                 finish();
                             }

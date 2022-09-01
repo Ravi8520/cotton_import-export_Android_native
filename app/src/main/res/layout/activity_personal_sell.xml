@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@id/layout_main"
     android:background="@color/tab_text_color"
     tools:context=".activities.PostToSellActivity">
 
@@ -18,12 +18,12 @@
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_centerVertical="true"
-            android:clickable="true"
             android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:focusable="true"
             android:padding="@dimen/_3sdp"
-            app:tint="@color/white"
-            android:src="@drawable/ic_back_arrow" />
+            android:src="@drawable/ic_back_arrow"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/txt_title"
@@ -115,8 +115,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/btn_submit"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -144,6 +144,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_weight="0.8"
                         android:background="@drawable/textview_border"
+                        android:ems="10"
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:maxLength="10"
@@ -180,13 +181,14 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_weight="0.8"
                         android:background="@drawable/textview_border"
+                        android:ems="10"
+                        android:hint="@string/lbl_dollar"
                         android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="10"
-                        android:hint="@string/lbl_dollar"
-                        android:textColorHint="@color/tab_text_color"
                         android:paddingLeft="@dimen/_10sdp"
                         android:singleLine="true"
+                        android:textColorHint="@color/tab_text_color"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -196,8 +198,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:visibility="visible">
+                    android:visibility="visible"
+                    android:weightSum="2">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -241,10 +243,10 @@
                     android:id="@+id/layout_country_dispatch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:weightSum="2"
-                    android:visibility="visible">
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -279,7 +281,6 @@
                             app:ms_dropdown_max_height="@dimen/_150sdp" />
 
 
-
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -288,10 +289,10 @@
                     android:id="@+id/layout_port_dispatch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:weightSum="2"
-                    android:visibility="visible">
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -334,10 +335,10 @@
                     android:id="@+id/layout_destination_country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:weightSum="2"
-                    android:visibility="visible">
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -372,7 +373,6 @@
                             app:ms_dropdown_max_height="@dimen/_150sdp" />
 
 
-
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -381,10 +381,10 @@
                     android:id="@+id/layout_destination_port"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:weightSum="2"
-                    android:visibility="visible">
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -426,362 +426,362 @@
 
             </LinearLayout>
 
-         <!--   <LinearLayout
-                android:id="@+id/price_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/btn_submit"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:orientation="vertical">
+            <!--   <LinearLayout
+                   android:id="@+id/price_layout"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_above="@id/btn_submit"
+                   android:layout_marginBottom="@dimen/_10sdp"
+                   android:layout_marginTop="@dimen/_5sdp"
+                   android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:weightSum="2">
 
-                    <TextView
-                        android:id="@+id/lblbales"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:layout_weight="1.2"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="Quantity in ton"
-                        android:textColor="#343434"
-                        android:textSize="14sp" />
+                       <TextView
+                           android:id="@+id/lblbales"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_marginRight="@dimen/_5sdp"
+                           android:layout_weight="1.2"
+                           android:fontFamily="@font/poppins_semibold"
+                           android:text="Quantity in ton"
+                           android:textColor="#343434"
+                           android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/edt_bales"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:layout_weight="0.8"
-                        android:background="@drawable/textview_border"
-                        android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:paddingLeft="@dimen/_10sdp"
-                        android:singleLine="true"
-                        android:textSize="14sp" />
+                       <EditText
+                           android:id="@+id/edt_bales"
+                           android:layout_width="match_parent"
+                           android:layout_height="50dp"
+                           android:layout_marginLeft="@dimen/_5sdp"
+                           android:layout_weight="0.8"
+                           android:background="@drawable/textview_border"
+                           android:imeOptions="actionNext"
+                           android:inputType="number"
+                           android:maxLength="10"
+                           android:paddingLeft="@dimen/_10sdp"
+                           android:singleLine="true"
+                           android:textSize="14sp" />
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:layout_weight="1.2"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="Price per LB is USD"
-                        android:textColor="#343434"
-                        android:textSize="14sp" />
-
-                    <EditText
-                        android:id="@+id/edt_price"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="@dimen/_5sdp"
-                        android:layout_weight="0.8"
-                        android:background="@drawable/textview_border"
-                        android:imeOptions="actionDone"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:hint="@string/lbl_dollar"
-                        android:textColorHint="@color/tab_text_color"
-                        android:paddingLeft="@dimen/_10sdp"
-                        android:singleLine="true"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_de"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="visible"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.2"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="Delivery Condition"
-                        android:textColor="@color/tab_text_color"
-                        android:textSize="14sp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.8"
-                        android:background="@drawable/textview_border"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spinner_delivery_condition"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:spinnerMode="dropdown" />
-
-                        <ImageView
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:rotation="-90"
-                            android:src="@drawable/ic_back_arrow" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
+                   </LinearLayout>
 
 
-                <LinearLayout
-                    android:id="@+id/layout_country_dispatch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:visibility="visible"
-                    android:weightSum="2">
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:layout_marginBottom="@dimen/_10sdp"
+                       android:orientation="horizontal"
+                       android:weightSum="2">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.2"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/lbl_country_of_dispatch"
-                        android:textColor="@color/tab_text_color"
-                        android:textSize="14sp" />
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_marginRight="@dimen/_5sdp"
+                           android:layout_weight="1.2"
+                           android:fontFamily="@font/poppins_semibold"
+                           android:text="Price per LB is USD"
+                           android:textColor="#343434"
+                           android:textSize="14sp" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.8"
-                        android:background="@drawable/textview_border"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                       <EditText
+                           android:id="@+id/edt_price"
+                           android:layout_width="match_parent"
+                           android:layout_height="50dp"
+                           android:layout_marginLeft="@dimen/_5sdp"
+                           android:layout_weight="0.8"
+                           android:background="@drawable/textview_border"
+                           android:imeOptions="actionDone"
+                           android:inputType="number"
+                           android:maxLength="10"
+                           android:hint="@string/lbl_dollar"
+                           android:textColorHint="@color/tab_text_color"
+                           android:paddingLeft="@dimen/_10sdp"
+                           android:singleLine="true"
+                           android:textSize="14sp" />
 
-                        <Spinner
-                            android:id="@+id/spinner_country_of_dispatch"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:layout_toLeftOf="@+id/image"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:spinnerMode="dropdown" />
+                   </LinearLayout>
 
-                        <ImageView
-                            android:id="@+id/image"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:rotation="-90"
-                            android:src="@drawable/ic_back_arrow" />
+                   <LinearLayout
+                       android:id="@+id/layout_de"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:visibility="visible"
+                       android:weightSum="2">
 
-                    </RelativeLayout>
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="1.2"
+                           android:fontFamily="@font/poppins_semibold"
+                           android:text="Delivery Condition"
+                           android:textColor="@color/tab_text_color"
+                           android:textSize="14sp" />
 
-                </LinearLayout>
+                       <RelativeLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="0.8"
+                           android:background="@drawable/textview_border"
+                           android:gravity="center"
+                           android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/layout_port_dispatch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    android:visibility="visible"
-                    android:weightSum="2">
+                           <Spinner
+                               android:id="@+id/spinner_delivery_condition"
+                               android:layout_width="match_parent"
+                               android:layout_height="50dp"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginLeft="5dp"
+                               android:background="@android:color/transparent"
+                               android:gravity="center"
+                               android:spinnerMode="dropdown" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.2"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/lbl_port_of_dispatch"
-                        android:textColor="@color/tab_text_color"
-                        android:textSize="14sp" />
+                           <ImageView
+                               android:layout_width="@dimen/_25sdp"
+                               android:layout_height="@dimen/_25sdp"
+                               android:layout_alignParentRight="true"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="@dimen/_5sdp"
+                               android:rotation="-90"
+                               android:src="@drawable/ic_back_arrow" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.8"
-                        android:background="@drawable/textview_border"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                       </RelativeLayout>
 
-                        <Spinner
-                            android:id="@+id/spinner_port_of_dispatch"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:layout_toLeftOf="@+id/image1"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:spinnerMode="dropdown" />
-
-                        <ImageView
-                            android:id="@+id/image1"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:rotation="-90"
-                            android:src="@drawable/ic_back_arrow" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_destination_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:weightSum="2"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.2"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/lbl_destination_country"
-                        android:textColor="@color/tab_text_color"
-                        android:textSize="14sp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.8"
-                        android:background="@drawable/textview_border"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spinner_destination_country"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:layout_toLeftOf="@+id/image2"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:spinnerMode="dropdown" />
-
-                        <ImageView
-                            android:id="@+id/image2"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:rotation="-90"
-                            android:src="@drawable/ic_back_arrow" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_destination_port"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    android:visibility="visible"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.2"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/lbl_destination_port"
-                        android:textColor="@color/tab_text_color"
-                        android:textSize="14sp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.8"
-                        android:background="@drawable/textview_border"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spinner_destination_port"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:layout_toLeftOf="@+id/image3"
-                            android:spinnerMode="dropdown" />
-
-                        <ImageView
-                            android:id="@+id/image3"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:rotation="-90"
-                            android:src="@drawable/ic_back_arrow" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
+                   </LinearLayout>
 
 
-            </LinearLayout>-->
+                   <LinearLayout
+                       android:id="@+id/layout_country_dispatch"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:visibility="visible"
+                       android:weightSum="2">
+
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="1.2"
+                           android:fontFamily="@font/poppins_semibold"
+                           android:text="@string/lbl_country_of_dispatch"
+                           android:textColor="@color/tab_text_color"
+                           android:textSize="14sp" />
+
+                       <RelativeLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="0.8"
+                           android:background="@drawable/textview_border"
+                           android:gravity="center"
+                           android:orientation="horizontal">
+
+                           <Spinner
+                               android:id="@+id/spinner_country_of_dispatch"
+                               android:layout_width="match_parent"
+                               android:layout_height="50dp"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginLeft="5dp"
+                               android:layout_toLeftOf="@+id/image"
+                               android:background="@android:color/transparent"
+                               android:gravity="center"
+                               android:spinnerMode="dropdown" />
+
+                           <ImageView
+                               android:id="@+id/image"
+                               android:layout_width="@dimen/_25sdp"
+                               android:layout_height="@dimen/_25sdp"
+                               android:layout_alignParentRight="true"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="@dimen/_5sdp"
+                               android:rotation="-90"
+                               android:src="@drawable/ic_back_arrow" />
+
+                       </RelativeLayout>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:id="@+id/layout_port_dispatch"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:orientation="horizontal"
+                       android:visibility="visible"
+                       android:weightSum="2">
+
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="1.2"
+                           android:fontFamily="@font/poppins_semibold"
+                           android:text="@string/lbl_port_of_dispatch"
+                           android:textColor="@color/tab_text_color"
+                           android:textSize="14sp" />
+
+                       <RelativeLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="0.8"
+                           android:background="@drawable/textview_border"
+                           android:gravity="center"
+                           android:orientation="horizontal">
+
+                           <Spinner
+                               android:id="@+id/spinner_port_of_dispatch"
+                               android:layout_width="match_parent"
+                               android:layout_height="50dp"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginLeft="5dp"
+                               android:layout_toLeftOf="@+id/image1"
+                               android:background="@android:color/transparent"
+                               android:gravity="center"
+                               android:spinnerMode="dropdown" />
+
+                           <ImageView
+                               android:id="@+id/image1"
+                               android:layout_width="@dimen/_25sdp"
+                               android:layout_height="@dimen/_25sdp"
+                               android:layout_alignParentRight="true"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="@dimen/_5sdp"
+                               android:rotation="-90"
+                               android:src="@drawable/ic_back_arrow" />
+
+                       </RelativeLayout>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:id="@+id/layout_destination_country"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:weightSum="2"
+                       android:visibility="visible">
+
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="1.2"
+                           android:fontFamily="@font/poppins_semibold"
+                           android:text="@string/lbl_destination_country"
+                           android:textColor="@color/tab_text_color"
+                           android:textSize="14sp" />
+
+                       <RelativeLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="0.8"
+                           android:background="@drawable/textview_border"
+                           android:gravity="center"
+                           android:orientation="horizontal">
+
+                           <Spinner
+                               android:id="@+id/spinner_destination_country"
+                               android:layout_width="match_parent"
+                               android:layout_height="50dp"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginLeft="5dp"
+                               android:layout_toLeftOf="@+id/image2"
+                               android:background="@android:color/transparent"
+                               android:gravity="center"
+                               android:spinnerMode="dropdown" />
+
+                           <ImageView
+                               android:id="@+id/image2"
+                               android:layout_width="@dimen/_25sdp"
+                               android:layout_height="@dimen/_25sdp"
+                               android:layout_alignParentRight="true"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="@dimen/_5sdp"
+                               android:rotation="-90"
+                               android:src="@drawable/ic_back_arrow" />
+
+                       </RelativeLayout>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:id="@+id/layout_destination_port"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:orientation="horizontal"
+                       android:visibility="visible"
+                       android:weightSum="2">
+
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="1.2"
+                           android:fontFamily="@font/poppins_semibold"
+                           android:text="@string/lbl_destination_port"
+                           android:textColor="@color/tab_text_color"
+                           android:textSize="14sp" />
+
+                       <RelativeLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_weight="0.8"
+                           android:background="@drawable/textview_border"
+                           android:gravity="center"
+                           android:orientation="horizontal">
+
+                           <Spinner
+                               android:id="@+id/spinner_destination_port"
+                               android:layout_width="match_parent"
+                               android:layout_height="50dp"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginLeft="5dp"
+                               android:background="@android:color/transparent"
+                               android:gravity="center"
+                               android:layout_toLeftOf="@+id/image3"
+                               android:spinnerMode="dropdown" />
+
+                           <ImageView
+                               android:id="@+id/image3"
+                               android:layout_width="@dimen/_25sdp"
+                               android:layout_height="@dimen/_25sdp"
+                               android:layout_alignParentRight="true"
+                               android:layout_centerVertical="true"
+                               android:layout_gravity="center"
+                               android:layout_marginRight="@dimen/_5sdp"
+                               android:rotation="-90"
+                               android:src="@drawable/ic_back_arrow" />
+
+                       </RelativeLayout>
+
+                   </LinearLayout>
+
+
+               </LinearLayout>-->
 
 
             <Button

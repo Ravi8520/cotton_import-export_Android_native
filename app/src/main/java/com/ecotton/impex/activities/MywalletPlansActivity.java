@@ -20,6 +20,7 @@ import com.ecotton.impex.api.ResponseModel;
 import com.ecotton.impex.databinding.ActivityMywalletPlansBinding;
 import com.ecotton.impex.models.AddPlanModel;
 import com.ecotton.impex.models.Plan;
+import com.ecotton.impex.models.login.LoginModel;
 import com.ecotton.impex.utils.AppUtil;
 import com.ecotton.impex.utils.CustomDialog;
 import com.ecotton.impex.utils.SessionUtil;
@@ -28,10 +29,14 @@ import com.google.gson.Gson;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,9 +53,13 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
     public MywalletPlansActivity mContext;
     WalletPlansAdapter adapter;
     public int planid;
+    public int company_id;
 
     public ActivityMywalletPlansBinding binding;
     String home;
+    String login_as;
+    String user_id;
+
     String Days;
     String Price;
     String Id;
@@ -71,6 +80,10 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
 
         if (intent != null) {
             home = intent.getStringExtra("home");
+            login_as = intent.getStringExtra("login_as");
+            user_id = intent.getStringExtra("user_id");
+            company_id = intent.getIntExtra("company_id", 0);
+            Log.e("company_id", "company_id==" + company_id);
         }
 
         binding.backarrow.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +99,8 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
             @Override
             public void onClick(View view) {
                 if (Days != null && Price != null && Id != null) {
+                    Log.e("onClick", "onClick==");
                     startPayment();
-                    Toast.makeText(mContext, "Suuuuuu", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(mContext, "Please Select Any Plans", Toast.LENGTH_SHORT).show();
                 }
@@ -109,6 +122,8 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
                 Price = String.valueOf(adapter.planList.get(position).getPrice());
                 Id = String.valueOf(adapter.planList.get(position).getId());
                 Log.e("Id", "Id==" + Id);
+                Log.e("Days", "Days==" + Days);
+                Log.e("Price", "Price==" + Price);
             }
         });
     }
@@ -126,7 +141,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
             call.enqueue(new Callback<ResponseModel<List<Plan>>>() {
                 @Override
                 public void onResponse(Call<ResponseModel<List<Plan>>> call, Response<ResponseModel<List<Plan>>> response) {
-                    Log.e("dashboard", "dashboard==" + new Gson().toJson(response.body()));
+                    Log.e("Plan", "Plan==" + new Gson().toJson(response.body()));
                     customDialog.dismissProgress(mContext);
                     if (response.body() != null) {
                         if (response.body().status == Utils.StandardStatusCodes.SUCCESS && response.body().data.size() > 0 && new Gson().toJson(response.body()) != null) {
@@ -145,7 +160,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
                 @Override
                 public void onFailure(Call<ResponseModel<List<Plan>>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);
-                    Log.e("dashboard", "dashboard==" + t.getMessage());
+                    Log.e("Throwable", "Throwable==" + t.getMessage());
                 }
             });
 
@@ -158,21 +173,22 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
         final Activity activity = this;
         final Checkout co = new Checkout();
         try {
-            String userType;
             JSONObject options = new JSONObject();
-            if (mSessionUtil.getUsertype().equals("buyer")) {
-                userType = "Importer";
+
+
+            Log.e("login_as", "login_as==" + login_as);
+            if (login_as.equals("buyer")) {
+                options.put("name", "Importer" + " " + user_id);
             } else {
-                userType = "Exporter";
+                options.put("name", "Exporter" + " " + user_id);
             }
-            options.put("name", userType + " " + mSessionUtil.getUserid());
             options.put("description", "Payment of Plan Free with " + Days + " Days..");
             options.put("send_sms_hash", true);
             options.put("allow_rotation", true);
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://cdn.razorpay.com/logos/IQVt78DBTEPodI_original.png");
             options.put("currency", "USD");
-            String samount = Price;
+            String samount = String.valueOf(Price);
             int amount = Math.round(Float.parseFloat(samount) * 100);
             planid = Integer.parseInt(Id);
             options.put("amount", amount);
@@ -195,9 +211,9 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
     @Override
     public void onPaymentSuccess(String razorpayPaymentID) {
         try {
-            Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
             Log.e("getPrice", "getPrice==" + razorpayPaymentID);
-            // AddPlans(planid, razorpayPaymentID);
+            AddPlans(planid, razorpayPaymentID);
         } catch (Exception e) {
             Log.e(TAG, "Exception in onPaymentSuccess", e);
         }
@@ -219,7 +235,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
 
             String payment_id = jsonObject2.getString("payment_id");
 
-            //AddPlans1(planid, reason, payment_id);
+            AddPlans1(planid, reason, payment_id);
 
         } catch (Exception e) {
             Log.e(TAG, "Exception in onPaymentError", e);
@@ -230,10 +246,12 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
         try {
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("user_type", mSessionUtil.getUsertype());
-            jsonObject.put("user_id", mSessionUtil.getUserid());
-            jsonObject.put("company_id", mSessionUtil.getCompanyId());
+            jsonObject.put("user_type", login_as);
+            jsonObject.put("user_id", user_id);
+            jsonObject.put("company_id", company_id);
             jsonObject.put("plan_id", planid);
+
+            Log.e("company_id", "company_id==" + company_id);
 
             jsonObject.put("transaction_id", payment_id);
 
@@ -272,7 +290,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
                 @Override
                 public void onFailure(Call<ResponseModel<AddPlanModel>> call, Throwable t) {
                     customDialog.dismissProgress(mContext);
-                    Log.e("dashboard", "dashboard==" + t.getMessage());
+                    Log.e("Throwable", "Throwable==" + t.getMessage());
                 }
             });
 
@@ -285,11 +303,11 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
         try {
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("user_type", mSessionUtil.getUsertype());
-            jsonObject.put("user_id", mSessionUtil.getUserid());
-            jsonObject.put("company_id", mSessionUtil.getCompanyId());
+            jsonObject.put("user_type", login_as);
+            jsonObject.put("user_id", user_id);
+            jsonObject.put("company_id", company_id);
             jsonObject.put("plan_id", planid);
-
+            Log.e("company_id", "company_id==" + company_id);
             jsonObject.put("transaction_id", razorpayPaymentID);
             jsonObject.put("payment_status", "success");
 
@@ -310,7 +328,7 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
                     if (response.body() != null) {
                         if (response.body().status == Utils.StandardStatusCodes.SUCCESS) {
                             AppUtil.showToast(mContext, response.body().message);
-                            onBackPressed();
+                            SelectUser();
                         } else if (response.body().status == Utils.StandardStatusCodes.NO_DATA_FOUND) {
                             AppUtil.showToast(mContext, response.body().message);
                         } else if (response.body().status == Utils.StandardStatusCodes.UNAUTHORISE) {
@@ -334,16 +352,104 @@ public class MywalletPlansActivity extends AppCompatActivity implements PaymentR
         }
     }
 
+
+    private void SelectUser() {
+        try {
+            JSONObject object = new JSONObject();
+            object.put("company_id", company_id);
+            object.put("login_as", login_as);
+            String data = object.toString();
+            Log.e("data", "data==" + data);
+            Call<ResponseBody> call = APIClient.getInstance().Select_company(mSessionUtil.getApiToken(), data);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
+
+                        String dataa = null;
+                        try {
+                            dataa = new String(response.body().bytes());
+                            Log.e("login_as", "login_as==" + dataa);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Gson gson = new Gson();
+                        LoginModel model = gson.fromJson(dataa, LoginModel.class);
+                        if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
+
+                            if (model.getData().getIs_user_plan() == 1) {
+
+                                HashMap<String, String> map = new HashMap<>();
+                                map.put(SessionUtil.API_TOKEN, mSessionUtil.getApiToken());
+                                map.put(SessionUtil.EMAIL, mSessionUtil.getEmail());
+                                map.put(SessionUtil.PASS, mSessionUtil.getPass());
+                                map.put(SessionUtil.COMPANY_NAME, model.getData().getCompany_name());
+                                map.put(SessionUtil.USER_TYPE, model.getData().getUser_type());
+                                map.put(SessionUtil.USERID, model.getData().getUserId());
+                                map.put(SessionUtil.COMPANY_ID, model.getData().getCompany_id());
+                                mSessionUtil.setData(map);
+
+                                if (home != null) {
+                                    if (home.equals("wallet")) {
+                                        startActivity(new Intent(MywalletPlansActivity.this, MyWalletActivity.class));
+                                        finish();
+                                    }
+                                } else {
+                                    Intent intent = new Intent(mContext, HomeActivity.class);
+                                    intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
+                                    intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+
+                            } else {
+                                Intent intent = new Intent(mContext, MywalletPlansActivity.class);
+                                intent.putExtra("home", "home");
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
+                            AppUtil.showToast(mContext, model.getMessage());
+                            Intent intent = new Intent(mContext, MywalletPlansActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else if (model.getStatus() == Utils.StandardStatusCodes.UNAUTHORISE) {
+                            AppUtil.showToast(mContext, model.getMessage());
+                            AppUtil.autoLogout(MywalletPlansActivity.this);
+                        } else {
+                            AppUtil.showToast(mContext, model.getMessage());
+                        }
+                    } catch (Exception e) {
+                        e.getMessage();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onBackPressed() {
         if (home != null) {
             if (home.equals("home")) {
                 startActivity(new Intent(MywalletPlansActivity.this, HomeActivity.class));
                 finish();
+            } else if (home.equals("loginas")) {
+                startActivity(new Intent(MywalletPlansActivity.this, LoginAsActivity.class));
+                finish();
+            } else if (home.equals("wallet")) {
+                startActivity(new Intent(MywalletPlansActivity.this, MyWalletActivity.class));
+                finish();
             }
-        } else {
-            startActivity(new Intent(MywalletPlansActivity.this, MyWalletActivity.class));
-            finish();
         }
     }
 }

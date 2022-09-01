@@ -3,8 +3,8 @@ package com.ecotton.impex.models;
 import java.io.Serializable;
 
 public class Plan implements Serializable {
-    public int id,validity,price;
-    public String name="";
+    public int id, validity, price;
+    public String name = "";
 
     public int getId() {
         return id;

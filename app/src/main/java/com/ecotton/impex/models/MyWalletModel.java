@@ -12,6 +12,30 @@ public class MyWalletModel implements Serializable {
     @Expose
     private String wallet_amount;
 
+    @SerializedName("left_days")
+    @Expose
+    private String left_days;
+
+    @SerializedName("validity")
+    @Expose
+    private String validity;
+
+    public String getLeft_days() {
+        return left_days;
+    }
+
+    public void setLeft_days(String left_days) {
+        this.left_days = left_days;
+    }
+
+    public String getValidity() {
+        return validity;
+    }
+
+    public void setValidity(String validity) {
+        this.validity = validity;
+    }
+
     @SerializedName("transaction_history")
     @Expose
     private List<Transaction> transaction_history = new ArrayList();

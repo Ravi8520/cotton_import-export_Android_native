@@ -258,8 +258,10 @@ public class HomeFragment extends Fragment {
                         LoginModel model = gson.fromJson(dataa, LoginModel.class);
                         if (model.getStatus() == Utils.StandardStatusCodes.SUCCESS) {
 
-                            HashMap<String, String> map = new HashMap<>();
+
                             if (model.getData().getIs_user_plan() == 1) {
+
+                                HashMap<String, String> map = new HashMap<>();
                                 map.put(SessionUtil.API_TOKEN, mSessionUtil.getApiToken());
                                 map.put(SessionUtil.EMAIL, mSessionUtil.getEmail());
                                 map.put(SessionUtil.PASS, mSessionUtil.getPass());
@@ -269,19 +271,25 @@ public class HomeFragment extends Fragment {
                                 map.put(SessionUtil.COMPANY_ID, model.getData().getCompany_id());
                                 mSessionUtil.setData(map);
 
+                                Log.e("map", "map==" + map);
+
                                 Intent intent = new Intent(mContext, HomeActivity.class);
                                 intent.putExtra(HomeActivity.COMPANY_Name, model.getData().getCompany_name());
                                 intent.putExtra(HomeActivity.USER_Type, model.getData().getUser_type());
                                 startActivity(intent);
-                                ((Activity)mContext).finish();
+                                ((Activity) mContext).finish();
+
                             } else {
                                 Intent intent = new Intent(mContext, MywalletPlansActivity.class);
                                 intent.putExtra("home", "home");
+                                intent.putExtra("login_as", Usertype);
+                                intent.putExtra("company_id", company_id);
+                                intent.putExtra("user_id", model.getData().getUserId());
+                                Log.e("map", "map==" + model.getData().getUserId());
                                 startActivity(intent);
-                                ((Activity)mContext).finish();
+                                ((Activity) mContext).finish();
                             }
                         } else if (model.getStatus() == Utils.StandardStatusCodes.NO_DATA_FOUND) {
-
                             final Dialog dialog = new Dialog(mContext);
                             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                             dialog.setCancelable(false);

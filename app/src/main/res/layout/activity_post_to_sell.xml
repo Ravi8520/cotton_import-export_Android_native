@@ -148,6 +148,7 @@
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:maxLength="10"
+                        android:ems="10"
                         android:paddingLeft="@dimen/_10sdp"
                         android:singleLine="true"
                         android:textSize="14sp" />
@@ -184,6 +185,7 @@
                         android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="10"
+                        android:ems="10"
                         android:hint="@string/lbl_dollar"
                         android:textColorHint="@color/tab_text_color"
                         android:paddingLeft="@dimen/_10sdp"
